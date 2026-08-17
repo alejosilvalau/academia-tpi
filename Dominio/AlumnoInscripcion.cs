@@ -1,5 +1,9 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Dominio
 {
+    [Table("AlumnoInscripciones")]
     public class AlumnoInscripcion : BusinessEntity
     {
         public AlumnoInscripcion()
@@ -10,12 +14,15 @@ namespace Dominio
         public Condiciones Condicion { get; set; }
         public int? Nota { get; set; }
 
+        [ForeignKey("Alumno")]
         public int AlumnoId { get; set; }
         public virtual Persona Alumno { get; set; }
 
+        [ForeignKey("Curso")]
         public int CursoId { get; set; }
         public virtual Curso Curso { get; set; }
 
+        [NotMapped]
         public string DescripcionMateria
         {
             get
@@ -24,6 +31,7 @@ namespace Dominio
             }
         }
 
+        [NotMapped]
         public int? Legajo
         {
             get
@@ -32,6 +40,7 @@ namespace Dominio
             }
         }
 
+        [NotMapped]
         public string Nombre
         {
             get
@@ -40,6 +49,7 @@ namespace Dominio
             }
         }
 
+        [NotMapped]
         public string Apellido
         {
             get
@@ -48,6 +58,7 @@ namespace Dominio
             }
         }
 
+        [NotMapped]
         public string DescripcionComision
         {
             get

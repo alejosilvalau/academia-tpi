@@ -1,9 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Dominio
 {
+    [Table("Cursos")]
     public class Curso : BusinessEntity
     {
         public int AnioCalendario { get; set; }
         public int Cupo { get; set; }
+
+        [NotMapped]
         public string Descripcion
         {
             get
@@ -12,6 +18,7 @@ namespace Dominio
             }
         }
 
+        [ForeignKey("Materia")]
         public int MateriaId { get; set; }
         private Materia _materia;
         public virtual Materia Materia
@@ -30,6 +37,7 @@ namespace Dominio
             }
         }
 
+        [ForeignKey("Comision")]
         public int ComisionId { get; set; }
         private Comision _comision;
         public virtual Comision Comision

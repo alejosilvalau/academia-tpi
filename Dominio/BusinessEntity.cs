@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
@@ -9,6 +10,7 @@ namespace Dominio
             State = States.New;
         }
 
+        [Key]
         public int ID { get; set; }
 
         [NotMapped]

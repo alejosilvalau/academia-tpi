@@ -1,9 +1,15 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Dominio
 {
+    [Table("Planes")]
     public class Plan : BusinessEntity
     {
+        [StringLength(100)]
         public string Descripcion { get; set; }
 
+        [ForeignKey("Especialidad")]
         public int EspecialidadId { get; set; }
         private Especialidad _especialidad;
         public virtual Especialidad Especialidad

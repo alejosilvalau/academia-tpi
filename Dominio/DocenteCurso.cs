@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace Dominio
 {
+    [Table("DocenteCursos")]
     public class DocenteCurso : BusinessEntity
     {
         public TiposCargos Cargo { get; set; }
 
+        [ForeignKey("Curso")]
         public int CursoId { get; set; }
         private Curso _curso;
         public virtual Curso Curso
@@ -22,6 +27,7 @@ namespace Dominio
             }
         }
 
+        [ForeignKey("Docente")]
         public int DocenteId { get; set; }
         private Persona _docente;
         public virtual Persona Docente
