@@ -19,7 +19,7 @@ namespace Repositorio
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=AcademiaDB;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=AcademiaDB;Trusted_Connection=True;");
             }
         }
 
