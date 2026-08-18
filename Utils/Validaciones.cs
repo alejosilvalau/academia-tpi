@@ -2,7 +2,7 @@
 
 namespace Utils
 {
-    internal class Validaciones
+    public class Validaciones
     {
         public static bool ValidarRegexEmail(string email)
         {
