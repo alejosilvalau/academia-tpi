@@ -1,0 +1,80 @@
+@page "/reportes/planes"
+@inject ReporteServicio ReporteServicio
+@inject IJSRuntime JS
+
+<h3>Reporte de Planes</h3>
+
+<div style="margin-bottom:15px;">
+    <label>Plan:</label>
+    <select @onchange="OnPlanChanged" style="margin-left:10px;padding:5px;width:400px;">
+        <option value="">-- Seleccione un plan --</option>
+        @if (planes != null)
+        {
+            @foreach (DataRow row in planes.Rows)
+            {
+                <option value="@row["ID"]">@row["Descripcion"] - @row["Especialidad"]</option>
+            }
+        }
+    </select>
+</div>
+
+<button @onclick="GenerarReporte" disabled="@(planId == 0)" style="padding:8px 20px;background-color:#4a86c8;color:white;border:none;cursor:pointer;">
+    Generar Reporte PDF
+</button>
+
+@if (!string.IsNullOrEmpty(mensaje))
+{
+    <p style="margin-top:10px;color:@(mensaje.Contains("Error") ? "red" : "green");">@mensaje</p>
+}
+
+@code {
+    private DataTable? planes;
+    private int planId;
+    private string mensaje = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            planes = ReporteServicio.ObtenerPlanes();
+        }
+        catch (Exception ex)
+        {
+            mensaje = "Error al cargar planes: " + ex.Message;
+        }
+    }
+
+    private void OnPlanChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int id))
+            planId = id;
+        else
+            planId = 0;
+    }
+
+    private async Task GenerarReporte()
+    {
+        if (planId == 0)
+        {
+            mensaje = "Seleccione un plan.";
+            return;
+        }
+
+        try
+        {
+            var report = ReporteServicio.GenerarReportePlanes(planId);
+            byte[] pdfBytes = ReporteServicio.ExportarPdf(report);
+
+            await JS.InvokeVoidAsync("downloadFile",
+                $"ReportePlanes_{planId}.pdf",
+                "application/pdf",
+                Convert.ToBase64String(pdfBytes));
+
+            mensaje = "Reporte generado correctamente.";
+        }
+        catch (Exception ex)
+        {
+            mensaje = "Error al generar reporte: " + ex.Message;
+        }
+    }
+}

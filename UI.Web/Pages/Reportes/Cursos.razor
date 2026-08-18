@@ -1,0 +1,80 @@
+@page "/reportes/cursos"
+@inject ReporteServicio ReporteServicio
+@inject IJSRuntime JS
+
+<h3>Reporte de Cursos</h3>
+
+<div style="margin-bottom:15px;">
+    <label>Curso:</label>
+    <select @onchange="OnCursoChanged" style="margin-left:10px;padding:5px;width:400px;">
+        <option value="">-- Seleccione un curso --</option>
+        @if (cursos != null)
+        {
+            @foreach (DataRow row in cursos.Rows)
+            {
+                <option value="@row["ID"]">@row["Materia"] - @row["Comision"] (@row["AnioCalendario"])</option>
+            }
+        }
+    </select>
+</div>
+
+<button @onclick="GenerarReporte" disabled="@(cursoId == 0)" style="padding:8px 20px;background-color:#4a86c8;color:white;border:none;cursor:pointer;">
+    Generar Reporte PDF
+</button>
+
+@if (!string.IsNullOrEmpty(mensaje))
+{
+    <p style="margin-top:10px;color:@(mensaje.Contains("Error") ? "red" : "green");">@mensaje</p>
+}
+
+@code {
+    private DataTable? cursos;
+    private int cursoId;
+    private string mensaje = string.Empty;
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            cursos = ReporteServicio.ObtenerCursos();
+        }
+        catch (Exception ex)
+        {
+            mensaje = "Error al cargar cursos: " + ex.Message;
+        }
+    }
+
+    private void OnCursoChanged(ChangeEventArgs e)
+    {
+        if (int.TryParse(e.Value?.ToString(), out int id))
+            cursoId = id;
+        else
+            cursoId = 0;
+    }
+
+    private async Task GenerarReporte()
+    {
+        if (cursoId == 0)
+        {
+            mensaje = "Seleccione un curso.";
+            return;
+        }
+
+        try
+        {
+            var report = ReporteServicio.GenerarReporteCursos(cursoId);
+            byte[] pdfBytes = ReporteServicio.ExportarPdf(report);
+
+            await JS.InvokeVoidAsync("downloadFile",
+                $"ReporteCursos_{cursoId}.pdf",
+                "application/pdf",
+                Convert.ToBase64String(pdfBytes));
+
+            mensaje = "Reporte generado correctamente.";
+        }
+        catch (Exception ex)
+        {
+            mensaje = "Error al generar reporte: " + ex.Message;
+        }
+    }
+}
