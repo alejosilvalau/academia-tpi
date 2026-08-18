@@ -1,0 +1,48 @@
+using Dominio;
+using Repositorio;
+using Servicios;
+
+namespace UI.Desktop.Forms.Cursos
+{
+    public partial class Cursos : ApplicationForm
+    {
+        private readonly CursoServicio _servicio;
+
+        public Cursos()
+        {
+            InitializeComponent();
+            _servicio = new CursoServicio(new AcademiaContext());
+            dgvCursos.AutoGenerateColumns = false;
+        }
+
+        private void Cursos_Load(object sender, EventArgs e) => Listar();
+
+        public override void Listar()
+        {
+            try { dgvCursos.DataSource = _servicio.GetAll(); }
+            catch (Exception ex) { Notificar("Error", ex.Message); }
+        }
+
+        private void tsbAgregar_Click(object sender, EventArgs e)
+        {
+            new CursoDesktop(ModoForm.Alta).ShowDialog();
+            Listar();
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (!IsRowSelected(dgvCursos)) return;
+            int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
+            new CursoDesktop(id, ModoForm.Modificacion).ShowDialog();
+            Listar();
+        }
+
+        private void tsbEliminar_Click(object sender, EventArgs e)
+        {
+            if (!IsRowSelected(dgvCursos)) return;
+            int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
+            new CursoDesktop(id, ModoForm.Baja).ShowDialog();
+            Listar();
+        }
+    }
+}

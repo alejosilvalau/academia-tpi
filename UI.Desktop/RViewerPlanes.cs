@@ -2,7 +2,7 @@ using Servicios;
 
 namespace UI.Desktop
 {
-    public partial class RViewerPlanes : Form
+    public partial class RViewerPlanes : ApplicationForm
     {
         private readonly ReporteServicio _servicio;
 

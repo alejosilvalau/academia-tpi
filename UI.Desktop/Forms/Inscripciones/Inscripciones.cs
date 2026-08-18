@@ -1,0 +1,50 @@
+using Dominio;
+using Repositorio;
+using Servicios;
+
+namespace UI.Desktop.Forms.Inscripciones
+{
+    public partial class Inscripciones : ApplicationForm
+    {
+        private readonly InscripcionServicio _servicio;
+        private readonly Persona _personaActual;
+
+        public Inscripciones(Persona persona)
+        {
+            InitializeComponent();
+            _servicio = new InscripcionServicio(new AcademiaContext());
+            _personaActual = persona;
+            dgvInscripciones.AutoGenerateColumns = false;
+        }
+
+        private void Inscripciones_Load(object sender, EventArgs e) => Listar();
+
+        public override void Listar()
+        {
+            try { dgvInscripciones.DataSource = _servicio.GetByAlumno(_personaActual.ID); }
+            catch (Exception ex) { Notificar("Error", ex.Message); }
+        }
+
+        private void tsbAgregar_Click(object sender, EventArgs e)
+        {
+            new InscripcionDesktop(_personaActual, ModoForm.Alta).ShowDialog();
+            Listar();
+        }
+
+        private void tsbEditar_Click(object sender, EventArgs e)
+        {
+            if (!IsRowSelected(dgvInscripciones)) return;
+            int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
+            new InscripcionDesktop(_personaActual, id, ModoForm.Modificacion).ShowDialog();
+            Listar();
+        }
+
+        private void tsbEliminar_Click(object sender, EventArgs e)
+        {
+            if (!IsRowSelected(dgvInscripciones)) return;
+            int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
+            new InscripcionDesktop(_personaActual, id, ModoForm.Baja).ShowDialog();
+            Listar();
+        }
+    }
+}
