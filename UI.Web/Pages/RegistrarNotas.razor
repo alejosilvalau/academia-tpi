@@ -1,0 +1,147 @@
+@page "/registrar-notas"
+@inject InscripcionServicio InscripcionServicio
+@inject CursoServicio CursoServicio
+@inject PersonaServicio PersonaServicio
+@inject DocenteCursoServicio DocenteCursoServicio
+@inject UI.Web.Services.SesionService Sesion
+
+<div class="md-card">
+    <div class="md-card-header-actions">
+        <span>Registrar Notas</span>
+        <div class="md-btn-group">
+            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="md-message @(mensajeEsError ? "md-message-error" : "md-message-success")">@mensaje</div>
+    }
+
+    <div class="md-form-row">
+        <div class="md-form-group">
+            <label class="md-label">Curso</label>
+            <select class="md-select" @bind="cursoIdSeleccionado" @bind:after="CargarInscripciones">
+                <option value="0">-- Seleccione un curso --</option>
+                @if (cursos != null)
+                {
+                    @foreach (var c in cursos)
+                    {
+                        <option value="@c.ID">@c.Descripcion</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="md-form-group"></div>
+    </div>
+
+    @if (inscripciones != null && inscripciones.Count > 0)
+    {
+        <table class="md-table">
+            <thead>
+                <tr>
+                    <th>Legajo</th>
+                    <th>Alumno</th>
+                    <th>Condicion Actual</th>
+                    <th>Nota Actual</th>
+                    <th>Nueva Nota</th>
+                    <th style="width:100px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in inscripciones)
+                {
+                    <tr>
+                        <td>@item.Legajo</td>
+                        <td>@item.Nombre @item.Apellido</td>
+                        <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
+                        <td>@(item.Nota?.ToString() ?? "-")</td>
+                        <td>
+                            <input class="md-input" type="number" min="0" max="10" style="width:80px;"
+                                   @bind="notas[item.ID]" />
+                        </td>
+                        <td>
+                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Calificar(item.ID)">Calificar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else if (cursoIdSeleccionado != 0)
+    {
+        <div class="md-empty"><div class="md-empty-icon">&#9998;</div><p>No hay inscripciones en este curso</p></div>
+    }
+</div>
+
+@code {
+    private List<Curso>? cursos;
+    private List<AlumnoInscripcion>? inscripciones;
+    private string mensaje = "";
+    private bool mensajeEsError = false;
+    private int cursoIdSeleccionado;
+    private Dictionary<int, int?> notas = new();
+
+    protected override void OnInitialized()
+    {
+        try
+        {
+            if (Sesion.IsDocente && Sesion.UsuarioActual?.PersonaId != null)
+            {
+                var asignaciones = DocenteCursoServicio.GetByDocente(Sesion.UsuarioActual.PersonaId.Value);
+                var cursoIds = asignaciones.Select(a => a.CursoId).Distinct().ToList();
+                cursos = CursoServicio.GetAll().Where(c => cursoIds.Contains(c.ID)).ToList();
+            }
+            else
+            {
+                cursos = CursoServicio.GetAll();
+            }
+        }
+        catch { }
+    }
+
+    private void CargarInscripciones()
+    {
+        if (cursoIdSeleccionado == 0) { inscripciones = null; return; }
+        try
+        {
+            inscripciones = InscripcionServicio.GetByCurso(cursoIdSeleccionado);
+            notas = new Dictionary<int, int?>();
+            foreach (var ins in inscripciones)
+            {
+                notas[ins.ID] = ins.Nota;
+            }
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Calificar(int inscripcionId)
+    {
+        try
+        {
+            var inscripcion = InscripcionServicio.GetOne(inscripcionId);
+            if (inscripcion == null) return;
+
+            if (notas.TryGetValue(inscripcionId, out int? nota) && nota.HasValue)
+            {
+                inscripcion.Nota = nota;
+                inscripcion.Condicion = nota >= 6
+                    ? AlumnoInscripcion.Condiciones.Aprobado
+                    : AlumnoInscripcion.Condiciones.Regular;
+            }
+
+            InscripcionServicio.Update(inscripcion);
+            mostrarMensaje("Calificacion guardada correctamente.", false);
+            CargarInscripciones();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Cargar() => CargarInscripciones();
+
+    private void mostrarMensaje(string msg, bool esError)
+    {
+        mensaje = msg;
+        mensajeEsError = esError;
+    }
+}

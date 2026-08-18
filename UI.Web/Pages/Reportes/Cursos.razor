@@ -2,30 +2,62 @@
 @inject ReporteServicio ReporteServicio
 @inject IJSRuntime JS
 
-<h3>Reporte de Cursos</h3>
+<div class="md-card">
+    <div class="md-card-header">Reporte de Cursos</div>
 
-<div style="margin-bottom:15px;">
-    <label>Curso:</label>
-    <select @onchange="OnCursoChanged" style="margin-left:10px;padding:5px;width:400px;">
-        <option value="">-- Seleccione un curso --</option>
-        @if (cursos != null)
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="md-message @(mensaje.Contains("Error") ? "md-message-error" : "md-message-success")">@mensaje</div>
+    }
+
+    <div class="md-form-row">
+        <div class="md-form-group">
+            <label class="md-label">Curso</label>
+            <select class="md-select" @bind="cursoId">
+                <option value="0">-- Seleccione un curso --</option>
+                @if (cursos != null)
+                {
+                    @foreach (DataRow row in cursos.Rows)
+                    {
+                        <option value="@row["ID"]">@row["Materia"] - @row["Comision"] (@row["AnioCalendario"])</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="md-form-group" style="display:flex;align-items:flex-end;">
+            <button class="md-btn md-btn-accent" @onclick="GenerarReporte" disabled="@(cursoId == 0)">
+                Generar Reporte PDF
+            </button>
+        </div>
+    </div>
+
+    @if (cursoId != 0 && cursos != null)
+    {
+        var selectedRow = cursos.Select().FirstOrDefault(r => r["ID"].ToString() == cursoId.ToString());
+        if (selectedRow != null)
         {
-            @foreach (DataRow row in cursos.Rows)
-            {
-                <option value="@row["ID"]">@row["Materia"] - @row["Comision"] (@row["AnioCalendario"])</option>
-            }
+            <div class="md-card" style="border:1px solid var(--border);margin-top:16px;">
+                <div class="md-card-header">Vista Previa</div>
+                <table class="md-table">
+                    <thead>
+                        <tr>
+                            <th>Materia</th>
+                            <th>Comision</th>
+                            <th>Anio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@selectedRow["Materia"]</td>
+                            <td>@selectedRow["Comision"]</td>
+                            <td>@selectedRow["AnioCalendario"]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         }
-    </select>
+    }
 </div>
-
-<button @onclick="GenerarReporte" disabled="@(cursoId == 0)" style="padding:8px 20px;background-color:#4a86c8;color:white;border:none;cursor:pointer;">
-    Generar Reporte PDF
-</button>
-
-@if (!string.IsNullOrEmpty(mensaje))
-{
-    <p style="margin-top:10px;color:@(mensaje.Contains("Error") ? "red" : "green");">@mensaje</p>
-}
 
 @code {
     private DataTable? cursos;
@@ -42,14 +74,6 @@
         {
             mensaje = "Error al cargar cursos: " + ex.Message;
         }
-    }
-
-    private void OnCursoChanged(ChangeEventArgs e)
-    {
-        if (int.TryParse(e.Value?.ToString(), out int id))
-            cursoId = id;
-        else
-            cursoId = 0;
     }
 
     private async Task GenerarReporte()

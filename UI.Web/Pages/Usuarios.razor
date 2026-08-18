@@ -1,0 +1,203 @@
+@page "/usuarios"
+@inject UsuarioServicio UsuarioServicio
+@inject PersonaServicio PersonaServicio
+
+<div class="md-card">
+    <div class="md-card-header-actions">
+        <span>Usuarios</span>
+        <div class="md-btn-group">
+            <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nuevo</button>
+            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="md-message @(mensajeEsError ? "md-message-error" : "md-message-success")">@mensaje</div>
+    }
+
+    @if (modoForm != ModoForm.Ninguno)
+    {
+        <div class="md-card" style="border:1px solid var(--border);">
+            <div class="md-card-header">@(modoForm == ModoForm.Alta ? "Nuevo Usuario" : "Editar Usuario")</div>
+            <EditForm Model="actual" OnValidSubmit="Guardar">
+                <div class="md-form-row">
+                    <div class="md-form-group">
+                        <label class="md-label">Nombre de Usuario</label>
+                        <input class="md-input" @bind="actual.NombreUsuario" />
+                    </div>
+                    <div class="md-form-group">
+                        <label class="md-label">Clave</label>
+                        <input class="md-input" type="password" @bind="actual.Clave" />
+                    </div>
+                </div>
+                <div class="md-form-row">
+                    <div class="md-form-group">
+                        <label class="md-label">Persona</label>
+                        <select class="md-select" @bind="personaIdSeleccionada">
+                            <option value="">-- Seleccione --</option>
+                            @if (personas != null)
+                            {
+                                @foreach (var p in personas)
+                                {
+                                    <option value="@p.ID">@p.Nombre @p.Apellido (Legajo: @p.Legajo)</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="md-form-group">
+                        <label class="md-label">&nbsp;</label>
+                        <div class="md-checkbox-group" style="margin-top:8px;">
+                            <input type="checkbox" @bind="actual.Habilitado" />
+                            <label>Habilitado</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="md-form-actions">
+                    <button class="md-btn md-btn-cancel" type="button" @onclick="Cancelar">Cancelar</button>
+                    <button class="md-btn md-btn-primary" type="submit">Guardar</button>
+                </div>
+            </EditForm>
+        </div>
+    }
+
+    @if (lista == null)
+    {
+        <div class="md-loading"><div class="md-spinner"></div><p>Cargando...</p></div>
+    }
+    else if (lista.Count == 0)
+    {
+        <div class="md-empty"><div class="md-empty-icon">&#9830;</div><p>No hay usuarios registrados</p></div>
+    }
+    else
+    {
+        <table class="md-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Habilitado</th>
+                    <th style="width:120px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in lista)
+                {
+                    <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
+                        <td>@item.ID</td>
+                        <td>@item.NombreUsuario</td>
+                        <td>@item.Persona?.Nombre</td>
+                        <td>@item.Persona?.Apellido</td>
+                        <td>
+                            @if (item.Habilitado)
+                            {
+                                <span class="md-badge md-badge-success">Si</span>
+                            }
+                            else
+                            {
+                                <span class="md-badge md-badge-danger">No</span>
+                            }
+                        </td>
+                        <td>
+                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
+                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private List<Usuario>? lista;
+    private List<Persona>? personas;
+    private Usuario actual = new();
+    private ModoForm modoForm = ModoForm.Ninguno;
+    private int seleccionadaId;
+    private string mensaje = "";
+    private bool mensajeEsError = false;
+    private string? personaIdSeleccionada;
+
+    enum ModoForm { Ninguno, Alta, Modificacion }
+
+    protected override void OnInitialized()
+    {
+        personas = PersonaServicio.GetAll();
+        Cargar();
+    }
+
+    private void Cargar()
+    {
+        try { lista = UsuarioServicio.GetAll(); }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Seleccionar(int id) => seleccionadaId = id;
+
+    private void Nuevo()
+    {
+        actual = new Usuario { Habilitado = true };
+        personaIdSeleccionada = null;
+        modoForm = ModoForm.Alta;
+        seleccionadaId = 0;
+    }
+
+    private void Editar(int id)
+    {
+        var item = UsuarioServicio.GetOne(id);
+        if (item == null) return;
+        actual = item;
+        personaIdSeleccionada = item.PersonaId?.ToString();
+        modoForm = ModoForm.Modificacion;
+        seleccionadaId = id;
+    }
+
+    private void Cancelar()
+    {
+        modoForm = ModoForm.Ninguno;
+        actual = new Usuario();
+    }
+
+    private void Guardar()
+    {
+        try
+        {
+            if (int.TryParse(personaIdSeleccionada, out int pid))
+                actual.PersonaId = pid;
+            else
+                actual.PersonaId = null;
+
+            if (modoForm == ModoForm.Alta)
+                UsuarioServicio.Save(actual);
+            else
+                UsuarioServicio.Update(actual);
+
+            mostrarMensaje("Guardado correctamente.", false);
+            Cancelar();
+            Cargar();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Eliminar(int id)
+    {
+        var item = UsuarioServicio.GetOne(id);
+        if (item == null) return;
+        try
+        {
+            UsuarioServicio.Delete(item);
+            mostrarMensaje("Eliminado correctamente.", false);
+            Cargar();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void mostrarMensaje(string msg, bool esError)
+    {
+        mensaje = msg;
+        mensajeEsError = esError;
+    }
+}

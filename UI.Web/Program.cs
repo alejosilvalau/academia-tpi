@@ -1,24 +1,35 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Servicios;
+using Repositorio;
+using UI.Web.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
-builder.Services.AddSingleton<ReporteServicio>();
+
+builder.Services.AddScoped<AcademiaContext>();
+builder.Services.AddScoped<EspecialidadServicio>();
+builder.Services.AddScoped<PlanServicio>();
+builder.Services.AddScoped<ComisionServicio>();
+builder.Services.AddScoped<MateriaServicio>();
+builder.Services.AddScoped<CursoServicio>();
+builder.Services.AddScoped<PersonaServicio>();
+builder.Services.AddScoped<UsuarioServicio>();
+builder.Services.AddScoped<DocenteCursoServicio>();
+builder.Services.AddScoped<InscripcionServicio>();
+builder.Services.AddScoped<ReporteServicio>();
+builder.Services.AddSingleton<SesionService>();
 
 var app = builder.Build();
 
 if (!app.Environment.IsDevelopment())
 {
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
 app.UseStaticFiles();
-
 app.UseRouting();
 
 app.MapBlazorHub();

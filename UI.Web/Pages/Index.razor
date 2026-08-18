@@ -1,8 +1,115 @@
 ﻿@page "/"
+@inject UI.Web.Services.SesionService Sesion
 
-<h1>Academia TPI</h1>
-<p>Sistema de gestión académica</p>
-<ul>
-    <li><a href="/reportes/cursos">Reporte de Cursos</a></li>
-    <li><a href="/reportes/planes">Reporte de Planes</a></li>
-</ul>
+@if (Sesion.IsLoggedIn)
+{
+    <div class="md-card">
+        <div class="md-card-header">Bienvenido, @Sesion.UsuarioActual?.Persona?.Nombre</div>
+        <p style="color:var(--text-secondary);margin-bottom:20px;">
+            Sistema de gestion academica - Rol: <strong>@Sesion.TipoUsuario</strong>
+        </p>
+    </div>
+
+    <div class="dashboard-grid">
+        @if (Sesion.IsAdmin)
+        {
+            <a href="/especialidades" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Especialidades</h3>
+                    <p>Gestionar especialidades</p>
+                </div>
+            </a>
+            <a href="/planes" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Planes</h3>
+                    <p>Gestionar planes de estudio</p>
+                </div>
+            </a>
+            <a href="/comisiones" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Comisiones</h3>
+                    <p>Gestionar comisiones</p>
+                </div>
+            </a>
+            <a href="/materias" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Materias</h3>
+                    <p>Gestionar materias</p>
+                </div>
+            </a>
+            <a href="/cursos" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Cursos</h3>
+                    <p>Gestionar cursos</p>
+                </div>
+            </a>
+            <a href="/personas" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Personas</h3>
+                    <p>Gestionar alumnos, docentes y administradores</p>
+                </div>
+            </a>
+            <a href="/dictados" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Dictados</h3>
+                    <p>Gestionar asignacion de docentes a cursos</p>
+                </div>
+            </a>
+            <a href="/usuarios" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9830;</div>
+                <div class="dashboard-card-text">
+                    <h3>Usuarios</h3>
+                    <p>Gestionar usuarios del sistema</p>
+                </div>
+            </a>
+            <a href="/reportes/cursos" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9776;</div>
+                <div class="dashboard-card-text">
+                    <h3>Reporte Cursos</h3>
+                    <p>Generar reporte PDF de cursos</p>
+                </div>
+            </a>
+            <a href="/reportes/planes" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9776;</div>
+                <div class="dashboard-card-text">
+                    <h3>Reporte Planes</h3>
+                    <p>Generar reporte PDF de planes</p>
+                </div>
+            </a>
+        }
+        @if (Sesion.IsAlumno)
+        {
+            <a href="/inscripciones" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9998;</div>
+                <div class="dashboard-card-text">
+                    <h3>Inscripciones</h3>
+                    <p>Inscribirse a cursos</p>
+                </div>
+            </a>
+        }
+        @if (Sesion.IsDocente)
+        {
+            <a href="/registrar-notas" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9998;</div>
+                <div class="dashboard-card-text">
+                    <h3>Registrar Notas</h3>
+                    <p>Calificar alumnos en cursos</p>
+                </div>
+            </a>
+        }
+    </div>
+}
+else
+{
+    <div class="md-loading">
+        <div class="md-spinner"></div>
+        <p>Cargando...</p>
+    </div>
+}

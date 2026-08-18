@@ -2,30 +2,60 @@
 @inject ReporteServicio ReporteServicio
 @inject IJSRuntime JS
 
-<h3>Reporte de Planes</h3>
+<div class="md-card">
+    <div class="md-card-header">Reporte de Planes</div>
 
-<div style="margin-bottom:15px;">
-    <label>Plan:</label>
-    <select @onchange="OnPlanChanged" style="margin-left:10px;padding:5px;width:400px;">
-        <option value="">-- Seleccione un plan --</option>
-        @if (planes != null)
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="md-message @(mensaje.Contains("Error") ? "md-message-error" : "md-message-success")">@mensaje</div>
+    }
+
+    <div class="md-form-row">
+        <div class="md-form-group">
+            <label class="md-label">Plan</label>
+            <select class="md-select" @bind="planId">
+                <option value="0">-- Seleccione un plan --</option>
+                @if (planes != null)
+                {
+                    @foreach (DataRow row in planes.Rows)
+                    {
+                        <option value="@row["ID"]">@row["Descripcion"] - @row["Especialidad"]</option>
+                    }
+                }
+            </select>
+        </div>
+        <div class="md-form-group" style="display:flex;align-items:flex-end;">
+            <button class="md-btn md-btn-accent" @onclick="GenerarReporte" disabled="@(planId == 0)">
+                Generar Reporte PDF
+            </button>
+        </div>
+    </div>
+
+    @if (planId != 0 && planes != null)
+    {
+        var selectedRow = planes.Select().FirstOrDefault(r => r["ID"].ToString() == planId.ToString());
+        if (selectedRow != null)
         {
-            @foreach (DataRow row in planes.Rows)
-            {
-                <option value="@row["ID"]">@row["Descripcion"] - @row["Especialidad"]</option>
-            }
+            <div class="md-card" style="border:1px solid var(--border);margin-top:16px;">
+                <div class="md-card-header">Vista Previa</div>
+                <table class="md-table">
+                    <thead>
+                        <tr>
+                            <th>Descripcion</th>
+                            <th>Especialidad</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@selectedRow["Descripcion"]</td>
+                            <td>@selectedRow["Especialidad"]</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         }
-    </select>
+    }
 </div>
-
-<button @onclick="GenerarReporte" disabled="@(planId == 0)" style="padding:8px 20px;background-color:#4a86c8;color:white;border:none;cursor:pointer;">
-    Generar Reporte PDF
-</button>
-
-@if (!string.IsNullOrEmpty(mensaje))
-{
-    <p style="margin-top:10px;color:@(mensaje.Contains("Error") ? "red" : "green");">@mensaje</p>
-}
 
 @code {
     private DataTable? planes;
@@ -42,14 +72,6 @@
         {
             mensaje = "Error al cargar planes: " + ex.Message;
         }
-    }
-
-    private void OnPlanChanged(ChangeEventArgs e)
-    {
-        if (int.TryParse(e.Value?.ToString(), out int id))
-            planId = id;
-        else
-            planId = 0;
     }
 
     private async Task GenerarReporte()

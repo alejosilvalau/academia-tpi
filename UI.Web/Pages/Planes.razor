@@ -1,0 +1,170 @@
+@page "/planes"
+@inject PlanServicio PlanServicio
+@inject EspecialidadServicio EspecialidadServicio
+
+<div class="md-card">
+    <div class="md-card-header-actions">
+        <span>Planes</span>
+        <div class="md-btn-group">
+            <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nuevo</button>
+            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="md-message @(mensajeEsError ? "md-message-error" : "md-message-success")">@mensaje</div>
+    }
+
+    @if (modoForm != ModoForm.Ninguno)
+    {
+        <div class="md-card" style="border:1px solid var(--border);">
+            <div class="md-card-header">@(modoForm == ModoForm.Alta ? "Nuevo Plan" : "Editar Plan")</div>
+            <EditForm Model="actual" OnValidSubmit="Guardar">
+                <div class="md-form-row">
+                    <div class="md-form-group">
+                        <label class="md-label">Descripcion</label>
+                        <input class="md-input" @bind="actual.Descripcion" placeholder="Nombre del plan" />
+                    </div>
+                    <div class="md-form-group">
+                        <label class="md-label">Especialidad</label>
+                        <select class="md-select" @bind="actual.EspecialidadId">
+                            <option value="0">-- Seleccione --</option>
+                            @if (especialidades != null)
+                            {
+                                @foreach (var e in especialidades)
+                                {
+                                    <option value="@e.ID">@e.Descripcion</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="md-form-actions">
+                    <button class="md-btn md-btn-cancel" type="button" @onclick="Cancelar">Cancelar</button>
+                    <button class="md-btn md-btn-primary" type="submit">Guardar</button>
+                </div>
+            </EditForm>
+        </div>
+    }
+
+    @if (lista == null)
+    {
+        <div class="md-loading"><div class="md-spinner"></div><p>Cargando...</p></div>
+    }
+    else if (lista.Count == 0)
+    {
+        <div class="md-empty"><div class="md-empty-icon">&#9830;</div><p>No hay planes registrados</p></div>
+    }
+    else
+    {
+        <table class="md-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Descripcion</th>
+                    <th>Especialidad</th>
+                    <th style="width:120px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in lista)
+                {
+                    <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
+                        <td>@item.ID</td>
+                        <td>@item.Descripcion</td>
+                        <td>@item.Especialidad?.Descripcion</td>
+                        <td>
+                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
+                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private List<Plan>? lista;
+    private List<Especialidad>? especialidades;
+    private Plan actual = new();
+    private ModoForm modoForm = ModoForm.Ninguno;
+    private int seleccionadaId;
+    private string mensaje = "";
+    private bool mensajeEsError = false;
+
+    enum ModoForm { Ninguno, Alta, Modificacion }
+
+    protected override void OnInitialized()
+    {
+        especialidades = EspecialidadServicio.GetAll();
+        Cargar();
+    }
+
+    private void Cargar()
+    {
+        try { lista = PlanServicio.GetAll(); }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Seleccionar(int id) => seleccionadaId = id;
+
+    private void Nuevo()
+    {
+        actual = new Plan();
+        modoForm = ModoForm.Alta;
+        seleccionadaId = 0;
+    }
+
+    private void Editar(int id)
+    {
+        var item = PlanServicio.GetOne(id);
+        if (item == null) return;
+        actual = item;
+        modoForm = ModoForm.Modificacion;
+        seleccionadaId = id;
+    }
+
+    private void Cancelar()
+    {
+        modoForm = ModoForm.Ninguno;
+        actual = new Plan();
+    }
+
+    private void Guardar()
+    {
+        try
+        {
+            if (actual.EspecialidadId == 0) { mostrarMensaje("Seleccione una especialidad.", true); return; }
+            if (modoForm == ModoForm.Alta)
+                PlanServicio.Save(actual);
+            else
+                PlanServicio.Update(actual);
+
+            mostrarMensaje("Guardado correctamente.", false);
+            Cancelar();
+            Cargar();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Eliminar(int id)
+    {
+        var item = PlanServicio.GetOne(id);
+        if (item == null) return;
+        try
+        {
+            PlanServicio.Delete(item);
+            mostrarMensaje("Eliminado correctamente.", false);
+            Cargar();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void mostrarMensaje(string msg, bool esError)
+    {
+        mensaje = msg;
+        mensajeEsError = esError;
+    }
+}

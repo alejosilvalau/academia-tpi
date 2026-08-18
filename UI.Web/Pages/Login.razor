@@ -1,0 +1,78 @@
+@page "/login"
+@inject UsuarioServicio UsuarioServicio
+@inject UI.Web.Services.SesionService Sesion
+@inject NavigationManager Nav
+
+@if (Sesion.IsLoggedIn)
+{
+    Nav.NavigateTo("/", forceLoad: true);
+    return;
+}
+
+<div class="login-container">
+    <div class="login-left">
+        <div class="login-left-logo">ACADEMIA</div>
+        <div class="login-left-subtitle">Sistema de Gestion Academica</div>
+        <div class="login-left-desc">
+            Administre especialidades, planes, comisiones, materias,
+            cursos, inscripciones y reportes de la academia.
+        </div>
+    </div>
+    <div class="login-right">
+        <div class="login-card">
+            <h2>Iniciar Sesion</h2>
+            <p>Ingrese sus credenciales para acceder al sistema</p>
+
+            @if (!string.IsNullOrEmpty(mensaje))
+            {
+                <div class="md-message md-message-error">@mensaje</div>
+            }
+
+            <EditForm Model="this" OnValidSubmit="IniciarSesion">
+                <div class="md-form-group">
+                    <label class="md-label">Usuario</label>
+                    <input class="md-input" type="text" @bind="nombreUsuario" placeholder="Nombre de usuario" autofocus />
+                </div>
+                <div class="md-form-group">
+                    <label class="md-label">Clave</label>
+                    <input class="md-input" type="password" @bind="clave" placeholder="Contrasena" />
+                </div>
+                <button class="md-btn md-btn-accent" type="submit" disabled="@cargando">
+                    @if (cargando) { <span>Ingresando...</span> } else { <span>Ingresar</span> }
+                </button>
+            </EditForm>
+        </div>
+    </div>
+</div>
+
+@code {
+    private string nombreUsuario = "";
+    private string clave = "";
+    private string mensaje = "";
+    private bool cargando = false;
+
+    private void IniciarSesion()
+    {
+        mensaje = "";
+        cargando = true;
+
+        try
+        {
+            var usuario = UsuarioServicio.Login(nombreUsuario, clave);
+            if (usuario == null)
+            {
+                mensaje = "Usuario o clave incorrectos, o usuario deshabilitado.";
+                cargando = false;
+                return;
+            }
+
+            Sesion.Login(usuario);
+            Nav.NavigateTo("/", forceLoad: true);
+        }
+        catch (Exception ex)
+        {
+            mensaje = "Error al iniciar sesion: " + ex.Message;
+            cargando = false;
+        }
+    }
+}

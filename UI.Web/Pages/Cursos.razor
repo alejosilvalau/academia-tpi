@@ -1,0 +1,198 @@
+@page "/cursos"
+@inject CursoServicio CursoServicio
+@inject MateriaServicio MateriaServicio
+@inject ComisionServicio ComisionServicio
+
+<div class="md-card">
+    <div class="md-card-header-actions">
+        <span>Cursos</span>
+        <div class="md-btn-group">
+            <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nuevo</button>
+            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+        </div>
+    </div>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="md-message @(mensajeEsError ? "md-message-error" : "md-message-success")">@mensaje</div>
+    }
+
+    @if (modoForm != ModoForm.Ninguno)
+    {
+        <div class="md-card" style="border:1px solid var(--border);">
+            <div class="md-card-header">@(modoForm == ModoForm.Alta ? "Nuevo Curso" : "Editar Curso")</div>
+            <EditForm Model="actual" OnValidSubmit="Guardar">
+                <div class="md-form-row-3">
+                    <div class="md-form-group">
+                        <label class="md-label">Materia</label>
+                        <select class="md-select" @bind="actual.MateriaId">
+                            <option value="0">-- Seleccione --</option>
+                            @if (materias != null)
+                            {
+                                @foreach (var m in materias)
+                                {
+                                    <option value="@m.ID">@m.Descripcion</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="md-form-group">
+                        <label class="md-label">Comision</label>
+                        <select class="md-select" @bind="actual.ComisionId">
+                            <option value="0">-- Seleccione --</option>
+                            @if (comisiones != null)
+                            {
+                                @foreach (var c in comisiones)
+                                {
+                                    <option value="@c.ID">@c.Descripcion</option>
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="md-form-group">
+                        <label class="md-label">Anio Calendario</label>
+                        <input class="md-input" type="number" @bind="actual.AnioCalendario" />
+                    </div>
+                </div>
+                <div class="md-form-row">
+                    <div class="md-form-group">
+                        <label class="md-label">Cupo</label>
+                        <input class="md-input" type="number" @bind="actual.Cupo" />
+                    </div>
+                    <div class="md-form-group"></div>
+                </div>
+                <div class="md-form-actions">
+                    <button class="md-btn md-btn-cancel" type="button" @onclick="Cancelar">Cancelar</button>
+                    <button class="md-btn md-btn-primary" type="submit">Guardar</button>
+                </div>
+            </EditForm>
+        </div>
+    }
+
+    @if (lista == null)
+    {
+        <div class="md-loading"><div class="md-spinner"></div><p>Cargando...</p></div>
+    }
+    else if (lista.Count == 0)
+    {
+        <div class="md-empty"><div class="md-empty-icon">&#9830;</div><p>No hay cursos registrados</p></div>
+    }
+    else
+    {
+        <table class="md-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Materia</th>
+                    <th>Comision</th>
+                    <th>Anio</th>
+                    <th>Cupo</th>
+                    <th style="width:120px;">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in lista)
+                {
+                    <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
+                        <td>@item.ID</td>
+                        <td>@item.Materia?.Descripcion</td>
+                        <td>@item.Comision?.Descripcion</td>
+                        <td>@item.AnioCalendario</td>
+                        <td>@item.Cupo</td>
+                        <td>
+                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
+                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private List<Curso>? lista;
+    private List<Materia>? materias;
+    private List<Comision>? comisiones;
+    private Curso actual = new();
+    private ModoForm modoForm = ModoForm.Ninguno;
+    private int seleccionadaId;
+    private string mensaje = "";
+    private bool mensajeEsError = false;
+
+    enum ModoForm { Ninguno, Alta, Modificacion }
+
+    protected override void OnInitialized()
+    {
+        materias = MateriaServicio.GetAll();
+        comisiones = ComisionServicio.GetAll();
+        Cargar();
+    }
+
+    private void Cargar()
+    {
+        try { lista = CursoServicio.GetAll(); }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Seleccionar(int id) => seleccionadaId = id;
+
+    private void Nuevo()
+    {
+        actual = new Curso { AnioCalendario = DateTime.Now.Year };
+        modoForm = ModoForm.Alta;
+        seleccionadaId = 0;
+    }
+
+    private void Editar(int id)
+    {
+        var item = CursoServicio.GetOne(id);
+        if (item == null) return;
+        actual = item;
+        modoForm = ModoForm.Modificacion;
+        seleccionadaId = id;
+    }
+
+    private void Cancelar()
+    {
+        modoForm = ModoForm.Ninguno;
+        actual = new Curso();
+    }
+
+    private void Guardar()
+    {
+        try
+        {
+            if (actual.MateriaId == 0) { mostrarMensaje("Seleccione una materia.", true); return; }
+            if (actual.ComisionId == 0) { mostrarMensaje("Seleccione una comision.", true); return; }
+            if (modoForm == ModoForm.Alta)
+                CursoServicio.Save(actual);
+            else
+                CursoServicio.Update(actual);
+
+            mostrarMensaje("Guardado correctamente.", false);
+            Cancelar();
+            Cargar();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void Eliminar(int id)
+    {
+        var item = CursoServicio.GetOne(id);
+        if (item == null) return;
+        try
+        {
+            CursoServicio.Delete(item);
+            mostrarMensaje("Eliminado correctamente.", false);
+            Cargar();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void mostrarMensaje(string msg, bool esError)
+    {
+        mensaje = msg;
+        mensajeEsError = esError;
+    }
+}

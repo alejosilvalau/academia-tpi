@@ -1,10 +1,140 @@
 ﻿@inherits LayoutComponentBase
+@inject UI.Web.Services.SesionService Sesion
+@inject NavigationManager Nav
 
-<nav style="background-color:#4a86c8;padding:10px 20px;display:flex;gap:20px;align-items:center;">
-    <a href="/" style="color:white;text-decoration:none;font-weight:bold;">Academia TPI</a>
-    <a href="/reportes/cursos" style="color:white;text-decoration:none;">Reporte Cursos</a>
-    <a href="/reportes/planes" style="color:white;text-decoration:none;">Reporte Planes</a>
-</nav>
-<div style="padding:20px;">
+@if (Sesion.IsLoggedIn)
+{
+    <div class="sidebar">
+        <div class="sidebar-logo">ACADEMIA <span>TPI</span></div>
+
+        <nav class="sidebar-nav">
+            <div class="sidebar-section">
+                <a href="/" class="sidebar-link @(IsActive("/"))">
+                    <span class="icon">&#9750;</span> Inicio
+                </a>
+            </div>
+
+            @if (Sesion.IsAdmin)
+            {
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Administracion</div>
+                    <a href="/especialidades" class="sidebar-link @(IsActive("/especialidades"))">
+                        <span class="icon">&#9830;</span> Especialidades
+                    </a>
+                    <a href="/planes" class="sidebar-link @(IsActive("/planes"))">
+                        <span class="icon">&#9830;</span> Planes
+                    </a>
+                    <a href="/comisiones" class="sidebar-link @(IsActive("/comisiones"))">
+                        <span class="icon">&#9830;</span> Comisiones
+                    </a>
+                    <a href="/materias" class="sidebar-link @(IsActive("/materias"))">
+                        <span class="icon">&#9830;</span> Materias
+                    </a>
+                    <a href="/cursos" class="sidebar-link @(IsActive("/cursos"))">
+                        <span class="icon">&#9830;</span> Cursos
+                    </a>
+                    <a href="/personas" class="sidebar-link @(IsActive("/personas"))">
+                        <span class="icon">&#9830;</span> Personas
+                    </a>
+                    <a href="/dictados" class="sidebar-link @(IsActive("/dictados"))">
+                        <span class="icon">&#9830;</span> Dictados
+                    </a>
+                    <a href="/usuarios" class="sidebar-link @(IsActive("/usuarios"))">
+                        <span class="icon">&#9830;</span> Usuarios
+                    </a>
+                </div>
+
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Reportes</div>
+                    <a href="/reportes/cursos" class="sidebar-link @(IsActive("/reportes/cursos"))">
+                        <span class="icon">&#9776;</span> Cursos
+                    </a>
+                    <a href="/reportes/planes" class="sidebar-link @(IsActive("/reportes/planes"))">
+                        <span class="icon">&#9776;</span> Planes
+                    </a>
+                </div>
+            }
+
+            @if (Sesion.IsAlumno)
+            {
+                <div class="sidebar-section">
+                    <a href="/inscripciones" class="sidebar-link @(IsActive("/inscripciones"))">
+                        <span class="icon">&#9998;</span> Inscripciones
+                    </a>
+                </div>
+            }
+
+            @if (Sesion.IsDocente)
+            {
+                <div class="sidebar-section">
+                    <a href="/registrar-notas" class="sidebar-link @(IsActive("/registrar-notas"))">
+                        <span class="icon">&#9998;</span> Registrar Notas
+                    </a>
+                </div>
+            }
+        </nav>
+
+        <div class="sidebar-footer">
+            <a href="/login" @onclick="CerrarSesion" @onclick:preventDefault>
+                <span class="icon">&#10140;</span> Cerrar Sesion
+            </a>
+        </div>
+    </div>
+
+    <div class="topbar">
+        <div class="topbar-title">@GetPageTitle()</div>
+        <div class="topbar-user">@Sesion.UsuarioActual?.Persona?.Nombre @Sesion.UsuarioActual?.Persona?.Apellido</div>
+    </div>
+
+    <div class="content">
+        @Body
+    </div>
+}
+else
+{
     @Body
-</div>
+}
+
+@code {
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender && !Sesion.IsLoggedIn && !Nav.Uri.EndsWith("/login"))
+        {
+            Nav.NavigateTo("/login", forceLoad: true);
+        }
+    }
+
+    private string IsActive(string path)
+    {
+        var uri = new Uri(Nav.Uri);
+        return uri.AbsolutePath == path ? "active" : "";
+    }
+
+    private string GetPageTitle()
+    {
+        var uri = new Uri(Nav.Uri);
+        return uri.AbsolutePath switch
+        {
+            "/" => "Inicio",
+            "/especialidades" => "Especialidades",
+            "/planes" => "Planes",
+            "/comisiones" => "Comisiones",
+            "/materias" => "Materias",
+            "/cursos" => "Cursos",
+            "/personas" => "Personas",
+            "/dictados" => "Dictados",
+            "/usuarios" => "Usuarios",
+            "/inscripciones" => "Inscripciones",
+            "/registrar-notas" => "Registrar Notas",
+            "/reportes/cursos" => "Reporte de Cursos",
+            "/reportes/planes" => "Reporte de Planes",
+            _ => "Academia TPI"
+        };
+    }
+
+    private void CerrarSesion()
+    {
+        Sesion.Logout();
+        Nav.NavigateTo("/login", forceLoad: true);
+    }
+}
