@@ -186,6 +186,7 @@ namespace UI.Desktop.Forms.Materias
             this.cbxPlan.Name = "cbxPlan";
             this.cbxPlan.Size = new System.Drawing.Size(472, 25);
             this.cbxPlan.TabIndex = 9;
+            this.cbxPlan.ValueMember = "ID";
             //
             // panelBottom
             //

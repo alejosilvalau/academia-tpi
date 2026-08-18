@@ -308,6 +308,7 @@ namespace UI.Desktop.Forms.Personas
             this.cbxPlan.Name = "cbxPlan";
             this.cbxPlan.Size = new System.Drawing.Size(414, 31);
             this.cbxPlan.TabIndex = 17;
+            this.cbxPlan.ValueMember = "ID";
             // 
             // lblFechaNacimiento
             // 

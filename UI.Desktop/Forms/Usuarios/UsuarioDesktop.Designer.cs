@@ -185,6 +185,7 @@ namespace UI.Desktop.Forms.Usuarios
             this.cbxPersona.Name = "cbxPersona";
             this.cbxPersona.Size = new System.Drawing.Size(314, 31);
             this.cbxPersona.TabIndex = 9;
+            this.cbxPersona.ValueMember = "ID";
             //
             // panelBotones
             //

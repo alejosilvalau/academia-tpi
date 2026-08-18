@@ -112,6 +112,7 @@ namespace UI.Desktop.Forms.Dictados
             cbxCursos.Name = "cbxCursos";
             cbxCursos.Size = new Size(334, 31);
             cbxCursos.TabIndex = 3;
+            cbxCursos.ValueMember = "ID";
             // 
             // lblDocente
             // 
@@ -139,6 +140,7 @@ namespace UI.Desktop.Forms.Dictados
             cbxDocentes.Name = "cbxDocentes";
             cbxDocentes.Size = new Size(334, 31);
             cbxDocentes.TabIndex = 5;
+            cbxDocentes.ValueMember = "ID";
             // 
             // lblCargo
             // 

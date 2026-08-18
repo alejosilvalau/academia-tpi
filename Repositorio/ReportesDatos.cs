@@ -9,7 +9,7 @@ namespace Repositorio
 
         public ReportesDatos()
         {
-            _connectionString = "Server=(localdb)\\mssqllocaldb;Database=AcademiaDB;Trusted_Connection=True;";
+            _connectionString = "Server=localhost\\SQLEXPRESS;Database=Academia;Trusted_Connection=True;TrustServerCertificate=True;";
         }
 
         public ReportesDatos(string connectionString)
