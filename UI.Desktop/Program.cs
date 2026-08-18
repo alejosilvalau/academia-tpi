@@ -1,3 +1,5 @@
+using Repositorio;
+
 namespace UI.Desktop;
 
 static class Program
@@ -6,6 +8,11 @@ static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+
+        using (var context = new AcademiaContext())
+        {
+            context.Database.EnsureCreated();
+        }
 
         using (var login = new Login())
         {

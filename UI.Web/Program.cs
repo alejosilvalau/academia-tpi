@@ -23,6 +23,12 @@ builder.Services.AddSingleton<SesionService>();
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<AcademiaContext>();
+    context.Database.EnsureCreated();
+}
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
