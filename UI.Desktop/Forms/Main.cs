@@ -46,6 +46,7 @@ namespace UI.Desktop
 
         internal void OpenForm(ApplicationForm form)
         {
+            panelSubMenu.Visible = false;
             panelFormLoader.Controls.Clear();
             form.Dock = DockStyle.Fill;
             form.FormBorderStyle = FormBorderStyle.None;
