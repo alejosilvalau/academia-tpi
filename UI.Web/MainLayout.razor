@@ -17,41 +17,49 @@
             @if (Sesion.IsAdmin)
             {
                 <div class="sidebar-section">
-                    <div class="sidebar-section-title">Administracion</div>
-                    <a href="/especialidades" class="sidebar-link @(IsActive("/especialidades"))">
-                        <span class="icon">&#9830;</span> Especialidades
-                    </a>
-                    <a href="/planes" class="sidebar-link @(IsActive("/planes"))">
-                        <span class="icon">&#9830;</span> Planes
-                    </a>
-                    <a href="/comisiones" class="sidebar-link @(IsActive("/comisiones"))">
-                        <span class="icon">&#9830;</span> Comisiones
-                    </a>
-                    <a href="/materias" class="sidebar-link @(IsActive("/materias"))">
-                        <span class="icon">&#9830;</span> Materias
-                    </a>
-                    <a href="/cursos" class="sidebar-link @(IsActive("/cursos"))">
-                        <span class="icon">&#9830;</span> Cursos
-                    </a>
-                    <a href="/personas" class="sidebar-link @(IsActive("/personas"))">
-                        <span class="icon">&#9830;</span> Personas
-                    </a>
-                    <a href="/dictados" class="sidebar-link @(IsActive("/dictados"))">
-                        <span class="icon">&#9830;</span> Dictados
-                    </a>
-                    <a href="/usuarios" class="sidebar-link @(IsActive("/usuarios"))">
-                        <span class="icon">&#9830;</span> Usuarios
-                    </a>
+                    <div class="sidebar-section-title @(adminOpen ? "open" : "")" @onclick="ToggleAdministracion">
+                        Administracion <span class="arrow">&#9654;</span>
+                    </div>
+                    <div class="sidebar-section-items @(adminOpen ? "open" : "")">
+                        <a href="/especialidades" class="sidebar-link @(IsActive("/especialidades"))">
+                            <span class="icon">&#9830;</span> Especialidades
+                        </a>
+                        <a href="/planes" class="sidebar-link @(IsActive("/planes"))">
+                            <span class="icon">&#9830;</span> Planes
+                        </a>
+                        <a href="/comisiones" class="sidebar-link @(IsActive("/comisiones"))">
+                            <span class="icon">&#9830;</span> Comisiones
+                        </a>
+                        <a href="/materias" class="sidebar-link @(IsActive("/materias"))">
+                            <span class="icon">&#9830;</span> Materias
+                        </a>
+                        <a href="/cursos" class="sidebar-link @(IsActive("/cursos"))">
+                            <span class="icon">&#9830;</span> Cursos
+                        </a>
+                        <a href="/personas" class="sidebar-link @(IsActive("/personas"))">
+                            <span class="icon">&#9830;</span> Personas
+                        </a>
+                        <a href="/dictados" class="sidebar-link @(IsActive("/dictados"))">
+                            <span class="icon">&#9830;</span> Dictados
+                        </a>
+                        <a href="/usuarios" class="sidebar-link @(IsActive("/usuarios"))">
+                            <span class="icon">&#9830;</span> Usuarios
+                        </a>
+                    </div>
                 </div>
 
                 <div class="sidebar-section">
-                    <div class="sidebar-section-title">Reportes</div>
-                    <a href="/reportes/cursos" class="sidebar-link @(IsActive("/reportes/cursos"))">
-                        <span class="icon">&#9776;</span> Cursos
-                    </a>
-                    <a href="/reportes/planes" class="sidebar-link @(IsActive("/reportes/planes"))">
-                        <span class="icon">&#9776;</span> Planes
-                    </a>
+                    <div class="sidebar-section-title @(reportesOpen ? "open" : "")" @onclick="ToggleReportes">
+                        Reportes <span class="arrow">&#9654;</span>
+                    </div>
+                    <div class="sidebar-section-items @(reportesOpen ? "open" : "")">
+                        <a href="/reportes/cursos" class="sidebar-link @(IsActive("/reportes/cursos"))">
+                            <span class="icon">&#9776;</span> Cursos
+                        </a>
+                        <a href="/reportes/planes" class="sidebar-link @(IsActive("/reportes/planes"))">
+                            <span class="icon">&#9776;</span> Planes
+                        </a>
+                    </div>
                 </div>
             }
 
@@ -96,6 +104,12 @@ else
 }
 
 @code {
+    private bool adminOpen;
+    private bool reportesOpen;
+
+    private void ToggleAdministracion() => adminOpen = !adminOpen;
+    private void ToggleReportes() => reportesOpen = !reportesOpen;
+
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender && !Sesion.IsLoggedIn && !Nav.Uri.EndsWith("/login"))

@@ -1,8 +1,7 @@
-using System.Drawing;
-using System.Runtime.InteropServices;
 using Dominio;
 using Repositorio;
 using Servicios;
+using System.Runtime.InteropServices;
 
 namespace UI.Desktop
 {
@@ -89,6 +88,11 @@ namespace UI.Desktop
                 return false;
             }
             return true;
+        }
+
+        private void lblSubtitulo_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

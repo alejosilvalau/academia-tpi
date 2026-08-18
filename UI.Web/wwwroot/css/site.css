@@ -67,16 +67,45 @@ a:hover { color: var(--primary-dark); }
 .sidebar-nav { flex: 1; padding: 8px 0; overflow-y: auto; }
 
 .sidebar-section {
-  padding: 8px 0;
+  padding: 0;
 }
 
 .sidebar-section-title {
-  padding: 4px 24px 4px;
-  font-size: 11px;
+  padding: 10px 24px;
+  font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 1px;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.5);
   font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.15s, color 0.15s;
+  user-select: none;
+}
+
+.sidebar-section-title:hover {
+  background: var(--sidebar-hover);
+  color: var(--sidebar-text-active);
+}
+
+.sidebar-section-title .arrow {
+  font-size: 10px;
+  transition: transform 0.2s;
+}
+
+.sidebar-section-title.open .arrow {
+  transform: rotate(90deg);
+}
+
+.sidebar-section-items {
+  display: none;
+  background: rgba(0,0,0,0.1);
+}
+
+.sidebar-section-items.open {
+  display: block;
 }
 
 .sidebar-link {
@@ -418,7 +447,8 @@ a:hover { color: var(--primary-dark); }
 /* ===================== LOGIN ===================== */
 .login-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
 }
 
 .login-left {
@@ -430,6 +460,7 @@ a:hover { color: var(--primary-dark); }
   justify-content: center;
   color: var(--text-on-primary);
   padding: 40px;
+  text-align: center;
 }
 
 .login-left-logo {
@@ -437,12 +468,14 @@ a:hover { color: var(--primary-dark); }
   font-weight: 700;
   color: var(--accent);
   margin-bottom: 8px;
+  text-align: center;
 }
 
 .login-left-subtitle {
   font-size: 18px;
   opacity: 0.8;
   font-weight: 300;
+  text-align: center;
 }
 
 .login-left-desc {
