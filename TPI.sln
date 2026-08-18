@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repositorio", "Repositorio\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicios", "Servicios\Servicios.csproj", "{A8991236-0CD6-4637-AD51-A3DF21F0256A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI.Desktop", "UI.Desktop\UI.Desktop.csproj", "{171D7129-E1D6-4D0C-9AFD-21BEE6385972}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -75,6 +77,18 @@ Global
 		{A8991236-0CD6-4637-AD51-A3DF21F0256A}.Release|x64.Build.0 = Release|Any CPU
 		{A8991236-0CD6-4637-AD51-A3DF21F0256A}.Release|x86.ActiveCfg = Release|Any CPU
 		{A8991236-0CD6-4637-AD51-A3DF21F0256A}.Release|x86.Build.0 = Release|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Debug|x64.Build.0 = Debug|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Debug|x86.Build.0 = Debug|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Release|Any CPU.Build.0 = Release|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Release|x64.ActiveCfg = Release|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Release|x64.Build.0 = Release|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Release|x86.ActiveCfg = Release|Any CPU
+		{171D7129-E1D6-4D0C-9AFD-21BEE6385972}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

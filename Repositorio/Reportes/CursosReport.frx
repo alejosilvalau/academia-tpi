@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Report ScriptLanguage="CSharp" TextQuality="Regular" ReportInfo.Description="Reporte de Cursos con alumnos inscriptos" ReportInfo.Created="08/17/2026" ReportInfo.CreatorVersion="2026.2.3.0">
+  <Dictionary>
+    <TableDataSource Name="Curso" ReferenceName="Curso" DataType="System.Int32" Enabled="true">
+      <Column Name="ID" DataType="System.Int32"/>
+      <Column Name="AnioCalendario" DataType="System.Int32"/>
+      <Column Name="Cupo" DataType="System.Int32"/>
+      <Column Name="DescripcionMateria" DataType="System.String"/>
+      <Column Name="DescripcionComision" DataType="System.String"/>
+      <Column Name="Nombre" DataType="System.String"/>
+      <Column Name="Apellido" DataType="System.String"/>
+      <Column Name="Legajo" DataType="System.Int32"/>
+    </TableDataSource>
+  </Dictionary>
+  <ReportPage Name="Page1" PaperWidth="210" PaperHeight="297" LeftMargin="20" RightMargin="20" TopMargin="20" BottomMargin="20">
+    <ReportTitleBand Name="ReportTitle1" Width="170" Height="60">
+      <TextObject Name="Title" Left="0" Top="0" Width="170" Height="40" Text="Reporte de Cursos" HorzAlign="Center" Font="Tahoma, 20pt, style=Bold" TextFill.Color="CornflowerBlue"/>
+      <TextObject Name="SubTitle" Left="0" Top="42" Width="170" Height="16" Text="Alumnos inscriptos por curso" HorzAlign="Center" Font="Tahoma, 10pt" TextFill.Color="Gray"/>
+    </ReportTitleBand>
+    <DataBand Name="Data1" Top="64" Width="170" Height="50" DataSourceName="Curso">
+      <TextObject Name="LblID" Left="0" Top="0" Width="25" Height="14" Text="ID:" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="ValID" Left="26" Top="0" Width="30" Height="14" Text="[Curso.ID]" Font="Tahoma, 8pt"/>
+      <TextObject Name="LblAnio" Left="60" Top="0" Width="35" Height="14" Text="Año:" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="ValAnio" Left="96" Top="0" Width="30" Height="14" Text="[Curso.AnioCalendario]" Font="Tahoma, 8pt"/>
+      <TextObject Name="LblCupo" Left="130" Top="0" Width="30" Height="14" Text="Cupo:" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="ValCupo" Left="161" Top="0" Width="9" Height="14" Text="[Curso.Cupo]" Font="Tahoma, 8pt"/>
+      <TextObject Name="LblMateria" Left="0" Top="16" Width="55" Height="14" Text="Materia:" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="ValMateria" Left="56" Top="16" Width="114" Height="14" Text="[Curso.DescripcionMateria]" Font="Tahoma, 8pt"/>
+      <TextObject Name="LblComision" Left="0" Top="32" Width="55" Height="14" Text="Comisión:" Font="Tahoma, 8pt, style=Bold"/>
+      <TextObject Name="ValComision" Left="56" Top="32" Width="114" Height="14" Text="[Curso.DescripcionComision]" Font="Tahoma, 8pt"/>
+    </DataBand>
+    <DataBand Name="Data2" Top="118" Width="170" Height="18" DataSourceName="Curso">
+      <TextObject Name="LblAlumno" Left="0" Top="0" Width="60" Height="14" Text="Alumno:" Font="Tahoma, 8pt, style=Bold" TextFill.Color="CornflowerBlue"/>
+      <TextObject Name="ValAlumno" Left="61" Top="0" Width="80" Height="14" Text="[Curso.Apellido], [Curso.Nombre]" Font="Tahoma, 8pt"/>
+      <TextObject Name="LblLegajo" Left="142" Top="0" Width="28" Height="14" Text="Legajo:" Font="Tahoma, 8pt, style=Bold" TextFill.Color="CornflowerBlue"/>
+      <TextObject Name="ValLegajo" Left="171" Top="0" Width="29" Height="14" Text="[Curso.Legajo]" Font="Tahoma, 8pt"/>
+    </DataBand>
+  </ReportPage>
+</Report>
