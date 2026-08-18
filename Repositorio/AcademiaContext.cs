@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using Dominio;
 
-namespace Dominio
+namespace Repositorio
 {
     public class AcademiaContext : DbContext
     {
