@@ -19,7 +19,7 @@ namespace Repositorio
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=Academia;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=localhost\\SQLEXPRESS;Database=Academia;TrustServerCertificate=True;Trusted_Connection=True;");
             }
         }
 
@@ -29,18 +29,27 @@ namespace Repositorio
             {
                 entity.Metadata.FindNavigation(nameof(Plan.Especialidad))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasOne(p => p.Especialidad).WithMany()
+                    .HasForeignKey(p => p.EspecialidadId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Materia>(entity =>
             {
                 entity.Metadata.FindNavigation(nameof(Materia.Plan))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasOne(m => m.Plan).WithMany()
+                    .HasForeignKey(m => m.PlanId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Comision>(entity =>
             {
                 entity.Metadata.FindNavigation(nameof(Comision.Plan))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasOne(c => c.Plan).WithMany()
+                    .HasForeignKey(c => c.PlanId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Curso>(entity =>
@@ -51,6 +60,12 @@ namespace Repositorio
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
                 entity.Metadata.FindNavigation(nameof(Curso.Comision))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasOne(c => c.Materia).WithMany()
+                    .HasForeignKey(c => c.MateriaId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(c => c.Comision).WithMany()
+                    .HasForeignKey(c => c.ComisionId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Persona>(entity =>
@@ -59,6 +74,9 @@ namespace Repositorio
 
                 entity.Metadata.FindNavigation(nameof(Persona.Plan))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasOne(p => p.Plan).WithMany()
+                    .HasForeignKey(p => p.PlanId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -69,6 +87,9 @@ namespace Repositorio
 
                 entity.Metadata.FindNavigation(nameof(Usuario.Persona))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasOne(u => u.Persona).WithMany()
+                    .HasForeignKey(u => u.PersonaId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<DocenteCurso>(entity =>
@@ -77,6 +98,12 @@ namespace Repositorio
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
                 entity.Metadata.FindNavigation(nameof(DocenteCurso.Docente))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
+                entity.HasOne(dc => dc.Curso).WithMany()
+                    .HasForeignKey(dc => dc.CursoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(dc => dc.Docente).WithMany()
+                    .HasForeignKey(dc => dc.DocenteId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             modelBuilder.Entity<AlumnoInscripcion>(entity =>
@@ -86,6 +113,12 @@ namespace Repositorio
                 entity.Ignore(ai => ai.Nombre);
                 entity.Ignore(ai => ai.Apellido);
                 entity.Ignore(ai => ai.DescripcionComision);
+                entity.HasOne(ai => ai.Alumno).WithMany()
+                    .HasForeignKey(ai => ai.AlumnoId)
+                    .OnDelete(DeleteBehavior.Restrict);
+                entity.HasOne(ai => ai.Curso).WithMany()
+                    .HasForeignKey(ai => ai.CursoId)
+                    .OnDelete(DeleteBehavior.Restrict);
             });
 
             SeedData(modelBuilder);
@@ -209,7 +242,7 @@ namespace Repositorio
                 new AlumnoInscripcion { ID = 11, AlumnoId = 9, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
                 new AlumnoInscripcion { ID = 12, AlumnoId = 9, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
                 new AlumnoInscripcion { ID = 13, AlumnoId = 12, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
-                new AlumnoInscripcion { ID = 14, AlumnoId = 12, CursoId = 12, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
+                new AlumnoInscripcion { ID = 14, AlumnoId = 12, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
                 new AlumnoInscripcion { ID = 15, AlumnoId = 13, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 6 }
             );
         }
