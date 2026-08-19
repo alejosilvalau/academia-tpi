@@ -1,7 +1,6 @@
 using Dominio;
 using Repositorio;
 using Servicios;
-using System.Runtime.InteropServices;
 
 namespace UI.Desktop
 {
@@ -9,24 +8,12 @@ namespace UI.Desktop
     {
         private readonly UsuarioServicio _usuarioServicio;
 
-        [DllImport("user32.dll")]
-        private static extern void ReleaseCapture();
-
-        [DllImport("user32.dll")]
-        private static extern void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
-
         public static Usuario? UsuarioActual { get; private set; }
 
         public Login()
         {
             InitializeComponent();
             _usuarioServicio = new UsuarioServicio(new AcademiaContext());
-        }
-
-        private void appLogin_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
@@ -43,16 +30,6 @@ namespace UI.Desktop
             {
                 Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnMinimizar_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
         }
 
         private void txt_EnterLeave(object sender, EventArgs e)

@@ -52,7 +52,7 @@ namespace UI.Desktop.Forms.Dictados
             this.tsbAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAgregar.Name = "tsbAgregar";
             this.tsbAgregar.Size = new System.Drawing.Size(35, 37);
-            this.tsbAgregar.Text = "+";
+            this.tsbAgregar.Text = "Agregar";
             this.tsbAgregar.Click += new System.EventHandler(this.tsbAgregar_Click);
             //
             // tsbEditar
@@ -152,7 +152,7 @@ namespace UI.Desktop.Forms.Dictados
             this.ClientSize = new System.Drawing.Size(750, 450);
             this.Controls.Add(this.dgvDocentes);
             this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "Dictados";
             this.Text = "Dictados";
             this.Load += new System.EventHandler(this.Dictados_Load);

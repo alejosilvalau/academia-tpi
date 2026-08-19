@@ -389,7 +389,7 @@ namespace UI.Desktop.Forms.Personas
             this.ClientSize = new System.Drawing.Size(600, 360);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panelBotones);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "PersonaDesktop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Persona";

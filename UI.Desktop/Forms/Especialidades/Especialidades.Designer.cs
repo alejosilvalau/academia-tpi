@@ -50,7 +50,7 @@ namespace UI.Desktop.Forms.Especialidades
             this.tsbAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAgregar.Name = "tsbAgregar";
             this.tsbAgregar.Size = new System.Drawing.Size(35, 37);
-            this.tsbAgregar.Text = "+";
+            this.tsbAgregar.Text = "Agregar";
             this.tsbAgregar.Click += new System.EventHandler(this.tsbAgregar_Click);
             // 
             // tsbEditar
@@ -133,7 +133,7 @@ namespace UI.Desktop.Forms.Especialidades
             this.ClientSize = new System.Drawing.Size(700, 450);
             this.Controls.Add(this.dgvEspecialidades);
             this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "Especialidades";
             this.Text = "Especialidades";
             this.Load += new System.EventHandler(this.Especialidades_Load);

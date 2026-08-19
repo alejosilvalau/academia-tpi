@@ -24,9 +24,6 @@ namespace UI.Desktop
             lblTipo = new Label();
             lblUsuario = new Label();
             panelTop = new Panel();
-            btnMinimizar = new Button();
-            btnMaximizar = new Button();
-            btnCerrar = new Button();
             lblTitulo = new Label();
             panelFormLoader = new Panel();
             panelSubMenu = new Panel();
@@ -78,7 +75,7 @@ namespace UI.Desktop
             btnCerrarSesion.Location = new Point(0, 690);
             btnCerrarSesion.Margin = new Padding(3, 4, 3, 4);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Padding = new Padding(10, 10, 10, 10);
+            btnCerrarSesion.Padding = new Padding(10);
             btnCerrarSesion.Size = new Size(220, 60);
             btnCerrarSesion.TabIndex = 5;
             btnCerrarSesion.Text = "  Cerrar Sesion";
@@ -99,7 +96,7 @@ namespace UI.Desktop
             btnReportes.Location = new Point(0, 308);
             btnReportes.Margin = new Padding(3, 4, 3, 4);
             btnReportes.Name = "btnReportes";
-            btnReportes.Padding = new Padding(10, 10, 10, 10);
+            btnReportes.Padding = new Padding(10);
             btnReportes.Size = new Size(220, 61);
             btnReportes.TabIndex = 4;
             btnReportes.Text = "  Reportes";
@@ -121,7 +118,7 @@ namespace UI.Desktop
             btnNotas.Location = new Point(0, 247);
             btnNotas.Margin = new Padding(3, 4, 3, 4);
             btnNotas.Name = "btnNotas";
-            btnNotas.Padding = new Padding(10, 10, 10, 10);
+            btnNotas.Padding = new Padding(10);
             btnNotas.Size = new Size(220, 61);
             btnNotas.TabIndex = 3;
             btnNotas.Text = "  Registrar Notas";
@@ -142,7 +139,7 @@ namespace UI.Desktop
             btnInscripcion.Location = new Point(0, 186);
             btnInscripcion.Margin = new Padding(3, 4, 3, 4);
             btnInscripcion.Name = "btnInscripcion";
-            btnInscripcion.Padding = new Padding(10, 10, 10, 10);
+            btnInscripcion.Padding = new Padding(10);
             btnInscripcion.Size = new Size(220, 61);
             btnInscripcion.TabIndex = 2;
             btnInscripcion.Text = "  Inscripcion";
@@ -163,7 +160,7 @@ namespace UI.Desktop
             btnAdministracion.Location = new Point(0, 125);
             btnAdministracion.Margin = new Padding(3, 4, 3, 4);
             btnAdministracion.Name = "btnAdministracion";
-            btnAdministracion.Padding = new Padding(10, 10, 10, 10);
+            btnAdministracion.Padding = new Padding(10);
             btnAdministracion.Size = new Size(220, 61);
             btnAdministracion.TabIndex = 1;
             btnAdministracion.Text = "  Administracion";
@@ -211,9 +208,6 @@ namespace UI.Desktop
             // panelTop
             // 
             panelTop.BackColor = Color.FromArgb(96, 125, 139);
-            panelTop.Controls.Add(btnMinimizar);
-            panelTop.Controls.Add(btnMaximizar);
-            panelTop.Controls.Add(btnCerrar);
             panelTop.Controls.Add(lblTitulo);
             panelTop.Dock = DockStyle.Top;
             panelTop.Location = new Point(220, 0);
@@ -221,61 +215,6 @@ namespace UI.Desktop
             panelTop.Name = "panelTop";
             panelTop.Size = new Size(780, 62);
             panelTop.TabIndex = 1;
-            panelTop.MouseDown += panelTop_MouseDown;
-            // 
-            // btnMinimizar
-            // 
-            btnMinimizar.Dock = DockStyle.Right;
-            btnMinimizar.FlatAppearance.BorderSize = 0;
-            btnMinimizar.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnMinimizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
-            btnMinimizar.FlatStyle = FlatStyle.Flat;
-            btnMinimizar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnMinimizar.ForeColor = Color.White;
-            btnMinimizar.Location = new Point(690, 0);
-            btnMinimizar.Margin = new Padding(3, 4, 3, 4);
-            btnMinimizar.Name = "btnMinimizar";
-            btnMinimizar.Size = new Size(30, 62);
-            btnMinimizar.TabIndex = 3;
-            btnMinimizar.Text = "-";
-            btnMinimizar.UseVisualStyleBackColor = true;
-            btnMinimizar.Click += btnMinimizar_Click;
-            // 
-            // btnMaximizar
-            // 
-            btnMaximizar.Dock = DockStyle.Right;
-            btnMaximizar.FlatAppearance.BorderSize = 0;
-            btnMaximizar.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnMaximizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
-            btnMaximizar.FlatStyle = FlatStyle.Flat;
-            btnMaximizar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnMaximizar.ForeColor = Color.White;
-            btnMaximizar.Location = new Point(720, 0);
-            btnMaximizar.Margin = new Padding(3, 4, 3, 4);
-            btnMaximizar.Name = "btnMaximizar";
-            btnMaximizar.Size = new Size(30, 62);
-            btnMaximizar.TabIndex = 2;
-            btnMaximizar.Text = "[]";
-            btnMaximizar.UseVisualStyleBackColor = true;
-            btnMaximizar.Click += btnMaximizar_Click;
-            // 
-            // btnCerrar
-            // 
-            btnCerrar.Dock = DockStyle.Right;
-            btnCerrar.FlatAppearance.BorderSize = 0;
-            btnCerrar.FlatAppearance.MouseDownBackColor = Color.FromArgb(211, 47, 47);
-            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(211, 47, 47);
-            btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnCerrar.ForeColor = Color.White;
-            btnCerrar.Location = new Point(750, 0);
-            btnCerrar.Margin = new Padding(3, 4, 3, 4);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(30, 62);
-            btnCerrar.TabIndex = 1;
-            btnCerrar.Text = "X";
-            btnCerrar.UseVisualStyleBackColor = true;
-            btnCerrar.Click += btnCerrar_Click;
             // 
             // lblTitulo
             // 
@@ -553,12 +492,12 @@ namespace UI.Desktop
             btnActualizar.FlatStyle = FlatStyle.Flat;
             btnActualizar.Font = new Font("Segoe UI", 10F);
             btnActualizar.ForeColor = Color.FromArgb(255, 193, 7);
-            btnActualizar.Location = new Point(579, 0);
+            btnActualizar.Location = new Point(533, 0);
             btnActualizar.Margin = new Padding(3, 4, 3, 4);
             btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(121, 62);
+            btnActualizar.Size = new Size(167, 62);
             btnActualizar.TabIndex = 1;
-            btnActualizar.Text = "Actualizar";
+            btnActualizar.Text = "Refrescar Datos";
             btnActualizar.UseVisualStyleBackColor = true;
             btnActualizar.Click += btnActualizar_Click;
             // 
@@ -619,9 +558,6 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnInscripcion;
         private System.Windows.Forms.Button btnAdministracion;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Button btnMinimizar;
-        private System.Windows.Forms.Button btnMaximizar;
-        private System.Windows.Forms.Button btnCerrar;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel panelFormLoader;
         private System.Windows.Forms.Panel panelSubMenu;

@@ -243,7 +243,7 @@ namespace UI.Desktop.Forms.Materias
             this.ClientSize = new System.Drawing.Size(580, 225);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panelBottom);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "MateriaDesktop";
             this.Padding = new System.Windows.Forms.Padding(15);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

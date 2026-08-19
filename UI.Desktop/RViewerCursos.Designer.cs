@@ -104,7 +104,7 @@ namespace UI.Desktop
             this.ClientSize = new System.Drawing.Size(800, 500);
             this.Controls.Add(this.panelContent);
             this.Controls.Add(this.panelTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "RViewerCursos";
             this.Text = "Reporte de Cursos";
             this.Load += new System.EventHandler(this.RViewerCursos_Load);

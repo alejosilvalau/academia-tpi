@@ -25,15 +25,11 @@ namespace UI.Desktop
             txtUsuario = new TextBox();
             txtClave = new TextBox();
             btnIniciarSesion = new Button();
-            tableLayoutPanel3 = new TableLayoutPanel();
-            btnCerrar = new Button();
-            btnMinimizar = new Button();
             panelLeft.SuspendLayout();
             tlpCenter.SuspendLayout();
             pnlLabels.SuspendLayout();
             panelRight.SuspendLayout();
             tlpRight.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
             // panelLeft
@@ -102,7 +98,6 @@ namespace UI.Desktop
             // 
             panelRight.BackColor = Color.FromArgb(245, 245, 245);
             panelRight.Controls.Add(tlpRight);
-            panelRight.Controls.Add(tableLayoutPanel3);
             panelRight.Dock = DockStyle.Fill;
             panelRight.Location = new Point(280, 0);
             panelRight.Margin = new Padding(3, 4, 3, 4);
@@ -199,58 +194,6 @@ namespace UI.Desktop
             btnIniciarSesion.UseVisualStyleBackColor = false;
             btnIniciarSesion.Click += btnIniciarSesion_Click;
             // 
-            // tableLayoutPanel3
-            // 
-            tableLayoutPanel3.ColumnCount = 2;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle());
-            tableLayoutPanel3.Controls.Add(btnCerrar, 1, 0);
-            tableLayoutPanel3.Controls.Add(btnMinimizar, 0, 0);
-            tableLayoutPanel3.Dock = DockStyle.Top;
-            tableLayoutPanel3.Location = new Point(0, 0);
-            tableLayoutPanel3.Margin = new Padding(3, 4, 3, 4);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 1;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle());
-            tableLayoutPanel3.Size = new Size(420, 40);
-            tableLayoutPanel3.TabIndex = 7;
-            // 
-            // btnCerrar
-            // 
-            btnCerrar.Dock = DockStyle.Right;
-            btnCerrar.FlatAppearance.BorderSize = 0;
-            btnCerrar.FlatAppearance.MouseDownBackColor = Color.FromArgb(211, 47, 47);
-            btnCerrar.FlatAppearance.MouseOverBackColor = Color.FromArgb(211, 47, 47);
-            btnCerrar.FlatStyle = FlatStyle.Flat;
-            btnCerrar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnCerrar.ForeColor = Color.FromArgb(117, 117, 117);
-            btnCerrar.Location = new Point(387, 0);
-            btnCerrar.Margin = new Padding(0);
-            btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(33, 40);
-            btnCerrar.TabIndex = 2;
-            btnCerrar.Text = "X";
-            btnCerrar.UseVisualStyleBackColor = true;
-            btnCerrar.Click += btnCerrar_Click;
-            // 
-            // btnMinimizar
-            // 
-            btnMinimizar.Dock = DockStyle.Right;
-            btnMinimizar.FlatAppearance.BorderSize = 0;
-            btnMinimizar.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnMinimizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
-            btnMinimizar.FlatStyle = FlatStyle.Flat;
-            btnMinimizar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnMinimizar.ForeColor = Color.FromArgb(117, 117, 117);
-            btnMinimizar.Location = new Point(354, 0);
-            btnMinimizar.Margin = new Padding(0);
-            btnMinimizar.Name = "btnMinimizar";
-            btnMinimizar.Size = new Size(33, 40);
-            btnMinimizar.TabIndex = 1;
-            btnMinimizar.Text = "-";
-            btnMinimizar.UseVisualStyleBackColor = true;
-            btnMinimizar.Click += btnMinimizar_Click;
-            // 
             // Login
             // 
             AcceptButton = btnIniciarSesion;
@@ -259,12 +202,11 @@ namespace UI.Desktop
             ClientSize = new Size(700, 475);
             Controls.Add(panelRight);
             Controls.Add(panelLeft);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.Sizable;
             Margin = new Padding(3, 5, 3, 5);
             Name = "Login";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Login";
-            MouseDown += appLogin_MouseDown;
             panelLeft.ResumeLayout(false);
             tlpCenter.ResumeLayout(false);
             tlpCenter.PerformLayout();
@@ -272,7 +214,6 @@ namespace UI.Desktop
             panelRight.ResumeLayout(false);
             tlpRight.ResumeLayout(false);
             tlpRight.PerformLayout();
-            tableLayoutPanel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -284,9 +225,6 @@ namespace UI.Desktop
         private System.Windows.Forms.Label lblAcademia;
         private System.Windows.Forms.Label lblSubtitulo;
         private System.Windows.Forms.Panel panelRight;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
-        private System.Windows.Forms.Button btnCerrar;
-        private System.Windows.Forms.Button btnMinimizar;
         private System.Windows.Forms.TableLayoutPanel tlpRight;
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.TextBox txtUsuario;

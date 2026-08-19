@@ -241,7 +241,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.Controls.Add(this.dgvCursos);
             this.Controls.Add(this.panelBotones);
             this.Controls.Add(this.panelTop);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "InscripcionDesktop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Inscripcion";

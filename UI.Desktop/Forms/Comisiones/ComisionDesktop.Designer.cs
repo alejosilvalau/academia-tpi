@@ -213,7 +213,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.ClientSize = new System.Drawing.Size(580, 195);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panelBottom);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "ComisionDesktop";
             this.Padding = new System.Windows.Forms.Padding(15);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

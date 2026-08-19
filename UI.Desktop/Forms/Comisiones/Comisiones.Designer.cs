@@ -51,7 +51,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.tsbAgregar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbAgregar.Name = "tsbAgregar";
             this.tsbAgregar.Size = new System.Drawing.Size(27, 37);
-            this.tsbAgregar.Text = "+";
+            this.tsbAgregar.Text = "Agregar";
             this.tsbAgregar.Click += new System.EventHandler(this.tsbAgregar_Click);
             //
             // tsbEditar
@@ -151,7 +151,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dgvComisiones);
             this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "Comisiones";
             this.Text = "Comisiones";
             this.Load += new System.EventHandler(this.Comisiones_Load);

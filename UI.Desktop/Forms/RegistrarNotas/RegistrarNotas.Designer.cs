@@ -209,7 +209,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             this.Controls.Add(this.dgvAlumnos);
             this.Controls.Add(this.panelTop);
             this.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "RegistrarNotas";
             this.Text = "Registrar Notas";
             this.Load += new System.EventHandler(this.RegistrarNotas_Load);

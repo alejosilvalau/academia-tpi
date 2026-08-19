@@ -153,7 +153,7 @@ namespace UI.Desktop.Forms.Especialidades
             this.ClientSize = new System.Drawing.Size(440, 180);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panelBotones);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "EspecialidadDesktop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Especialidad";

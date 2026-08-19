@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using Dominio;
 using Repositorio;
 using Servicios;
@@ -8,12 +7,6 @@ namespace UI.Desktop
     public partial class Main : ApplicationForm
     {
         private readonly PersonaServicio _personaServicio;
-
-        [DllImport("user32.dll")]
-        private static extern void ReleaseCapture();
-
-        [DllImport("user32.dll")]
-        private static extern void SendMessage(IntPtr hWnd, int wMsg, int wParam, int lParam);
 
         public Main()
         {
@@ -36,12 +29,6 @@ namespace UI.Desktop
             btnReportes.Visible = Login.UsuarioActual?.Persona?.Tipo == Persona.TiposPersonas.Administrador;
             btnInscripcion.Visible = true;
             btnNotas.Visible = true;
-        }
-
-        private void panelTop_MouseDown(object sender, MouseEventArgs e)
-        {
-            ReleaseCapture();
-            SendMessage(Handle, 0x112, 0xf012, 0);
         }
 
         internal void OpenForm(ApplicationForm form)
@@ -174,24 +161,6 @@ namespace UI.Desktop
         private void btnCerrarSesion_Click(object sender, EventArgs e)
         {
             Application.Restart();
-        }
-
-        private void btnCerrar_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void btnMaximizar_Click(object sender, EventArgs e)
-        {
-            if (WindowState != FormWindowState.Maximized)
-                WindowState = FormWindowState.Maximized;
-            else
-                WindowState = FormWindowState.Normal;
-        }
-
-        private void btnMinimizar_Click(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
         }
 
         private void panelFormLoader_ControlAdded(object sender, ControlEventArgs e)

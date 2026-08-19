@@ -227,7 +227,7 @@ namespace UI.Desktop.Forms.Dictados
             ClientSize = new Size(460, 338);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.Sizable;
             Margin = new Padding(3, 5, 3, 5);
             Name = "DictadoDesktop";
             StartPosition = FormStartPosition.CenterParent;

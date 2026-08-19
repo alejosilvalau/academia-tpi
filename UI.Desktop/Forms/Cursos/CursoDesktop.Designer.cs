@@ -285,7 +285,7 @@ namespace UI.Desktop.Forms.Cursos
             ClientSize = new Size(560, 281);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
-            FormBorderStyle = FormBorderStyle.None;
+            FormBorderStyle = FormBorderStyle.Sizable;
             Margin = new Padding(3, 5, 3, 5);
             Name = "CursoDesktop";
             StartPosition = FormStartPosition.CenterParent;
