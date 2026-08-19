@@ -26,10 +26,26 @@ namespace UI.Desktop
             }
 
             panelSubMenu.Visible = false;
-            btnAdministracion.Visible = Login.UsuarioActual?.Persona?.Tipo == Persona.TiposPersonas.Administrador;
-            btnReportes.Visible = Login.UsuarioActual?.Persona?.Tipo == Persona.TiposPersonas.Administrador;
-            btnInscripcion.Visible = true;
-            btnNotas.Visible = true;
+
+            var tipo = Login.UsuarioActual?.Persona?.Tipo;
+            btnAdministracion.Visible = tipo == Persona.TiposPersonas.Administrador;
+            btnReportes.Visible = tipo == Persona.TiposPersonas.Administrador;
+
+            switch (tipo)
+            {
+                case Persona.TiposPersonas.Administrador:
+                    btnInscripcion.Visible = true;
+                    btnNotas.Visible = true;
+                    break;
+                case Persona.TiposPersonas.Alumno:
+                    btnInscripcion.Visible = true;
+                    btnNotas.Visible = false;
+                    break;
+                case Persona.TiposPersonas.Docente:
+                    btnInscripcion.Visible = false;
+                    btnNotas.Visible = true;
+                    break;
+            }
         }
 
         internal void OpenForm(ApplicationForm form)

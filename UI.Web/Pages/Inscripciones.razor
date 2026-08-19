@@ -5,13 +5,20 @@
 @inject UI.Web.Services.SesionService Sesion
 
 <div class="md-card">
-    <div class="md-card-header-actions">
+<div class="md-card-header-actions">
         <span>Inscripciones</span>
         <div class="md-btn-group">
-            <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nueva</button>
+            @if (Sesion.IsAdmin)
+            {
+                <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nueva</button>
+            }
+            else
+            {
+                <span class="md-btn md-btn-accent">+ Inscribirme</span>
+            }
             <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
         </div>
-    </div>
+</div>
 
     @if (!string.IsNullOrEmpty(mensaje))
     {
@@ -28,12 +35,16 @@
                         <label class="md-label">Alumno</label>
                         <select class="md-select" @bind="alumnoIdSeleccionado">
                             <option value="0">-- Seleccione --</option>
-                            @if (alumnos != null)
+                            @if (Sesion.IsAdmin)
                             {
                                 @foreach (var a in alumnos)
                                 {
                                     <option value="@a.ID">@a.Nombre @a.Apellido (Legajo: @a.Legajo)</option>
                                 }
+                            }
+                            else
+                            {
+                                <option value="@Sesion.UsuarioActual.PersonaId">@Sesion.UsuarioActual.Persona.Nombre @Sesion.UsuarioActual.Persona.Apellido (Legajo: @Sesion.UsuarioActual.Persona.Legajo)</option>
                             }
                         </select>
                     </div>
@@ -94,7 +105,10 @@
                         <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
                         <td>@(item.Nota?.ToString() ?? "-")</td>
                         <td>
-                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Baja</button>
+                            @if (Sesion.IsAdmin)
+                            {
+                                <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Baja</button>
+                            }
                         </td>
                     </tr>
                 }

@@ -25,5 +25,10 @@ namespace UI.Web.Services
         {
             _usuarioActual = null;
         }
+
+        public bool ValidarPermisos(Persona.TiposPersonas tipoRequerido)
+        {
+            return IsAdmin || TipoUsuario == tipoRequerido;
+        }
     }
 }

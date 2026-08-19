@@ -9,13 +9,19 @@ namespace UI.Desktop.Forms.Inscripciones
         private readonly InscripcionServicio _servicio;
         private readonly Persona _personaActual;
 
-        public Inscripciones(Persona persona)
+        public Inscripciones(Persona persona, bool admin = false)
         {
             InitializeComponent();
             _servicio = new InscripcionServicio(new AcademiaContext());
             _personaActual = persona;
             dgvInscripciones.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
+
+            if (!admin)
+            {
+                tsbEditar.Visible = false;
+                tsbEliminar.Visible = false;
+            }
         }
 
         private void Inscripciones_Load(object sender, EventArgs e) => Listar();

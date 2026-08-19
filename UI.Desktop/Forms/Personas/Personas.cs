@@ -21,6 +21,11 @@ namespace UI.Desktop.Forms.Personas
         {
             _filtroTipo = tipo;
             Text = $"Personas - {tipo}";
+
+            tsbAgregar.Visible = false;
+            tsbEditar.Visible = false;
+            tsbEliminar.Visible = false;
+            tsbSeleccionar.Visible = true;
         }
 
         private void Personas_Load(object sender, EventArgs e) => Listar();
@@ -57,6 +62,23 @@ namespace UI.Desktop.Forms.Personas
             int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
             new PersonaDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+        }
+
+        private void tsbSeleccionar_Click(object sender, EventArgs e)
+        {
+            if (!IsRowSelected(dgvPersonas)) return;
+            var personaSeleccionada = (Persona)dgvPersonas.SelectedRows[0].DataBoundItem;
+
+            if (_filtroTipo == Persona.TiposPersonas.Alumno)
+            {
+                var form = new Forms.Inscripciones.Inscripciones(personaSeleccionada, admin: true);
+                form.ShowDialog();
+            }
+            else if (_filtroTipo == Persona.TiposPersonas.Docente)
+            {
+                var form = new Forms.RegistrarNotas.RegistrarNotas(personaSeleccionada);
+                form.ShowDialog();
+            }
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

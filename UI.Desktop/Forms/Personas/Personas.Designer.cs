@@ -29,6 +29,7 @@ namespace UI.Desktop.Forms.Personas
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
+            this.tsbSeleccionar = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPersonas)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -40,7 +41,8 @@ namespace UI.Desktop.Forms.Personas
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAgregar,
             this.tsbEditar,
-            this.tsbEliminar});
+            this.tsbEliminar,
+            this.tsbSeleccionar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(900, 40);
@@ -81,6 +83,19 @@ namespace UI.Desktop.Forms.Personas
             this.tsbEliminar.Size = new System.Drawing.Size(65, 37);
             this.tsbEliminar.Text = "Eliminar";
             this.tsbEliminar.Click += new System.EventHandler(this.tsbEliminar_Click);
+            // 
+            // tsbSeleccionar
+            // 
+            this.tsbSeleccionar.BackColor = MaterialColors.PrimaryDark;
+            this.tsbSeleccionar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.tsbSeleccionar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.tsbSeleccionar.ForeColor = MaterialColors.TextOnPrimary;
+            this.tsbSeleccionar.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.tsbSeleccionar.Name = "tsbSeleccionar";
+            this.tsbSeleccionar.Size = new System.Drawing.Size(80, 37);
+            this.tsbSeleccionar.Text = "Seleccionar";
+            this.tsbSeleccionar.Visible = false;
+            this.tsbSeleccionar.Click += new System.EventHandler(this.tsbSeleccionar_Click);
             // 
             // dgvPersonas
             // 
@@ -218,5 +233,6 @@ namespace UI.Desktop.Forms.Personas
         private System.Windows.Forms.ToolStripButton tsbAgregar;
         private System.Windows.Forms.ToolStripButton tsbEditar;
         private System.Windows.Forms.ToolStripButton tsbEliminar;
+        private System.Windows.Forms.ToolStripButton tsbSeleccionar;
     }
 }

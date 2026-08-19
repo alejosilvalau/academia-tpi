@@ -4,6 +4,7 @@
 @inject PersonaServicio PersonaServicio
 @inject DocenteCursoServicio DocenteCursoServicio
 @inject UI.Web.Services.SesionService Sesion
+@inject NavigationManager Navigation
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -81,23 +82,33 @@
     private bool mensajeEsError = false;
     private int cursoIdSeleccionado;
     private Dictionary<int, int?> notas = new();
+    private List<Persona>? docentes;
 
     protected override void OnInitialized()
     {
-        try
+        if (!Sesion.ValidarPermisos(Dominio.Persona.TiposPersonas.Docente))
         {
+            Navigation.NavigateTo("/");
+            return;
+        }
+
+        if (Sesion.IsAdmin)
+        {
+            // Admin: show dropdown to select a Docente
+            docentes = PersonaServicio.GetByTipo(Persona.TiposPersonas.Docente);
+        }
+        else
+        {
+            // Docente: load own courses directly
             if (Sesion.IsDocente && Sesion.UsuarioActual?.PersonaId != null)
             {
                 var asignaciones = DocenteCursoServicio.GetByDocente(Sesion.UsuarioActual.PersonaId.Value);
                 var cursoIds = asignaciones.Select(a => a.CursoId).Distinct().ToList();
                 cursos = CursoServicio.GetAll().Where(c => cursoIds.Contains(c.ID)).ToList();
             }
-            else
-            {
-                cursos = CursoServicio.GetAll();
-            }
         }
-        catch { }
+
+        Cargar();
     }
 
     private void CargarInscripciones()

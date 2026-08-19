@@ -1,6 +1,8 @@
 @page "/planes"
 @inject PlanServicio PlanServicio
 @inject EspecialidadServicio EspecialidadServicio
+@inject UI.Web.Services.SesionService Sesion
+@inject NavigationManager Navigation
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -98,6 +100,11 @@
 
     protected override void OnInitialized()
     {
+        if (!Sesion.ValidarPermisos(Dominio.Persona.TiposPersonas.Administrador))
+        {
+            Navigation.NavigateTo("/");
+            return;
+        }
         especialidades = EspecialidadServicio.GetAll();
         Cargar();
     }
