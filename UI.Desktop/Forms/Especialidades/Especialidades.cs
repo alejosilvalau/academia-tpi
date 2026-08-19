@@ -13,6 +13,7 @@ namespace UI.Desktop.Forms.Especialidades
             InitializeComponent();
             _servicio = new EspecialidadServicio(new AcademiaContext());
             dgvEspecialidades.AutoGenerateColumns = false;
+            AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         private void Especialidades_Load(object sender, EventArgs e) => Listar();

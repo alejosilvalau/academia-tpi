@@ -1,3 +1,4 @@
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace UI.Desktop
@@ -44,6 +45,19 @@ namespace UI.Desktop
                 return false;
             }
             return true;
+        }
+
+        protected void AplicarHoverToolStrip(ToolStrip toolStrip, Color hoverColor)
+        {
+            foreach (ToolStripItem item in toolStrip.Items)
+            {
+                if (item is ToolStripButton)
+                {
+                    var original = item.BackColor;
+                    item.MouseEnter += (s, e) => { item.BackColor = hoverColor; };
+                    item.MouseLeave += (s, e) => { item.BackColor = original; };
+                }
+            }
         }
     }
 }

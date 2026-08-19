@@ -13,6 +13,7 @@ namespace UI.Desktop.Forms.Usuarios
             InitializeComponent();
             _servicio = new UsuarioServicio(new AcademiaContext());
             dgvUsuarios.AutoGenerateColumns = false;
+            AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         private void Usuarios_Load(object sender, EventArgs e) => Listar();

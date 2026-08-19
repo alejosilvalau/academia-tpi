@@ -13,6 +13,7 @@ namespace UI.Desktop.Forms.Materias
             InitializeComponent();
             _servicio = new MateriaServicio(new AcademiaContext());
             dgvMaterias.AutoGenerateColumns = false;
+            AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         private void Materias_Load(object sender, EventArgs e) => Listar();

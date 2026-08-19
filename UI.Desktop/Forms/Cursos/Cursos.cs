@@ -13,6 +13,7 @@ namespace UI.Desktop.Forms.Cursos
             InitializeComponent();
             _servicio = new CursoServicio(new AcademiaContext());
             dgvCursos.AutoGenerateColumns = false;
+            AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         private void Cursos_Load(object sender, EventArgs e) => Listar();

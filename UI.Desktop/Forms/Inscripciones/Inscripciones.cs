@@ -15,6 +15,7 @@ namespace UI.Desktop.Forms.Inscripciones
             _servicio = new InscripcionServicio(new AcademiaContext());
             _personaActual = persona;
             dgvInscripciones.AutoGenerateColumns = false;
+            AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         private void Inscripciones_Load(object sender, EventArgs e) => Listar();

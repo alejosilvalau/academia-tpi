@@ -14,6 +14,7 @@ namespace UI.Desktop.Forms.Personas
             InitializeComponent();
             _servicio = new PersonaServicio(new AcademiaContext());
             dgvPersonas.AutoGenerateColumns = false;
+            AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         public Personas(Persona.TiposPersonas tipo) : this()

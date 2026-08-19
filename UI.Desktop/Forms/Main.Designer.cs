@@ -68,7 +68,7 @@ namespace UI.Desktop
             btnCerrarSesion.Dock = DockStyle.Bottom;
             btnCerrarSesion.FlatAppearance.BorderSize = 0;
             btnCerrarSesion.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnCerrarSesion.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnCerrarSesion.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnCerrarSesion.FlatStyle = FlatStyle.Flat;
             btnCerrarSesion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnCerrarSesion.ForeColor = Color.FromArgb(255, 193, 7);
@@ -89,7 +89,7 @@ namespace UI.Desktop
             btnReportes.Dock = DockStyle.Top;
             btnReportes.FlatAppearance.BorderSize = 0;
             btnReportes.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnReportes.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnReportes.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnReportes.FlatStyle = FlatStyle.Flat;
             btnReportes.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnReportes.ForeColor = Color.White;
@@ -111,7 +111,7 @@ namespace UI.Desktop
             btnNotas.Dock = DockStyle.Top;
             btnNotas.FlatAppearance.BorderSize = 0;
             btnNotas.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnNotas.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnNotas.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnNotas.FlatStyle = FlatStyle.Flat;
             btnNotas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnNotas.ForeColor = Color.White;
@@ -132,7 +132,7 @@ namespace UI.Desktop
             btnInscripcion.Dock = DockStyle.Top;
             btnInscripcion.FlatAppearance.BorderSize = 0;
             btnInscripcion.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnInscripcion.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnInscripcion.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnInscripcion.FlatStyle = FlatStyle.Flat;
             btnInscripcion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnInscripcion.ForeColor = Color.White;
@@ -153,7 +153,7 @@ namespace UI.Desktop
             btnAdministracion.Dock = DockStyle.Top;
             btnAdministracion.FlatAppearance.BorderSize = 0;
             btnAdministracion.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnAdministracion.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnAdministracion.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnAdministracion.FlatStyle = FlatStyle.Flat;
             btnAdministracion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAdministracion.ForeColor = Color.White;
@@ -266,7 +266,7 @@ namespace UI.Desktop
             btnReportesPlanes.Dock = DockStyle.Top;
             btnReportesPlanes.FlatAppearance.BorderSize = 0;
             btnReportesPlanes.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnReportesPlanes.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnReportesPlanes.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnReportesPlanes.FlatStyle = FlatStyle.Flat;
             btnReportesPlanes.Font = new Font("Segoe UI", 9F);
             btnReportesPlanes.ForeColor = Color.White;
@@ -287,7 +287,7 @@ namespace UI.Desktop
             btnReportesCursos.Dock = DockStyle.Top;
             btnReportesCursos.FlatAppearance.BorderSize = 0;
             btnReportesCursos.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnReportesCursos.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnReportesCursos.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnReportesCursos.FlatStyle = FlatStyle.Flat;
             btnReportesCursos.Font = new Font("Segoe UI", 9F);
             btnReportesCursos.ForeColor = Color.White;
@@ -308,7 +308,7 @@ namespace UI.Desktop
             btnABMUsuarios.Dock = DockStyle.Top;
             btnABMUsuarios.FlatAppearance.BorderSize = 0;
             btnABMUsuarios.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMUsuarios.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMUsuarios.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMUsuarios.FlatStyle = FlatStyle.Flat;
             btnABMUsuarios.Font = new Font("Segoe UI", 9F);
             btnABMUsuarios.ForeColor = Color.White;
@@ -329,7 +329,7 @@ namespace UI.Desktop
             btnABMPlanes.Dock = DockStyle.Top;
             btnABMPlanes.FlatAppearance.BorderSize = 0;
             btnABMPlanes.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMPlanes.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMPlanes.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMPlanes.FlatStyle = FlatStyle.Flat;
             btnABMPlanes.Font = new Font("Segoe UI", 9F);
             btnABMPlanes.ForeColor = Color.White;
@@ -350,7 +350,7 @@ namespace UI.Desktop
             btnABMPersonas.Dock = DockStyle.Top;
             btnABMPersonas.FlatAppearance.BorderSize = 0;
             btnABMPersonas.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMPersonas.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMPersonas.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMPersonas.FlatStyle = FlatStyle.Flat;
             btnABMPersonas.Font = new Font("Segoe UI", 9F);
             btnABMPersonas.ForeColor = Color.White;
@@ -371,7 +371,7 @@ namespace UI.Desktop
             btnABMMaterias.Dock = DockStyle.Top;
             btnABMMaterias.FlatAppearance.BorderSize = 0;
             btnABMMaterias.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMMaterias.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMMaterias.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMMaterias.FlatStyle = FlatStyle.Flat;
             btnABMMaterias.Font = new Font("Segoe UI", 9F);
             btnABMMaterias.ForeColor = Color.White;
@@ -392,7 +392,7 @@ namespace UI.Desktop
             btnABMEspecialidades.Dock = DockStyle.Top;
             btnABMEspecialidades.FlatAppearance.BorderSize = 0;
             btnABMEspecialidades.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMEspecialidades.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMEspecialidades.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMEspecialidades.FlatStyle = FlatStyle.Flat;
             btnABMEspecialidades.Font = new Font("Segoe UI", 9F);
             btnABMEspecialidades.ForeColor = Color.White;
@@ -413,7 +413,7 @@ namespace UI.Desktop
             btnABMDictados.Dock = DockStyle.Top;
             btnABMDictados.FlatAppearance.BorderSize = 0;
             btnABMDictados.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMDictados.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMDictados.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMDictados.FlatStyle = FlatStyle.Flat;
             btnABMDictados.Font = new Font("Segoe UI", 9F);
             btnABMDictados.ForeColor = Color.White;
@@ -434,7 +434,7 @@ namespace UI.Desktop
             btnABMCursos.Dock = DockStyle.Top;
             btnABMCursos.FlatAppearance.BorderSize = 0;
             btnABMCursos.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMCursos.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMCursos.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMCursos.FlatStyle = FlatStyle.Flat;
             btnABMCursos.Font = new Font("Segoe UI", 9F);
             btnABMCursos.ForeColor = Color.White;
@@ -455,7 +455,7 @@ namespace UI.Desktop
             btnABMComisiones.Dock = DockStyle.Top;
             btnABMComisiones.FlatAppearance.BorderSize = 0;
             btnABMComisiones.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMComisiones.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnABMComisiones.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnABMComisiones.FlatStyle = FlatStyle.Flat;
             btnABMComisiones.Font = new Font("Segoe UI", 9F);
             btnABMComisiones.ForeColor = Color.White;
@@ -488,14 +488,14 @@ namespace UI.Desktop
             btnActualizar.Dock = DockStyle.Right;
             btnActualizar.FlatAppearance.BorderSize = 0;
             btnActualizar.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnActualizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnActualizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnActualizar.FlatStyle = FlatStyle.Flat;
             btnActualizar.Font = new Font("Segoe UI", 10F);
             btnActualizar.ForeColor = Color.FromArgb(255, 193, 7);
-            btnActualizar.Location = new Point(533, 0);
+            btnActualizar.Location = new Point(503, 0);
             btnActualizar.Margin = new Padding(3, 4, 3, 4);
             btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(167, 62);
+            btnActualizar.Size = new Size(157, 62);
             btnActualizar.TabIndex = 1;
             btnActualizar.Text = "Refrescar Datos";
             btnActualizar.UseVisualStyleBackColor = true;
@@ -506,16 +506,16 @@ namespace UI.Desktop
             btnSalir.Dock = DockStyle.Right;
             btnSalir.FlatAppearance.BorderSize = 0;
             btnSalir.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnSalir.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnSalir.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
             btnSalir.FlatStyle = FlatStyle.Flat;
             btnSalir.Font = new Font("Segoe UI", 10F);
             btnSalir.ForeColor = Color.White;
-            btnSalir.Location = new Point(700, 0);
+            btnSalir.Location = new Point(660, 0);
             btnSalir.Margin = new Padding(3, 4, 3, 4);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(80, 62);
+            btnSalir.Size = new Size(120, 62);
             btnSalir.TabIndex = 0;
-            btnSalir.Text = "Salir";
+            btnSalir.Text = "Cerrar Vista";
             btnSalir.UseVisualStyleBackColor = true;
             btnSalir.Click += btnSalir_Click;
             // 

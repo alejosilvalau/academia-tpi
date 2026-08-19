@@ -13,6 +13,7 @@ namespace UI.Desktop.Forms.Planes
             InitializeComponent();
             _servicio = new PlanServicio(new AcademiaContext());
             dgvPlanes.AutoGenerateColumns = false;
+            AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         private void Planes_Load(object sender, EventArgs e) => Listar();
