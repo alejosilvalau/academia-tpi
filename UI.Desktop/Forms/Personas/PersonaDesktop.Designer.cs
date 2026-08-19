@@ -102,7 +102,7 @@ namespace UI.Desktop.Forms.Personas
             // txtID
             // 
             this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.txtID.BackColor = MaterialColors.Surface;
+            this.txtID.BackColor = MaterialColors.ReadOnlyBack;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -274,6 +274,7 @@ namespace UI.Desktop.Forms.Personas
             this.cbxTipo.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.cbxTipo.BackColor = MaterialColors.Surface;
             this.cbxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxTipo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxTipo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxTipo.ForeColor = MaterialColors.TextPrimary;
             this.cbxTipo.FormattingEnabled = true;
@@ -300,6 +301,7 @@ namespace UI.Desktop.Forms.Personas
             this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.cbxPlan.BackColor = MaterialColors.Surface;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPlan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxPlan.ForeColor = MaterialColors.TextPrimary;
             this.cbxPlan.FormattingEnabled = true;

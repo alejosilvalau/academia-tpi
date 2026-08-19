@@ -65,7 +65,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             // txtAlumno
             //
-            this.txtAlumno.BackColor = MaterialColors.Surface;
+            this.txtAlumno.BackColor = MaterialColors.ReadOnlyBack;
             this.txtAlumno.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAlumno.Enabled = false;
             this.txtAlumno.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -91,6 +91,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             this.cbxCondicion.BackColor = MaterialColors.Surface;
             this.cbxCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCondicion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxCondicion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxCondicion.ForeColor = MaterialColors.TextPrimary;
             this.cbxCondicion.FormattingEnabled = true;

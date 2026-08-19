@@ -18,5 +18,6 @@ namespace UI.Desktop
         public static readonly Color RowAlternate = Color.FromArgb(236, 239, 241);
         public static readonly Color Error = Color.FromArgb(211, 47, 47);
         public static readonly Color CancelBtn = Color.FromArgb(144, 164, 174);
+        public static readonly Color ReadOnlyBack = Color.FromArgb(238, 238, 238);
     }
 }

@@ -80,7 +80,7 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             // txtID
             // 
-            txtID.BackColor = Color.White;
+            txtID.BackColor = MaterialColors.ReadOnlyBack;
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtID.Enabled = false;
@@ -185,6 +185,7 @@ namespace UI.Desktop.Forms.Usuarios
             cbxPersona.DisplayMember = "NombreCompleto";
             cbxPersona.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxPersona.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxPersona.FlatStyle = FlatStyle.Flat;
             cbxPersona.Font = new Font("Segoe UI", 10F);
             cbxPersona.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPersona.FormattingEnabled = true;

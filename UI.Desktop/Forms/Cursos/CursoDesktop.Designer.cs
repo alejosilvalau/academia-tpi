@@ -83,7 +83,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // txtID
             // 
-            txtID.BackColor = Color.White;
+            txtID.BackColor = MaterialColors.ReadOnlyBack;
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtID.Enabled = false;
@@ -135,7 +135,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // txtDescripcion
             // 
-            txtDescripcion.BackColor = Color.White;
+            txtDescripcion.BackColor = MaterialColors.ReadOnlyBack;
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtDescripcion.Font = new Font("Segoe UI", 10F);
@@ -189,6 +189,7 @@ namespace UI.Desktop.Forms.Cursos
             cbxMateria.BackColor = Color.White;
             cbxMateria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxMateria.FlatStyle = FlatStyle.Flat;
             cbxMateria.Font = new Font("Segoe UI", 10F);
             cbxMateria.ForeColor = Color.FromArgb(33, 33, 33);
             cbxMateria.FormattingEnabled = true;
@@ -217,6 +218,7 @@ namespace UI.Desktop.Forms.Cursos
             cbxComision.BackColor = Color.White;
             cbxComision.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxComision.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxComision.FlatStyle = FlatStyle.Flat;
             cbxComision.Font = new Font("Segoe UI", 10F);
             cbxComision.ForeColor = Color.FromArgb(33, 33, 33);
             cbxComision.FormattingEnabled = true;

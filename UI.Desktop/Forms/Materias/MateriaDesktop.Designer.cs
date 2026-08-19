@@ -80,7 +80,7 @@ namespace UI.Desktop.Forms.Materias
             // txtID
             //
             this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.txtID.BackColor = MaterialColors.Surface;
+            this.txtID.BackColor = MaterialColors.ReadOnlyBack;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -181,6 +181,7 @@ namespace UI.Desktop.Forms.Materias
             this.tableLayoutPanel1.SetColumnSpan(this.cbxPlan, 3);
             this.cbxPlan.BackColor = MaterialColors.Surface;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxPlan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxPlan.ForeColor = MaterialColors.TextPrimary;
             this.cbxPlan.FormattingEnabled = true;

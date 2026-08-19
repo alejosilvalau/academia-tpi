@@ -75,9 +75,8 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             // txtID
             // 
-            this.txtID.BackColor = MaterialColors.Surface;
+            this.txtID.BackColor = MaterialColors.ReadOnlyBack;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtID.ForeColor = MaterialColors.TextPrimary;
