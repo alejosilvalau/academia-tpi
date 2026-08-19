@@ -27,6 +27,7 @@ namespace UI.Desktop.Forms.Materias
             this.colHorasSemanales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colHorasTotales = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPlan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterias)).BeginInit();
             this.SuspendLayout();
@@ -97,7 +98,8 @@ namespace UI.Desktop.Forms.Materias
             this.colDescripcion,
             this.colHorasSemanales,
             this.colHorasTotales,
-            this.colPlan});
+            this.colPlan,
+            this.FillSpacer});
             this.dgvMaterias.DefaultCellStyle.BackColor = MaterialColors.Surface;
             this.dgvMaterias.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
             this.dgvMaterias.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -157,6 +159,14 @@ namespace UI.Desktop.Forms.Materias
             this.colPlan.Name = "colPlan";
             this.colPlan.ReadOnly = true;
             //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            //
             // Materias
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -188,5 +198,6 @@ namespace UI.Desktop.Forms.Materias
         private System.Windows.Forms.DataGridViewTextBoxColumn colHorasSemanales;
         private System.Windows.Forms.DataGridViewTextBoxColumn colHorasTotales;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPlan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
     }
 }

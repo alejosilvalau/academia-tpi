@@ -30,6 +30,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlumnos)).BeginInit();
             this.SuspendLayout();
@@ -134,7 +135,8 @@ namespace UI.Desktop.Forms.RegistrarNotas
             this.Apellido,
             this.Legajo,
             this.Condicion,
-            this.Nota});
+            this.Nota,
+            this.FillSpacer});
             this.dgvAlumnos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvAlumnos.EnableHeadersVisualStyles = false;
             this.dgvAlumnos.GridColor = MaterialColors.Border;
@@ -204,6 +206,14 @@ namespace UI.Desktop.Forms.RegistrarNotas
             this.Nota.Name = "Nota";
             this.Nota.ReadOnly = true;
             //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            //
             // RegistrarNotas
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -238,5 +248,6 @@ namespace UI.Desktop.Forms.RegistrarNotas
         private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Condicion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
     }
 }

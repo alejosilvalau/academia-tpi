@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Cursos
             this.Cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
@@ -100,7 +101,8 @@ namespace UI.Desktop.Forms.Cursos
             this.AnioCalendario,
             this.Cupo,
             this.Materia,
-            this.Comision});
+            this.Comision,
+            this.FillSpacer});
             this.dgvCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCursos.EnableHeadersVisualStyles = false;
             this.dgvCursos.GridColor = MaterialColors.Border;
@@ -170,6 +172,14 @@ namespace UI.Desktop.Forms.Cursos
             this.Comision.Name = "Comision";
             this.Comision.ReadOnly = true;
             //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            //
             // Cursos
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -198,6 +208,7 @@ namespace UI.Desktop.Forms.Cursos
         private System.Windows.Forms.DataGridViewTextBoxColumn Cupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comision;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbAgregar;
         private System.Windows.Forms.ToolStripButton tsbEditar;

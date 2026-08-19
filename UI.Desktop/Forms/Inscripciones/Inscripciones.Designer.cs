@@ -23,6 +23,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.Condicion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nota = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Legajo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
@@ -95,7 +96,8 @@ namespace UI.Desktop.Forms.Inscripciones
             this.DescripcionMateria,
             this.Condicion,
             this.Nota,
-            this.Legajo});
+            this.Legajo,
+            this.FillSpacer});
             this.dgvInscripciones.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvInscripciones.EnableHeadersVisualStyles = false;
             this.dgvInscripciones.GridColor = MaterialColors.Border;
@@ -162,6 +164,14 @@ namespace UI.Desktop.Forms.Inscripciones
             this.Legajo.Name = "Legajo";
             this.Legajo.ReadOnly = true;
             //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            //
             // Inscripciones
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -189,6 +199,7 @@ namespace UI.Desktop.Forms.Inscripciones
         private System.Windows.Forms.DataGridViewTextBoxColumn Condicion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nota;
         private System.Windows.Forms.DataGridViewTextBoxColumn Legajo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbAgregar;
         private System.Windows.Forms.ToolStripButton tsbEditar;

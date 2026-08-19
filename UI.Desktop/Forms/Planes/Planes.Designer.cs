@@ -21,6 +21,7 @@ namespace UI.Desktop.Forms.Planes
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Especialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
@@ -95,7 +96,8 @@ namespace UI.Desktop.Forms.Planes
             this.dgvPlanes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Descripcion,
-            this.Especialidad});
+            this.Especialidad,
+            this.FillSpacer});
             this.dgvPlanes.DefaultCellStyle.BackColor = MaterialColors.Surface;
             this.dgvPlanes.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dgvPlanes.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
@@ -141,6 +143,14 @@ namespace UI.Desktop.Forms.Planes
             this.Especialidad.MinimumWidth = 150;
             this.Especialidad.Name = "Especialidad";
             this.Especialidad.ReadOnly = true;
+            //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
             // Planes
             // 
@@ -167,6 +177,7 @@ namespace UI.Desktop.Forms.Planes
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn Especialidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbAgregar;
         private System.Windows.Forms.ToolStripButton tsbEditar;

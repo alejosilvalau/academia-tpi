@@ -29,6 +29,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.Cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Comision = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panelBotones = new System.Windows.Forms.Panel();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
@@ -115,7 +116,8 @@ namespace UI.Desktop.Forms.Inscripciones
             this.AnioCalendario,
             this.Cupo,
             this.Materia,
-            this.Comision});
+            this.Comision,
+            this.FillSpacer});
             this.dgvCursos.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvCursos.EnableHeadersVisualStyles = false;
             this.dgvCursos.GridColor = MaterialColors.Border;
@@ -183,6 +185,14 @@ namespace UI.Desktop.Forms.Inscripciones
             this.Comision.MinimumWidth = 120;
             this.Comision.Name = "Comision";
             this.Comision.ReadOnly = true;
+            //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             //
             // panelBotones
             //
@@ -265,6 +275,7 @@ namespace UI.Desktop.Forms.Inscripciones
         private System.Windows.Forms.DataGridViewTextBoxColumn Cupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materia;
         private System.Windows.Forms.DataGridViewTextBoxColumn Comision;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
         private System.Windows.Forms.Panel panelBotones;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;

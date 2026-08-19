@@ -23,6 +23,7 @@ namespace UI.Desktop.Forms.Usuarios
             this.PersonaNombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PersonaApellido = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Habilitado = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
             this.tsbEditar = new System.Windows.Forms.ToolStripButton();
@@ -100,7 +101,8 @@ namespace UI.Desktop.Forms.Usuarios
             this.NombreUsuario,
             this.PersonaNombre,
             this.PersonaApellido,
-            this.Habilitado});
+            this.Habilitado,
+            this.FillSpacer});
             this.dgvUsuarios.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvUsuarios.EnableHeadersVisualStyles = false;
             this.dgvUsuarios.GridColor = MaterialColors.Border;
@@ -164,6 +166,14 @@ namespace UI.Desktop.Forms.Usuarios
             this.Habilitado.Name = "Habilitado";
             this.Habilitado.ReadOnly = true;
             //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            //
             // Usuarios
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -191,6 +201,7 @@ namespace UI.Desktop.Forms.Usuarios
         private System.Windows.Forms.DataGridViewTextBoxColumn PersonaNombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn PersonaApellido;
         private System.Windows.Forms.DataGridViewCheckBoxColumn Habilitado;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbAgregar;
         private System.Windows.Forms.ToolStripButton tsbEditar;

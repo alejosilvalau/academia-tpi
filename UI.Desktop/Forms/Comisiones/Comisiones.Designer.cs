@@ -26,6 +26,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.colDescripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colAnioEspecialidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colPlan = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComisiones)).BeginInit();
             this.SuspendLayout();
@@ -95,7 +96,8 @@ namespace UI.Desktop.Forms.Comisiones
             this.colID,
             this.colDescripcion,
             this.colAnioEspecialidad,
-            this.colPlan});
+            this.colPlan,
+            this.FillSpacer});
             this.dgvComisiones.DefaultCellStyle.BackColor = MaterialColors.Surface;
             this.dgvComisiones.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
             this.dgvComisiones.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -147,6 +149,14 @@ namespace UI.Desktop.Forms.Comisiones
             this.colPlan.Name = "colPlan";
             this.colPlan.ReadOnly = true;
             //
+            // FillSpacer
+            //
+            this.FillSpacer.HeaderText = "";
+            this.FillSpacer.MinimumWidth = 5;
+            this.FillSpacer.Name = "FillSpacer";
+            this.FillSpacer.ReadOnly = true;
+            this.FillSpacer.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            //
             // Comisiones
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -177,5 +187,6 @@ namespace UI.Desktop.Forms.Comisiones
         private System.Windows.Forms.DataGridViewTextBoxColumn colDescripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn colAnioEspecialidad;
         private System.Windows.Forms.DataGridViewTextBoxColumn colPlan;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
     }
 }
