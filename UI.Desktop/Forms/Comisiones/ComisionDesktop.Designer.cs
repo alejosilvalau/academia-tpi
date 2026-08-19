@@ -74,7 +74,7 @@ namespace UI.Desktop.Forms.Comisiones
             //
             // txtID
             //
-            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtID.BackColor = MaterialColors.Surface;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Enabled = false;
@@ -100,7 +100,7 @@ namespace UI.Desktop.Forms.Comisiones
             //
             // txtDescripcion
             //
-            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtDescripcion.BackColor = MaterialColors.Surface;
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -124,7 +124,7 @@ namespace UI.Desktop.Forms.Comisiones
             //
             // txtAnioEspecialidad
             //
-            this.txtAnioEspecialidad.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtAnioEspecialidad.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtAnioEspecialidad.BackColor = MaterialColors.Surface;
             this.txtAnioEspecialidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtAnioEspecialidad.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -148,7 +148,7 @@ namespace UI.Desktop.Forms.Comisiones
             //
             // cbxPlan
             //
-            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.cbxPlan.BackColor = MaterialColors.Surface;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);

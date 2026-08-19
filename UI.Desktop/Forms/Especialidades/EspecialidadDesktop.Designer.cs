@@ -77,7 +77,7 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             this.txtID.BackColor = MaterialColors.Surface;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtID.ForeColor = MaterialColors.TextPrimary;
@@ -91,7 +91,7 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             this.txtDescripcion.BackColor = MaterialColors.Surface;
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtDescripcion.ForeColor = MaterialColors.TextPrimary;
             this.txtDescripcion.Location = new System.Drawing.Point(123, 55);

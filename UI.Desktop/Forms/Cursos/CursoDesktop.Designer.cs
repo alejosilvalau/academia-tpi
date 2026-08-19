@@ -85,7 +85,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             txtID.BackColor = Color.White;
             txtID.BorderStyle = BorderStyle.FixedSingle;
-            txtID.Anchor = AnchorStyles.Left;
+            txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
@@ -112,7 +112,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             txtAnioCalendario.BackColor = Color.White;
             txtAnioCalendario.BorderStyle = BorderStyle.FixedSingle;
-            txtAnioCalendario.Anchor = AnchorStyles.Left;
+            txtAnioCalendario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtAnioCalendario.Font = new Font("Segoe UI", 10F);
             txtAnioCalendario.ForeColor = Color.FromArgb(33, 33, 33);
             txtAnioCalendario.Location = new Point(403, 4);
@@ -137,7 +137,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             txtDescripcion.BackColor = Color.White;
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
-            txtDescripcion.Anchor = AnchorStyles.Left;
+            txtDescripcion.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtDescripcion.Font = new Font("Segoe UI", 10F);
             txtDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
             txtDescripcion.Location = new Point(123, 60);
@@ -163,7 +163,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             txtCupo.BackColor = Color.White;
             txtCupo.BorderStyle = BorderStyle.FixedSingle;
-            txtCupo.Anchor = AnchorStyles.Left;
+            txtCupo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtCupo.Font = new Font("Segoe UI", 10F);
             txtCupo.ForeColor = Color.FromArgb(33, 33, 33);
             txtCupo.Location = new Point(403, 60);
@@ -187,7 +187,7 @@ namespace UI.Desktop.Forms.Cursos
             // cbxMateria
             // 
             cbxMateria.BackColor = Color.White;
-            cbxMateria.Anchor = AnchorStyles.Left;
+            cbxMateria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxMateria.Font = new Font("Segoe UI", 10F);
             cbxMateria.ForeColor = Color.FromArgb(33, 33, 33);
@@ -215,7 +215,7 @@ namespace UI.Desktop.Forms.Cursos
             // cbxComision
             // 
             cbxComision.BackColor = Color.White;
-            cbxComision.Anchor = AnchorStyles.Left;
+            cbxComision.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxComision.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxComision.Font = new Font("Segoe UI", 10F);
             cbxComision.ForeColor = Color.FromArgb(33, 33, 33);

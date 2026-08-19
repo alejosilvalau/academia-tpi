@@ -82,7 +82,7 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             txtID.BackColor = Color.White;
             txtID.BorderStyle = BorderStyle.FixedSingle;
-            txtID.Anchor = AnchorStyles.Left;
+            txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
@@ -109,7 +109,7 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             txtUsuario.BackColor = Color.White;
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
-            txtUsuario.Anchor = AnchorStyles.Left;
+            txtUsuario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtUsuario.Font = new Font("Segoe UI", 10F);
             txtUsuario.ForeColor = Color.FromArgb(33, 33, 33);
             txtUsuario.Location = new Point(93, 60);
@@ -134,7 +134,7 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             txtClave.BackColor = Color.White;
             txtClave.BorderStyle = BorderStyle.FixedSingle;
-            txtClave.Anchor = AnchorStyles.Left;
+            txtClave.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtClave.Font = new Font("Segoe UI", 10F);
             txtClave.ForeColor = Color.FromArgb(33, 33, 33);
             txtClave.Location = new Point(93, 116);
@@ -183,7 +183,7 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             cbxPersona.BackColor = Color.White;
             cbxPersona.DisplayMember = "NombreCompleto";
-            cbxPersona.Anchor = AnchorStyles.Left;
+            cbxPersona.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxPersona.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersona.Font = new Font("Segoe UI", 10F);
             cbxPersona.ForeColor = Color.FromArgb(33, 33, 33);

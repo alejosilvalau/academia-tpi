@@ -76,7 +76,7 @@ namespace UI.Desktop.Forms.Dictados
             // 
             txtID.BackColor = Color.White;
             txtID.BorderStyle = BorderStyle.FixedSingle;
-            txtID.Anchor = AnchorStyles.Left;
+            txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
@@ -102,7 +102,7 @@ namespace UI.Desktop.Forms.Dictados
             // cbxCursos
             // 
             cbxCursos.BackColor = Color.White;
-            cbxCursos.Anchor = AnchorStyles.Left;
+            cbxCursos.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxCursos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxCursos.Font = new Font("Segoe UI", 10F);
             cbxCursos.ForeColor = Color.FromArgb(33, 33, 33);
@@ -130,7 +130,7 @@ namespace UI.Desktop.Forms.Dictados
             // cbxDocentes
             // 
             cbxDocentes.BackColor = Color.White;
-            cbxDocentes.Anchor = AnchorStyles.Left;
+            cbxDocentes.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxDocentes.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxDocentes.Font = new Font("Segoe UI", 10F);
             cbxDocentes.ForeColor = Color.FromArgb(33, 33, 33);
@@ -158,7 +158,7 @@ namespace UI.Desktop.Forms.Dictados
             // cbxTiposCargos
             // 
             cbxTiposCargos.BackColor = Color.White;
-            cbxTiposCargos.Anchor = AnchorStyles.Left;
+            cbxTiposCargos.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxTiposCargos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTiposCargos.Font = new Font("Segoe UI", 10F);
             cbxTiposCargos.ForeColor = Color.FromArgb(33, 33, 33);

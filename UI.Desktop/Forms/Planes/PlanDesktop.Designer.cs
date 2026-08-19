@@ -93,7 +93,7 @@ namespace UI.Desktop.Forms.Planes
             // 
             // txtID
             // 
-            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtID.BackColor = MaterialColors.Surface;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Enabled = false;
@@ -107,7 +107,7 @@ namespace UI.Desktop.Forms.Planes
             // 
             // txtDescripcion
             // 
-            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtDescripcion.BackColor = MaterialColors.Surface;
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -119,7 +119,7 @@ namespace UI.Desktop.Forms.Planes
             // 
             // cbxEspecialidad
             // 
-            this.cbxEspecialidad.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxEspecialidad.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.cbxEspecialidad.BackColor = MaterialColors.Surface;
             this.cbxEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxEspecialidad.Font = new System.Drawing.Font("Segoe UI", 10F);

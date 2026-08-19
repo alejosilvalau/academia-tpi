@@ -101,7 +101,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // txtID
             // 
-            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtID.BackColor = MaterialColors.Surface;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Enabled = false;
@@ -127,7 +127,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // txtNombre
             // 
-            this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtNombre.BackColor = MaterialColors.Surface;
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -151,7 +151,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // txtApellido
             // 
-            this.txtApellido.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtApellido.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtApellido.BackColor = MaterialColors.Surface;
             this.txtApellido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtApellido.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -175,7 +175,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // txtLegajo
             // 
-            this.txtLegajo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtLegajo.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtLegajo.BackColor = MaterialColors.Surface;
             this.txtLegajo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLegajo.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -199,7 +199,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // txtEMail
             // 
-            this.txtEMail.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtEMail.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtEMail.BackColor = MaterialColors.Surface;
             this.txtEMail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtEMail.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -223,7 +223,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // txtTelefono
             // 
-            this.txtTelefono.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtTelefono.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtTelefono.BackColor = MaterialColors.Surface;
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtTelefono.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -247,7 +247,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // txtDireccion
             // 
-            this.txtDireccion.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtDireccion.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtDireccion.BackColor = MaterialColors.Surface;
             this.txtDireccion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDireccion.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -271,7 +271,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             // cbxTipo
             // 
-            this.cbxTipo.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxTipo.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.cbxTipo.BackColor = MaterialColors.Surface;
             this.cbxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipo.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -297,7 +297,7 @@ namespace UI.Desktop.Forms.Personas
             // cbxPlan
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.cbxPlan, 3);
-            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.cbxPlan.BackColor = MaterialColors.Surface;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -326,9 +326,10 @@ namespace UI.Desktop.Forms.Personas
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.dtpFechaNacimiento, 3);
             this.dtpFechaNacimiento.CalendarFont = new System.Drawing.Font("Segoe UI", 10F);
-            this.dtpFechaNacimiento.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.dtpFechaNacimiento.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.dtpFechaNacimiento.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dtpFechaNacimiento.CustomFormat = "dd/MM/yyyy";
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(143, 233);
             this.dtpFechaNacimiento.Name = "dtpFechaNacimiento";
             this.dtpFechaNacimiento.Size = new System.Drawing.Size(414, 30);

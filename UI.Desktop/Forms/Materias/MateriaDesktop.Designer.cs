@@ -79,7 +79,7 @@ namespace UI.Desktop.Forms.Materias
             //
             // txtID
             //
-            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtID.BackColor = MaterialColors.Surface;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtID.Enabled = false;
@@ -105,7 +105,7 @@ namespace UI.Desktop.Forms.Materias
             //
             // txtHsSemanales
             //
-            this.txtHsSemanales.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtHsSemanales.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtHsSemanales.BackColor = MaterialColors.Surface;
             this.txtHsSemanales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtHsSemanales.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -129,7 +129,7 @@ namespace UI.Desktop.Forms.Materias
             //
             // txtDescripcion
             //
-            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtDescripcion.BackColor = MaterialColors.Surface;
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -153,7 +153,7 @@ namespace UI.Desktop.Forms.Materias
             //
             // txtHsTotales
             //
-            this.txtHsTotales.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.txtHsTotales.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.txtHsTotales.BackColor = MaterialColors.Surface;
             this.txtHsTotales.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtHsTotales.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -177,7 +177,7 @@ namespace UI.Desktop.Forms.Materias
             //
             // cbxPlan
             //
-            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             this.tableLayoutPanel1.SetColumnSpan(this.cbxPlan, 3);
             this.cbxPlan.BackColor = MaterialColors.Surface;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
