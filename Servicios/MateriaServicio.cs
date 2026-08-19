@@ -14,7 +14,7 @@ namespace Servicios
 
         public List<Materia> GetAll()
         {
-            return _repositorio.GetAll();
+            return _repositorio.GetAllConPlan();
         }
 
         public Materia? GetOne(int id)

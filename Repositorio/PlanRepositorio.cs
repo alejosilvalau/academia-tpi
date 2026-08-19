@@ -7,6 +7,13 @@ namespace Repositorio
     {
         public PlanRepositorio(AcademiaContext ctx) : base(ctx) { }
 
+        public List<Plan> GetAllConEspecialidad()
+        {
+            return context.Planes
+                .Include(p => p.Especialidad)
+                .ToList();
+        }
+
         public List<Plan> GetByEspecialidad(int especialidadId)
         {
             return context.Planes

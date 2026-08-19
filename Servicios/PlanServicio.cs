@@ -14,7 +14,7 @@ namespace Servicios
 
         public List<Plan> GetAll()
         {
-            return _repositorio.GetAll();
+            return _repositorio.GetAllConEspecialidad();
         }
 
         public Plan? GetOne(int id)
