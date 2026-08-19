@@ -11,7 +11,7 @@ namespace Dominio
         public string Nombre { get; set; } = null!;
         [StringLength(100)]
         public string Apellido { get; set; } = null!;
-        public int? Legajo { get; set; }
+        public int Legajo { get; set; }
         [StringLength(100)]
         public string EMail { get; set; } = null!;
         [StringLength(200)]

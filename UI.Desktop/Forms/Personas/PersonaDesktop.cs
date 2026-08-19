@@ -51,7 +51,7 @@ namespace UI.Desktop.Forms.Personas
             txtID.Text = _persona.ID.ToString();
             txtNombre.Text = _persona.Nombre;
             txtApellido.Text = _persona.Apellido;
-            txtLegajo.Text = _persona.Legajo?.ToString() ?? "";
+            txtLegajo.Text = _persona.Legajo.ToString();
             txtEMail.Text = _persona.EMail;
             txtDireccion.Text = _persona.Direccion;
             txtTelefono.Text = _persona.Telefono;
@@ -67,7 +67,7 @@ namespace UI.Desktop.Forms.Personas
             _persona.Nombre = txtNombre.Text;
             _persona.Apellido = txtApellido.Text;
             int.TryParse(txtLegajo.Text, out int legajo);
-            _persona.Legajo = legajo > 0 ? legajo : null;
+            _persona.Legajo = legajo;
             _persona.EMail = txtEMail.Text;
             _persona.Direccion = txtDireccion.Text;
             _persona.Telefono = txtTelefono.Text;
