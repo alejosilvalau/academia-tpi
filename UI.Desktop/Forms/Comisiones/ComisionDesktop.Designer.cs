@@ -53,6 +53,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(20, 15, 20, 15);
             this.tableLayoutPanel1.RowCount = 2;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -150,7 +151,6 @@ namespace UI.Desktop.Forms.Comisiones
             this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxPlan.BackColor = MaterialColors.Surface;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPlan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxPlan.ForeColor = MaterialColors.TextPrimary;
             this.cbxPlan.FormattingEnabled = true;

@@ -90,7 +90,6 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             this.cbxCondicion.BackColor = MaterialColors.Surface;
             this.cbxCondicion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCondicion.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxCondicion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxCondicion.ForeColor = MaterialColors.TextPrimary;
             this.cbxCondicion.FormattingEnabled = true;

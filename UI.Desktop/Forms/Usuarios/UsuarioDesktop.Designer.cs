@@ -56,6 +56,7 @@ namespace UI.Desktop.Forms.Usuarios
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.Padding = new Padding(20, 15, 20, 15);
             tableLayoutPanel1.RowCount = 5;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
@@ -184,7 +185,6 @@ namespace UI.Desktop.Forms.Usuarios
             cbxPersona.DisplayMember = "ID";
             cbxPersona.Anchor = AnchorStyles.Left;
             cbxPersona.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxPersona.FlatStyle = FlatStyle.Flat;
             cbxPersona.Font = new Font("Segoe UI", 10F);
             cbxPersona.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPersona.FormattingEnabled = true;

@@ -51,6 +51,7 @@ namespace UI.Desktop.Forms.Dictados
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.Padding = new Padding(20, 15, 20, 15);
             tableLayoutPanel1.RowCount = 4;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
@@ -103,7 +104,6 @@ namespace UI.Desktop.Forms.Dictados
             cbxCursos.BackColor = Color.White;
             cbxCursos.Anchor = AnchorStyles.Left;
             cbxCursos.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxCursos.FlatStyle = FlatStyle.Flat;
             cbxCursos.Font = new Font("Segoe UI", 10F);
             cbxCursos.ForeColor = Color.FromArgb(33, 33, 33);
             cbxCursos.FormattingEnabled = true;
@@ -131,7 +131,6 @@ namespace UI.Desktop.Forms.Dictados
             cbxDocentes.BackColor = Color.White;
             cbxDocentes.Anchor = AnchorStyles.Left;
             cbxDocentes.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxDocentes.FlatStyle = FlatStyle.Flat;
             cbxDocentes.Font = new Font("Segoe UI", 10F);
             cbxDocentes.ForeColor = Color.FromArgb(33, 33, 33);
             cbxDocentes.FormattingEnabled = true;
@@ -159,7 +158,6 @@ namespace UI.Desktop.Forms.Dictados
             cbxTiposCargos.BackColor = Color.White;
             cbxTiposCargos.Anchor = AnchorStyles.Left;
             cbxTiposCargos.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxTiposCargos.FlatStyle = FlatStyle.Flat;
             cbxTiposCargos.Font = new Font("Segoe UI", 10F);
             cbxTiposCargos.ForeColor = Color.FromArgb(33, 33, 33);
             cbxTiposCargos.FormattingEnabled = true;

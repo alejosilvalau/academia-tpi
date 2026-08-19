@@ -76,6 +76,7 @@ namespace UI.Desktop.Forms.Personas
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(20, 15, 20, 15);
             this.tableLayoutPanel1.RowCount = 6;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
@@ -273,7 +274,6 @@ namespace UI.Desktop.Forms.Personas
             this.cbxTipo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxTipo.BackColor = MaterialColors.Surface;
             this.cbxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxTipo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxTipo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxTipo.ForeColor = MaterialColors.TextPrimary;
             this.cbxTipo.FormattingEnabled = true;
@@ -300,7 +300,6 @@ namespace UI.Desktop.Forms.Personas
             this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxPlan.BackColor = MaterialColors.Surface;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPlan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxPlan.ForeColor = MaterialColors.TextPrimary;
             this.cbxPlan.FormattingEnabled = true;

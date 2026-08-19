@@ -47,6 +47,7 @@ namespace UI.Desktop.Forms.Planes
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(20, 15, 20, 15);
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
@@ -121,7 +122,6 @@ namespace UI.Desktop.Forms.Planes
             this.cbxEspecialidad.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxEspecialidad.BackColor = MaterialColors.Surface;
             this.cbxEspecialidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxEspecialidad.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxEspecialidad.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbxEspecialidad.ForeColor = MaterialColors.TextPrimary;
             this.cbxEspecialidad.FormattingEnabled = true;

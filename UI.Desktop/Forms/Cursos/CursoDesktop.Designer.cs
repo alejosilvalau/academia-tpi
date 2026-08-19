@@ -61,6 +61,7 @@ namespace UI.Desktop.Forms.Cursos
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.Padding = new Padding(20, 15, 20, 15);
             tableLayoutPanel1.RowCount = 3;
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
@@ -188,7 +189,6 @@ namespace UI.Desktop.Forms.Cursos
             cbxMateria.BackColor = Color.White;
             cbxMateria.Anchor = AnchorStyles.Left;
             cbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxMateria.FlatStyle = FlatStyle.Flat;
             cbxMateria.Font = new Font("Segoe UI", 10F);
             cbxMateria.ForeColor = Color.FromArgb(33, 33, 33);
             cbxMateria.FormattingEnabled = true;
@@ -216,7 +216,6 @@ namespace UI.Desktop.Forms.Cursos
             cbxComision.BackColor = Color.White;
             cbxComision.Anchor = AnchorStyles.Left;
             cbxComision.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxComision.FlatStyle = FlatStyle.Flat;
             cbxComision.Font = new Font("Segoe UI", 10F);
             cbxComision.ForeColor = Color.FromArgb(33, 33, 33);
             cbxComision.FormattingEnabled = true;
