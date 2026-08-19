@@ -15,9 +15,9 @@ namespace UI.Desktop.Forms.Cursos
         public CursoDesktop() : base()
         {
             InitializeComponent();
-            _servicio = new CursoServicio(new AcademiaContext());
-            _materiaServicio = new MateriaServicio(new AcademiaContext());
-            _comisionServicio = new ComisionServicio(new AcademiaContext());
+            _servicio = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _materiaServicio = new MateriaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _comisionServicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         public CursoDesktop(ModoForm modo) : this()

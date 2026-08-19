@@ -14,8 +14,8 @@ namespace UI.Desktop.Forms.Usuarios
         public UsuarioDesktop() : base()
         {
             InitializeComponent();
-            _servicio = new UsuarioServicio(new AcademiaContext());
-            _personaServicio = new PersonaServicio(new AcademiaContext());
+            _servicio = new UsuarioServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         public UsuarioDesktop(ModoForm modo) : this()

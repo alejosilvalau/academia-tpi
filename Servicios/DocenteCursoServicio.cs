@@ -10,7 +10,8 @@ namespace Servicios
         private DocenteCursoRepositorio _repositorio;
         private PersonaRepositorio _personaRepositorio;
 
-        public DocenteCursoServicio(AcademiaContext context)
+        public DocenteCursoServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorio = new DocenteCursoRepositorio(context);
             _personaRepositorio = new PersonaRepositorio(context);
@@ -18,26 +19,33 @@ namespace Servicios
 
         public List<DocenteCurso> GetAll()
         {
+            RequiereAdmin();
             return _repositorio.GetAllConCursoYDocente();
         }
 
         public DocenteCurso? GetOne(int id)
         {
+            RequiereAdmin();
             return _repositorio.GetOne(id);
         }
 
         public List<DocenteCurso> GetByDocente(int docenteId)
         {
+            RequiereAutenticacion();
+            if (!EsAdmin() && PersonaIdActual() != docenteId)
+                throw new AccesoNoAutorizadoException("No puede consultar las asignaciones de otro docente.");
             return _repositorio.GetByDocente(docenteId);
         }
 
         public List<DocenteCurso> GetByCurso(int cursoId)
         {
+            RequiereAdmin();
             return _repositorio.GetByCurso(cursoId);
         }
 
         public void AsignarDocente(int docenteId, int cursoId, DocenteCurso.TiposCargos cargo)
         {
+            RequiereAdmin();
             ValidarBasicos(docenteId, cursoId);
             ValidarReglasNegocio(docenteId, cursoId, cargo, esAlta: true);
             var asignacion = new DocenteCurso
@@ -55,6 +63,7 @@ namespace Servicios
 
         public void Update(DocenteCurso docenteCurso)
         {
+            RequiereAdmin();
             ValidarBasicos(docenteCurso.DocenteId, docenteCurso.CursoId);
             ValidarReglasNegocio(docenteCurso.DocenteId, docenteCurso.CursoId, docenteCurso.Cargo, esAlta: false, idActual: docenteCurso.ID);
             EjecutarPersistencia(() =>
@@ -66,6 +75,7 @@ namespace Servicios
 
         public void Delete(DocenteCurso docenteCurso)
         {
+            RequiereAdmin();
             EjecutarPersistencia(() =>
             {
                 _repositorio.Delete(docenteCurso);

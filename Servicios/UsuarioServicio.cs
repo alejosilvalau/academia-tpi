@@ -9,23 +9,27 @@ namespace Servicios
     {
         private UsuarioRepositorio _repositorio;
 
-        public UsuarioServicio(AcademiaContext context)
+        public UsuarioServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorio = new UsuarioRepositorio(context);
         }
 
         public List<Usuario> GetAll()
         {
+            RequiereAdmin();
             return _repositorio.GetAllConPersona();
         }
 
         public Usuario? GetOne(int id)
         {
+            RequiereAdmin();
             return _repositorio.GetOneConPersona(id);
         }
 
         public Usuario? GetByUsername(string nombreUsuario)
         {
+            RequiereAdmin();
             if (string.IsNullOrWhiteSpace(nombreUsuario))
                 throw new ValidacionException("El nombre de usuario es obligatorio.");
             return _repositorio.GetByUsername(nombreUsuario);
@@ -43,6 +47,7 @@ namespace Servicios
 
         public void Save(Usuario usuario)
         {
+            RequiereAdmin();
             ValidarBasicos(usuario);
             ValidarFormato(usuario);
             ValidarReglasNegocio(usuario, esAlta: true);
@@ -55,6 +60,7 @@ namespace Servicios
 
         public void Update(Usuario usuario)
         {
+            RequiereAdmin();
             ValidarBasicos(usuario);
             ValidarFormato(usuario);
             ValidarReglasNegocio(usuario, esAlta: false);
@@ -67,6 +73,7 @@ namespace Servicios
 
         public void Delete(Usuario usuario)
         {
+            RequiereAdmin();
             ValidarEliminacion(usuario);
             EjecutarPersistencia(() =>
             {

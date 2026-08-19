@@ -9,7 +9,7 @@ namespace UI.Desktop
         public RViewerCursos()
         {
             InitializeComponent();
-            _servicio = new ReporteServicio();
+            _servicio = new ReporteServicio(new UsuarioContextoDesktop());
         }
 
         private void RViewerCursos_Load(object sender, EventArgs e)

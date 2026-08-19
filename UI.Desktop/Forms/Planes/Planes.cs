@@ -11,7 +11,7 @@ namespace UI.Desktop.Forms.Planes
         public Planes()
         {
             InitializeComponent();
-            _servicio = new PlanServicio(new AcademiaContext());
+            _servicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvPlanes.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

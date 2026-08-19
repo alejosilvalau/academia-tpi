@@ -9,7 +9,7 @@ namespace UI.Desktop
         public RViewerPlanes()
         {
             InitializeComponent();
-            _servicio = new ReporteServicio();
+            _servicio = new ReporteServicio(new UsuarioContextoDesktop());
         }
 
         private void RViewerPlanes_Load(object sender, EventArgs e)

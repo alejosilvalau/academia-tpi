@@ -11,7 +11,7 @@ namespace UI.Desktop.Forms.Materias
         public Materias()
         {
             InitializeComponent();
-            _servicio = new MateriaServicio(new AcademiaContext());
+            _servicio = new MateriaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvMaterias.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

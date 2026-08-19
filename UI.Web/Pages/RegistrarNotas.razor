@@ -103,8 +103,7 @@
             if (Sesion.IsDocente && Sesion.UsuarioActual?.PersonaId != null)
             {
                 var asignaciones = DocenteCursoServicio.GetByDocente(Sesion.UsuarioActual.PersonaId.Value);
-                var cursoIds = asignaciones.Select(a => a.CursoId).Distinct().ToList();
-                cursos = CursoServicio.GetAll().Where(c => cursoIds.Contains(c.ID)).ToList();
+                cursos = asignaciones.Select(a => a.Curso).Where(c => c != null).DistinctBy(c => c!.ID).ToList();
             }
         }
 
@@ -130,16 +129,17 @@
     {
         try
         {
-            var inscripcion = InscripcionServicio.GetOne(inscripcionId);
+            var inscripcion = InscripcionServicio.GetByCurso(cursoIdSeleccionado).FirstOrDefault(i => i.ID == inscripcionId);
             if (inscripcion == null) return;
 
             if (notas.TryGetValue(inscripcionId, out int? nota) && nota.HasValue)
             {
                 inscripcion.Nota = nota;
                 inscripcion.Condicion = nota >= 6
-                    ? AlumnoInscripcion.
-
-                    : AlumnoInscripcion.Condiciones.Regular;
+                    ? AlumnoInscripcion.Condiciones.Aprobado
+                    : nota >= 4
+                        ? AlumnoInscripcion.Condiciones.Regular
+                        : AlumnoInscripcion.Condiciones.Inscripto;
             }
 
             InscripcionServicio.Update(inscripcion);

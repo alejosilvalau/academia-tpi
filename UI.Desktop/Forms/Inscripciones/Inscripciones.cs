@@ -12,7 +12,7 @@ namespace UI.Desktop.Forms.Inscripciones
         public Inscripciones(Persona persona, bool admin = false)
         {
             InitializeComponent();
-            _servicio = new InscripcionServicio(new AcademiaContext());
+            _servicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _personaActual = persona;
             dgvInscripciones.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);

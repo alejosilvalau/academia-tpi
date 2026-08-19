@@ -10,7 +10,8 @@ namespace Servicios
         private CursoRepositorio _repositorio;
         private AlumnoInscripcionRepositorio _repositorioInscripciones;
 
-        public CursoServicio(AcademiaContext context)
+        public CursoServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorio = new CursoRepositorio(context);
             _repositorioInscripciones = new AlumnoInscripcionRepositorio(context);
@@ -18,21 +19,25 @@ namespace Servicios
 
         public List<Curso> GetAll()
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetAllConMateriaYComision();
         }
 
         public Curso? GetOne(int id)
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetOneConMateriaYComision(id);
         }
 
         public List<Curso> GetByMateriaYComision(int materiaId, int comisionId)
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetByMateriaYComision(materiaId, comisionId);
         }
 
         public void Save(Curso curso)
         {
+            RequiereAdmin();
             ValidarBasicos(curso);
             ValidarFormato(curso);
             ValidarReglasNegocio(curso, esAlta: true);
@@ -45,6 +50,7 @@ namespace Servicios
 
         public void Update(Curso curso)
         {
+            RequiereAdmin();
             ValidarBasicos(curso);
             ValidarFormato(curso);
             ValidarReglasNegocio(curso, esAlta: false);
@@ -57,6 +63,7 @@ namespace Servicios
 
         public void Delete(Curso curso)
         {
+            RequiereAdmin();
             EjecutarPersistencia(() =>
             {
                 _repositorio.Delete(curso);

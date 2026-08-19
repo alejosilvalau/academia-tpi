@@ -17,215 +17,220 @@ namespace UI.Desktop.Forms.Comisiones
 
         private void InitializeComponent()
         {
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.lblID = new System.Windows.Forms.Label();
-            this.txtID = new System.Windows.Forms.TextBox();
-            this.lblDescripcion = new System.Windows.Forms.Label();
-            this.txtDescripcion = new System.Windows.Forms.TextBox();
-            this.lblAnioEspecialidad = new System.Windows.Forms.Label();
-            this.txtAnioEspecialidad = new System.Windows.Forms.TextBox();
-            this.lblPlan = new System.Windows.Forms.Label();
-            this.cbxPlan = new System.Windows.Forms.ComboBox();
-            this.panelBottom = new System.Windows.Forms.Panel();
-
-            this.btnCancelar = new System.Windows.Forms.Button();
-            this.btnAceptar = new System.Windows.Forms.Button();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.panelBottom.SuspendLayout();
-            this.SuspendLayout();
-            //
+            tableLayoutPanel1 = new TableLayoutPanel();
+            lblID = new Label();
+            txtID = new TextBox();
+            lblDescripcion = new Label();
+            txtDescripcion = new TextBox();
+            lblAnioEspecialidad = new Label();
+            txtAnioEspecialidad = new TextBox();
+            lblPlan = new Label();
+            cbxPlan = new ComboBox();
+            panelBottom = new Panel();
+            btnCancelar = new Button();
+            btnAceptar = new Button();
+            tableLayoutPanel1.SuspendLayout();
+            panelBottom.SuspendLayout();
+            SuspendLayout();
+            // 
             // tableLayoutPanel1
-            //
-            this.tableLayoutPanel1.ColumnCount = 4;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.lblID, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtID, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblDescripcion, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtDescripcion, 1, 1);
-            this.tableLayoutPanel1.Controls.Add(this.lblAnioEspecialidad, 2, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtAnioEspecialidad, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.lblPlan, 2, 1);
-            this.tableLayoutPanel1.Controls.Add(this.cbxPlan, 3, 1);
-            this.tableLayoutPanel1.BackColor = MaterialColors.Surface;
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.Padding = new System.Windows.Forms.Padding(20, 15, 20, 15);
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(550, 120);
-            this.tableLayoutPanel1.TabIndex = 0;
-            //
+            // 
+            tableLayoutPanel1.BackColor = Color.White;
+            tableLayoutPanel1.ColumnCount = 4;
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle());
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tableLayoutPanel1.Controls.Add(lblID, 0, 0);
+            tableLayoutPanel1.Controls.Add(txtID, 1, 0);
+            tableLayoutPanel1.Controls.Add(lblDescripcion, 0, 1);
+            tableLayoutPanel1.Controls.Add(txtDescripcion, 1, 1);
+            tableLayoutPanel1.Controls.Add(lblAnioEspecialidad, 2, 0);
+            tableLayoutPanel1.Controls.Add(txtAnioEspecialidad, 3, 0);
+            tableLayoutPanel1.Controls.Add(lblPlan, 2, 1);
+            tableLayoutPanel1.Controls.Add(cbxPlan, 3, 1);
+            tableLayoutPanel1.Dock = DockStyle.Fill;
+            tableLayoutPanel1.Location = new Point(0, 0);
+            tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
+            tableLayoutPanel1.Name = "tableLayoutPanel1";
+            tableLayoutPanel1.Padding = new Padding(20, 19, 20, 19);
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.Size = new Size(580, 188);
+            tableLayoutPanel1.TabIndex = 0;
+            // 
             // lblID
-            //
-            this.lblID.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblID.AutoSize = true;
-            this.lblID.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblID.ForeColor = MaterialColors.TextPrimary;
-            this.lblID.Location = new System.Drawing.Point(40, 8);
-            this.lblID.Name = "lblID";
-            this.lblID.Size = new System.Drawing.Size(22, 19);
-            this.lblID.TabIndex = 0;
-            this.lblID.Text = "ID:";
-            //
+            // 
+            lblID.Anchor = AnchorStyles.Right;
+            lblID.AutoSize = true;
+            lblID.Font = new Font("Segoe UI", 10F);
+            lblID.ForeColor = Color.FromArgb(33, 33, 33);
+            lblID.Location = new Point(94, 26);
+            lblID.Name = "lblID";
+            lblID.Size = new Size(31, 23);
+            lblID.TabIndex = 0;
+            lblID.Text = "ID:";
+            // 
             // txtID
-            //
-            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.txtID.BackColor = MaterialColors.Surface;
-            this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtID.Enabled = false;
-            this.txtID.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtID.ForeColor = MaterialColors.TextSecondary;
-            this.txtID.Location = new System.Drawing.Point(68, 5);
-            this.txtID.Name = "txtID";
-            this.txtID.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(200, 25);
-            this.txtID.TabIndex = 1;
-            //
+            // 
+            txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtID.BackColor = Color.White;
+            txtID.BorderStyle = BorderStyle.FixedSingle;
+            txtID.Enabled = false;
+            txtID.Font = new Font("Segoe UI", 10F);
+            txtID.ForeColor = Color.FromArgb(117, 117, 117);
+            txtID.Location = new Point(131, 23);
+            txtID.Margin = new Padding(3, 4, 3, 4);
+            txtID.Name = "txtID";
+            txtID.ReadOnly = true;
+            txtID.Size = new Size(135, 30);
+            txtID.TabIndex = 1;
+            // 
             // lblDescripcion
-            //
-            this.lblDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblDescripcion.AutoSize = true;
-            this.lblDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblDescripcion.ForeColor = MaterialColors.TextPrimary;
-            this.lblDescripcion.Location = new System.Drawing.Point(3, 38);
-            this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(59, 19);
-            this.lblDescripcion.TabIndex = 2;
-            this.lblDescripcion.Text = "Nombre:";
-            //
+            // 
+            lblDescripcion.Anchor = AnchorStyles.Right;
+            lblDescripcion.AutoSize = true;
+            lblDescripcion.Font = new Font("Segoe UI", 10F);
+            lblDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
+            lblDescripcion.Location = new Point(23, 101);
+            lblDescripcion.Name = "lblDescripcion";
+            lblDescripcion.Size = new Size(102, 23);
+            lblDescripcion.TabIndex = 2;
+            lblDescripcion.Text = "Descripción:";
+            // 
             // txtDescripcion
-            //
-            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.txtDescripcion.BackColor = MaterialColors.Surface;
-            this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtDescripcion.ForeColor = MaterialColors.TextPrimary;
-            this.txtDescripcion.Location = new System.Drawing.Point(68, 35);
-            this.txtDescripcion.Name = "txtDescripcion";
-            this.txtDescripcion.Size = new System.Drawing.Size(200, 25);
-            this.txtDescripcion.TabIndex = 3;
-            //
+            // 
+            txtDescripcion.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtDescripcion.BackColor = Color.White;
+            txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
+            txtDescripcion.Font = new Font("Segoe UI", 10F);
+            txtDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
+            txtDescripcion.Location = new Point(131, 98);
+            txtDescripcion.Margin = new Padding(3, 4, 3, 4);
+            txtDescripcion.Name = "txtDescripcion";
+            txtDescripcion.Size = new Size(135, 30);
+            txtDescripcion.TabIndex = 3;
+            // 
             // lblAnioEspecialidad
-            //
-            this.lblAnioEspecialidad.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblAnioEspecialidad.AutoSize = true;
-            this.lblAnioEspecialidad.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblAnioEspecialidad.ForeColor = MaterialColors.TextPrimary;
-            this.lblAnioEspecialidad.Location = new System.Drawing.Point(294, 8);
-            this.lblAnioEspecialidad.Name = "lblAnioEspecialidad";
-            this.lblAnioEspecialidad.Size = new System.Drawing.Size(120, 19);
-            this.lblAnioEspecialidad.TabIndex = 4;
-            this.lblAnioEspecialidad.Text = "Año Especialidad:";
-            //
+            // 
+            lblAnioEspecialidad.Anchor = AnchorStyles.Right;
+            lblAnioEspecialidad.AutoSize = true;
+            lblAnioEspecialidad.Font = new Font("Segoe UI", 10F);
+            lblAnioEspecialidad.ForeColor = Color.FromArgb(33, 33, 33);
+            lblAnioEspecialidad.Location = new Point(272, 26);
+            lblAnioEspecialidad.Name = "lblAnioEspecialidad";
+            lblAnioEspecialidad.Size = new Size(143, 23);
+            lblAnioEspecialidad.TabIndex = 4;
+            lblAnioEspecialidad.Text = "Año Especialidad:";
+            // 
             // txtAnioEspecialidad
-            //
-            this.txtAnioEspecialidad.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.txtAnioEspecialidad.BackColor = MaterialColors.Surface;
-            this.txtAnioEspecialidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtAnioEspecialidad.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.txtAnioEspecialidad.ForeColor = MaterialColors.TextPrimary;
-            this.txtAnioEspecialidad.Location = new System.Drawing.Point(420, 5);
-            this.txtAnioEspecialidad.Name = "txtAnioEspecialidad";
-            this.txtAnioEspecialidad.Size = new System.Drawing.Size(120, 25);
-            this.txtAnioEspecialidad.TabIndex = 5;
-            //
+            // 
+            txtAnioEspecialidad.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtAnioEspecialidad.BackColor = Color.White;
+            txtAnioEspecialidad.BorderStyle = BorderStyle.FixedSingle;
+            txtAnioEspecialidad.Font = new Font("Segoe UI", 10F);
+            txtAnioEspecialidad.ForeColor = Color.FromArgb(33, 33, 33);
+            txtAnioEspecialidad.Location = new Point(421, 23);
+            txtAnioEspecialidad.Margin = new Padding(3, 4, 3, 4);
+            txtAnioEspecialidad.Name = "txtAnioEspecialidad";
+            txtAnioEspecialidad.Size = new Size(136, 30);
+            txtAnioEspecialidad.TabIndex = 5;
+            // 
             // lblPlan
-            //
-            this.lblPlan.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.lblPlan.AutoSize = true;
-            this.lblPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblPlan.ForeColor = MaterialColors.TextPrimary;
-            this.lblPlan.Location = new System.Drawing.Point(375, 38);
-            this.lblPlan.Name = "lblPlan";
-            this.lblPlan.Size = new System.Drawing.Size(39, 19);
-            this.lblPlan.TabIndex = 6;
-            this.lblPlan.Text = "Plan:";
-            //
+            // 
+            lblPlan.Anchor = AnchorStyles.Right;
+            lblPlan.AutoSize = true;
+            lblPlan.Font = new Font("Segoe UI", 10F);
+            lblPlan.ForeColor = Color.FromArgb(33, 33, 33);
+            lblPlan.Location = new Point(368, 101);
+            lblPlan.Name = "lblPlan";
+            lblPlan.Size = new Size(47, 23);
+            lblPlan.TabIndex = 6;
+            lblPlan.Text = "Plan:";
+            // 
             // cbxPlan
-            //
-            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
-            this.cbxPlan.BackColor = MaterialColors.Surface;
-            this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.cbxPlan.ForeColor = MaterialColors.TextPrimary;
-            this.cbxPlan.FormattingEnabled = true;
-            this.cbxPlan.Location = new System.Drawing.Point(420, 35);
-            this.cbxPlan.Name = "cbxPlan";
-            this.cbxPlan.Size = new System.Drawing.Size(120, 25);
-            this.cbxPlan.TabIndex = 7;
-            this.cbxPlan.DisplayMember = "Descripcion";
-            this.cbxPlan.ValueMember = "ID";
-            //
+            // 
+            cbxPlan.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cbxPlan.BackColor = Color.White;
+            cbxPlan.DisplayMember = "Descripcion";
+            cbxPlan.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxPlan.Font = new Font("Segoe UI", 10F);
+            cbxPlan.ForeColor = Color.FromArgb(33, 33, 33);
+            cbxPlan.FormattingEnabled = true;
+            cbxPlan.Location = new Point(421, 97);
+            cbxPlan.Margin = new Padding(3, 4, 3, 4);
+            cbxPlan.Name = "cbxPlan";
+            cbxPlan.Size = new Size(136, 31);
+            cbxPlan.TabIndex = 7;
+            cbxPlan.ValueMember = "ID";
+            // 
             // panelBottom
-            //
-            this.panelBottom.BackColor = MaterialColors.Background;
-            this.panelBottom.Controls.Add(this.btnCancelar);
-            this.panelBottom.Controls.Add(this.btnAceptar);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 135);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(550, 45);
-            this.panelBottom.TabIndex = 1;
-
-            //
-            // btnAceptar
-            //
-            this.btnAceptar.BackColor = MaterialColors.Accent;
-            this.btnAceptar.FlatAppearance.BorderSize = 0;
-            this.btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
-            this.btnAceptar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 171, 0);
-            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnAceptar.ForeColor = MaterialColors.TextPrimary;
-            this.btnAceptar.Location = new System.Drawing.Point(280, 5);
-            this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(100, 35);
-            this.btnAceptar.TabIndex = 0;
-            this.btnAceptar.Text = "Guardar";
-            this.btnAceptar.UseVisualStyleBackColor = false;
-            this.btnAceptar.Click += new System.EventHandler(this.btnAceptar_Click);
-            //
+            // 
+            panelBottom.BackColor = Color.FromArgb(245, 245, 245);
+            panelBottom.Controls.Add(btnCancelar);
+            panelBottom.Controls.Add(btnAceptar);
+            panelBottom.Dock = DockStyle.Bottom;
+            panelBottom.Location = new Point(0, 188);
+            panelBottom.Margin = new Padding(3, 4, 3, 4);
+            panelBottom.Name = "panelBottom";
+            panelBottom.Size = new Size(580, 56);
+            panelBottom.TabIndex = 1;
+            // 
             // btnCancelar
-            //
-            this.btnCancelar.BackColor = MaterialColors.CancelBtn;
-            this.btnCancelar.FlatAppearance.BorderSize = 0;
-            this.btnCancelar.FlatAppearance.MouseDownBackColor = MaterialColors.PrimaryDark;
-            this.btnCancelar.FlatAppearance.MouseOverBackColor = MaterialColors.PrimaryDark;
-            this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.btnCancelar.ForeColor = MaterialColors.TextOnPrimary;
-            this.btnCancelar.Location = new System.Drawing.Point(170, 5);
-            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 35);
-            this.btnCancelar.TabIndex = 1;
-            this.btnCancelar.Text = "Cancelar";
-            this.btnCancelar.UseVisualStyleBackColor = false;
-            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
-            //
+            // 
+            btnCancelar.Anchor = AnchorStyles.None;
+            btnCancelar.BackColor = Color.FromArgb(144, 164, 174);
+            btnCancelar.FlatAppearance.BorderSize = 0;
+            btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
+            btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(69, 90, 100);
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.Location = new Point(185, 6);
+            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(100, 44);
+            btnCancelar.TabIndex = 1;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // btnAceptar
+            // 
+            btnAceptar.Anchor = AnchorStyles.None;
+            btnAceptar.BackColor = Color.FromArgb(255, 193, 7);
+            btnAceptar.FlatAppearance.BorderSize = 0;
+            btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
+            btnAceptar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 171, 0);
+            btnAceptar.FlatStyle = FlatStyle.Flat;
+            btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
+            btnAceptar.Location = new Point(295, 6);
+            btnAceptar.Margin = new Padding(3, 4, 3, 4);
+            btnAceptar.Name = "btnAceptar";
+            btnAceptar.Size = new Size(100, 44);
+            btnAceptar.TabIndex = 0;
+            btnAceptar.Text = "Guardar";
+            btnAceptar.UseVisualStyleBackColor = false;
+            btnAceptar.Click += btnAceptar_Click;
+            // 
             // ComisionDesktop
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = MaterialColors.Background;
-            this.ClientSize = new System.Drawing.Size(580, 195);
-            this.Controls.Add(this.tableLayoutPanel1);
-            this.Controls.Add(this.panelBottom);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.Name = "ComisionDesktop";
-
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Comision";
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.panelBottom.ResumeLayout(false);
-            this.ResumeLayout(false);
+            // 
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(245, 245, 245);
+            ClientSize = new Size(580, 244);
+            Controls.Add(tableLayoutPanel1);
+            Controls.Add(panelBottom);
+            Margin = new Padding(3, 5, 3, 5);
+            Name = "ComisionDesktop";
+            StartPosition = FormStartPosition.CenterParent;
+            Text = "Comision";
+            tableLayoutPanel1.ResumeLayout(false);
+            tableLayoutPanel1.PerformLayout();
+            panelBottom.ResumeLayout(false);
+            ResumeLayout(false);
         }
 
         #endregion

@@ -11,7 +11,7 @@ namespace UI.Desktop.Forms.Usuarios
         public Usuarios()
         {
             InitializeComponent();
-            _servicio = new UsuarioServicio(new AcademiaContext());
+            _servicio = new UsuarioServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvUsuarios.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

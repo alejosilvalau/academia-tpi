@@ -14,8 +14,8 @@ namespace UI.Desktop.Forms.Materias
         public MateriaDesktop() : base()
         {
             InitializeComponent();
-            _servicio = new MateriaServicio(new AcademiaContext());
-            _planServicio = new PlanServicio(new AcademiaContext());
+            _servicio = new MateriaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         public MateriaDesktop(ModoForm modo) : this()

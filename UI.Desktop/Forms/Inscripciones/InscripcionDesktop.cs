@@ -14,7 +14,7 @@ namespace UI.Desktop.Forms.Inscripciones
         public InscripcionDesktop(Persona persona, ModoForm modo)
         {
             InitializeComponent();
-            _servicio = new InscripcionServicio(new AcademiaContext());
+            _servicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _personaActual = persona;
             Modo = modo;
             txtAlumno.Text = persona.ToString();
@@ -27,7 +27,7 @@ namespace UI.Desktop.Forms.Inscripciones
             {
                 case ModoForm.Alta:
                     btnAceptar.Text = "Inscribir";
-                    dgvCursos.DataSource = new CursoServicio(new AcademiaContext()).GetAll();
+                    dgvCursos.DataSource = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop()).GetAll();
                     break;
                 case ModoForm.Modificacion:
                     btnAceptar.Text = "Guardar";

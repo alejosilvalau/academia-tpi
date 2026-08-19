@@ -11,7 +11,7 @@ namespace UI.Desktop.Forms.Dictados
         public Dictados()
         {
             InitializeComponent();
-            _servicio = new DocenteCursoServicio(new AcademiaContext());
+            _servicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvDocentes.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

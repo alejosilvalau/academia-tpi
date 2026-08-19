@@ -11,7 +11,7 @@ namespace UI.Desktop.Forms.Comisiones
         public Comisiones()
         {
             InitializeComponent();
-            _servicio = new ComisionServicio(new AcademiaContext());
+            _servicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvComisiones.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

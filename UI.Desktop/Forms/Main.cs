@@ -11,7 +11,7 @@ namespace UI.Desktop
         public Main()
         {
             InitializeComponent();
-            _personaServicio = new PersonaServicio(new AcademiaContext());
+            _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         private void Main_Load(object sender, EventArgs e)

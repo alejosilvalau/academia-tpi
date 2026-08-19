@@ -1,5 +1,7 @@
 @page "/reportes/planes"
 @inject ReporteServicio ReporteServicio
+@inject UI.Web.Services.SesionService Sesion
+@inject NavigationManager Navigation
 @inject IJSRuntime JS
 
 <div class="md-card">
@@ -64,6 +66,12 @@
 
     protected override void OnInitialized()
     {
+        if (!Sesion.ValidarPermisos(Dominio.Persona.TiposPersonas.Administrador))
+        {
+            Navigation.NavigateTo("/");
+            return;
+        }
+
         try
         {
             planes = ReporteServicio.ObtenerPlanes();

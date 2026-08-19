@@ -9,33 +9,39 @@ namespace Servicios
     {
         private PersonaRepositorio _repositorio;
 
-        public PersonaServicio(AcademiaContext context)
+        public PersonaServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorio = new PersonaRepositorio(context);
         }
 
         public List<Persona> GetAll()
         {
+            RequiereAdmin();
             return _repositorio.GetAllConPlan();
         }
 
         public Persona? GetOne(int id)
         {
+            RequiereAdmin();
             return _repositorio.GetOne(id);
         }
 
         public List<Persona> GetByTipo(Persona.TiposPersonas tipo)
         {
+            RequiereAdmin();
             return _repositorio.GetByTipo(tipo);
         }
 
         public Persona? GetByLegajo(int legajo)
         {
+            RequiereAdmin();
             return _repositorio.GetByLegajo(legajo);
         }
 
         public void Save(Persona persona)
         {
+            RequiereAdmin();
             ValidarBasicos(persona);
             ValidarFormato(persona);
             ValidarReglasNegocio(persona, esAlta: true);
@@ -48,6 +54,7 @@ namespace Servicios
 
         public void Update(Persona persona)
         {
+            RequiereAdmin();
             ValidarBasicos(persona);
             ValidarFormato(persona);
             ValidarReglasNegocio(persona, esAlta: false);
@@ -60,6 +67,7 @@ namespace Servicios
 
         public void Delete(Persona persona)
         {
+            RequiereAdmin();
             EjecutarPersistencia(() =>
             {
                 _repositorio.Delete(persona);

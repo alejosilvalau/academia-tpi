@@ -10,37 +10,51 @@ namespace Servicios
         private AlumnoInscripcionRepositorio _repositorioInscripcion;
         private CursoRepositorio _repositorioCurso;
         private PersonaRepositorio _repositorioPersona;
+        private DocenteCursoRepositorio _repositorioDocenteCurso;
 
-        public InscripcionServicio(AcademiaContext context)
+        public InscripcionServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorioInscripcion = new AlumnoInscripcionRepositorio(context);
             _repositorioCurso = new CursoRepositorio(context);
             _repositorioPersona = new PersonaRepositorio(context);
+            _repositorioDocenteCurso = new DocenteCursoRepositorio(context);
         }
 
         public List<AlumnoInscripcion> GetAll()
         {
+            RequiereAdmin();
             return _repositorioInscripcion.GetAllConAlumnoYCurso();
         }
 
         public AlumnoInscripcion? GetOne(int id)
         {
+            RequiereAdmin();
             return _repositorioInscripcion.GetOne(id);
         }
 
         public List<AlumnoInscripcion> GetByAlumno(int alumnoId)
         {
+            RequiereAutenticacion();
+            if (!EsAdmin() && PersonaIdActual() != alumnoId)
+                throw new AccesoNoAutorizadoException("No puede consultar las inscripciones de otro alumno.");
             return _repositorioInscripcion.GetByAlumno(alumnoId);
         }
 
         public List<AlumnoInscripcion> GetByCurso(int cursoId)
         {
+            RequiereAutenticacion();
+            if (!EsAdmin() && !EsDocenteDelCurso(cursoId))
+                throw new AccesoNoAutorizadoException("No puede consultar las inscripciones de un curso que no le está asignado.");
             return _repositorioInscripcion.GetByCurso(cursoId);
         }
 
         public void InscribirAlumno(int alumnoId, int cursoId)
         {
             ValidarBasicos(alumnoId, cursoId);
+            RequiereAutenticacion();
+            if (!EsAdmin() && PersonaIdActual() != alumnoId)
+                throw new AccesoNoAutorizadoException("No puede inscribir a otro alumno.");
             ValidarReglasNegocio(alumnoId, cursoId);
 
             var inscripcion = new AlumnoInscripcion
@@ -60,6 +74,9 @@ namespace Servicios
         public void Update(AlumnoInscripcion inscripcion)
         {
             ValidarBasicosActualizacion(inscripcion);
+            RequiereAutenticacion();
+            if (!EsAdmin() && !EsDocenteDelCurso(inscripcion.CursoId))
+                throw new AccesoNoAutorizadoException("No puede modificar inscripciones de un curso que no le está asignado.");
             EjecutarPersistencia(() =>
             {
                 _repositorioInscripcion.Update(inscripcion);
@@ -69,6 +86,7 @@ namespace Servicios
 
         public void Delete(AlumnoInscripcion inscripcion)
         {
+            RequiereAdmin();
             EjecutarPersistencia(() =>
             {
                 _repositorioInscripcion.Delete(inscripcion);
@@ -136,6 +154,14 @@ namespace Servicios
             var yaInscripto = _repositorioInscripcion.GetByAlumno(alumnoId).Any(ai => ai.CursoId == cursoId);
             if (yaInscripto)
                 throw new ReglaNegocioException("El alumno ya está inscripto en ese curso.");
+        }
+
+        private bool EsDocenteDelCurso(int cursoId)
+        {
+            if (TipoUsuarioActual() != Persona.TiposPersonas.Docente) return false;
+            var docenteId = PersonaIdActual();
+            if (!docenteId.HasValue) return false;
+            return _repositorioDocenteCurso.GetByCurso(cursoId).Any(dc => dc.DocenteId == docenteId.Value);
         }
     }
 }

@@ -11,7 +11,7 @@ namespace UI.Desktop.Forms.Especialidades
         public Especialidades()
         {
             InitializeComponent();
-            _servicio = new EspecialidadServicio(new AcademiaContext());
+            _servicio = new EspecialidadServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvEspecialidades.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

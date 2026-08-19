@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Components.Web;
 using Servicios;
 using Repositorio;
 using UI.Web.Services;
+using UI.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddScoped<AcademiaContext>();
+builder.Services.AddScoped<IUsuarioContexto, UsuarioContextoWeb>();
 builder.Services.AddScoped<EspecialidadServicio>();
 builder.Services.AddScoped<PlanServicio>();
 builder.Services.AddScoped<ComisionServicio>();

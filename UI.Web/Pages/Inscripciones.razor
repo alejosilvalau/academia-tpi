@@ -3,6 +3,7 @@
 @inject CursoServicio CursoServicio
 @inject PersonaServicio PersonaServicio
 @inject UI.Web.Services.SesionService Sesion
+@inject NavigationManager Navigation
 
 <div class="md-card">
 <div class="md-card-header-actions">
@@ -133,6 +134,12 @@
 
     protected override void OnInitialized()
     {
+        if (!Sesion.ValidarPermisos(Dominio.Persona.TiposPersonas.Alumno))
+        {
+            Navigation.NavigateTo("/");
+            return;
+        }
+
         cursos = CursoServicio.GetAll();
         alumnos = PersonaServicio.GetByTipo(Persona.TiposPersonas.Alumno);
         Cargar();

@@ -12,7 +12,7 @@ namespace UI.Desktop.Forms.Personas
         public Personas()
         {
             InitializeComponent();
-            _servicio = new PersonaServicio(new AcademiaContext());
+            _servicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvPersonas.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

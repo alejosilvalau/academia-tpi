@@ -8,13 +8,15 @@ namespace Servicios
     {
         private readonly ReporteGenerador _generador;
 
-        public ReporteServicio()
+        public ReporteServicio(IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _generador = new ReporteGenerador();
         }
 
         public DataTable ObtenerCursos()
         {
+            RequiereAdmin();
             try
             {
                 return _generador.ObtenerCursos();
@@ -31,6 +33,7 @@ namespace Servicios
 
         public DataTable ObtenerPlanes()
         {
+            RequiereAdmin();
             try
             {
                 return _generador.ObtenerPlanes();
@@ -47,6 +50,7 @@ namespace Servicios
 
         public FastReport.Report GenerarReporteCursos(int cursoId)
         {
+            RequiereAdmin();
             try
             {
                 return _generador.GenerarReporteCursos(cursoId);
@@ -63,6 +67,7 @@ namespace Servicios
 
         public FastReport.Report GenerarReportePlanes(int planId)
         {
+            RequiereAdmin();
             try
             {
                 return _generador.GenerarReportePlanes(planId);
@@ -79,6 +84,7 @@ namespace Servicios
 
         public byte[] ExportarPdf(FastReport.Report report)
         {
+            RequiereAdmin();
             try
             {
                 return _generador.ExportarPdf(report);

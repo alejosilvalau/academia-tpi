@@ -1,7 +1,6 @@
 using Dominio;
 using Repositorio;
 using Servicios;
-using Utils;
 
 namespace UI.Desktop.Forms.Comisiones
 {
@@ -14,8 +13,8 @@ namespace UI.Desktop.Forms.Comisiones
         public ComisionDesktop() : base()
         {
             InitializeComponent();
-            _servicio = new ComisionServicio(new AcademiaContext());
-            _planServicio = new PlanServicio(new AcademiaContext());
+            _servicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         public ComisionDesktop(ModoForm modo) : this()
@@ -77,5 +76,6 @@ namespace UI.Desktop.Forms.Comisiones
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();
+
     }
 }

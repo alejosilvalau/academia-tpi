@@ -25,7 +25,7 @@ namespace UI.Desktop.Forms.Especialidades
         public EspecialidadDesktop() : base()
         {
             InitializeComponent();
-            _servicio = new EspecialidadServicio(new AcademiaContext());
+            _servicio = new EspecialidadServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         private void SetModo()

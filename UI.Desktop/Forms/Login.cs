@@ -13,7 +13,7 @@ namespace UI.Desktop
         public Login()
         {
             InitializeComponent();
-            _usuarioServicio = new UsuarioServicio(new AcademiaContext());
+            _usuarioServicio = new UsuarioServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)

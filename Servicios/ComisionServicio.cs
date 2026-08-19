@@ -9,28 +9,33 @@ namespace Servicios
     {
         private ComisionRepositorio _repositorio;
 
-        public ComisionServicio(AcademiaContext context)
+        public ComisionServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorio = new ComisionRepositorio(context);
         }
 
         public List<Comision> GetAll()
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetAllConPlan();
         }
 
         public Comision? GetOne(int id)
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetOne(id);
         }
 
         public List<Comision> GetByPlan(int planId)
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetByPlan(planId);
         }
 
         public void Save(Comision comision)
         {
+            RequiereAdmin();
             ValidarBasicos(comision);
             ValidarFormato(comision);
             EjecutarPersistencia(() =>
@@ -42,6 +47,7 @@ namespace Servicios
 
         public void Update(Comision comision)
         {
+            RequiereAdmin();
             ValidarBasicos(comision);
             ValidarFormato(comision);
             EjecutarPersistencia(() =>
@@ -53,6 +59,7 @@ namespace Servicios
 
         public void Delete(Comision comision)
         {
+            RequiereAdmin();
             EjecutarPersistencia(() =>
             {
                 _repositorio.Delete(comision);

@@ -15,8 +15,8 @@ namespace UI.Desktop.Forms.RegistrarNotas
         {
             InitializeComponent();
             _personaActual = persona;
-            _dcServicio = new DocenteCursoServicio(new AcademiaContext());
-            _inscripcionServicio = new InscripcionServicio(new AcademiaContext());
+            _dcServicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _inscripcionServicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             cbxCursos.DataSource = _dcServicio.GetByDocente(persona.ID);
             cbxCursos.DisplayMember = "Curso";
             dgvAlumnos.AutoGenerateColumns = false;

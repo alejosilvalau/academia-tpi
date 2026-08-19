@@ -15,9 +15,9 @@ namespace UI.Desktop.Forms.Dictados
         public DictadoDesktop() : base()
         {
             InitializeComponent();
-            _servicio = new DocenteCursoServicio(new AcademiaContext());
-            _cursoServicio = new CursoServicio(new AcademiaContext());
-            _personaServicio = new PersonaServicio(new AcademiaContext());
+            _servicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _cursoServicio = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
         public DictadoDesktop(ModoForm modo) : this()

@@ -11,7 +11,7 @@ namespace UI.Desktop.Forms.Cursos
         public Cursos()
         {
             InitializeComponent();
-            _servicio = new CursoServicio(new AcademiaContext());
+            _servicio = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             dgvCursos.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

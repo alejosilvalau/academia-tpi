@@ -9,23 +9,27 @@ namespace Servicios
     {
         private EspecialidadRepositorio _repositorio;
 
-        public EspecialidadServicio(AcademiaContext context)
+        public EspecialidadServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorio = new EspecialidadRepositorio(context);
         }
 
         public List<Especialidad> GetAll()
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetAll();
         }
 
         public Especialidad? GetOne(int id)
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetOne(id);
         }
 
         public void Save(Especialidad especialidad)
         {
+            RequiereAdmin();
             ValidarBasicos(especialidad);
             ValidarFormato(especialidad);
             EjecutarPersistencia(() =>
@@ -37,6 +41,7 @@ namespace Servicios
 
         public void Update(Especialidad especialidad)
         {
+            RequiereAdmin();
             ValidarBasicos(especialidad);
             ValidarFormato(especialidad);
             EjecutarPersistencia(() =>
@@ -48,6 +53,7 @@ namespace Servicios
 
         public void Delete(Especialidad especialidad)
         {
+            RequiereAdmin();
             EjecutarPersistencia(() =>
             {
                 _repositorio.Delete(especialidad);

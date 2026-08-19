@@ -26,8 +26,8 @@ namespace UI.Desktop.Forms.Planes
         public PlanDesktop() : base()
         {
             InitializeComponent();
-            _planServicio = new PlanServicio(new AcademiaContext());
-            _especialidadServicio = new EspecialidadServicio(new AcademiaContext());
+            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _especialidadServicio = new EspecialidadServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             CargarEspecialidades();
         }
 

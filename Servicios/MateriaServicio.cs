@@ -9,28 +9,33 @@ namespace Servicios
     {
         private MateriaRepositorio _repositorio;
 
-        public MateriaServicio(AcademiaContext context)
+        public MateriaServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
+            : base(usuarioContexto)
         {
             _repositorio = new MateriaRepositorio(context);
         }
 
         public List<Materia> GetAll()
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetAllConPlan();
         }
 
         public Materia? GetOne(int id)
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetOne(id);
         }
 
         public List<Materia> GetByPlan(int planId)
         {
+            RequiereAdminOAlumno();
             return _repositorio.GetByPlan(planId);
         }
 
         public void Save(Materia materia)
         {
+            RequiereAdmin();
             ValidarBasicos(materia);
             ValidarFormato(materia);
             EjecutarPersistencia(() =>
@@ -42,6 +47,7 @@ namespace Servicios
 
         public void Update(Materia materia)
         {
+            RequiereAdmin();
             ValidarBasicos(materia);
             ValidarFormato(materia);
             EjecutarPersistencia(() =>
@@ -53,6 +59,7 @@ namespace Servicios
 
         public void Delete(Materia materia)
         {
+            RequiereAdmin();
             EjecutarPersistencia(() =>
             {
                 _repositorio.Delete(materia);

@@ -1,4 +1,4 @@
-﻿using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 
 namespace Utils
 {
@@ -46,15 +46,6 @@ namespace Utils
             });
             return rta;
         }
-
-        //public static bool UsuarioNoExiste(string nombreUsuario)
-        //{
-        //    if (new UsuarioLogic().GetOneNombreUsuario(nombreUsuario) != null)
-        //    {
-        //        return false;
-        //    }
-        //    return true;
-        //}
 
         public static bool UsuarioLengthValido(string nombreUsuario)
         {
