@@ -61,7 +61,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             this.tsbEditar.BackColor = MaterialColors.PrimaryDark;
             this.tsbEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbEditar.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.tsbEditar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.tsbEditar.ForeColor = MaterialColors.TextOnPrimary;
             this.tsbEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEditar.Name = "tsbEditar";
@@ -73,7 +73,7 @@ namespace UI.Desktop.Forms.Personas
             // 
             this.tsbEliminar.BackColor = MaterialColors.PrimaryDark;
             this.tsbEliminar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbEliminar.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.tsbEliminar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.tsbEliminar.ForeColor = MaterialColors.TextOnPrimary;
             this.tsbEliminar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.tsbEliminar.Name = "tsbEliminar";
