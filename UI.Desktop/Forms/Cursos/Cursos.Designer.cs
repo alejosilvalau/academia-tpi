@@ -115,6 +115,7 @@ namespace UI.Desktop.Forms.Cursos
             this.dgvCursos.Size = new System.Drawing.Size(750, 410);
             this.dgvCursos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvCursos.TabIndex = 1;
+            this.dgvCursos.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             //
             // ID
             //

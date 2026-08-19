@@ -106,6 +106,7 @@ namespace UI.Desktop.Forms.Especialidades
             this.dgvEspecialidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEspecialidades.Size = new System.Drawing.Size(700, 410);
             this.dgvEspecialidades.TabIndex = 1;
+            this.dgvEspecialidades.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             // 
             // ID
             // 

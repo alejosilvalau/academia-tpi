@@ -113,6 +113,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.dgvComisiones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvComisiones.Size = new System.Drawing.Size(800, 410);
             this.dgvComisiones.TabIndex = 1;
+            this.dgvComisiones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             //
             // colID
             //

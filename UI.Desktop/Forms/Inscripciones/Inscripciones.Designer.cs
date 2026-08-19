@@ -114,6 +114,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.dgvInscripciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInscripciones.Size = new System.Drawing.Size(800, 410);
             this.dgvInscripciones.TabIndex = 1;
+            this.dgvInscripciones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             //
             // ID
             //

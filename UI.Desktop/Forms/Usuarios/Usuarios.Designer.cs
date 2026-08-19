@@ -114,6 +114,7 @@ namespace UI.Desktop.Forms.Usuarios
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsuarios.Size = new System.Drawing.Size(800, 410);
             this.dgvUsuarios.TabIndex = 1;
+            this.dgvUsuarios.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             //
             // ID
             //

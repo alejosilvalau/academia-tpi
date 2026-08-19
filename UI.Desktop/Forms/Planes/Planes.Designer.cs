@@ -108,6 +108,7 @@ namespace UI.Desktop.Forms.Planes
             this.dgvPlanes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPlanes.Size = new System.Drawing.Size(700, 410);
             this.dgvPlanes.TabIndex = 1;
+            this.dgvPlanes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             // 
             // ID
             // 

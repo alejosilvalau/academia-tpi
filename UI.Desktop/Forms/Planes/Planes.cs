@@ -45,5 +45,10 @@ namespace UI.Desktop.Forms.Planes
             new PlanDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
         }
+
+        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            tsbEditar_Click(sender, e);
+        }
     }
 }

@@ -114,6 +114,7 @@ namespace UI.Desktop.Forms.Personas
             this.dgvPersonas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonas.Size = new System.Drawing.Size(900, 410);
             this.dgvPersonas.TabIndex = 1;
+            this.dgvPersonas.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             // 
             // ID
             // 

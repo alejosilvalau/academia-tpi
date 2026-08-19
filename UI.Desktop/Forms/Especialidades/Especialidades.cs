@@ -45,5 +45,10 @@ namespace UI.Desktop.Forms.Especialidades
             new EspecialidadDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
         }
+
+        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            tsbEditar_Click(sender, e);
+        }
     }
 }

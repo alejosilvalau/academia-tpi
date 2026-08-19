@@ -115,6 +115,7 @@ namespace UI.Desktop.Forms.Materias
             this.dgvMaterias.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMaterias.Size = new System.Drawing.Size(800, 410);
             this.dgvMaterias.TabIndex = 1;
+            this.dgvMaterias.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             //
             // colID
             //

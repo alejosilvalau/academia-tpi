@@ -111,6 +111,7 @@ namespace UI.Desktop.Forms.Dictados
             this.dgvDocentes.Size = new System.Drawing.Size(750, 410);
             this.dgvDocentes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDocentes.TabIndex = 1;
+            this.dgvDocentes.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             //
             // ID
             //

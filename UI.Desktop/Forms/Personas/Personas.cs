@@ -58,5 +58,10 @@ namespace UI.Desktop.Forms.Personas
             new PersonaDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
         }
+
+        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            tsbEditar_Click(sender, e);
+        }
     }
 }
