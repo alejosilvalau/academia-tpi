@@ -41,6 +41,7 @@ namespace UI.Desktop.Forms.Especialidades
             int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
             new EspecialidadDesktop(id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvEspecialidades, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace UI.Desktop.Forms.Especialidades
             int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
             new EspecialidadDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvEspecialidades, id);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

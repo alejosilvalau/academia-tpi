@@ -41,6 +41,7 @@ namespace UI.Desktop.Forms.Cursos
             int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
             new CursoDesktop(id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvCursos, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace UI.Desktop.Forms.Cursos
             int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
             new CursoDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvCursos, id);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

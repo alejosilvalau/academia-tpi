@@ -41,6 +41,7 @@ namespace UI.Desktop.Forms.Comisiones
             int id = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
             new ComisionDesktop(id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvComisiones, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace UI.Desktop.Forms.Comisiones
             int id = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
             new ComisionDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvComisiones, id);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

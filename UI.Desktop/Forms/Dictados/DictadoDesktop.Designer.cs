@@ -104,7 +104,6 @@ namespace UI.Desktop.Forms.Dictados
             cbxCursos.BackColor = Color.White;
             cbxCursos.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxCursos.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxCursos.FlatStyle = FlatStyle.Flat;
             cbxCursos.Font = new Font("Segoe UI", 10F);
             cbxCursos.ForeColor = Color.FromArgb(33, 33, 33);
             cbxCursos.FormattingEnabled = true;
@@ -133,7 +132,6 @@ namespace UI.Desktop.Forms.Dictados
             cbxDocentes.BackColor = Color.White;
             cbxDocentes.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxDocentes.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxDocentes.FlatStyle = FlatStyle.Flat;
             cbxDocentes.Font = new Font("Segoe UI", 10F);
             cbxDocentes.ForeColor = Color.FromArgb(33, 33, 33);
             cbxDocentes.FormattingEnabled = true;
@@ -162,7 +160,6 @@ namespace UI.Desktop.Forms.Dictados
             cbxTiposCargos.BackColor = Color.White;
             cbxTiposCargos.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxTiposCargos.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxTiposCargos.FlatStyle = FlatStyle.Flat;
             cbxTiposCargos.Font = new Font("Segoe UI", 10F);
             cbxTiposCargos.ForeColor = Color.FromArgb(33, 33, 33);
             cbxTiposCargos.FormattingEnabled = true;

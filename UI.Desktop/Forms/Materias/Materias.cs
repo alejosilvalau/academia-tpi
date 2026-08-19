@@ -41,6 +41,7 @@ namespace UI.Desktop.Forms.Materias
             int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
             new MateriaDesktop(id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvMaterias, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace UI.Desktop.Forms.Materias
             int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
             new MateriaDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvMaterias, id);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

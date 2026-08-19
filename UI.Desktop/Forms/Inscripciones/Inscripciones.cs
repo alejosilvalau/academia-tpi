@@ -49,6 +49,7 @@ namespace UI.Desktop.Forms.Inscripciones
             int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
             new InscripcionDesktop(_personaActual, id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvInscripciones, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -57,6 +58,7 @@ namespace UI.Desktop.Forms.Inscripciones
             int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
             new InscripcionDesktop(_personaActual, id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvInscripciones, id);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

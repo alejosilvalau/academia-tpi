@@ -59,5 +59,21 @@ namespace UI.Desktop
                 }
             }
         }
+
+        protected void SeleccionarFila(DataGridView dgv, int? id)
+        {
+            if (!id.HasValue) return;
+            foreach (DataGridViewRow row in dgv.Rows)
+            {
+                if (row.DataBoundItem != null &&
+                    row.DataBoundItem.GetType().GetProperty("ID")?.GetValue(row.DataBoundItem) is int rowId &&
+                    rowId == id.Value)
+                {
+                    row.Selected = true;
+                    dgv.FirstDisplayedScrollingRowIndex = row.Index;
+                    break;
+                }
+            }
+        }
     }
 }

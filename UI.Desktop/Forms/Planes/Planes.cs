@@ -41,6 +41,7 @@ namespace UI.Desktop.Forms.Planes
             int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
             new PlanDesktop(id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvPlanes, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace UI.Desktop.Forms.Planes
             int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
             new PlanDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvPlanes, id);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

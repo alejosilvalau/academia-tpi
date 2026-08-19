@@ -56,6 +56,7 @@ namespace UI.Desktop.Forms.Personas
             int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
             new PersonaDesktop(id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvPersonas, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -64,6 +65,7 @@ namespace UI.Desktop.Forms.Personas
             int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
             new PersonaDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvPersonas, id);
         }
 
         private void tsbSeleccionar_Click(object sender, EventArgs e)

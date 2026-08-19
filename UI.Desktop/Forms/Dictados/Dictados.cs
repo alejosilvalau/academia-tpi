@@ -41,6 +41,7 @@ namespace UI.Desktop.Forms.Dictados
             int id = ((DocenteCurso)dgvDocentes.SelectedRows[0].DataBoundItem).ID;
             new DictadoDesktop(id, ModoForm.Modificacion).ShowDialog();
             Listar();
+            SeleccionarFila(dgvDocentes, id);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,6 +50,7 @@ namespace UI.Desktop.Forms.Dictados
             int id = ((DocenteCurso)dgvDocentes.SelectedRows[0].DataBoundItem).ID;
             new DictadoDesktop(id, ModoForm.Baja).ShowDialog();
             Listar();
+            SeleccionarFila(dgvDocentes, id);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

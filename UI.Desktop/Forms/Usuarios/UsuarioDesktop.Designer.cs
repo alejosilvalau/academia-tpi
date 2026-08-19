@@ -185,7 +185,6 @@ namespace UI.Desktop.Forms.Usuarios
             cbxPersona.DisplayMember = "NombreCompleto";
             cbxPersona.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxPersona.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxPersona.FlatStyle = FlatStyle.Flat;
             cbxPersona.Font = new Font("Segoe UI", 10F);
             cbxPersona.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPersona.FormattingEnabled = true;

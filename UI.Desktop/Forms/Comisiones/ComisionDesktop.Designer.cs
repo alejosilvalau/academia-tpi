@@ -155,7 +155,6 @@ namespace UI.Desktop.Forms.Comisiones
             cbxPlan.BackColor = Color.White;
             cbxPlan.DisplayMember = "Descripcion";
             cbxPlan.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxPlan.FlatStyle = FlatStyle.Flat;
             cbxPlan.Font = new Font("Segoe UI", 10F);
             cbxPlan.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPlan.FormattingEnabled = true;

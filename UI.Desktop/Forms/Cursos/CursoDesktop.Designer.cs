@@ -189,7 +189,6 @@ namespace UI.Desktop.Forms.Cursos
             cbxMateria.BackColor = Color.White;
             cbxMateria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxMateria.FlatStyle = FlatStyle.Flat;
             cbxMateria.Font = new Font("Segoe UI", 10F);
             cbxMateria.ForeColor = Color.FromArgb(33, 33, 33);
             cbxMateria.FormattingEnabled = true;
@@ -218,7 +217,6 @@ namespace UI.Desktop.Forms.Cursos
             cbxComision.BackColor = Color.White;
             cbxComision.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxComision.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxComision.FlatStyle = FlatStyle.Flat;
             cbxComision.Font = new Font("Segoe UI", 10F);
             cbxComision.ForeColor = Color.FromArgb(33, 33, 33);
             cbxComision.FormattingEnabled = true;
