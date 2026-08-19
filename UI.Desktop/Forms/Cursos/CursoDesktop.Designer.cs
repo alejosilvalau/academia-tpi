@@ -249,7 +249,7 @@ namespace UI.Desktop.Forms.Cursos
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
             btnCancelar.Anchor = AnchorStyles.None;
-            btnCancelar.Location = new Point(285, 10);
+            btnCancelar.Location = new Point(175, 10);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 40);
             btnCancelar.TabIndex = 1;
@@ -267,7 +267,7 @@ namespace UI.Desktop.Forms.Cursos
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
             btnAceptar.Anchor = AnchorStyles.None;
-            btnAceptar.Location = new Point(175, 10);
+            btnAceptar.Location = new Point(285, 10);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(100, 40);
             btnAceptar.TabIndex = 0;

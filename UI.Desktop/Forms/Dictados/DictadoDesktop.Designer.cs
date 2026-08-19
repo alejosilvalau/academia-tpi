@@ -190,7 +190,7 @@ namespace UI.Desktop.Forms.Dictados
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(235, 10);
+            btnCancelar.Location = new Point(125, 10);
             btnCancelar.Anchor = AnchorStyles.None;
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 40);
@@ -208,7 +208,7 @@ namespace UI.Desktop.Forms.Dictados
             btnAceptar.FlatStyle = FlatStyle.Flat;
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
-            btnAceptar.Location = new Point(125, 10);
+            btnAceptar.Location = new Point(235, 10);
             btnAceptar.Anchor = AnchorStyles.None;
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(100, 40);
