@@ -1,4 +1,5 @@
 using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace UI.Desktop
@@ -75,5 +76,20 @@ namespace UI.Desktop
                 }
             }
         }
+
+        protected void CongelarGrilla(DataGridView dgv)
+        {
+            SendMessage(dgv.Handle, WM_SETREDRAW, IntPtr.Zero, IntPtr.Zero);
+        }
+
+        protected void DescongelarGrilla(DataGridView dgv)
+        {
+            SendMessage(dgv.Handle, WM_SETREDRAW, (IntPtr)1, IntPtr.Zero);
+            dgv.Refresh();
+        }
+
+        [DllImport("user32.dll")]
+        private static extern IntPtr SendMessage(IntPtr hWnd, int msg, IntPtr wParam, IntPtr lParam);
+        private const int WM_SETREDRAW = 0x000B;
     }
 }

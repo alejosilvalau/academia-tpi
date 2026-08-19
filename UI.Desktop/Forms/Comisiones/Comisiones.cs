@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Comisiones
             {
                 dgvComisiones.DataSource = null;
                 dgvComisiones.DataSource = _servicio.GetAll();
-                dgvComisiones.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
@@ -40,8 +39,10 @@ namespace UI.Desktop.Forms.Comisiones
             if (!IsRowSelected(dgvComisiones)) return;
             int id = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
             new ComisionDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvComisiones);
             Listar();
             SeleccionarFila(dgvComisiones, id);
+            DescongelarGrilla(dgvComisiones);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,8 +50,10 @@ namespace UI.Desktop.Forms.Comisiones
             if (!IsRowSelected(dgvComisiones)) return;
             int id = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
             new ComisionDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvComisiones);
             Listar();
             SeleccionarFila(dgvComisiones, id);
+            DescongelarGrilla(dgvComisiones);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

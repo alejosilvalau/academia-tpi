@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Planes
             {
                 dgvPlanes.DataSource = null;
                 dgvPlanes.DataSource = _servicio.GetAll();
-                dgvPlanes.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
@@ -40,8 +39,10 @@ namespace UI.Desktop.Forms.Planes
             if (!IsRowSelected(dgvPlanes)) return;
             int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
             new PlanDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvPlanes);
             Listar();
             SeleccionarFila(dgvPlanes, id);
+            DescongelarGrilla(dgvPlanes);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,8 +50,10 @@ namespace UI.Desktop.Forms.Planes
             if (!IsRowSelected(dgvPlanes)) return;
             int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
             new PlanDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvPlanes);
             Listar();
             SeleccionarFila(dgvPlanes, id);
+            DescongelarGrilla(dgvPlanes);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

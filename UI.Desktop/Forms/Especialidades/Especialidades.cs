@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Especialidades
             {
                 dgvEspecialidades.DataSource = null;
                 dgvEspecialidades.DataSource = _servicio.GetAll();
-                dgvEspecialidades.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
@@ -40,8 +39,10 @@ namespace UI.Desktop.Forms.Especialidades
             if (!IsRowSelected(dgvEspecialidades)) return;
             int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
             new EspecialidadDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvEspecialidades);
             Listar();
             SeleccionarFila(dgvEspecialidades, id);
+            DescongelarGrilla(dgvEspecialidades);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,8 +50,10 @@ namespace UI.Desktop.Forms.Especialidades
             if (!IsRowSelected(dgvEspecialidades)) return;
             int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
             new EspecialidadDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvEspecialidades);
             Listar();
             SeleccionarFila(dgvEspecialidades, id);
+            DescongelarGrilla(dgvEspecialidades);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

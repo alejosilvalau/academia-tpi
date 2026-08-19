@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Cursos
             {
                 dgvCursos.DataSource = null;
                 dgvCursos.DataSource = _servicio.GetAll();
-                dgvCursos.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
@@ -40,8 +39,10 @@ namespace UI.Desktop.Forms.Cursos
             if (!IsRowSelected(dgvCursos)) return;
             int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
             new CursoDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvCursos);
             Listar();
             SeleccionarFila(dgvCursos, id);
+            DescongelarGrilla(dgvCursos);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,8 +50,10 @@ namespace UI.Desktop.Forms.Cursos
             if (!IsRowSelected(dgvCursos)) return;
             int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
             new CursoDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvCursos);
             Listar();
             SeleccionarFila(dgvCursos, id);
+            DescongelarGrilla(dgvCursos);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

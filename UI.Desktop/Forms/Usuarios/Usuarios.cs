@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Usuarios
             {
                 dgvUsuarios.DataSource = null;
                 dgvUsuarios.DataSource = _servicio.GetAll();
-                dgvUsuarios.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -40,8 +39,10 @@ namespace UI.Desktop.Forms.Usuarios
             if (!IsRowSelected(dgvUsuarios)) return;
             int id = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
             new UsuarioDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvUsuarios);
             Listar();
             SeleccionarFila(dgvUsuarios, id);
+            DescongelarGrilla(dgvUsuarios);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,8 +50,10 @@ namespace UI.Desktop.Forms.Usuarios
             if (!IsRowSelected(dgvUsuarios)) return;
             int id = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
             new UsuarioDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvUsuarios);
             Listar();
             SeleccionarFila(dgvUsuarios, id);
+            DescongelarGrilla(dgvUsuarios);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

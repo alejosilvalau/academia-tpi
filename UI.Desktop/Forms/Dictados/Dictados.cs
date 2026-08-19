@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Dictados
             {
                 dgvDocentes.DataSource = null;
                 dgvDocentes.DataSource = _servicio.GetAll();
-                dgvDocentes.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
@@ -40,8 +39,10 @@ namespace UI.Desktop.Forms.Dictados
             if (!IsRowSelected(dgvDocentes)) return;
             int id = ((DocenteCurso)dgvDocentes.SelectedRows[0].DataBoundItem).ID;
             new DictadoDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvDocentes);
             Listar();
             SeleccionarFila(dgvDocentes, id);
+            DescongelarGrilla(dgvDocentes);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,8 +50,10 @@ namespace UI.Desktop.Forms.Dictados
             if (!IsRowSelected(dgvDocentes)) return;
             int id = ((DocenteCurso)dgvDocentes.SelectedRows[0].DataBoundItem).ID;
             new DictadoDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvDocentes);
             Listar();
             SeleccionarFila(dgvDocentes, id);
+            DescongelarGrilla(dgvDocentes);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

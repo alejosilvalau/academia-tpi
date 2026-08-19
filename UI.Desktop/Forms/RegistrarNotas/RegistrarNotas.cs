@@ -33,7 +33,6 @@ namespace UI.Desktop.Forms.RegistrarNotas
                 dgvAlumnos.DataSource = null;
                 if (cbxCursos.SelectedItem is DocenteCurso dc)
                     dgvAlumnos.DataSource = _inscripcionServicio.GetByCurso(dc.CursoId);
-                dgvAlumnos.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

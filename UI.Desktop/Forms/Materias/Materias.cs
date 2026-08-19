@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Materias
             {
                 dgvMaterias.DataSource = null;
                 dgvMaterias.DataSource = _servicio.GetAll();
-                dgvMaterias.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
@@ -40,8 +39,10 @@ namespace UI.Desktop.Forms.Materias
             if (!IsRowSelected(dgvMaterias)) return;
             int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
             new MateriaDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvMaterias);
             Listar();
             SeleccionarFila(dgvMaterias, id);
+            DescongelarGrilla(dgvMaterias);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -49,8 +50,10 @@ namespace UI.Desktop.Forms.Materias
             if (!IsRowSelected(dgvMaterias)) return;
             int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
             new MateriaDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvMaterias);
             Listar();
             SeleccionarFila(dgvMaterias, id);
+            DescongelarGrilla(dgvMaterias);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -32,7 +32,6 @@ namespace UI.Desktop.Forms.Inscripciones
             {
                 dgvInscripciones.DataSource = null;
                 dgvInscripciones.DataSource = _servicio.GetByAlumno(_personaActual.ID);
-                dgvInscripciones.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -48,8 +47,10 @@ namespace UI.Desktop.Forms.Inscripciones
             if (!IsRowSelected(dgvInscripciones)) return;
             int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
             new InscripcionDesktop(_personaActual, id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvInscripciones);
             Listar();
             SeleccionarFila(dgvInscripciones, id);
+            DescongelarGrilla(dgvInscripciones);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -57,8 +58,10 @@ namespace UI.Desktop.Forms.Inscripciones
             if (!IsRowSelected(dgvInscripciones)) return;
             int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
             new InscripcionDesktop(_personaActual, id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvInscripciones);
             Listar();
             SeleccionarFila(dgvInscripciones, id);
+            DescongelarGrilla(dgvInscripciones);
         }
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -39,7 +39,6 @@ namespace UI.Desktop.Forms.Personas
                     dgvPersonas.DataSource = _servicio.GetByTipo(_filtroTipo.Value);
                 else
                     dgvPersonas.DataSource = _servicio.GetAll();
-                dgvPersonas.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -55,8 +54,10 @@ namespace UI.Desktop.Forms.Personas
             if (!IsRowSelected(dgvPersonas)) return;
             int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
             new PersonaDesktop(id, ModoForm.Modificacion).ShowDialog();
+            CongelarGrilla(dgvPersonas);
             Listar();
             SeleccionarFila(dgvPersonas, id);
+            DescongelarGrilla(dgvPersonas);
         }
 
         private void tsbEliminar_Click(object sender, EventArgs e)
@@ -64,8 +65,10 @@ namespace UI.Desktop.Forms.Personas
             if (!IsRowSelected(dgvPersonas)) return;
             int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
             new PersonaDesktop(id, ModoForm.Baja).ShowDialog();
+            CongelarGrilla(dgvPersonas);
             Listar();
             SeleccionarFila(dgvPersonas, id);
+            DescongelarGrilla(dgvPersonas);
         }
 
         private void tsbSeleccionar_Click(object sender, EventArgs e)
