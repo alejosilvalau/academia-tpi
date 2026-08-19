@@ -47,21 +47,24 @@
                         </a>
                     </div>
                 </div>
-
-                <div class="sidebar-section">
-                    <div class="sidebar-section-title @(reportesOpen ? "open" : "")" @onclick="ToggleReportes">
-                        Reportes <span class="arrow">&#9654;</span>
-                    </div>
-                    <div class="sidebar-section-items @(reportesOpen ? "open" : "")">
-                        <a href="/reportes/cursos" class="sidebar-link @(IsActive("/reportes/cursos"))">
-                            <span class="icon">&#9776;</span> Cursos
-                        </a>
-                        <a href="/reportes/planes" class="sidebar-link @(IsActive("/reportes/planes"))">
-                            <span class="icon">&#9776;</span> Planes
-                        </a>
-                    </div>
-                </div>
             }
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title @(reportesOpen ? "open" : "")" @onclick="ToggleReportes">
+                    Reportes <span class="arrow">&#9654;</span>
+                </div>
+                <div class="sidebar-section-items @(reportesOpen ? "open" : "")">
+                    @if (Sesion.IsAdmin || Sesion.IsDocente)
+                    {
+                        <a href="/reportes/rendimiento-docente" class="sidebar-link @(IsActive("/reportes/rendimiento-docente"))">
+                            <span class="icon">&#9776;</span> Rendimiento Docente
+                        </a>
+                    }
+                    <a href="/reportes/rendimiento-alumnos" class="sidebar-link @(IsActive("/reportes/rendimiento-alumnos"))">
+                        <span class="icon">&#9776;</span> Rendimiento Alumnos
+                    </a>
+                </div>
+            </div>
 
             @if (Sesion.IsAlumno)
             {
@@ -140,8 +143,8 @@ else
             "/usuarios" => "Usuarios",
             "/inscripciones" => "Inscripciones",
             "/registrar-notas" => "Registrar Notas",
-            "/reportes/cursos" => "Reporte de Cursos",
-            "/reportes/planes" => "Reporte de Planes",
+            "/reportes/rendimiento-docente" => "Reporte de Rendimiento Docente",
+            "/reportes/rendimiento-alumnos" => "Reporte de Rendimiento de Alumnos",
             _ => "Academia TPI"
         };
     }

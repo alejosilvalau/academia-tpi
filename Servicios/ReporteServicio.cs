@@ -1,4 +1,5 @@
 using System.Data;
+using Dominio;
 using Repositorio;
 using Servicios.Excepciones;
 
@@ -14,12 +15,12 @@ namespace Servicios
             _generador = new ReporteGenerador();
         }
 
-        public DataTable ObtenerCursos()
+        public DataTable ObtenerDocentes()
         {
             RequiereAdmin();
             try
             {
-                return _generador.ObtenerCursos();
+                return _generador.ObtenerDocentes();
             }
             catch (ServicioException)
             {
@@ -27,16 +28,16 @@ namespace Servicios
             }
             catch (Exception)
             {
-                throw new ServicioException("No se pudieron obtener los cursos para el reporte. Intente nuevamente.");
+                throw new ServicioException("No se pudieron obtener los docentes para el reporte. Intente nuevamente.");
             }
         }
 
-        public DataTable ObtenerPlanes()
+        public DataTable ObtenerAlumnos()
         {
             RequiereAdmin();
             try
             {
-                return _generador.ObtenerPlanes();
+                return _generador.ObtenerAlumnos();
             }
             catch (ServicioException)
             {
@@ -44,16 +45,17 @@ namespace Servicios
             }
             catch (Exception)
             {
-                throw new ServicioException("No se pudieron obtener los planes para el reporte. Intente nuevamente.");
+                throw new ServicioException("No se pudieron obtener los alumnos para el reporte. Intente nuevamente.");
             }
         }
 
-        public FastReport.Report GenerarReporteCursos(int cursoId)
+        public FastReport.Report GenerarReporteRendimientoDocente(int docenteId)
         {
-            RequiereAdmin();
+            RequiereAdminODocente();
             try
             {
-                return _generador.GenerarReporteCursos(cursoId);
+                int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
+                return _generador.GenerarReporteRendimientoDocente(idResuelto);
             }
             catch (ServicioException)
             {
@@ -61,16 +63,21 @@ namespace Servicios
             }
             catch (Exception)
             {
-                throw new ServicioException("No se pudo generar el reporte de cursos. Verifique que el archivo de plantilla exista.");
+                throw new ServicioException("No se pudo generar el reporte de rendimiento docente. Verifique que el archivo de plantilla exista.");
             }
         }
 
-        public FastReport.Report GenerarReportePlanes(int planId)
+        public FastReport.Report GenerarReporteRendimientoAlumno(int alumnoId)
         {
-            RequiereAdmin();
+            RequiereAutenticacion();
+            var tipo = TipoUsuarioActual();
+            if (tipo == Persona.TiposPersonas.Docente)
+                throw new AccesoNoAutorizadoException("Los docentes no pueden generar el reporte individual de un alumno. Utilice el reporte de sus alumnos.");
+
             try
             {
-                return _generador.GenerarReportePlanes(planId);
+                int idResuelto = EsAdmin() ? alumnoId : PersonaIdActual()!.Value;
+                return _generador.GenerarReporteRendimientoAlumno(idResuelto);
             }
             catch (ServicioException)
             {
@@ -78,13 +85,31 @@ namespace Servicios
             }
             catch (Exception)
             {
-                throw new ServicioException("No se pudo generar el reporte de planes. Verifique que el archivo de plantilla exista.");
+                throw new ServicioException("No se pudo generar el reporte de rendimiento del alumno. Verifique que el archivo de plantilla exista.");
+            }
+        }
+
+        public FastReport.Report GenerarReporteRendimientoAlumnosDeDocente(int docenteId)
+        {
+            RequiereAdminODocente();
+            try
+            {
+                int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
+                return _generador.GenerarReporteRendimientoAlumnosDeDocente(idResuelto);
+            }
+            catch (ServicioException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw new ServicioException("No se pudo generar el reporte de rendimiento de los alumnos del docente. Verifique que el archivo de plantilla exista.");
             }
         }
 
         public byte[] ExportarPdf(FastReport.Report report)
         {
-            RequiereAdmin();
+            RequiereAutenticacion();
             try
             {
                 return _generador.ExportarPdf(report);

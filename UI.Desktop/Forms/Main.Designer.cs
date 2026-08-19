@@ -28,8 +28,8 @@ namespace UI.Desktop
             lblTitulo = new Label();
             panelFormLoader = new Panel();
             panelSubMenu = new Panel();
-            btnReportesPlanes = new Button();
-            btnReportesCursos = new Button();
+            btnReportesRendimientoDocente = new Button();
+            btnReportesRendimientoAlumnos = new Button();
             btnABMUsuarios = new Button();
             btnABMPlanes = new Button();
             btnABMPersonas = new Button();
@@ -259,8 +259,8 @@ namespace UI.Desktop
             // panelSubMenu
             // 
             panelSubMenu.BackColor = Color.FromArgb(48, 63, 71);
-            panelSubMenu.Controls.Add(btnReportesPlanes);
-            panelSubMenu.Controls.Add(btnReportesCursos);
+            panelSubMenu.Controls.Add(btnReportesRendimientoDocente);
+            panelSubMenu.Controls.Add(btnReportesRendimientoAlumnos);
             panelSubMenu.Controls.Add(btnABMUsuarios);
             panelSubMenu.Controls.Add(btnABMPlanes);
             panelSubMenu.Controls.Add(btnABMPersonas);
@@ -276,47 +276,47 @@ namespace UI.Desktop
             panelSubMenu.TabIndex = 3;
             panelSubMenu.Visible = false;
             // 
-            // btnReportesPlanes
+            // btnReportesRendimientoDocente
             // 
-            btnReportesPlanes.AutoSize = true;
-            btnReportesPlanes.Dock = DockStyle.Top;
-            btnReportesPlanes.FlatAppearance.BorderSize = 0;
-            btnReportesPlanes.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnReportesPlanes.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
-            btnReportesPlanes.FlatStyle = FlatStyle.Flat;
-            btnReportesPlanes.Font = new Font("Segoe UI", 9F);
-            btnReportesPlanes.ForeColor = Color.White;
-            btnReportesPlanes.Location = new Point(0, 468);
-            btnReportesPlanes.Margin = new Padding(3, 4, 3, 4);
-            btnReportesPlanes.Name = "btnReportesPlanes";
-            btnReportesPlanes.Padding = new Padding(15, 8, 15, 8);
-            btnReportesPlanes.Size = new Size(200, 52);
-            btnReportesPlanes.TabIndex = 9;
-            btnReportesPlanes.Text = "Reportes Planes";
-            btnReportesPlanes.TextAlign = ContentAlignment.MiddleLeft;
-            btnReportesPlanes.Visible = false;
-            btnReportesPlanes.Click += btnReportesPlanes_Click;
+            btnReportesRendimientoDocente.AutoSize = true;
+            btnReportesRendimientoDocente.Dock = DockStyle.Top;
+            btnReportesRendimientoDocente.FlatAppearance.BorderSize = 0;
+            btnReportesRendimientoDocente.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
+            btnReportesRendimientoDocente.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
+            btnReportesRendimientoDocente.FlatStyle = FlatStyle.Flat;
+            btnReportesRendimientoDocente.Font = new Font("Segoe UI", 9F);
+            btnReportesRendimientoDocente.ForeColor = Color.White;
+            btnReportesRendimientoDocente.Location = new Point(0, 468);
+            btnReportesRendimientoDocente.Margin = new Padding(3, 4, 3, 4);
+            btnReportesRendimientoDocente.Name = "btnReportesRendimientoDocente";
+            btnReportesRendimientoDocente.Padding = new Padding(15, 8, 15, 8);
+            btnReportesRendimientoDocente.Size = new Size(200, 52);
+            btnReportesRendimientoDocente.TabIndex = 9;
+            btnReportesRendimientoDocente.Text = "Rendimiento Docente";
+            btnReportesRendimientoDocente.TextAlign = ContentAlignment.MiddleLeft;
+            btnReportesRendimientoDocente.Visible = false;
+            btnReportesRendimientoDocente.Click += btnReportesRendimientoDocente_Click;
             // 
-            // btnReportesCursos
+            // btnReportesRendimientoAlumnos
             // 
-            btnReportesCursos.AutoSize = true;
-            btnReportesCursos.Dock = DockStyle.Top;
-            btnReportesCursos.FlatAppearance.BorderSize = 0;
-            btnReportesCursos.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnReportesCursos.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
-            btnReportesCursos.FlatStyle = FlatStyle.Flat;
-            btnReportesCursos.Font = new Font("Segoe UI", 9F);
-            btnReportesCursos.ForeColor = Color.White;
-            btnReportesCursos.Location = new Point(0, 416);
-            btnReportesCursos.Margin = new Padding(3, 4, 3, 4);
-            btnReportesCursos.Name = "btnReportesCursos";
-            btnReportesCursos.Padding = new Padding(15, 8, 15, 8);
-            btnReportesCursos.Size = new Size(200, 52);
-            btnReportesCursos.TabIndex = 8;
-            btnReportesCursos.Text = "Reportes Cursos";
-            btnReportesCursos.TextAlign = ContentAlignment.MiddleLeft;
-            btnReportesCursos.Visible = false;
-            btnReportesCursos.Click += btnReportesCursos_Click;
+            btnReportesRendimientoAlumnos.AutoSize = true;
+            btnReportesRendimientoAlumnos.Dock = DockStyle.Top;
+            btnReportesRendimientoAlumnos.FlatAppearance.BorderSize = 0;
+            btnReportesRendimientoAlumnos.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
+            btnReportesRendimientoAlumnos.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
+            btnReportesRendimientoAlumnos.FlatStyle = FlatStyle.Flat;
+            btnReportesRendimientoAlumnos.Font = new Font("Segoe UI", 9F);
+            btnReportesRendimientoAlumnos.ForeColor = Color.White;
+            btnReportesRendimientoAlumnos.Location = new Point(0, 416);
+            btnReportesRendimientoAlumnos.Margin = new Padding(3, 4, 3, 4);
+            btnReportesRendimientoAlumnos.Name = "btnReportesRendimientoAlumnos";
+            btnReportesRendimientoAlumnos.Padding = new Padding(15, 8, 15, 8);
+            btnReportesRendimientoAlumnos.Size = new Size(200, 52);
+            btnReportesRendimientoAlumnos.TabIndex = 8;
+            btnReportesRendimientoAlumnos.Text = "Rendimiento Alumnos";
+            btnReportesRendimientoAlumnos.TextAlign = ContentAlignment.MiddleLeft;
+            btnReportesRendimientoAlumnos.Visible = false;
+            btnReportesRendimientoAlumnos.Click += btnReportesRendimientoAlumnos_Click;
             // 
             // btnABMUsuarios
             // 
@@ -578,8 +578,8 @@ namespace UI.Desktop
         private System.Windows.Forms.Label lblTitulo;
         private System.Windows.Forms.Panel panelFormLoader;
         private System.Windows.Forms.Panel panelSubMenu;
-        private System.Windows.Forms.Button btnReportesPlanes;
-        private System.Windows.Forms.Button btnReportesCursos;
+        private System.Windows.Forms.Button btnReportesRendimientoDocente;
+        private System.Windows.Forms.Button btnReportesRendimientoAlumnos;
         private System.Windows.Forms.Button btnABMUsuarios;
         private System.Windows.Forms.Button btnABMPlanes;
         private System.Windows.Forms.Button btnABMPersonas;

@@ -7,6 +7,7 @@ namespace UI.Desktop
     public partial class Main : ApplicationForm
     {
         private readonly PersonaServicio _personaServicio;
+        private readonly HashSet<string> _botonesPermitidos = new();
 
         public Main()
         {
@@ -29,21 +30,32 @@ namespace UI.Desktop
 
             var tipo = Login.UsuarioActual?.Persona?.Tipo;
             btnAdministracion.Visible = tipo == Persona.TiposPersonas.Administrador;
-            btnReportes.Visible = tipo == Persona.TiposPersonas.Administrador;
+            btnReportes.Visible = tipo != null;
 
             switch (tipo)
             {
                 case Persona.TiposPersonas.Administrador:
                     btnInscripcion.Visible = true;
                     btnNotas.Visible = true;
+                    btnReportesRendimientoDocente.Visible = true;
+                    btnReportesRendimientoAlumnos.Visible = true;
+                    _botonesPermitidos.Add(btnReportesRendimientoDocente.Name);
+                    _botonesPermitidos.Add(btnReportesRendimientoAlumnos.Name);
                     break;
                 case Persona.TiposPersonas.Alumno:
                     btnInscripcion.Visible = true;
                     btnNotas.Visible = false;
+                    btnReportesRendimientoDocente.Visible = false;
+                    btnReportesRendimientoAlumnos.Visible = true;
+                    _botonesPermitidos.Add(btnReportesRendimientoAlumnos.Name);
                     break;
                 case Persona.TiposPersonas.Docente:
                     btnInscripcion.Visible = false;
                     btnNotas.Visible = true;
+                    btnReportesRendimientoDocente.Visible = true;
+                    btnReportesRendimientoAlumnos.Visible = true;
+                    _botonesPermitidos.Add(btnReportesRendimientoDocente.Name);
+                    _botonesPermitidos.Add(btnReportesRendimientoAlumnos.Name);
                     break;
             }
         }
@@ -77,7 +89,7 @@ namespace UI.Desktop
             foreach (Control c in panelSubMenu.Controls)
             {
                 if (c is Button btn)
-                    btn.Visible = btn.Name.Contains(category);
+                    btn.Visible = btn.Name.Contains(category) && _botonesPermitidos.Contains(btn.Name);
             }
 
             int height = 0;
@@ -139,14 +151,14 @@ namespace UI.Desktop
             OpenForm(new Forms.Usuarios.Usuarios());
         }
 
-        private void btnReportesCursos_Click(object sender, EventArgs e)
+        private void btnReportesRendimientoDocente_Click(object sender, EventArgs e)
         {
-            OpenForm(new RViewerCursos());
+            OpenForm(new ReporteViewer(ModoReporte.RendimientoDocente));
         }
 
-        private void btnReportesPlanes_Click(object sender, EventArgs e)
+        private void btnReportesRendimientoAlumnos_Click(object sender, EventArgs e)
         {
-            OpenForm(new RViewerPlanes());
+            OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos));
         }
 
         private void btnInscripcion_Click(object sender, EventArgs e)

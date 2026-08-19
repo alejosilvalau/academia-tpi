@@ -1,0 +1,124 @@
+@page "/reportes/rendimiento-alumnos"
+@inject ReporteServicio ReporteServicio
+@inject UI.Web.Services.SesionService Sesion
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+
+<div class="md-card">
+    <div class="md-card-header">Reporte de Rendimiento de Alumnos</div>
+
+    @if (!string.IsNullOrEmpty(mensaje))
+    {
+        <div class="md-message @(mensaje.Contains("Error") ? "md-message-error" : "md-message-success")">@mensaje</div>
+    }
+
+    <div class="md-form-row">
+        @if (Sesion.IsAdmin)
+        {
+            <div class="md-form-group">
+                <label class="md-label">Alumno</label>
+                <select class="md-select" @bind="alumnoId">
+                    <option value="0">-- Seleccione un alumno --</option>
+                    @if (alumnos != null)
+                    {
+                        @foreach (DataRow row in alumnos.Rows)
+                        {
+                            <option value="@row["ID"]">@row["Apellido"], @row["Nombre"] (Legajo @row["Legajo"])</option>
+                        }
+                    }
+                </select>
+            </div>
+        }
+        <div class="md-form-group" style="display:flex;align-items:flex-end;gap:8px;">
+            <button class="md-btn md-btn-accent" @onclick="GenerarReporte" disabled="@(Sesion.IsAdmin && alumnoId == 0)">
+                Generar Reporte
+            </button>
+            <button class="md-btn" @onclick="DescargarPdf" disabled="@(pdfBase64 == null)">
+                Descargar PDF
+            </button>
+        </div>
+    </div>
+
+    @if (pdfBase64 != null)
+    {
+        <div class="md-card" style="border:1px solid var(--border);margin-top:16px;padding:8px;">
+            <iframe id="pdfFrame" style="width:100%;height:80vh;border:0;"></iframe>
+        </div>
+    }
+</div>
+
+@code {
+    private DataTable? alumnos;
+    private int alumnoId;
+    private string mensaje = string.Empty;
+    private string? pdfBase64;
+
+    protected override void OnInitialized()
+    {
+        if (!Sesion.IsLoggedIn)
+        {
+            Navigation.NavigateTo("/login");
+            return;
+        }
+
+        try
+        {
+            if (Sesion.IsAdmin)
+            {
+                alumnos = ReporteServicio.ObtenerAlumnos();
+            }
+        }
+        catch (Exception ex)
+        {
+            mensaje = "Error al cargar alumnos: " + ex.Message;
+        }
+    }
+
+    private async Task GenerarReporte()
+    {
+        try
+        {
+            byte[] pdfBytes;
+
+            if (Sesion.IsAdmin)
+            {
+                if (alumnoId == 0)
+                {
+                    mensaje = "Seleccione un alumno.";
+                    return;
+                }
+                var report = ReporteServicio.GenerarReporteRendimientoAlumno(alumnoId);
+                pdfBytes = ReporteServicio.ExportarPdf(report);
+            }
+            else if (Sesion.IsDocente)
+            {
+                int docenteId = Sesion.UsuarioActual!.Persona!.ID;
+                var report = ReporteServicio.GenerarReporteRendimientoAlumnosDeDocente(docenteId);
+                pdfBytes = ReporteServicio.ExportarPdf(report);
+            }
+            else
+            {
+                int alumnoSelf = Sesion.UsuarioActual!.Persona!.ID;
+                var report = ReporteServicio.GenerarReporteRendimientoAlumno(alumnoSelf);
+                pdfBytes = ReporteServicio.ExportarPdf(report);
+            }
+
+            pdfBase64 = Convert.ToBase64String(pdfBytes);
+            await JS.InvokeVoidAsync("setIframeSrc", "pdfFrame", pdfBase64, "application/pdf");
+            mensaje = "Reporte generado correctamente.";
+        }
+        catch (Exception ex)
+        {
+            mensaje = "Error al generar reporte: " + ex.Message;
+        }
+    }
+
+    private async Task DescargarPdf()
+    {
+        if (pdfBase64 == null) return;
+        await JS.InvokeVoidAsync("downloadFile",
+            $"ReporteRendimientoAlumnos_{DateTime.Now:yyyyMMdd_HHmm}.pdf",
+            "application/pdf",
+            pdfBase64);
+    }
+}

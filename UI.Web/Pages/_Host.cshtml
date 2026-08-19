@@ -50,6 +50,24 @@
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         };
+
+        window.setIframeSrc = (iframeId, base64, contentType) => {
+            const iframe = document.getElementById(iframeId);
+            if (!iframe) return;
+            const byteCharacters = atob(base64);
+            const byteNumbers = new Array(byteCharacters.length);
+            for (let i = 0; i < byteCharacters.length; i++) {
+                byteNumbers[i] = byteCharacters.charCodeAt(i);
+            }
+            const byteArray = new Uint8Array(byteNumbers);
+            const blob = new Blob([byteArray], { type: contentType });
+            const url = URL.createObjectURL(blob);
+            if (iframe.dataset.blobUrl) {
+                URL.revokeObjectURL(iframe.dataset.blobUrl);
+            }
+            iframe.dataset.blobUrl = url;
+            iframe.src = url;
+        };
     </script>
 </body>
 </html>
