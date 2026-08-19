@@ -30,6 +30,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
         {
             try
             {
+                dgvAlumnos.DataSource = null;
                 if (cbxCursos.SelectedItem is DocenteCurso dc)
                     dgvAlumnos.DataSource = _inscripcionServicio.GetByCurso(dc.CursoId);
             }

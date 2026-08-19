@@ -20,7 +20,11 @@ namespace UI.Desktop.Forms.Usuarios
 
         public override void Listar()
         {
-            try { dgvUsuarios.DataSource = _servicio.GetAll(); }
+            try
+            {
+                dgvUsuarios.DataSource = null;
+                dgvUsuarios.DataSource = _servicio.GetAll();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

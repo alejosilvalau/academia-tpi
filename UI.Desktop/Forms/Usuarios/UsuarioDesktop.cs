@@ -59,7 +59,7 @@ namespace UI.Desktop.Forms.Usuarios
             _usuario.NombreUsuario = txtUsuario.Text;
             _usuario.Clave = txtClave.Text;
             _usuario.Habilitado = chkHabilitado.Checked;
-            if (cbxPersona.SelectedItem is Persona pers) _usuario.Persona = pers;
+            if (cbxPersona.SelectedValue is int personaId) _usuario.PersonaId = personaId;
         }
 
         public override void GuardarCambios()

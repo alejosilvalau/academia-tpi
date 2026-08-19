@@ -20,7 +20,11 @@ namespace UI.Desktop.Forms.Dictados
 
         public override void Listar()
         {
-            try { dgvDocentes.DataSource = _servicio.GetAll(); }
+            try
+            {
+                dgvDocentes.DataSource = null;
+                dgvDocentes.DataSource = _servicio.GetAll();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 

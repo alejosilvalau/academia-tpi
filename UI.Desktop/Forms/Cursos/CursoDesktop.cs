@@ -64,8 +64,8 @@ namespace UI.Desktop.Forms.Cursos
             int.TryParse(txtCupo.Text, out int cupo);
             _curso.AnioCalendario = anio;
             _curso.Cupo = cupo;
-            if (cbxMateria.SelectedItem is Materia mat) _curso.Materia = mat;
-            if (cbxComision.SelectedItem is Comision com) _curso.Comision = com;
+            if (cbxMateria.SelectedValue is int materiaId) _curso.MateriaId = materiaId;
+            if (cbxComision.SelectedValue is int comisionId) _curso.ComisionId = comisionId;
         }
 
         public override void GuardarCambios()

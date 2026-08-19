@@ -40,5 +40,12 @@ namespace Repositorio
         {
             context.SaveChanges();
         }
+
+        public void Detach(T entity)
+        {
+            var entry = context.Entry(entity);
+            if (entry.State != EntityState.Detached)
+                entry.State = EntityState.Detached;
+        }
     }
 }

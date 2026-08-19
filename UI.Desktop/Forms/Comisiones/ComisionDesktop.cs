@@ -57,7 +57,7 @@ namespace UI.Desktop.Forms.Comisiones
             _comision.Descripcion = txtDescripcion.Text;
             int.TryParse(txtAnioEspecialidad.Text, out int anio);
             _comision.AnioEspecialidad = anio;
-            if (cbxPlan.SelectedItem is Plan plan) _comision.Plan = plan;
+            if (cbxPlan.SelectedValue is int planId) _comision.PlanId = planId;
         }
 
         public override void GuardarCambios()

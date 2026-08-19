@@ -20,7 +20,11 @@ namespace UI.Desktop.Forms.Comisiones
 
         public override void Listar()
         {
-            try { dgvComisiones.DataSource = _servicio.GetAll(); }
+            try
+            {
+                dgvComisiones.DataSource = null;
+                dgvComisiones.DataSource = _servicio.GetAll();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 

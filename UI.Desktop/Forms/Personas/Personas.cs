@@ -34,6 +34,7 @@ namespace UI.Desktop.Forms.Personas
         {
             try
             {
+                dgvPersonas.DataSource = null;
                 if (_filtroTipo.HasValue)
                     dgvPersonas.DataSource = _servicio.GetByTipo(_filtroTipo.Value);
                 else

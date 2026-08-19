@@ -20,7 +20,11 @@ namespace UI.Desktop.Forms.Cursos
 
         public override void Listar()
         {
-            try { dgvCursos.DataSource = _servicio.GetAll(); }
+            try
+            {
+                dgvCursos.DataSource = null;
+                dgvCursos.DataSource = _servicio.GetAll();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 

@@ -61,7 +61,7 @@ namespace UI.Desktop.Forms.Materias
             _materia.HorasSemanales = hsSem;
             int.TryParse(txtHsTotales.Text, out int hsTot);
             _materia.HorasTotales = hsTot;
-            if (cbxPlan.SelectedItem is Plan plan) _materia.Plan = plan;
+            if (cbxPlan.SelectedValue is int planId) _materia.PlanId = planId;
         }
 
         public override void GuardarCambios()

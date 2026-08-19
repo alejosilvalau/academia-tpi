@@ -73,7 +73,7 @@ namespace UI.Desktop.Forms.Personas
             _persona.Telefono = txtTelefono.Text;
             _persona.FechaNacimiento = dtpFechaNacimiento.Value;
             if (cbxTipo.SelectedItem is Persona.TiposPersonas tipo) _persona.Tipo = tipo;
-            if (cbxPlan.SelectedItem is Plan plan) _persona.Plan = plan;
+            if (cbxPlan.SelectedValue is int planId) _persona.PlanId = planId;
         }
 
         public override void GuardarCambios()

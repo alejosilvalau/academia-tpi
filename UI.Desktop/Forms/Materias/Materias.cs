@@ -20,7 +20,11 @@ namespace UI.Desktop.Forms.Materias
 
         public override void Listar()
         {
-            try { dgvMaterias.DataSource = _servicio.GetAll(); }
+            try
+            {
+                dgvMaterias.DataSource = null;
+                dgvMaterias.DataSource = _servicio.GetAll();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 

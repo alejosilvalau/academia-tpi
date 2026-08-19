@@ -55,7 +55,6 @@ namespace UI.Desktop
             form.Dock = DockStyle.Fill;
             form.FormBorderStyle = FormBorderStyle.None;
             form.TopLevel = false;
-            form.TopMost = true;
             panelFormLoader.Controls.Add(form);
             lblTitulo.Text = form.Text;
             form.Show();

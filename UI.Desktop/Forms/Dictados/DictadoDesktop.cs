@@ -61,8 +61,8 @@ namespace UI.Desktop.Forms.Dictados
         {
             if (Modo == ModoForm.Alta) _dictado = new DocenteCurso();
             if (_dictado == null) return;
-            if (cbxCursos.SelectedItem is Curso cur) _dictado.Curso = cur;
-            if (cbxDocentes.SelectedItem is Persona doc) _dictado.Docente = doc;
+            if (cbxCursos.SelectedValue is int cursoId) _dictado.CursoId = cursoId;
+            if (cbxDocentes.SelectedValue is int docenteId) _dictado.DocenteId = docenteId;
             if (cbxTiposCargos.SelectedItem is DocenteCurso.TiposCargos cargo) _dictado.Cargo = cargo;
         }
 

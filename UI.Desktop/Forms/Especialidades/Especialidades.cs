@@ -20,7 +20,11 @@ namespace UI.Desktop.Forms.Especialidades
 
         public override void Listar()
         {
-            try { dgvEspecialidades.DataSource = _servicio.GetAll(); }
+            try
+            {
+                dgvEspecialidades.DataSource = null;
+                dgvEspecialidades.DataSource = _servicio.GetAll();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 

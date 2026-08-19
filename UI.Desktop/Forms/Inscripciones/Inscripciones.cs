@@ -28,7 +28,11 @@ namespace UI.Desktop.Forms.Inscripciones
 
         public override void Listar()
         {
-            try { dgvInscripciones.DataSource = _servicio.GetByAlumno(_personaActual.ID); }
+            try
+            {
+                dgvInscripciones.DataSource = null;
+                dgvInscripciones.DataSource = _servicio.GetByAlumno(_personaActual.ID);
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

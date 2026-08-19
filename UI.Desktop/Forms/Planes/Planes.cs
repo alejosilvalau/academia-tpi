@@ -20,7 +20,11 @@ namespace UI.Desktop.Forms.Planes
 
         public override void Listar()
         {
-            try { dgvPlanes.DataSource = _servicio.GetAll(); }
+            try
+            {
+                dgvPlanes.DataSource = null;
+                dgvPlanes.DataSource = _servicio.GetAll();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 
