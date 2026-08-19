@@ -58,7 +58,7 @@ namespace UI.Desktop.Forms.Especialidades
         {
             if (!Validaciones.FormularioCompleto(new List<string> { txtDescripcion.Text }))
             {
-                Notificar("Informacion invalida", "Complete los campos para continuar.");
+                Notificar("Información inválida", "Complete los campos para continuar.");
                 return false;
             }
             return true;

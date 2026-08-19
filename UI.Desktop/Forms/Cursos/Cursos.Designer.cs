@@ -127,7 +127,7 @@ namespace UI.Desktop.Forms.Cursos
             // Descripcion
             //
             this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
             this.Descripcion.MinimumWidth = 150;
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;
@@ -135,7 +135,7 @@ namespace UI.Desktop.Forms.Cursos
             // AnioCalendario
             //
             this.AnioCalendario.DataPropertyName = "AnioCalendario";
-            this.AnioCalendario.HeaderText = "Anio Calendario";
+            this.AnioCalendario.HeaderText = "Año Calendario";
             this.AnioCalendario.MinimumWidth = 100;
             this.AnioCalendario.Name = "AnioCalendario";
             this.AnioCalendario.ReadOnly = true;

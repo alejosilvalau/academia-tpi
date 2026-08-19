@@ -120,7 +120,7 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
             this.Descripcion.MinimumWidth = 200;
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;

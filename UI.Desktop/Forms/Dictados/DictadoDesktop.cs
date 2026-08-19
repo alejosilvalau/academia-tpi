@@ -67,7 +67,7 @@ namespace UI.Desktop.Forms.Dictados
         public override bool Validar()
         {
             if (cbxCursos.SelectedValue == null || cbxDocentes.SelectedValue == null || cbxTiposCargos.SelectedValue == null)
-            { Notificar("Informacion invalida", "Complete los campos para continuar."); return false; }
+            { Notificar("Información inválida", "Complete los campos para continuar."); return false; }
             return true;
         }
 

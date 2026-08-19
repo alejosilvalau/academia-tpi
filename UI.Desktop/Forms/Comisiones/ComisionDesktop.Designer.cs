@@ -117,7 +117,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.lblAnioEspecialidad.Name = "lblAnioEspecialidad";
             this.lblAnioEspecialidad.Size = new System.Drawing.Size(120, 19);
             this.lblAnioEspecialidad.TabIndex = 4;
-            this.lblAnioEspecialidad.Text = "Anio Especialidad:";
+            this.lblAnioEspecialidad.Text = "Año Especialidad:";
             //
             // txtAnioEspecialidad
             //

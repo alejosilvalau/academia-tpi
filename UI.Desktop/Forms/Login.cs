@@ -42,17 +42,17 @@ namespace UI.Desktop
             }
             else
             {
-                if (txt.Text == "Contrasena") { txt.Text = ""; txt.ForeColor = MaterialColors.TextPrimary; txt.PasswordChar = '*'; }
-                else if (txt.Text == "") { txt.ForeColor = MaterialColors.TextSecondary; txt.Text = "Contrasena"; txt.PasswordChar = '\0'; }
+                if (txt.Text == "Contraseña") { txt.Text = ""; txt.ForeColor = MaterialColors.TextPrimary; txt.PasswordChar = '*'; }
+                else if (txt.Text == "") { txt.ForeColor = MaterialColors.TextSecondary; txt.Text = "Contraseña"; txt.PasswordChar = '\0'; }
             }
         }
 
         public override bool Validar()
         {
             if (string.IsNullOrEmpty(txtUsuario.Text) || txtUsuario.Text == "Usuario" ||
-                string.IsNullOrEmpty(txtClave.Text) || txtClave.Text == "Contrasena")
+                string.IsNullOrEmpty(txtClave.Text) || txtClave.Text == "Contraseña")
             {
-                Notificar("Informacion invalida", "Complete todos los campos para continuar.",
+                Notificar("Información inválida", "Complete todos los campos para continuar.",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
@@ -60,7 +60,7 @@ namespace UI.Desktop
             UsuarioActual = _usuarioServicio.Login(txtUsuario.Text, txtClave.Text);
             if (UsuarioActual == null)
             {
-                Notificar("Informacion invalida", "Usuario y/o contrasena incorrectos.",
+                Notificar("Información inválida", "Usuario y/o contraseña incorrectos.",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }

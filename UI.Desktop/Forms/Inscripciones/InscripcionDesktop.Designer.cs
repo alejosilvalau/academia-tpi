@@ -84,7 +84,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.lblCondicion.Name = "lblCondicion";
             this.lblCondicion.Size = new System.Drawing.Size(64, 15);
             this.lblCondicion.TabIndex = 2;
-            this.lblCondicion.Text = "Condicion";
+            this.lblCondicion.Text = "Condición";
             //
             // cbxCondicion
             //
@@ -148,7 +148,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
             this.Descripcion.MinimumWidth = 200;
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;
@@ -156,7 +156,7 @@ namespace UI.Desktop.Forms.Inscripciones
             // AnioCalendario
             //
             this.AnioCalendario.DataPropertyName = "AnioCalendario";
-            this.AnioCalendario.HeaderText = "Anio";
+            this.AnioCalendario.HeaderText = "Año";
             this.AnioCalendario.MinimumWidth = 80;
             this.AnioCalendario.Name = "AnioCalendario";
             this.AnioCalendario.ReadOnly = true;
@@ -244,7 +244,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "InscripcionDesktop";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Inscripcion";
+            this.Text = "Inscripción";
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCursos)).EndInit();

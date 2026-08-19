@@ -40,7 +40,7 @@ namespace UI.Desktop
         {
             if (dgvSelected.SelectedRows.Count != 1)
             {
-                Notificar("Accion invalida", "Por favor seleccione una fila.",
+                Notificar("Acción inválida", "Por favor seleccione una fila.",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }

@@ -77,7 +77,7 @@ namespace UI.Desktop.Forms.Personas
         public override bool Validar()
         {
             if (!Validaciones.FormularioCompleto(new List<string> { txtNombre.Text, txtApellido.Text }))
-            { Notificar("Informacion invalida", "Complete los campos para continuar."); return false; }
+            { Notificar("Información inválida", "Complete los campos para continuar."); return false; }
             return true;
         }
 

@@ -217,7 +217,7 @@ namespace UI.Desktop.Forms.Personas
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(134, 45);
             this.lblTelefono.TabIndex = 10;
-            this.lblTelefono.Text = "Telefono";
+            this.lblTelefono.Text = "Teléfono";
             this.lblTelefono.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtTelefono
@@ -241,7 +241,7 @@ namespace UI.Desktop.Forms.Personas
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(134, 45);
             this.lblDireccion.TabIndex = 12;
-            this.lblDireccion.Text = "Direccion";
+            this.lblDireccion.Text = "Dirección";
             this.lblDireccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // txtDireccion

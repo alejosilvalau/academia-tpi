@@ -126,7 +126,7 @@ namespace UI.Desktop.Forms.Comisiones
             //
             this.colDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDescripcion.DataPropertyName = "Descripcion";
-            this.colDescripcion.HeaderText = "Descripcion";
+            this.colDescripcion.HeaderText = "Descripción";
             this.colDescripcion.Name = "colDescripcion";
             this.colDescripcion.ReadOnly = true;
             //
@@ -134,7 +134,7 @@ namespace UI.Desktop.Forms.Comisiones
             //
             this.colAnioEspecialidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colAnioEspecialidad.DataPropertyName = "AnioEspecialidad";
-            this.colAnioEspecialidad.HeaderText = "Anio Especialidad";
+            this.colAnioEspecialidad.HeaderText = "Año Especialidad";
             this.colAnioEspecialidad.Name = "colAnioEspecialidad";
             this.colAnioEspecialidad.ReadOnly = true;
             //

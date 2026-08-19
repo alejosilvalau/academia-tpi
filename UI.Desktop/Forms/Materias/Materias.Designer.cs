@@ -128,7 +128,7 @@ namespace UI.Desktop.Forms.Materias
             //
             this.colDescripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.colDescripcion.DataPropertyName = "Descripcion";
-            this.colDescripcion.HeaderText = "Descripcion";
+            this.colDescripcion.HeaderText = "Descripción";
             this.colDescripcion.Name = "colDescripcion";
             this.colDescripcion.ReadOnly = true;
             //

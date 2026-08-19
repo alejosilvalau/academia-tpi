@@ -104,7 +104,7 @@ namespace UI.Desktop.Forms.Cursos
             lblAnioCalendario.Name = "lblAnioCalendario";
             lblAnioCalendario.Size = new Size(114, 56);
             lblAnioCalendario.TabIndex = 2;
-            lblAnioCalendario.Text = "Anio Calendario";
+            lblAnioCalendario.Text = "Año Calendario";
             lblAnioCalendario.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtAnioCalendario
@@ -129,7 +129,7 @@ namespace UI.Desktop.Forms.Cursos
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(114, 56);
             lblDescripcion.TabIndex = 4;
-            lblDescripcion.Text = "Descripcion";
+            lblDescripcion.Text = "Descripción";
             lblDescripcion.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // txtDescripcion
@@ -208,7 +208,7 @@ namespace UI.Desktop.Forms.Cursos
             lblComision.Name = "lblComision";
             lblComision.Size = new Size(114, 107);
             lblComision.TabIndex = 10;
-            lblComision.Text = "Comision";
+            lblComision.Text = "Comisión";
             lblComision.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // cbxComision

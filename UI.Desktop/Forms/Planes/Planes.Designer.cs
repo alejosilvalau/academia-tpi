@@ -122,7 +122,7 @@ namespace UI.Desktop.Forms.Planes
             // 
             this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripcion";
+            this.Descripcion.HeaderText = "Descripción";
             this.Descripcion.MinimumWidth = 150;
             this.Descripcion.Name = "Descripcion";
             this.Descripcion.ReadOnly = true;

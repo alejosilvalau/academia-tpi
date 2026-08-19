@@ -65,7 +65,7 @@ namespace UI.Desktop.Forms.Usuarios
         public override bool Validar()
         {
             if (!Validaciones.FormularioCompleto(new List<string> { txtUsuario.Text, txtClave.Text }))
-            { Notificar("Informacion invalida", "Complete los campos para continuar."); return false; }
+            { Notificar("Información inválida", "Complete los campos para continuar."); return false; }
             return true;
         }
 

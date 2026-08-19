@@ -90,7 +90,7 @@ namespace UI.Desktop
             lblSubtitulo.Name = "lblSubtitulo";
             lblSubtitulo.Size = new Size(274, 38);
             lblSubtitulo.TabIndex = 1;
-            lblSubtitulo.Text = "Sistema de Gestion Academica";
+            lblSubtitulo.Text = "Sistema de Gestión Académica";
             lblSubtitulo.TextAlign = ContentAlignment.MiddleCenter;
             lblSubtitulo.Click += lblSubtitulo_Click;
             // 
@@ -171,7 +171,7 @@ namespace UI.Desktop
             txtClave.Name = "txtClave";
             txtClave.Size = new Size(274, 32);
             txtClave.TabIndex = 4;
-            txtClave.Text = "Contrasena";
+            txtClave.Text = "Contraseña";
             txtClave.Enter += txt_EnterLeave;
             txtClave.Leave += txt_EnterLeave;
             // 
@@ -190,7 +190,7 @@ namespace UI.Desktop
             btnIniciarSesion.Name = "btnIniciarSesion";
             btnIniciarSesion.Size = new Size(274, 48);
             btnIniciarSesion.TabIndex = 5;
-            btnIniciarSesion.Text = "Iniciar Sesion";
+            btnIniciarSesion.Text = "Iniciar Sesión";
             btnIniciarSesion.UseVisualStyleBackColor = false;
             btnIniciarSesion.Click += btnIniciarSesion_Click;
             // 

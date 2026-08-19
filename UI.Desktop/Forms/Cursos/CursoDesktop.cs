@@ -71,7 +71,7 @@ namespace UI.Desktop.Forms.Cursos
         public override bool Validar()
         {
             if (!Validaciones.FormularioCompleto(new List<string> { txtAnioCalendario.Text, txtCupo.Text }))
-            { Notificar("Informacion invalida", "Complete los campos para continuar."); return false; }
+            { Notificar("Información inválida", "Complete los campos para continuar."); return false; }
             return true;
         }
 

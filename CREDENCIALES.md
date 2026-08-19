@@ -2,7 +2,7 @@
 
 ## Usuarios para probar
 
-| Usuario   | Contrasena | Tipo          | Acceso                |
+| Usuario   | Contraseña | Tipo          | Acceso                |
 |-----------|------------|---------------|-----------------------|
 | lferreyra | admin123   | Administrador | Todo (ABM + Reportes) |
 | vrios     | doc2024    | Docente       | Registrar Notas       |
@@ -14,13 +14,13 @@
 
 ### Administrador
 
-| Usuario   | Contrasena | Nombre             |
+| Usuario   | Contraseña | Nombre             |
 |-----------|------------|--------------------|
 | lferreyra | admin123   | Luciano Ferreyra   |
 
 ### Docentes
 
-| Usuario | Contrasena | Nombre             |
+| Usuario | Contraseña | Nombre             |
 |---------|------------|--------------------|
 | vrios   | doc2024    | Valentina Rios     |
 | mherrera| doc2024    | Matias Herrera     |
@@ -29,7 +29,7 @@
 
 ### Alumnos
 
-| Usuario    | Contrasena | Nombre              | Legajo |
+| Usuario    | Contraseña | Nombre              | Legajo |
 |------------|------------|---------------------|--------|
 | clopez     | alu2024    | Camila Lopez        | 48102  |
 | tgimenez   | alu2024    | Tomas Gimenez       | 48230  |

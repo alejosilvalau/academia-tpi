@@ -74,7 +74,7 @@ namespace UI.Desktop.Forms.Planes
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(114, 45);
             this.lblDescripcion.TabIndex = 2;
-            this.lblDescripcion.Text = "Descripcion";
+            this.lblDescripcion.Text = "Descripción";
             this.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // lblEspecialidad

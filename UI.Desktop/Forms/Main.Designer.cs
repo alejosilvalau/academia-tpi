@@ -79,7 +79,7 @@ namespace UI.Desktop
             btnCerrarSesion.Padding = new Padding(10);
             btnCerrarSesion.Size = new Size(220, 60);
             btnCerrarSesion.TabIndex = 5;
-            btnCerrarSesion.Text = "  Cerrar Sesion";
+            btnCerrarSesion.Text = "  Cerrar Sesión";
             btnCerrarSesion.UseVisualStyleBackColor = false;
             btnCerrarSesion.Click += btnCerrarSesion_Click;
             // 
@@ -142,7 +142,7 @@ namespace UI.Desktop
             btnInscripcion.Padding = new Padding(10);
             btnInscripcion.Size = new Size(220, 61);
             btnInscripcion.TabIndex = 2;
-            btnInscripcion.Text = "  Inscripcion";
+            btnInscripcion.Text = "  Inscripción";
             btnInscripcion.TextAlign = ContentAlignment.MiddleLeft;
             btnInscripcion.UseVisualStyleBackColor = false;
             btnInscripcion.Click += btnInscripcion_Click;
@@ -163,7 +163,7 @@ namespace UI.Desktop
             btnAdministracion.Padding = new Padding(10);
             btnAdministracion.Size = new Size(220, 61);
             btnAdministracion.TabIndex = 1;
-            btnAdministracion.Text = "  Administracion";
+            btnAdministracion.Text = "  Administración";
             btnAdministracion.TextAlign = ContentAlignment.MiddleLeft;
             btnAdministracion.TextImageRelation = TextImageRelation.TextBeforeImage;
             btnAdministracion.UseVisualStyleBackColor = false;

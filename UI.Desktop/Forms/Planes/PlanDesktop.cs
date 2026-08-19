@@ -75,7 +75,7 @@ namespace UI.Desktop.Forms.Planes
         {
             if (!Validaciones.FormularioCompleto(new List<string> { txtDescripcion.Text }) || cbxEspecialidad.SelectedValue == null)
             {
-                Notificar("Informacion invalida", "Complete los campos para continuar.");
+                Notificar("Información inválida", "Complete los campos para continuar.");
                 return false;
             }
             return true;
