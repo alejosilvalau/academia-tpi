@@ -33,7 +33,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
                 if (cbxCursos.SelectedItem is DocenteCurso dc)
                     dgvAlumnos.DataSource = _inscripcionServicio.GetByCurso(dc.CursoId);
             }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
@@ -43,7 +43,6 @@ namespace UI.Desktop.Forms.RegistrarNotas
             {
                 var alumno = (AlumnoInscripcion)dgvAlumnos.SelectedRows[0].DataBoundItem;
                 int.TryParse(txtNota.Text, out int nota);
-                if (nota < 1 || nota > 10) { Notificar("Error", "La nota debe ser entre 1 y 10."); return; }
                 alumno.Nota = nota;
                 if (nota >= 6) alumno.Condicion = AlumnoInscripcion.Condiciones.Aprobado;
                 else if (nota >= 4) alumno.Condicion = AlumnoInscripcion.Condiciones.Regular;
@@ -51,7 +50,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
                 _inscripcionServicio.Update(alumno);
                 Listar();
             }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         public override bool Validar()

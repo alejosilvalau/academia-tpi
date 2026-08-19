@@ -63,32 +63,28 @@ namespace UI.Desktop.Forms.Inscripciones
 
         public override void GuardarCambios()
         {
-            try
+            if (Modo == ModoForm.Alta)
             {
-                if (Modo == ModoForm.Alta)
-                {
-                    if (!IsRowSelected(dgvCursos)) { Notificar("Error", "Seleccione un curso."); return; }
-                    var curso = (Curso)dgvCursos.SelectedRows[0].DataBoundItem;
-                    _servicio.InscribirAlumno(_personaActual.ID, curso.ID);
-                }
-                else if (Modo == ModoForm.Baja && _inscripcion != null)
-                {
-                    _servicio.Delete(_inscripcion);
-                }
-                else if (Modo == ModoForm.Modificacion && _inscripcion != null)
-                {
-                    MapearADatos();
-                    _servicio.Update(_inscripcion);
-                }
+                if (!IsRowSelected(dgvCursos)) { Notificar("Error", "Seleccione un curso.", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
+                var curso = (Curso)dgvCursos.SelectedRows[0].DataBoundItem;
+                _servicio.InscribirAlumno(_personaActual.ID, curso.ID);
             }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            else if (Modo == ModoForm.Baja && _inscripcion != null)
+            {
+                _servicio.Delete(_inscripcion);
+            }
+            else if (Modo == ModoForm.Modificacion && _inscripcion != null)
+            {
+                MapearADatos();
+                _servicio.Update(_inscripcion);
+            }
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             if (Modo == ModoForm.Alta && !IsRowSelected(dgvCursos)) return;
-            GuardarCambios();
-            Close();
+            try { GuardarCambios(); Close(); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();

@@ -236,14 +236,14 @@ namespace Repositorio
                 new AlumnoInscripcion { ID = 5, AlumnoId = 6, CursoId = 5, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
                 new AlumnoInscripcion { ID = 6, AlumnoId = 6, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 4 },
                 new AlumnoInscripcion { ID = 7, AlumnoId = 7, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 10 },
-                new AlumnoInscripcion { ID = 8, AlumnoId = 7, CursoId = 4, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 6 },
+                new AlumnoInscripcion { ID = 8, AlumnoId = 7, CursoId = 4, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
                 new AlumnoInscripcion { ID = 9, AlumnoId = 8, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 8 },
                 new AlumnoInscripcion { ID = 10, AlumnoId = 8, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
                 new AlumnoInscripcion { ID = 11, AlumnoId = 9, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
                 new AlumnoInscripcion { ID = 12, AlumnoId = 9, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
                 new AlumnoInscripcion { ID = 13, AlumnoId = 12, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
                 new AlumnoInscripcion { ID = 14, AlumnoId = 12, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
-                new AlumnoInscripcion { ID = 15, AlumnoId = 13, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 6 }
+                new AlumnoInscripcion { ID = 15, AlumnoId = 13, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 }
             );
         }
     }

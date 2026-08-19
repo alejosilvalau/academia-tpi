@@ -1,5 +1,6 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using Servicios.Excepciones;
 using Repositorio;
 
 namespace UI.Desktop;
@@ -10,6 +11,13 @@ static class Program
     static void Main()
     {
         ApplicationConfiguration.Initialize();
+
+        Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
+        Application.ThreadException += (_, e) => MostrarFatal(e.Exception);
+        AppDomain.CurrentDomain.UnhandledException += (_, e) =>
+        {
+            if (e.ExceptionObject is Exception ex) MostrarFatal(ex);
+        };
 
         using (var context = new AcademiaContext())
         {
@@ -29,6 +37,24 @@ static class Program
                     Application.Run(main);
                 }
             }
+        }
+    }
+
+    private static void MostrarFatal(Exception? ex)
+    {
+        var mensaje = ex switch
+        {
+            ServicioException sx => sx.Message,
+            null => "Ocurrió un error desconocido.",
+            _ => "Ocurrió un error inesperado en la aplicación. Intente nuevamente."
+        };
+        try
+        {
+            MessageBox.Show(mensaje, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+        }
+        catch
+        {
+            // Si no se puede mostrar el cuadro (por ejemplo, durante el cierre), se ignora.
         }
     }
 

@@ -21,7 +21,7 @@ namespace UI.Desktop.Forms.Usuarios
         public override void Listar()
         {
             try { dgvUsuarios.DataSource = _servicio.GetAll(); }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void tsbAgregar_Click(object sender, EventArgs e)

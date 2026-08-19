@@ -27,5 +27,14 @@ namespace Repositorio
                 .Include(u => u.Persona)
                 .FirstOrDefault(u => u.ID == id);
         }
+
+        public List<Usuario> GetHabilitadosConPersonaAsNoTracking()
+        {
+            return context.Usuarios
+                .AsNoTracking()
+                .Include(u => u.Persona)
+                .Where(u => u.Habilitado)
+                .ToList();
+        }
     }
 }

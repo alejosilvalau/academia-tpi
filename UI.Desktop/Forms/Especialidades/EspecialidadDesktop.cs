@@ -54,35 +54,22 @@ namespace UI.Desktop.Forms.Especialidades
             _especialidad.Descripcion = txtDescripcion.Text;
         }
 
-        public override bool Validar()
-        {
-            if (!Validaciones.FormularioCompleto(new List<string> { txtDescripcion.Text }))
-            {
-                Notificar("Información inválida", "Complete los campos para continuar.");
-                return false;
-            }
-            return true;
-        }
-
         public override void GuardarCambios()
         {
-            try
-            {
-                MapearADatos();
-                if (_especialidad == null) return;
-                if (Modo == ModoForm.Baja)
-                    _servicio.Delete(_especialidad);
-                else if (Modo == ModoForm.Alta)
-                    _servicio.Save(_especialidad);
-                else
-                    _servicio.Update(_especialidad);
-            }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            MapearADatos();
+            if (_especialidad == null) return;
+            if (Modo == ModoForm.Baja)
+                _servicio.Delete(_especialidad);
+            else if (Modo == ModoForm.Alta)
+                _servicio.Save(_especialidad);
+            else
+                _servicio.Update(_especialidad);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Validar()) { GuardarCambios(); Close(); }
+            try { GuardarCambios(); Close(); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();

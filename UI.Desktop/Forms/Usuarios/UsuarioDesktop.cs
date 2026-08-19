@@ -62,28 +62,20 @@ namespace UI.Desktop.Forms.Usuarios
             if (cbxPersona.SelectedItem is Persona pers) _usuario.Persona = pers;
         }
 
-        public override bool Validar()
-        {
-            if (!Validaciones.FormularioCompleto(new List<string> { txtUsuario.Text, txtClave.Text }))
-            { Notificar("Información inválida", "Complete los campos para continuar."); return false; }
-            return true;
-        }
-
         public override void GuardarCambios()
         {
-            try
-            {
-                MapearADatos();
-                if (_usuario == null) return;
-                if (Modo == ModoForm.Baja) _servicio.Delete(_usuario);
-                else if (Modo == ModoForm.Alta) _servicio.Save(_usuario);
-                else _servicio.Update(_usuario);
-            }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            MapearADatos();
+            if (_usuario == null) return;
+            if (Modo == ModoForm.Baja) _servicio.Delete(_usuario);
+            else if (Modo == ModoForm.Alta) _servicio.Save(_usuario);
+            else _servicio.Update(_usuario);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
-        { if (Validar()) { GuardarCambios(); Close(); } }
+        {
+            try { GuardarCambios(); Close(); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();
     }

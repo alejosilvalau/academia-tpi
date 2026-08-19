@@ -61,28 +61,20 @@ namespace UI.Desktop.Forms.Comisiones
             if (cbxPlan.SelectedItem is Plan plan) _comision.Plan = plan;
         }
 
-        public override bool Validar()
-        {
-            if (!Validaciones.FormularioCompleto(new List<string> { txtDescripcion.Text, txtAnioEspecialidad.Text }))
-            { Notificar("Información inválida", "Complete los campos para continuar."); return false; }
-            return true;
-        }
-
         public override void GuardarCambios()
         {
-            try
-            {
-                MapearADatos();
-                if (_comision == null) return;
-                if (Modo == ModoForm.Baja) _servicio.Delete(_comision);
-                else if (Modo == ModoForm.Alta) _servicio.Save(_comision);
-                else _servicio.Update(_comision);
-            }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            MapearADatos();
+            if (_comision == null) return;
+            if (Modo == ModoForm.Baja) _servicio.Delete(_comision);
+            else if (Modo == ModoForm.Alta) _servicio.Save(_comision);
+            else _servicio.Update(_comision);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
-        { if (Validar()) { GuardarCambios(); Close(); } }
+        {
+            try { GuardarCambios(); Close(); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();
     }

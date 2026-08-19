@@ -71,35 +71,22 @@ namespace UI.Desktop.Forms.Planes
             }
         }
 
-        public override bool Validar()
-        {
-            if (!Validaciones.FormularioCompleto(new List<string> { txtDescripcion.Text }) || cbxEspecialidad.SelectedValue == null)
-            {
-                Notificar("Información inválida", "Complete los campos para continuar.");
-                return false;
-            }
-            return true;
-        }
-
         public override void GuardarCambios()
         {
-            try
-            {
-                MapearADatos();
-                if (_plan == null) return;
-                if (Modo == ModoForm.Baja)
-                    _planServicio.Delete(_plan);
-                else if (Modo == ModoForm.Alta)
-                    _planServicio.Save(_plan);
-                else
-                    _planServicio.Update(_plan);
-            }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            MapearADatos();
+            if (_plan == null) return;
+            if (Modo == ModoForm.Baja)
+                _planServicio.Delete(_plan);
+            else if (Modo == ModoForm.Alta)
+                _planServicio.Save(_plan);
+            else
+                _planServicio.Update(_plan);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            if (Validar()) { GuardarCambios(); Close(); }
+            try { GuardarCambios(); Close(); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();

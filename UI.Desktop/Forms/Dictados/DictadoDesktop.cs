@@ -66,28 +66,20 @@ namespace UI.Desktop.Forms.Dictados
             if (cbxTiposCargos.SelectedItem is DocenteCurso.TiposCargos cargo) _dictado.Cargo = cargo;
         }
 
-        public override bool Validar()
-        {
-            if (cbxCursos.SelectedValue == null || cbxDocentes.SelectedValue == null || cbxTiposCargos.SelectedValue == null)
-            { Notificar("Información inválida", "Complete los campos para continuar."); return false; }
-            return true;
-        }
-
         public override void GuardarCambios()
         {
-            try
-            {
-                MapearADatos();
-                if (_dictado == null) return;
-                if (Modo == ModoForm.Baja) _servicio.Delete(_dictado);
-                else if (Modo == ModoForm.Alta) _servicio.AsignarDocente(_dictado.DocenteId, _dictado.CursoId, _dictado.Cargo);
-                else _servicio.Update(_dictado);
-            }
-            catch (Exception ex) { Notificar("Error", ex.Message); }
+            MapearADatos();
+            if (_dictado == null) return;
+            if (Modo == ModoForm.Baja) _servicio.Delete(_dictado);
+            else if (Modo == ModoForm.Alta) _servicio.AsignarDocente(_dictado.DocenteId, _dictado.CursoId, _dictado.Cargo);
+            else _servicio.Update(_dictado);
         }
 
         private void btnAceptar_Click(object sender, EventArgs e)
-        { if (Validar()) { GuardarCambios(); Close(); } }
+        {
+            try { GuardarCambios(); Close(); }
+            catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
+        }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();
     }

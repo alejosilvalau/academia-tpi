@@ -1,9 +1,11 @@
 using Dominio;
 using Repositorio;
+using Servicios.Excepciones;
+using Utils;
 
 namespace Servicios
 {
-    public class PlanServicio
+    public class PlanServicio : ServicioBase
     {
         private PlanRepositorio _repositorio;
 
@@ -29,20 +31,52 @@ namespace Servicios
 
         public void Save(Plan plan)
         {
-            _repositorio.Add(plan);
-            _repositorio.Save();
+            ValidarBasicos(plan);
+            ValidarFormato(plan);
+            EjecutarPersistencia(() =>
+            {
+                _repositorio.Add(plan);
+                _repositorio.Save();
+            }, "No se pudo guardar el plan. Intente nuevamente.");
         }
 
         public void Update(Plan plan)
         {
-            _repositorio.Update(plan);
-            _repositorio.Save();
+            ValidarBasicos(plan);
+            ValidarFormato(plan);
+            EjecutarPersistencia(() =>
+            {
+                _repositorio.Update(plan);
+                _repositorio.Save();
+            }, "No se pudo actualizar el plan. Intente nuevamente.");
         }
 
         public void Delete(Plan plan)
         {
-            _repositorio.Delete(plan);
-            _repositorio.Save();
+            EjecutarPersistencia(() =>
+            {
+                _repositorio.Delete(plan);
+                _repositorio.Save();
+            }, "No se pudo eliminar el plan. Intente nuevamente.");
+        }
+
+        private void ValidarBasicos(Plan plan)
+        {
+            Validar(() =>
+            {
+                if (plan == null)
+                    throw new ArgumentException("Los datos del plan son obligatorios.");
+                Validaciones.AsegurarNoVacio(plan.Descripcion, "Descripción");
+                Validaciones.AsegurarPositivo(plan.EspecialidadId, "Especialidad");
+            });
+        }
+
+        private void ValidarFormato(Plan plan)
+        {
+            Validar(() =>
+            {
+                Validaciones.AsegurarDescripcion(plan.Descripcion, "Descripción");
+            });
         }
     }
 }
