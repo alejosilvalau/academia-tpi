@@ -10,6 +10,7 @@ namespace Repositorio
         public List<Usuario> GetAllConPersona()
         {
             return context.Usuarios
+                .AsNoTracking()
                 .Include(u => u.Persona)
                 .ToList();
         }

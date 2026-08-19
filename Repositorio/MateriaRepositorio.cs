@@ -10,6 +10,7 @@ namespace Repositorio
         public List<Materia> GetAllConPlan()
         {
             return context.Materias
+                .AsNoTracking()
                 .Include(m => m.Plan)
                 .ToList();
         }
@@ -17,6 +18,7 @@ namespace Repositorio
         public List<Materia> GetByPlan(int planId)
         {
             return context.Materias
+                .AsNoTracking()
                 .Where(m => m.PlanId == planId)
                 .Include(m => m.Plan)
                 .ToList();

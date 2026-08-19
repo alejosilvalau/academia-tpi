@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Dictados
             {
                 dgvDocentes.DataSource = null;
                 dgvDocentes.DataSource = _servicio.GetAll();
+                dgvDocentes.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }

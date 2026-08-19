@@ -32,6 +32,7 @@ namespace UI.Desktop.Forms.Inscripciones
             {
                 dgvInscripciones.DataSource = null;
                 dgvInscripciones.DataSource = _servicio.GetByAlumno(_personaActual.ID);
+                dgvInscripciones.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Especialidades
             {
                 dgvEspecialidades.DataSource = null;
                 dgvEspecialidades.DataSource = _servicio.GetAll();
+                dgvEspecialidades.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }

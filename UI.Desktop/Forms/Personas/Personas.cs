@@ -39,6 +39,7 @@ namespace UI.Desktop.Forms.Personas
                     dgvPersonas.DataSource = _servicio.GetByTipo(_filtroTipo.Value);
                 else
                     dgvPersonas.DataSource = _servicio.GetAll();
+                dgvPersonas.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

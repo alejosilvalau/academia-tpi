@@ -10,6 +10,7 @@ namespace Repositorio
         public List<Curso> GetAllConMateriaYComision()
         {
             return context.Cursos
+                .AsNoTracking()
                 .Include(c => c.Materia)
                 .Include(c => c.Comision)
                 .ToList();
@@ -26,6 +27,7 @@ namespace Repositorio
         public List<Curso> GetByMateriaYComision(int materiaId, int comisionId)
         {
             return context.Cursos
+                .AsNoTracking()
                 .Where(c => c.MateriaId == materiaId && c.ComisionId == comisionId)
                 .Include(c => c.Materia)
                 .Include(c => c.Comision)

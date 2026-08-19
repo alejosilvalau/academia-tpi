@@ -10,6 +10,7 @@ namespace Repositorio
         public List<Comision> GetAllConPlan()
         {
             return context.Comisiones
+                .AsNoTracking()
                 .Include(c => c.Plan)
                 .ToList();
         }
@@ -17,6 +18,7 @@ namespace Repositorio
         public List<Comision> GetByPlan(int planId)
         {
             return context.Comisiones
+                .AsNoTracking()
                 .Where(c => c.PlanId == planId)
                 .Include(c => c.Plan)
                 .ToList();

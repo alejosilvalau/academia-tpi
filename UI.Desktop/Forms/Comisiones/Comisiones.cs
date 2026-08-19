@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Comisiones
             {
                 dgvComisiones.DataSource = null;
                 dgvComisiones.DataSource = _servicio.GetAll();
+                dgvComisiones.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }

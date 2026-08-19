@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Cursos
             {
                 dgvCursos.DataSource = null;
                 dgvCursos.DataSource = _servicio.GetAll();
+                dgvCursos.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }

@@ -10,6 +10,7 @@ namespace Repositorio
         public List<Plan> GetAllConEspecialidad()
         {
             return context.Planes
+                .AsNoTracking()
                 .Include(p => p.Especialidad)
                 .ToList();
         }
@@ -17,6 +18,7 @@ namespace Repositorio
         public List<Plan> GetByEspecialidad(int especialidadId)
         {
             return context.Planes
+                .AsNoTracking()
                 .Where(p => p.EspecialidadId == especialidadId)
                 .Include(p => p.Especialidad)
                 .ToList();

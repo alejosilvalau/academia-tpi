@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Materias
             {
                 dgvMaterias.DataSource = null;
                 dgvMaterias.DataSource = _servicio.GetAll();
+                dgvMaterias.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }

@@ -13,7 +13,7 @@ namespace Repositorio
 
         public List<T> GetAll()
         {
-            return context.Set<T>().ToList();
+            return context.Set<T>().AsNoTracking().ToList();
         }
 
         public T? GetOne(int id)

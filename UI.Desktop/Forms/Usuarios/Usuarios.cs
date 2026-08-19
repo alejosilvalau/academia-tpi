@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Usuarios
             {
                 dgvUsuarios.DataSource = null;
                 dgvUsuarios.DataSource = _servicio.GetAll();
+                dgvUsuarios.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

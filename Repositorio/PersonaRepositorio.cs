@@ -10,6 +10,7 @@ namespace Repositorio
         public List<Persona> GetByTipo(Persona.TiposPersonas tipo)
         {
             return context.Personas
+                .AsNoTracking()
                 .Where(p => p.Tipo == tipo)
                 .Include(p => p.Plan)
                 .ToList();
@@ -18,6 +19,7 @@ namespace Repositorio
         public List<Persona> GetByPlan(int? planId)
         {
             return context.Personas
+                .AsNoTracking()
                 .Where(p => p.PlanId == planId)
                 .Include(p => p.Plan)
                 .ToList();
@@ -33,6 +35,7 @@ namespace Repositorio
         public List<Persona> GetAllConPlan()
         {
             return context.Personas
+                .AsNoTracking()
                 .Include(p => p.Plan)
                 .ToList();
         }

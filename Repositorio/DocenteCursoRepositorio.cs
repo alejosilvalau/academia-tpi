@@ -10,6 +10,7 @@ namespace Repositorio
         public List<DocenteCurso> GetByDocente(int docenteId)
         {
             return context.DocenteCursos
+                .AsNoTracking()
                 .Where(dc => dc.DocenteId == docenteId)
                 .Include(dc => dc.Curso)
                     .ThenInclude(c => c!.Materia)
@@ -22,6 +23,7 @@ namespace Repositorio
         public List<DocenteCurso> GetByCurso(int cursoId)
         {
             return context.DocenteCursos
+                .AsNoTracking()
                 .Where(dc => dc.CursoId == cursoId)
                 .Include(dc => dc.Curso)
                     .ThenInclude(c => c!.Materia)
@@ -34,6 +36,7 @@ namespace Repositorio
         public List<DocenteCurso> GetAllConCursoYDocente()
         {
             return context.DocenteCursos
+                .AsNoTracking()
                 .Include(dc => dc.Curso)
                     .ThenInclude(c => c!.Materia)
                 .Include(dc => dc.Curso)

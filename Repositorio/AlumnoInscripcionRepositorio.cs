@@ -10,6 +10,7 @@ namespace Repositorio
         public List<AlumnoInscripcion> GetByAlumno(int alumnoId)
         {
             return context.AlumnoInscripciones
+                .AsNoTracking()
                 .Where(ai => ai.AlumnoId == alumnoId)
                 .Include(ai => ai.Alumno)
                 .Include(ai => ai.Curso)
@@ -22,6 +23,7 @@ namespace Repositorio
         public List<AlumnoInscripcion> GetByCurso(int cursoId)
         {
             return context.AlumnoInscripciones
+                .AsNoTracking()
                 .Where(ai => ai.CursoId == cursoId)
                 .Include(ai => ai.Alumno)
                 .Include(ai => ai.Curso)
@@ -34,6 +36,7 @@ namespace Repositorio
         public List<AlumnoInscripcion> GetAllConAlumnoYCurso()
         {
             return context.AlumnoInscripciones
+                .AsNoTracking()
                 .Include(ai => ai.Alumno)
                 .Include(ai => ai.Curso)
                     .ThenInclude(c => c!.Materia)

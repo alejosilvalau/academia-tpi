@@ -24,6 +24,7 @@ namespace UI.Desktop.Forms.Planes
             {
                 dgvPlanes.DataSource = null;
                 dgvPlanes.DataSource = _servicio.GetAll();
+                dgvPlanes.Refresh();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
