@@ -14,7 +14,7 @@ namespace Servicios
 
         public List<Comision> GetAll()
         {
-            return _repositorio.GetAll();
+            return _repositorio.GetAllConPlan();
         }
 
         public Comision? GetOne(int id)

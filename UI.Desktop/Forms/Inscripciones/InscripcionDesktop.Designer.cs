@@ -199,16 +199,16 @@ namespace UI.Desktop.Forms.Inscripciones
             // btnAceptar
             //
             this.btnAceptar.BackColor = MaterialColors.Accent;
-            this.btnAceptar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAceptar.FlatAppearance.BorderSize = 0;
             this.btnAceptar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnAceptar.ForeColor = MaterialColors.TextPrimary;
-            this.btnAceptar.Location = new System.Drawing.Point(400, 0);
+            this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnAceptar.Location = new System.Drawing.Point(305, 8);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(100, 50);
+            this.btnAceptar.Size = new System.Drawing.Size(100, 35);
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = false;
@@ -217,16 +217,16 @@ namespace UI.Desktop.Forms.Inscripciones
             // btnCancelar
             //
             this.btnCancelar.BackColor = MaterialColors.CancelBtn;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(120, 144, 156);
             this.btnCancelar.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(120, 144, 156);
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnCancelar.ForeColor = MaterialColors.TextOnPrimary;
-            this.btnCancelar.Location = new System.Drawing.Point(500, 0);
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnCancelar.Location = new System.Drawing.Point(195, 8);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 50);
+            this.btnCancelar.Size = new System.Drawing.Size(100, 35);
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;

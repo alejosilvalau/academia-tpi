@@ -70,21 +70,21 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // lblID
             // 
-            lblID.Dock = DockStyle.Fill;
+            lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(117, 117, 117);
             lblID.Location = new Point(3, 0);
             lblID.Name = "lblID";
             lblID.Size = new Size(114, 56);
             lblID.TabIndex = 0;
-            lblID.Text = "ID";
-            lblID.TextAlign = ContentAlignment.MiddleLeft;
+            lblID.Text = "ID:";
+            lblID.Anchor = AnchorStyles.Right;
             // 
             // txtID
             // 
             txtID.BackColor = Color.White;
             txtID.BorderStyle = BorderStyle.FixedSingle;
-            txtID.Dock = DockStyle.Fill;
+            txtID.Anchor = AnchorStyles.Left;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
@@ -97,21 +97,21 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // lblAnioCalendario
             // 
-            lblAnioCalendario.Dock = DockStyle.Fill;
+            lblAnioCalendario.AutoSize = true;
             lblAnioCalendario.Font = new Font("Segoe UI", 10F);
             lblAnioCalendario.ForeColor = Color.FromArgb(117, 117, 117);
             lblAnioCalendario.Location = new Point(283, 0);
             lblAnioCalendario.Name = "lblAnioCalendario";
             lblAnioCalendario.Size = new Size(114, 56);
             lblAnioCalendario.TabIndex = 2;
-            lblAnioCalendario.Text = "Año Calendario";
-            lblAnioCalendario.TextAlign = ContentAlignment.MiddleLeft;
+            lblAnioCalendario.Text = "Año Calendario:";
+            lblAnioCalendario.Anchor = AnchorStyles.Right;
             // 
             // txtAnioCalendario
             // 
             txtAnioCalendario.BackColor = Color.White;
             txtAnioCalendario.BorderStyle = BorderStyle.FixedSingle;
-            txtAnioCalendario.Dock = DockStyle.Fill;
+            txtAnioCalendario.Anchor = AnchorStyles.Left;
             txtAnioCalendario.Font = new Font("Segoe UI", 10F);
             txtAnioCalendario.ForeColor = Color.FromArgb(33, 33, 33);
             txtAnioCalendario.Location = new Point(403, 4);
@@ -122,21 +122,21 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // lblDescripcion
             // 
-            lblDescripcion.Dock = DockStyle.Fill;
+            lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 10F);
             lblDescripcion.ForeColor = Color.FromArgb(117, 117, 117);
             lblDescripcion.Location = new Point(3, 56);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(114, 56);
             lblDescripcion.TabIndex = 4;
-            lblDescripcion.Text = "Descripción";
-            lblDescripcion.TextAlign = ContentAlignment.MiddleLeft;
+            lblDescripcion.Text = "Descripción:";
+            lblDescripcion.Anchor = AnchorStyles.Right;
             // 
             // txtDescripcion
             // 
             txtDescripcion.BackColor = Color.White;
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
-            txtDescripcion.Dock = DockStyle.Fill;
+            txtDescripcion.Anchor = AnchorStyles.Left;
             txtDescripcion.Font = new Font("Segoe UI", 10F);
             txtDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
             txtDescripcion.Location = new Point(123, 60);
@@ -148,21 +148,21 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // lblCupo
             // 
-            lblCupo.Dock = DockStyle.Fill;
+            lblCupo.AutoSize = true;
             lblCupo.Font = new Font("Segoe UI", 10F);
             lblCupo.ForeColor = Color.FromArgb(117, 117, 117);
             lblCupo.Location = new Point(283, 56);
             lblCupo.Name = "lblCupo";
             lblCupo.Size = new Size(114, 56);
             lblCupo.TabIndex = 6;
-            lblCupo.Text = "Cupo";
-            lblCupo.TextAlign = ContentAlignment.MiddleLeft;
+            lblCupo.Text = "Cupo:";
+            lblCupo.Anchor = AnchorStyles.Right;
             // 
             // txtCupo
             // 
             txtCupo.BackColor = Color.White;
             txtCupo.BorderStyle = BorderStyle.FixedSingle;
-            txtCupo.Dock = DockStyle.Fill;
+            txtCupo.Anchor = AnchorStyles.Left;
             txtCupo.Font = new Font("Segoe UI", 10F);
             txtCupo.ForeColor = Color.FromArgb(33, 33, 33);
             txtCupo.Location = new Point(403, 60);
@@ -173,20 +173,20 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // lblMateria
             // 
-            lblMateria.Dock = DockStyle.Fill;
+            lblMateria.AutoSize = true;
             lblMateria.Font = new Font("Segoe UI", 10F);
             lblMateria.ForeColor = Color.FromArgb(117, 117, 117);
             lblMateria.Location = new Point(3, 112);
             lblMateria.Name = "lblMateria";
             lblMateria.Size = new Size(114, 107);
             lblMateria.TabIndex = 8;
-            lblMateria.Text = "Materia";
-            lblMateria.TextAlign = ContentAlignment.MiddleLeft;
+            lblMateria.Text = "Materia:";
+            lblMateria.Anchor = AnchorStyles.Right;
             // 
             // cbxMateria
             // 
             cbxMateria.BackColor = Color.White;
-            cbxMateria.Dock = DockStyle.Fill;
+            cbxMateria.Anchor = AnchorStyles.Left;
             cbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxMateria.FlatStyle = FlatStyle.Flat;
             cbxMateria.Font = new Font("Segoe UI", 10F);
@@ -201,20 +201,20 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // lblComision
             // 
-            lblComision.Dock = DockStyle.Fill;
+            lblComision.AutoSize = true;
             lblComision.Font = new Font("Segoe UI", 10F);
             lblComision.ForeColor = Color.FromArgb(117, 117, 117);
             lblComision.Location = new Point(283, 112);
             lblComision.Name = "lblComision";
             lblComision.Size = new Size(114, 107);
             lblComision.TabIndex = 10;
-            lblComision.Text = "Comisión";
-            lblComision.TextAlign = ContentAlignment.MiddleLeft;
+            lblComision.Text = "Comisión:";
+            lblComision.Anchor = AnchorStyles.Right;
             // 
             // cbxComision
             // 
             cbxComision.BackColor = Color.White;
-            cbxComision.Dock = DockStyle.Fill;
+            cbxComision.Anchor = AnchorStyles.Left;
             cbxComision.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxComision.FlatStyle = FlatStyle.Flat;
             cbxComision.Font = new Font("Segoe UI", 10F);
@@ -236,23 +236,22 @@ namespace UI.Desktop.Forms.Cursos
             panelBotones.Location = new Point(0, 219);
             panelBotones.Margin = new Padding(3, 4, 3, 4);
             panelBotones.Name = "panelBotones";
-            panelBotones.Size = new Size(560, 62);
+            panelBotones.Size = new Size(560, 60);
             panelBotones.TabIndex = 1;
             // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.FromArgb(144, 164, 174);
-            btnCancelar.Dock = DockStyle.Right;
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 144, 156);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(120, 144, 156);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(360, 0);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.Anchor = AnchorStyles.None;
+            btnCancelar.Location = new Point(285, 10);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(100, 62);
+            btnCancelar.Size = new Size(100, 40);
             btnCancelar.TabIndex = 1;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -261,17 +260,16 @@ namespace UI.Desktop.Forms.Cursos
             // btnAceptar
             // 
             btnAceptar.BackColor = Color.FromArgb(255, 193, 7);
-            btnAceptar.Dock = DockStyle.Right;
             btnAceptar.FlatAppearance.BorderSize = 0;
             btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
             btnAceptar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 171, 0);
             btnAceptar.FlatStyle = FlatStyle.Flat;
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
-            btnAceptar.Location = new Point(460, 0);
-            btnAceptar.Margin = new Padding(3, 4, 3, 4);
+            btnAceptar.Anchor = AnchorStyles.None;
+            btnAceptar.Location = new Point(175, 10);
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(100, 62);
+            btnAceptar.Size = new Size(100, 40);
             btnAceptar.TabIndex = 0;
             btnAceptar.Text = "Guardar";
             btnAceptar.UseVisualStyleBackColor = false;

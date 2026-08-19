@@ -29,6 +29,7 @@ namespace UI.Desktop.Forms.Usuarios
             lblPersona = new Label();
             cbxPersona = new ComboBox();
             panelBotones = new Panel();
+
             btnCancelar = new Button();
             btnAceptar = new Button();
             tableLayoutPanel1.SuspendLayout();
@@ -66,21 +67,21 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             // lblID
             // 
-            lblID.Dock = DockStyle.Fill;
-            lblID.Font = new Font("Segoe UI", 9F);
+            lblID.Anchor = AnchorStyles.Right;
+            lblID.AutoSize = true;
+            lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(117, 117, 117);
             lblID.Location = new Point(3, 0);
             lblID.Name = "lblID";
             lblID.Size = new Size(84, 56);
             lblID.TabIndex = 0;
-            lblID.Text = "ID";
-            lblID.TextAlign = ContentAlignment.MiddleLeft;
+            lblID.Text = "ID:";
             // 
             // txtID
             // 
             txtID.BackColor = Color.White;
             txtID.BorderStyle = BorderStyle.FixedSingle;
-            txtID.Dock = DockStyle.Fill;
+            txtID.Anchor = AnchorStyles.Left;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
@@ -93,21 +94,21 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             // lblUsuario
             // 
-            lblUsuario.Dock = DockStyle.Fill;
-            lblUsuario.Font = new Font("Segoe UI", 9F);
+            lblUsuario.Anchor = AnchorStyles.Right;
+            lblUsuario.AutoSize = true;
+            lblUsuario.Font = new Font("Segoe UI", 10F);
             lblUsuario.ForeColor = Color.FromArgb(117, 117, 117);
             lblUsuario.Location = new Point(3, 56);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(84, 56);
             lblUsuario.TabIndex = 2;
-            lblUsuario.Text = "Usuario";
-            lblUsuario.TextAlign = ContentAlignment.MiddleLeft;
+            lblUsuario.Text = "Usuario:";
             // 
             // txtUsuario
             // 
             txtUsuario.BackColor = Color.White;
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
-            txtUsuario.Dock = DockStyle.Fill;
+            txtUsuario.Anchor = AnchorStyles.Left;
             txtUsuario.Font = new Font("Segoe UI", 10F);
             txtUsuario.ForeColor = Color.FromArgb(33, 33, 33);
             txtUsuario.Location = new Point(93, 60);
@@ -118,21 +119,21 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             // lblClave
             // 
-            lblClave.Dock = DockStyle.Fill;
-            lblClave.Font = new Font("Segoe UI", 9F);
+            lblClave.Anchor = AnchorStyles.Right;
+            lblClave.AutoSize = true;
+            lblClave.Font = new Font("Segoe UI", 10F);
             lblClave.ForeColor = Color.FromArgb(117, 117, 117);
             lblClave.Location = new Point(3, 112);
             lblClave.Name = "lblClave";
             lblClave.Size = new Size(84, 56);
             lblClave.TabIndex = 4;
-            lblClave.Text = "Clave";
-            lblClave.TextAlign = ContentAlignment.MiddleLeft;
+            lblClave.Text = "Clave:";
             // 
             // txtClave
             // 
             txtClave.BackColor = Color.White;
             txtClave.BorderStyle = BorderStyle.FixedSingle;
-            txtClave.Dock = DockStyle.Fill;
+            txtClave.Anchor = AnchorStyles.Left;
             txtClave.Font = new Font("Segoe UI", 10F);
             txtClave.ForeColor = Color.FromArgb(33, 33, 33);
             txtClave.Location = new Point(93, 116);
@@ -143,19 +144,19 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             // lblHabilitado
             // 
-            lblHabilitado.Dock = DockStyle.Fill;
-            lblHabilitado.Font = new Font("Segoe UI", 9F);
+            lblHabilitado.Anchor = AnchorStyles.Right;
+            lblHabilitado.AutoSize = true;
+            lblHabilitado.Font = new Font("Segoe UI", 10F);
             lblHabilitado.ForeColor = Color.FromArgb(117, 117, 117);
             lblHabilitado.Location = new Point(3, 168);
             lblHabilitado.Name = "lblHabilitado";
             lblHabilitado.Size = new Size(84, 56);
             lblHabilitado.TabIndex = 6;
-            lblHabilitado.Text = "Habilitado";
-            lblHabilitado.TextAlign = ContentAlignment.MiddleLeft;
+            lblHabilitado.Text = "Habilitado:";
             // 
             // chkHabilitado
             // 
-            chkHabilitado.Dock = DockStyle.Fill;
+            chkHabilitado.Anchor = AnchorStyles.Left;
             chkHabilitado.Font = new Font("Segoe UI", 10F);
             chkHabilitado.ForeColor = Color.FromArgb(33, 33, 33);
             chkHabilitado.Location = new Point(93, 172);
@@ -167,21 +168,21 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             // lblPersona
             // 
-            lblPersona.Dock = DockStyle.Fill;
-            lblPersona.Font = new Font("Segoe UI", 9F);
+            lblPersona.Anchor = AnchorStyles.Right;
+            lblPersona.AutoSize = true;
+            lblPersona.Font = new Font("Segoe UI", 10F);
             lblPersona.ForeColor = Color.FromArgb(117, 117, 117);
             lblPersona.Location = new Point(3, 224);
             lblPersona.Name = "lblPersona";
             lblPersona.Size = new Size(84, 152);
             lblPersona.TabIndex = 8;
-            lblPersona.Text = "Persona";
-            lblPersona.TextAlign = ContentAlignment.MiddleLeft;
+            lblPersona.Text = "Persona:";
             // 
             // cbxPersona
             // 
             cbxPersona.BackColor = Color.White;
             cbxPersona.DisplayMember = "ID";
-            cbxPersona.Dock = DockStyle.Fill;
+            cbxPersona.Anchor = AnchorStyles.Left;
             cbxPersona.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersona.FlatStyle = FlatStyle.Flat;
             cbxPersona.Font = new Font("Segoe UI", 10F);
@@ -203,12 +204,11 @@ namespace UI.Desktop.Forms.Usuarios
             panelBotones.Location = new Point(0, 376);
             panelBotones.Margin = new Padding(3, 4, 3, 4);
             panelBotones.Name = "panelBotones";
-            panelBotones.Size = new Size(450, 62);
+            panelBotones.Size = new Size(450, 60);
             panelBotones.TabIndex = 1;
             // 
             // btnCancelar
             // 
-            btnCancelar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnCancelar.BackColor = Color.FromArgb(144, 164, 174);
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 144, 156);
@@ -216,10 +216,10 @@ namespace UI.Desktop.Forms.Usuarios
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(345, 6);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.Location = new Point(230, 10);
+            btnCancelar.Anchor = AnchorStyles.None;
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(100, 50);
+            btnCancelar.Size = new Size(100, 40);
             btnCancelar.TabIndex = 1;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -227,7 +227,6 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             // btnAceptar
             // 
-            btnAceptar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
             btnAceptar.BackColor = Color.FromArgb(255, 193, 7);
             btnAceptar.FlatAppearance.BorderSize = 0;
             btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
@@ -235,10 +234,10 @@ namespace UI.Desktop.Forms.Usuarios
             btnAceptar.FlatStyle = FlatStyle.Flat;
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
-            btnAceptar.Location = new Point(240, 6);
-            btnAceptar.Margin = new Padding(3, 4, 3, 4);
+            btnAceptar.Location = new Point(120, 10);
+            btnAceptar.Anchor = AnchorStyles.None;
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(100, 50);
+            btnAceptar.Size = new Size(100, 40);
             btnAceptar.TabIndex = 0;
             btnAceptar.Text = "Guardar";
             btnAceptar.UseVisualStyleBackColor = false;
@@ -278,5 +277,6 @@ namespace UI.Desktop.Forms.Usuarios
         private System.Windows.Forms.Panel panelBotones;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+
     }
 }

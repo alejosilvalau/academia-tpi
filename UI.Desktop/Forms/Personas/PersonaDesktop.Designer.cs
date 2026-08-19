@@ -88,21 +88,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblID
             // 
-            this.lblID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblID.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblID.ForeColor = MaterialColors.TextSecondary;
             this.lblID.Location = new System.Drawing.Point(3, 0);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(134, 45);
             this.lblID.TabIndex = 0;
-            this.lblID.Text = "ID";
-            this.lblID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblID.Text = "ID:";
             // 
             // txtID
             // 
+            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtID.BackColor = MaterialColors.Surface;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtID.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtID.ForeColor = MaterialColors.TextPrimary;
@@ -114,21 +114,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblNombre
             // 
-            this.lblNombre.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblNombre.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblNombre.AutoSize = true;
             this.lblNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblNombre.ForeColor = MaterialColors.TextSecondary;
             this.lblNombre.Location = new System.Drawing.Point(283, 0);
             this.lblNombre.Name = "lblNombre";
             this.lblNombre.Size = new System.Drawing.Size(134, 45);
             this.lblNombre.TabIndex = 2;
-            this.lblNombre.Text = "Nombre";
-            this.lblNombre.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblNombre.Text = "Nombre:";
             // 
             // txtNombre
             // 
+            this.txtNombre.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtNombre.BackColor = MaterialColors.Surface;
             this.txtNombre.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtNombre.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtNombre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtNombre.ForeColor = MaterialColors.TextPrimary;
             this.txtNombre.Location = new System.Drawing.Point(423, 10);
@@ -138,21 +138,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblApellido
             // 
-            this.lblApellido.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblApellido.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblApellido.AutoSize = true;
             this.lblApellido.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblApellido.ForeColor = MaterialColors.TextSecondary;
             this.lblApellido.Location = new System.Drawing.Point(3, 45);
             this.lblApellido.Name = "lblApellido";
             this.lblApellido.Size = new System.Drawing.Size(134, 45);
             this.lblApellido.TabIndex = 4;
-            this.lblApellido.Text = "Apellido";
-            this.lblApellido.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblApellido.Text = "Apellido:";
             // 
             // txtApellido
             // 
+            this.txtApellido.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtApellido.BackColor = MaterialColors.Surface;
             this.txtApellido.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtApellido.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtApellido.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtApellido.ForeColor = MaterialColors.TextPrimary;
             this.txtApellido.Location = new System.Drawing.Point(143, 55);
@@ -162,21 +162,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblLegajo
             // 
-            this.lblLegajo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblLegajo.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblLegajo.AutoSize = true;
             this.lblLegajo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblLegajo.ForeColor = MaterialColors.TextSecondary;
             this.lblLegajo.Location = new System.Drawing.Point(283, 45);
             this.lblLegajo.Name = "lblLegajo";
             this.lblLegajo.Size = new System.Drawing.Size(134, 45);
             this.lblLegajo.TabIndex = 6;
-            this.lblLegajo.Text = "Legajo";
-            this.lblLegajo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblLegajo.Text = "Legajo:";
             // 
             // txtLegajo
             // 
+            this.txtLegajo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtLegajo.BackColor = MaterialColors.Surface;
             this.txtLegajo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtLegajo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtLegajo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtLegajo.ForeColor = MaterialColors.TextPrimary;
             this.txtLegajo.Location = new System.Drawing.Point(423, 55);
@@ -186,21 +186,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblEMail
             // 
-            this.lblEMail.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblEMail.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblEMail.AutoSize = true;
             this.lblEMail.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblEMail.ForeColor = MaterialColors.TextSecondary;
             this.lblEMail.Location = new System.Drawing.Point(3, 90);
             this.lblEMail.Name = "lblEMail";
             this.lblEMail.Size = new System.Drawing.Size(134, 45);
             this.lblEMail.TabIndex = 8;
-            this.lblEMail.Text = "EMail";
-            this.lblEMail.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblEMail.Text = "E-Mail:";
             // 
             // txtEMail
             // 
+            this.txtEMail.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtEMail.BackColor = MaterialColors.Surface;
             this.txtEMail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtEMail.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtEMail.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtEMail.ForeColor = MaterialColors.TextPrimary;
             this.txtEMail.Location = new System.Drawing.Point(143, 100);
@@ -210,21 +210,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblTelefono
             // 
-            this.lblTelefono.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTelefono.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblTelefono.AutoSize = true;
             this.lblTelefono.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblTelefono.ForeColor = MaterialColors.TextSecondary;
             this.lblTelefono.Location = new System.Drawing.Point(283, 90);
             this.lblTelefono.Name = "lblTelefono";
             this.lblTelefono.Size = new System.Drawing.Size(134, 45);
             this.lblTelefono.TabIndex = 10;
-            this.lblTelefono.Text = "Teléfono";
-            this.lblTelefono.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTelefono.Text = "Telefono:";
             // 
             // txtTelefono
             // 
+            this.txtTelefono.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtTelefono.BackColor = MaterialColors.Surface;
             this.txtTelefono.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtTelefono.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtTelefono.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtTelefono.ForeColor = MaterialColors.TextPrimary;
             this.txtTelefono.Location = new System.Drawing.Point(423, 100);
@@ -234,21 +234,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblDireccion
             // 
-            this.lblDireccion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDireccion.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblDireccion.AutoSize = true;
             this.lblDireccion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblDireccion.ForeColor = MaterialColors.TextSecondary;
             this.lblDireccion.Location = new System.Drawing.Point(3, 135);
             this.lblDireccion.Name = "lblDireccion";
             this.lblDireccion.Size = new System.Drawing.Size(134, 45);
             this.lblDireccion.TabIndex = 12;
-            this.lblDireccion.Text = "Dirección";
-            this.lblDireccion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDireccion.Text = "Direccion:";
             // 
             // txtDireccion
             // 
+            this.txtDireccion.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtDireccion.BackColor = MaterialColors.Surface;
             this.txtDireccion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDireccion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtDireccion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtDireccion.ForeColor = MaterialColors.TextPrimary;
             this.txtDireccion.Location = new System.Drawing.Point(143, 145);
@@ -258,20 +258,20 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblTipo
             // 
-            this.lblTipo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblTipo.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblTipo.AutoSize = true;
             this.lblTipo.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblTipo.ForeColor = MaterialColors.TextSecondary;
             this.lblTipo.Location = new System.Drawing.Point(283, 135);
             this.lblTipo.Name = "lblTipo";
             this.lblTipo.Size = new System.Drawing.Size(134, 45);
             this.lblTipo.TabIndex = 14;
-            this.lblTipo.Text = "Tipo";
-            this.lblTipo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblTipo.Text = "Tipo:";
             // 
             // cbxTipo
             // 
+            this.cbxTipo.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxTipo.BackColor = MaterialColors.Surface;
-            this.cbxTipo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbxTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxTipo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxTipo.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -284,21 +284,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblPlan
             // 
-            this.lblPlan.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblPlan.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblPlan.AutoSize = true;
             this.lblPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblPlan.ForeColor = MaterialColors.TextSecondary;
             this.lblPlan.Location = new System.Drawing.Point(3, 180);
             this.lblPlan.Name = "lblPlan";
             this.lblPlan.Size = new System.Drawing.Size(134, 45);
             this.lblPlan.TabIndex = 16;
-            this.lblPlan.Text = "Plan";
-            this.lblPlan.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblPlan.Text = "Plan:";
             // 
             // cbxPlan
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.cbxPlan, 3);
+            this.cbxPlan.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.cbxPlan.BackColor = MaterialColors.Surface;
-            this.cbxPlan.Dock = System.Windows.Forms.DockStyle.Fill;
             this.cbxPlan.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbxPlan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cbxPlan.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -312,21 +312,21 @@ namespace UI.Desktop.Forms.Personas
             // 
             // lblFechaNacimiento
             // 
-            this.lblFechaNacimiento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblFechaNacimiento.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblFechaNacimiento.AutoSize = true;
             this.lblFechaNacimiento.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblFechaNacimiento.ForeColor = MaterialColors.TextSecondary;
             this.lblFechaNacimiento.Location = new System.Drawing.Point(3, 225);
             this.lblFechaNacimiento.Name = "lblFechaNacimiento";
             this.lblFechaNacimiento.Size = new System.Drawing.Size(134, 45);
             this.lblFechaNacimiento.TabIndex = 18;
-            this.lblFechaNacimiento.Text = "Fecha Nacimiento";
-            this.lblFechaNacimiento.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblFechaNacimiento.Text = "Fecha Nacimiento:";
             // 
             // dtpFechaNacimiento
             // 
             this.tableLayoutPanel1.SetColumnSpan(this.dtpFechaNacimiento, 3);
             this.dtpFechaNacimiento.CalendarFont = new System.Drawing.Font("Segoe UI", 10F);
-            this.dtpFechaNacimiento.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dtpFechaNacimiento.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.dtpFechaNacimiento.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.dtpFechaNacimiento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dtpFechaNacimiento.Location = new System.Drawing.Point(143, 233);
@@ -348,16 +348,16 @@ namespace UI.Desktop.Forms.Personas
             // btnAceptar
             // 
             this.btnAceptar.BackColor = MaterialColors.Accent;
-            this.btnAceptar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAceptar.FlatAppearance.BorderSize = 0;
             this.btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnAceptar.ForeColor = MaterialColors.TextPrimary;
-            this.btnAceptar.Location = new System.Drawing.Point(400, 0);
+            this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(100, 50);
+            this.btnAceptar.Location = new System.Drawing.Point(305, 8);
+            this.btnAceptar.Size = new System.Drawing.Size(100, 35);
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = false;
@@ -366,16 +366,16 @@ namespace UI.Desktop.Forms.Personas
             // btnCancelar
             // 
             this.btnCancelar.BackColor = MaterialColors.CancelBtn;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 144, 156);
             this.btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(120, 144, 156);
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnCancelar.ForeColor = MaterialColors.TextOnPrimary;
-            this.btnCancelar.Location = new System.Drawing.Point(500, 0);
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 50);
+            this.btnCancelar.Location = new System.Drawing.Point(195, 8);
+            this.btnCancelar.Size = new System.Drawing.Size(100, 35);
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;

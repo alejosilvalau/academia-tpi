@@ -27,6 +27,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.lblPlan = new System.Windows.Forms.Label();
             this.cbxPlan = new System.Windows.Forms.ComboBox();
             this.panelBottom = new System.Windows.Forms.Panel();
+
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAceptar = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
@@ -168,20 +169,21 @@ namespace UI.Desktop.Forms.Comisiones
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(550, 45);
             this.panelBottom.TabIndex = 1;
+
             //
             // btnAceptar
             //
             this.btnAceptar.BackColor = MaterialColors.Accent;
-            this.btnAceptar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAceptar.FlatAppearance.BorderSize = 0;
             this.btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnAceptar.ForeColor = MaterialColors.TextPrimary;
-            this.btnAceptar.Location = new System.Drawing.Point(350, 0);
+            this.btnAceptar.Location = new System.Drawing.Point(170, 5);
+            this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(100, 45);
+            this.btnAceptar.Size = new System.Drawing.Size(100, 35);
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = false;
@@ -190,16 +192,16 @@ namespace UI.Desktop.Forms.Comisiones
             // btnCancelar
             //
             this.btnCancelar.BackColor = MaterialColors.CancelBtn;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatAppearance.MouseDownBackColor = MaterialColors.PrimaryDark;
             this.btnCancelar.FlatAppearance.MouseOverBackColor = MaterialColors.PrimaryDark;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnCancelar.ForeColor = MaterialColors.TextOnPrimary;
-            this.btnCancelar.Location = new System.Drawing.Point(450, 0);
+            this.btnCancelar.Location = new System.Drawing.Point(280, 5);
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 45);
+            this.btnCancelar.Size = new System.Drawing.Size(100, 35);
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
@@ -238,5 +240,6 @@ namespace UI.Desktop.Forms.Comisiones
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
+
     }
 }

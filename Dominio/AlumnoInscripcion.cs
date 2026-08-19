@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
@@ -16,11 +15,11 @@ namespace Dominio
 
         [ForeignKey("Alumno")]
         public int AlumnoId { get; set; }
-        public virtual Persona Alumno { get; set; }
+        public virtual Persona Alumno { get; set; } = null!;
 
         [ForeignKey("Curso")]
         public int CursoId { get; set; }
-        public virtual Curso Curso { get; set; }
+        public virtual Curso Curso { get; set; } = null!;
 
         [NotMapped]
         public string DescripcionMateria

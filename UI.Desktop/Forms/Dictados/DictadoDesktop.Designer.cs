@@ -61,21 +61,21 @@ namespace UI.Desktop.Forms.Dictados
             // 
             // lblID
             // 
-            lblID.Dock = DockStyle.Fill;
+            lblID.Anchor = AnchorStyles.Right;
+            lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(117, 117, 117);
             lblID.Location = new Point(3, 0);
             lblID.Name = "lblID";
             lblID.Size = new Size(114, 56);
             lblID.TabIndex = 0;
-            lblID.Text = "ID";
-            lblID.TextAlign = ContentAlignment.MiddleLeft;
+            lblID.Text = "ID:";
             // 
             // txtID
             // 
             txtID.BackColor = Color.White;
             txtID.BorderStyle = BorderStyle.FixedSingle;
-            txtID.Dock = DockStyle.Fill;
+            txtID.Anchor = AnchorStyles.Left;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
@@ -88,20 +88,20 @@ namespace UI.Desktop.Forms.Dictados
             // 
             // lblCurso
             // 
-            lblCurso.Dock = DockStyle.Fill;
+            lblCurso.Anchor = AnchorStyles.Right;
+            lblCurso.AutoSize = true;
             lblCurso.Font = new Font("Segoe UI", 10F);
             lblCurso.ForeColor = Color.FromArgb(117, 117, 117);
             lblCurso.Location = new Point(3, 56);
             lblCurso.Name = "lblCurso";
             lblCurso.Size = new Size(114, 56);
             lblCurso.TabIndex = 2;
-            lblCurso.Text = "Curso";
-            lblCurso.TextAlign = ContentAlignment.MiddleLeft;
+            lblCurso.Text = "Curso:";
             // 
             // cbxCursos
             // 
             cbxCursos.BackColor = Color.White;
-            cbxCursos.Dock = DockStyle.Fill;
+            cbxCursos.Anchor = AnchorStyles.Left;
             cbxCursos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxCursos.FlatStyle = FlatStyle.Flat;
             cbxCursos.Font = new Font("Segoe UI", 10F);
@@ -116,20 +116,20 @@ namespace UI.Desktop.Forms.Dictados
             // 
             // lblDocente
             // 
-            lblDocente.Dock = DockStyle.Fill;
+            lblDocente.Anchor = AnchorStyles.Right;
+            lblDocente.AutoSize = true;
             lblDocente.Font = new Font("Segoe UI", 10F);
             lblDocente.ForeColor = Color.FromArgb(117, 117, 117);
             lblDocente.Location = new Point(3, 112);
             lblDocente.Name = "lblDocente";
             lblDocente.Size = new Size(114, 56);
             lblDocente.TabIndex = 4;
-            lblDocente.Text = "Docente";
-            lblDocente.TextAlign = ContentAlignment.MiddleLeft;
+            lblDocente.Text = "Docente:";
             // 
             // cbxDocentes
             // 
             cbxDocentes.BackColor = Color.White;
-            cbxDocentes.Dock = DockStyle.Fill;
+            cbxDocentes.Anchor = AnchorStyles.Left;
             cbxDocentes.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxDocentes.FlatStyle = FlatStyle.Flat;
             cbxDocentes.Font = new Font("Segoe UI", 10F);
@@ -144,20 +144,20 @@ namespace UI.Desktop.Forms.Dictados
             // 
             // lblCargo
             // 
-            lblCargo.Dock = DockStyle.Fill;
+            lblCargo.Anchor = AnchorStyles.Right;
+            lblCargo.AutoSize = true;
             lblCargo.Font = new Font("Segoe UI", 10F);
             lblCargo.ForeColor = Color.FromArgb(117, 117, 117);
             lblCargo.Location = new Point(3, 168);
             lblCargo.Name = "lblCargo";
             lblCargo.Size = new Size(114, 108);
             lblCargo.TabIndex = 6;
-            lblCargo.Text = "Cargo";
-            lblCargo.TextAlign = ContentAlignment.MiddleLeft;
+            lblCargo.Text = "Cargo:";
             // 
             // cbxTiposCargos
             // 
             cbxTiposCargos.BackColor = Color.White;
-            cbxTiposCargos.Dock = DockStyle.Fill;
+            cbxTiposCargos.Anchor = AnchorStyles.Left;
             cbxTiposCargos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTiposCargos.FlatStyle = FlatStyle.Flat;
             cbxTiposCargos.Font = new Font("Segoe UI", 10F);
@@ -178,23 +178,22 @@ namespace UI.Desktop.Forms.Dictados
             panelBotones.Location = new Point(0, 276);
             panelBotones.Margin = new Padding(3, 4, 3, 4);
             panelBotones.Name = "panelBotones";
-            panelBotones.Size = new Size(460, 62);
+            panelBotones.Size = new Size(460, 60);
             panelBotones.TabIndex = 1;
             // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.FromArgb(144, 164, 174);
-            btnCancelar.Dock = DockStyle.Right;
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 144, 156);
             btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(120, 144, 156);
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(260, 0);
-            btnCancelar.Margin = new Padding(3, 4, 3, 4);
+            btnCancelar.Location = new Point(235, 10);
+            btnCancelar.Anchor = AnchorStyles.None;
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(100, 62);
+            btnCancelar.Size = new Size(100, 40);
             btnCancelar.TabIndex = 1;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -203,17 +202,16 @@ namespace UI.Desktop.Forms.Dictados
             // btnAceptar
             // 
             btnAceptar.BackColor = Color.FromArgb(255, 193, 7);
-            btnAceptar.Dock = DockStyle.Right;
             btnAceptar.FlatAppearance.BorderSize = 0;
             btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
             btnAceptar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 171, 0);
             btnAceptar.FlatStyle = FlatStyle.Flat;
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
-            btnAceptar.Location = new Point(360, 0);
-            btnAceptar.Margin = new Padding(3, 4, 3, 4);
+            btnAceptar.Location = new Point(125, 10);
+            btnAceptar.Anchor = AnchorStyles.None;
             btnAceptar.Name = "btnAceptar";
-            btnAceptar.Size = new Size(100, 62);
+            btnAceptar.Size = new Size(100, 40);
             btnAceptar.TabIndex = 0;
             btnAceptar.Text = "Guardar";
             btnAceptar.UseVisualStyleBackColor = false;

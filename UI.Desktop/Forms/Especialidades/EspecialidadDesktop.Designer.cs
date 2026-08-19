@@ -50,33 +50,33 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             // lblID
             // 
-            this.lblID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblID.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblID.AutoSize = true;
             this.lblID.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblID.ForeColor = MaterialColors.TextSecondary;
             this.lblID.Location = new System.Drawing.Point(3, 0);
             this.lblID.Name = "lblID";
             this.lblID.Size = new System.Drawing.Size(114, 45);
             this.lblID.TabIndex = 0;
-            this.lblID.Text = "ID";
-            this.lblID.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblID.Text = "ID:";
             // 
             // lblDescripcion
             // 
-            this.lblDescripcion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.lblDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.lblDescripcion.AutoSize = true;
             this.lblDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.lblDescripcion.ForeColor = MaterialColors.TextSecondary;
             this.lblDescripcion.Location = new System.Drawing.Point(3, 45);
             this.lblDescripcion.Name = "lblDescripcion";
             this.lblDescripcion.Size = new System.Drawing.Size(114, 45);
             this.lblDescripcion.TabIndex = 2;
-            this.lblDescripcion.Text = "Descripción";
-            this.lblDescripcion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.lblDescripcion.Text = "Descripción:";
             // 
             // txtID
             // 
             this.txtID.BackColor = MaterialColors.Surface;
             this.txtID.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtID.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtID.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtID.Enabled = false;
             this.txtID.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtID.ForeColor = MaterialColors.TextPrimary;
@@ -90,7 +90,7 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             this.txtDescripcion.BackColor = MaterialColors.Surface;
             this.txtDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtDescripcion.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDescripcion.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.txtDescripcion.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.txtDescripcion.ForeColor = MaterialColors.TextPrimary;
             this.txtDescripcion.Location = new System.Drawing.Point(123, 55);
@@ -111,17 +111,17 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             // btnAceptar
             // 
+            this.btnAceptar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnAceptar.BackColor = MaterialColors.Accent;
-            this.btnAceptar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnAceptar.FlatAppearance.BorderSize = 0;
             this.btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 171, 0);
             this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAceptar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnAceptar.ForeColor = MaterialColors.TextPrimary;
-            this.btnAceptar.Location = new System.Drawing.Point(240, 0);
+            this.btnAceptar.Location = new System.Drawing.Point(225, 8);
             this.btnAceptar.Name = "btnAceptar";
-            this.btnAceptar.Size = new System.Drawing.Size(100, 50);
+            this.btnAceptar.Size = new System.Drawing.Size(100, 35);
             this.btnAceptar.TabIndex = 0;
             this.btnAceptar.Text = "Guardar";
             this.btnAceptar.UseVisualStyleBackColor = false;
@@ -129,17 +129,17 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.btnCancelar.BackColor = MaterialColors.CancelBtn;
-            this.btnCancelar.Dock = System.Windows.Forms.DockStyle.Right;
             this.btnCancelar.FlatAppearance.BorderSize = 0;
             this.btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 144, 156);
             this.btnCancelar.FlatAppearance.MouseOverBackColor = Color.FromArgb(120, 144, 156);
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancelar.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.btnCancelar.ForeColor = MaterialColors.TextOnPrimary;
-            this.btnCancelar.Location = new System.Drawing.Point(340, 0);
+            this.btnCancelar.Location = new System.Drawing.Point(115, 8);
             this.btnCancelar.Name = "btnCancelar";
-            this.btnCancelar.Size = new System.Drawing.Size(100, 50);
+            this.btnCancelar.Size = new System.Drawing.Size(100, 35);
             this.btnCancelar.TabIndex = 1;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = false;
