@@ -62,6 +62,7 @@ namespace UI.Desktop
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(220, 750);
             panelMenu.TabIndex = 0;
+            panelMenu.Click += panelOutside_Click;
             // 
             // btnCerrarSesion
             // 
@@ -79,7 +80,6 @@ namespace UI.Desktop
             btnCerrarSesion.Size = new Size(220, 60);
             btnCerrarSesion.TabIndex = 5;
             btnCerrarSesion.Text = "  Cerrar Sesion";
-            btnCerrarSesion.TextAlign = ContentAlignment.MiddleLeft;
             btnCerrarSesion.UseVisualStyleBackColor = false;
             btnCerrarSesion.Click += btnCerrarSesion_Click;
             // 
@@ -215,6 +215,7 @@ namespace UI.Desktop
             panelTop.Name = "panelTop";
             panelTop.Size = new Size(780, 62);
             panelTop.TabIndex = 1;
+            panelTop.Click += panelOutside_Click;
             // 
             // lblTitulo
             // 
@@ -237,11 +238,9 @@ namespace UI.Desktop
             panelFormLoader.Padding = new Padding(10, 12, 10, 12);
             panelFormLoader.Size = new Size(780, 626);
             panelFormLoader.TabIndex = 2;
+            panelFormLoader.Click += panelOutside_Click;
             panelFormLoader.ControlAdded += panelFormLoader_ControlAdded;
             panelFormLoader.ControlRemoved += panelFormLoader_ControlRemoved;
-            panelFormLoader.Click += panelOutside_Click;
-            panelMenu.Click += panelOutside_Click;
-            panelTop.Click += panelOutside_Click;
             // 
             // panelSubMenu
             // 
