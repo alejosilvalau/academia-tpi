@@ -63,6 +63,13 @@ namespace UI.Desktop
                 if (c is Button btn)
                     btn.Visible = btn.Name.Contains(category);
             }
+
+            int height = 0;
+            foreach (Control c in panelSubMenu.Controls)
+            {
+                if (c.Visible) height += c.Height;
+            }
+            panelSubMenu.Height = height;
         }
 
         private void HideSubMenu()
