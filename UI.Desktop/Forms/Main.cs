@@ -46,15 +46,15 @@ namespace UI.Desktop
 
         private void btnAdministracion_Click(object sender, EventArgs e)
         {
-            ShowSubMenu("ABM");
+            ShowSubMenu("ABM", btnAdministracion);
         }
 
         private void btnReportes_Click(object sender, EventArgs e)
         {
-            ShowSubMenu("Reportes");
+            ShowSubMenu("Reportes", btnReportes);
         }
 
-        private void ShowSubMenu(string category)
+        private void ShowSubMenu(string category, Control trigger)
         {
             panelSubMenu.BringToFront();
             panelSubMenu.Visible = true;
@@ -70,6 +70,7 @@ namespace UI.Desktop
                 if (c.Visible) height += c.Height;
             }
             panelSubMenu.Height = height;
+            panelSubMenu.Top = trigger.Top;
         }
 
         private void HideSubMenu()
