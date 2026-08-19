@@ -53,8 +53,9 @@ namespace UI.Desktop.Forms.Materias
             this.tableLayoutPanel1.Controls.Add(this.txtHsTotales, 3, 1);
             this.tableLayoutPanel1.Controls.Add(this.lblPlan, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.cbxPlan, 1, 2);
+            this.tableLayoutPanel1.BackColor = MaterialColors.Surface;
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 15);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 3;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -195,7 +196,7 @@ namespace UI.Desktop.Forms.Materias
             this.panelBottom.Controls.Add(this.btnCancelar);
             this.panelBottom.Controls.Add(this.btnAceptar);
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(15, 165);
+            this.panelBottom.Location = new System.Drawing.Point(0, 165);
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(550, 45);
             this.panelBottom.TabIndex = 1;
@@ -246,7 +247,6 @@ namespace UI.Desktop.Forms.Materias
             this.Controls.Add(this.panelBottom);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
             this.Name = "MateriaDesktop";
-            this.Padding = new System.Windows.Forms.Padding(15);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Materia";
             this.tableLayoutPanel1.ResumeLayout(false);
