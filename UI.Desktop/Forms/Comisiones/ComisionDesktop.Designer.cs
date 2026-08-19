@@ -158,6 +158,7 @@ namespace UI.Desktop.Forms.Comisiones
             this.cbxPlan.Name = "cbxPlan";
             this.cbxPlan.Size = new System.Drawing.Size(120, 25);
             this.cbxPlan.TabIndex = 7;
+            this.cbxPlan.DisplayMember = "Descripcion";
             this.cbxPlan.ValueMember = "ID";
             //
             // panelBottom

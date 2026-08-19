@@ -197,6 +197,7 @@ namespace UI.Desktop.Forms.Cursos
             cbxMateria.Name = "cbxMateria";
             cbxMateria.Size = new Size(154, 31);
             cbxMateria.TabIndex = 9;
+            cbxMateria.DisplayMember = "Descripcion";
             cbxMateria.ValueMember = "ID";
             // 
             // lblComision
@@ -224,6 +225,7 @@ namespace UI.Desktop.Forms.Cursos
             cbxComision.Name = "cbxComision";
             cbxComision.Size = new Size(154, 31);
             cbxComision.TabIndex = 11;
+            cbxComision.DisplayMember = "Descripcion";
             cbxComision.ValueMember = "ID";
             // 
             // panelBotones

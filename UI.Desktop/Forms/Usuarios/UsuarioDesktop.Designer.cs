@@ -182,7 +182,7 @@ namespace UI.Desktop.Forms.Usuarios
             // cbxPersona
             // 
             cbxPersona.BackColor = Color.White;
-            cbxPersona.DisplayMember = "ID";
+            cbxPersona.DisplayMember = "NombreCompleto";
             cbxPersona.Anchor = AnchorStyles.Left;
             cbxPersona.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersona.Font = new Font("Segoe UI", 10F);

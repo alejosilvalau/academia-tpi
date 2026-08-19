@@ -18,7 +18,7 @@ namespace UI.Desktop
             {
                 var cursos = _servicio.ObtenerCursos();
                 cbxCursos.DataSource = cursos;
-                cbxCursos.DisplayMember = "Materia";
+                cbxCursos.DisplayMember = "Descripcion";
                 cbxCursos.ValueMember = "ID";
             }
             catch (Exception ex)
