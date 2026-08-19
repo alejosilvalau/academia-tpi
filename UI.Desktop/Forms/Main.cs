@@ -22,6 +22,7 @@ namespace UI.Desktop
                 lblTitulo.Text = $"Bienvenido/a {persona.Nombre} {persona.Apellido}";
                 lblUsuario.Text = Login.UsuarioActual.NombreUsuario;
                 lblTipo.Text = persona.Tipo.ToString();
+                lblLegajo.Text = persona.Legajo > 0 ? $"Legajo: {persona.Legajo}" : "";
             }
 
             panelSubMenu.Visible = false;

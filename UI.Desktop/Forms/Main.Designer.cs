@@ -21,6 +21,7 @@ namespace UI.Desktop
             btnInscripcion = new Button();
             btnAdministracion = new Button();
             panelPerfil = new Panel();
+            lblLegajo = new Label();
             lblTipo = new Label();
             lblUsuario = new Label();
             panelTop = new Panel();
@@ -172,14 +173,27 @@ namespace UI.Desktop
             // panelPerfil
             // 
             panelPerfil.BackColor = Color.FromArgb(69, 90, 100);
+            panelPerfil.Controls.Add(lblLegajo);
             panelPerfil.Controls.Add(lblTipo);
             panelPerfil.Controls.Add(lblUsuario);
             panelPerfil.Dock = DockStyle.Top;
             panelPerfil.Location = new Point(0, 0);
             panelPerfil.Margin = new Padding(3, 4, 3, 4);
             panelPerfil.Name = "panelPerfil";
-            panelPerfil.Size = new Size(220, 125);
+            panelPerfil.Size = new Size(220, 145);
             panelPerfil.TabIndex = 0;
+            // 
+            // lblLegajo
+            // 
+            lblLegajo.Dock = DockStyle.Top;
+            lblLegajo.Font = new Font("Segoe UI", 8.5F);
+            lblLegajo.ForeColor = Color.FromArgb(180, 180, 180);
+            lblLegajo.Location = new Point(0, 75);
+            lblLegajo.Name = "lblLegajo";
+            lblLegajo.Size = new Size(220, 20);
+            lblLegajo.TabIndex = 2;
+            lblLegajo.Text = "Legajo";
+            lblLegajo.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // lblTipo
             // 
@@ -553,6 +567,7 @@ namespace UI.Desktop
         private System.Windows.Forms.Panel panelMenu;
         private System.Windows.Forms.Panel panelPerfil;
         private System.Windows.Forms.Label lblTipo;
+        private System.Windows.Forms.Label lblLegajo;
         private System.Windows.Forms.Label lblUsuario;
         private System.Windows.Forms.Button btnCerrarSesion;
         private System.Windows.Forms.Button btnReportes;
