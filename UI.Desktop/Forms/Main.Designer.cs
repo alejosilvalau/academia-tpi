@@ -239,6 +239,9 @@ namespace UI.Desktop
             panelFormLoader.TabIndex = 2;
             panelFormLoader.ControlAdded += panelFormLoader_ControlAdded;
             panelFormLoader.ControlRemoved += panelFormLoader_ControlRemoved;
+            panelFormLoader.Click += panelOutside_Click;
+            panelMenu.Click += panelOutside_Click;
+            panelTop.Click += panelOutside_Click;
             // 
             // panelSubMenu
             // 

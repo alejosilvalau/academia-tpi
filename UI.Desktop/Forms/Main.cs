@@ -75,10 +75,12 @@ namespace UI.Desktop
 
         private void HideSubMenu()
         {
-            if (!panelSubMenu.ClientRectangle.Contains(panelSubMenu.PointToClient(Cursor.Position)))
-            {
-                panelSubMenu.Visible = false;
-            }
+            panelSubMenu.Visible = false;
+        }
+
+        private void panelOutside_Click(object sender, EventArgs e)
+        {
+            HideSubMenu();
         }
 
         private void btnABMComisiones_Click(object sender, EventArgs e)
