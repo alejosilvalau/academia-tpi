@@ -82,15 +82,25 @@ namespace UI.Desktop.Forms.Planes
             // 
             this.dgvPlanes.AllowUserToAddRows = false;
             this.dgvPlanes.AllowUserToDeleteRows = false;
+            this.dgvPlanes.AlternatingRowsDefaultCellStyle.BackColor = MaterialColors.RowAlternate;
             this.dgvPlanes.BackgroundColor = MaterialColors.Surface;
             this.dgvPlanes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvPlanes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvPlanes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvPlanes.ColumnHeadersDefaultCellStyle.BackColor = MaterialColors.PrimaryDark;
+            this.dgvPlanes.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.dgvPlanes.ColumnHeadersDefaultCellStyle.ForeColor = MaterialColors.TextOnPrimary;
+            this.dgvPlanes.ColumnHeadersDefaultCellStyle.SelectionBackColor = MaterialColors.PrimaryDark;
             this.dgvPlanes.ColumnHeadersHeight = 40;
+            this.dgvPlanes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvPlanes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Descripcion,
             this.Especialidad});
+            this.dgvPlanes.DefaultCellStyle.BackColor = MaterialColors.Surface;
+            this.dgvPlanes.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvPlanes.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
+            this.dgvPlanes.DefaultCellStyle.SelectionBackColor = MaterialColors.Accent;
+            this.dgvPlanes.DefaultCellStyle.SelectionForeColor = MaterialColors.TextPrimary;
             this.dgvPlanes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPlanes.EnableHeadersVisualStyles = false;
             this.dgvPlanes.GridColor = MaterialColors.Border;
@@ -99,11 +109,6 @@ namespace UI.Desktop.Forms.Planes
             this.dgvPlanes.Name = "dgvPlanes";
             this.dgvPlanes.ReadOnly = true;
             this.dgvPlanes.RowHeadersVisible = false;
-            this.dgvPlanes.RowHeadersWidth = 51;
-            this.dgvPlanes.RowTemplate.DefaultCellStyle.BackColor = MaterialColors.Surface;
-            this.dgvPlanes.RowTemplate.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
-            this.dgvPlanes.RowTemplate.DefaultCellStyle.SelectionBackColor = MaterialColors.Primary;
-            this.dgvPlanes.RowTemplate.DefaultCellStyle.SelectionForeColor = MaterialColors.TextOnPrimary;
             this.dgvPlanes.RowTemplate.Height = 35;
             this.dgvPlanes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPlanes.Size = new System.Drawing.Size(700, 410);

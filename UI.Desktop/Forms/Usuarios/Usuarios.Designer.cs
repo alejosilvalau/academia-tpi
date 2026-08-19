@@ -88,7 +88,11 @@ namespace UI.Desktop.Forms.Usuarios
             this.dgvUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUsuarios.BackgroundColor = MaterialColors.Surface;
             this.dgvUsuarios.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvUsuarios.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
+            this.dgvUsuarios.ColumnHeadersDefaultCellStyle.BackColor = MaterialColors.PrimaryDark;
+            this.dgvUsuarios.ColumnHeadersDefaultCellStyle.ForeColor = MaterialColors.TextOnPrimary;
+            this.dgvUsuarios.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.dgvUsuarios.ColumnHeadersDefaultCellStyle.SelectionBackColor = MaterialColors.PrimaryDark;
+            this.dgvUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvUsuarios.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvUsuarios.ColumnHeadersHeight = 40;
             this.dgvUsuarios.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -105,11 +109,11 @@ namespace UI.Desktop.Forms.Usuarios
             this.dgvUsuarios.Name = "dgvUsuarios";
             this.dgvUsuarios.ReadOnly = true;
             this.dgvUsuarios.RowHeadersVisible = false;
-            this.dgvUsuarios.RowHeadersWidth = 51;
-            this.dgvUsuarios.RowTemplate.DefaultCellStyle.BackColor = MaterialColors.Surface;
-            this.dgvUsuarios.RowTemplate.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
-            this.dgvUsuarios.RowTemplate.DefaultCellStyle.SelectionBackColor = MaterialColors.Primary;
-            this.dgvUsuarios.RowTemplate.DefaultCellStyle.SelectionForeColor = MaterialColors.TextOnPrimary;
+            this.dgvUsuarios.DefaultCellStyle.BackColor = MaterialColors.Surface;
+            this.dgvUsuarios.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
+            this.dgvUsuarios.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvUsuarios.DefaultCellStyle.SelectionBackColor = MaterialColors.Accent;
+            this.dgvUsuarios.DefaultCellStyle.SelectionForeColor = MaterialColors.TextPrimary;
             this.dgvUsuarios.RowTemplate.Height = 35;
             this.dgvUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsuarios.Size = new System.Drawing.Size(800, 410);

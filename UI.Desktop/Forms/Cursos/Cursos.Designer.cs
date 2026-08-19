@@ -87,9 +87,13 @@ namespace UI.Desktop.Forms.Cursos
             this.dgvCursos.AllowUserToDeleteRows = false;
             this.dgvCursos.BackgroundColor = MaterialColors.Surface;
             this.dgvCursos.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvCursos.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvCursos.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvCursos.ColumnHeadersDefaultCellStyle.BackColor = MaterialColors.PrimaryDark;
+            this.dgvCursos.ColumnHeadersDefaultCellStyle.ForeColor = MaterialColors.TextOnPrimary;
+            this.dgvCursos.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.dgvCursos.ColumnHeadersDefaultCellStyle.SelectionBackColor = MaterialColors.PrimaryDark;
             this.dgvCursos.ColumnHeadersHeight = 40;
+            this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Descripcion,
@@ -105,11 +109,12 @@ namespace UI.Desktop.Forms.Cursos
             this.dgvCursos.Name = "dgvCursos";
             this.dgvCursos.ReadOnly = true;
             this.dgvCursos.RowHeadersVisible = false;
-            this.dgvCursos.RowHeadersWidth = 51;
-            this.dgvCursos.RowTemplate.DefaultCellStyle.BackColor = MaterialColors.Surface;
-            this.dgvCursos.RowTemplate.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
-            this.dgvCursos.RowTemplate.DefaultCellStyle.SelectionBackColor = MaterialColors.Primary;
-            this.dgvCursos.RowTemplate.DefaultCellStyle.SelectionForeColor = MaterialColors.TextOnPrimary;
+            this.dgvCursos.DefaultCellStyle.BackColor = MaterialColors.Surface;
+            this.dgvCursos.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
+            this.dgvCursos.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvCursos.DefaultCellStyle.SelectionBackColor = MaterialColors.Accent;
+            this.dgvCursos.DefaultCellStyle.SelectionForeColor = MaterialColors.TextPrimary;
+            this.dgvCursos.AlternatingRowsDefaultCellStyle.BackColor = MaterialColors.RowAlternate;
             this.dgvCursos.RowTemplate.Height = 35;
             this.dgvCursos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCursos.Size = new System.Drawing.Size(750, 410);

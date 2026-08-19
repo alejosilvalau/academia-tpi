@@ -7,11 +7,11 @@ namespace Dominio
     public class Plan : BusinessEntity
     {
         [StringLength(100)]
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = null!;
 
         [ForeignKey("Especialidad")]
         public int EspecialidadId { get; set; }
-        private Especialidad _especialidad;
+        private Especialidad _especialidad = null!;
         public virtual Especialidad Especialidad
         {
             get

@@ -7,22 +7,22 @@ namespace Dominio
     public class Persona : BusinessEntity
     {
         [StringLength(100)]
-        public string Nombre { get; set; }
+        public string Nombre { get; set; } = null!;
         [StringLength(100)]
-        public string Apellido { get; set; }
+        public string Apellido { get; set; } = null!;
         public int? Legajo { get; set; }
         [StringLength(100)]
-        public string EMail { get; set; }
+        public string EMail { get; set; } = null!;
         [StringLength(200)]
-        public string Direccion { get; set; }
+        public string Direccion { get; set; } = null!;
         [StringLength(50)]
-        public string Telefono { get; set; }
+        public string Telefono { get; set; } = null!;
         public DateTime FechaNacimiento { get; set; }
         public TiposPersonas Tipo { get; set; }
 
         [ForeignKey("Plan")]
         public int? PlanId { get; set; }
-        private Plan _plan;
+        private Plan _plan = null!;
         public virtual Plan Plan
         {
             get

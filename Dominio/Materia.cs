@@ -7,13 +7,13 @@ namespace Dominio
     public class Materia : BusinessEntity
     {
         [StringLength(100)]
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = null!;
         public int HorasSemanales { get; set; }
         public int HorasTotales { get; set; }
 
         [ForeignKey("Plan")]
         public int PlanId { get; set; }
-        private Plan _plan;
+        private Plan _plan = null!;
         public virtual Plan Plan
         {
             get

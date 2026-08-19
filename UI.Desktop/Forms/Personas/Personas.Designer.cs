@@ -87,8 +87,12 @@ namespace UI.Desktop.Forms.Personas
             this.dgvPersonas.AllowUserToDeleteRows = false;
             this.dgvPersonas.BackgroundColor = MaterialColors.Surface;
             this.dgvPersonas.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvPersonas.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvPersonas.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvPersonas.ColumnHeadersDefaultCellStyle.BackColor = MaterialColors.PrimaryDark;
+            this.dgvPersonas.ColumnHeadersDefaultCellStyle.ForeColor = MaterialColors.TextOnPrimary;
+            this.dgvPersonas.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.dgvPersonas.ColumnHeadersDefaultCellStyle.SelectionBackColor = MaterialColors.PrimaryDark;
+            this.dgvPersonas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvPersonas.ColumnHeadersHeight = 40;
             this.dgvPersonas.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -105,12 +109,13 @@ namespace UI.Desktop.Forms.Personas
             this.dgvPersonas.Name = "dgvPersonas";
             this.dgvPersonas.ReadOnly = true;
             this.dgvPersonas.RowHeadersVisible = false;
-            this.dgvPersonas.RowHeadersWidth = 51;
-            this.dgvPersonas.RowTemplate.DefaultCellStyle.BackColor = MaterialColors.Surface;
-            this.dgvPersonas.RowTemplate.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
-            this.dgvPersonas.RowTemplate.DefaultCellStyle.SelectionBackColor = MaterialColors.Primary;
-            this.dgvPersonas.RowTemplate.DefaultCellStyle.SelectionForeColor = MaterialColors.TextOnPrimary;
             this.dgvPersonas.RowTemplate.Height = 35;
+            this.dgvPersonas.DefaultCellStyle.BackColor = MaterialColors.Surface;
+            this.dgvPersonas.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
+            this.dgvPersonas.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvPersonas.DefaultCellStyle.SelectionBackColor = MaterialColors.Accent;
+            this.dgvPersonas.DefaultCellStyle.SelectionForeColor = MaterialColors.TextPrimary;
+            this.dgvPersonas.AlternatingRowsDefaultCellStyle.BackColor = MaterialColors.RowAlternate;
             this.dgvPersonas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvPersonas.Size = new System.Drawing.Size(900, 410);
             this.dgvPersonas.TabIndex = 1;

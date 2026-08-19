@@ -88,7 +88,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.dgvInscripciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvInscripciones.BackgroundColor = MaterialColors.Surface;
             this.dgvInscripciones.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvInscripciones.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvInscripciones.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvInscripciones.ColumnHeadersHeight = 40;
             this.dgvInscripciones.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -105,12 +104,17 @@ namespace UI.Desktop.Forms.Inscripciones
             this.dgvInscripciones.Name = "dgvInscripciones";
             this.dgvInscripciones.ReadOnly = true;
             this.dgvInscripciones.RowHeadersVisible = false;
-            this.dgvInscripciones.RowHeadersWidth = 51;
-            this.dgvInscripciones.RowTemplate.DefaultCellStyle.BackColor = MaterialColors.Surface;
-            this.dgvInscripciones.RowTemplate.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
-            this.dgvInscripciones.RowTemplate.DefaultCellStyle.SelectionBackColor = MaterialColors.Primary;
-            this.dgvInscripciones.RowTemplate.DefaultCellStyle.SelectionForeColor = MaterialColors.TextOnPrimary;
             this.dgvInscripciones.RowTemplate.Height = 35;
+            this.dgvInscripciones.ColumnHeadersDefaultCellStyle.BackColor = MaterialColors.PrimaryDark;
+            this.dgvInscripciones.ColumnHeadersDefaultCellStyle.ForeColor = MaterialColors.TextOnPrimary;
+            this.dgvInscripciones.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.dgvInscripciones.ColumnHeadersDefaultCellStyle.SelectionBackColor = MaterialColors.PrimaryDark;
+            this.dgvInscripciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvInscripciones.DefaultCellStyle.BackColor = MaterialColors.Surface;
+            this.dgvInscripciones.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
+            this.dgvInscripciones.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvInscripciones.DefaultCellStyle.SelectionBackColor = MaterialColors.Accent;
+            this.dgvInscripciones.DefaultCellStyle.SelectionForeColor = MaterialColors.TextPrimary;
             this.dgvInscripciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInscripciones.Size = new System.Drawing.Size(800, 410);
             this.dgvInscripciones.TabIndex = 1;

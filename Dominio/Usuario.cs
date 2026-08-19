@@ -7,14 +7,14 @@ namespace Dominio
     public class Usuario : BusinessEntity
     {
         [StringLength(100)]
-        public string NombreUsuario { get; set; }
+        public string NombreUsuario { get; set; } = null!;
         [StringLength(100)]
-        public string Clave { get; set; }
+        public string Clave { get; set; } = null!;
         public bool Habilitado { get; set; }
 
         [ForeignKey("Persona")]
         public int? PersonaId { get; set; }
-        private Persona _persona;
+        private Persona _persona = null!;
         public virtual Persona Persona
         {
             get

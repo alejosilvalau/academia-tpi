@@ -85,9 +85,13 @@ namespace UI.Desktop.Forms.Dictados
             this.dgvDocentes.AllowUserToDeleteRows = false;
             this.dgvDocentes.BackgroundColor = MaterialColors.Surface;
             this.dgvDocentes.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvDocentes.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvDocentes.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvDocentes.ColumnHeadersDefaultCellStyle.BackColor = MaterialColors.PrimaryDark;
+            this.dgvDocentes.ColumnHeadersDefaultCellStyle.ForeColor = MaterialColors.TextOnPrimary;
+            this.dgvDocentes.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.dgvDocentes.ColumnHeadersDefaultCellStyle.SelectionBackColor = MaterialColors.PrimaryDark;
             this.dgvDocentes.ColumnHeadersHeight = 40;
+            this.dgvDocentes.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvDocentes.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.Curso,
@@ -101,12 +105,13 @@ namespace UI.Desktop.Forms.Dictados
             this.dgvDocentes.Name = "dgvDocentes";
             this.dgvDocentes.ReadOnly = true;
             this.dgvDocentes.RowHeadersVisible = false;
-            this.dgvDocentes.RowHeadersWidth = 51;
-            this.dgvDocentes.RowTemplate.DefaultCellStyle.BackColor = MaterialColors.Surface;
-            this.dgvDocentes.RowTemplate.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
-            this.dgvDocentes.RowTemplate.DefaultCellStyle.SelectionBackColor = MaterialColors.Primary;
-            this.dgvDocentes.RowTemplate.DefaultCellStyle.SelectionForeColor = MaterialColors.TextOnPrimary;
             this.dgvDocentes.RowTemplate.Height = 35;
+            this.dgvDocentes.DefaultCellStyle.BackColor = MaterialColors.Surface;
+            this.dgvDocentes.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
+            this.dgvDocentes.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvDocentes.DefaultCellStyle.SelectionBackColor = MaterialColors.Accent;
+            this.dgvDocentes.DefaultCellStyle.SelectionForeColor = MaterialColors.TextPrimary;
+            this.dgvDocentes.AlternatingRowsDefaultCellStyle.BackColor = MaterialColors.RowAlternate;
             this.dgvDocentes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvDocentes.Size = new System.Drawing.Size(750, 410);
             this.dgvDocentes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;

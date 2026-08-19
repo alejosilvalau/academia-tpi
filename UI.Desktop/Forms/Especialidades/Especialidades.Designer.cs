@@ -83,8 +83,12 @@ namespace UI.Desktop.Forms.Especialidades
             this.dgvEspecialidades.AllowUserToDeleteRows = false;
             this.dgvEspecialidades.BackgroundColor = MaterialColors.Surface;
             this.dgvEspecialidades.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dgvEspecialidades.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None;
             this.dgvEspecialidades.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
+            this.dgvEspecialidades.ColumnHeadersDefaultCellStyle.BackColor = MaterialColors.PrimaryDark;
+            this.dgvEspecialidades.ColumnHeadersDefaultCellStyle.ForeColor = MaterialColors.TextOnPrimary;
+            this.dgvEspecialidades.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.dgvEspecialidades.ColumnHeadersDefaultCellStyle.SelectionBackColor = MaterialColors.PrimaryDark;
+            this.dgvEspecialidades.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvEspecialidades.ColumnHeadersHeight = 40;
             this.dgvEspecialidades.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -97,11 +101,12 @@ namespace UI.Desktop.Forms.Especialidades
             this.dgvEspecialidades.Name = "dgvEspecialidades";
             this.dgvEspecialidades.ReadOnly = true;
             this.dgvEspecialidades.RowHeadersVisible = false;
-            this.dgvEspecialidades.RowHeadersWidth = 51;
-            this.dgvEspecialidades.RowTemplate.DefaultCellStyle.BackColor = MaterialColors.Surface;
-            this.dgvEspecialidades.RowTemplate.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
-            this.dgvEspecialidades.RowTemplate.DefaultCellStyle.SelectionBackColor = MaterialColors.Primary;
-            this.dgvEspecialidades.RowTemplate.DefaultCellStyle.SelectionForeColor = MaterialColors.TextOnPrimary;
+            this.dgvEspecialidades.DefaultCellStyle.BackColor = MaterialColors.Surface;
+            this.dgvEspecialidades.DefaultCellStyle.ForeColor = MaterialColors.TextPrimary;
+            this.dgvEspecialidades.DefaultCellStyle.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.dgvEspecialidades.DefaultCellStyle.SelectionBackColor = MaterialColors.Accent;
+            this.dgvEspecialidades.DefaultCellStyle.SelectionForeColor = MaterialColors.TextPrimary;
+            this.dgvEspecialidades.AlternatingRowsDefaultCellStyle.BackColor = MaterialColors.RowAlternate;
             this.dgvEspecialidades.RowTemplate.Height = 35;
             this.dgvEspecialidades.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvEspecialidades.Size = new System.Drawing.Size(700, 410);

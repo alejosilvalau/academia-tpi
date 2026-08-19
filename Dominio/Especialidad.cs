@@ -7,7 +7,7 @@ namespace Dominio
     public class Especialidad : BusinessEntity
     {
         [StringLength(100)]
-        public string Descripcion { get; set; }
+        public string Descripcion { get; set; } = null!;
 
         public override string ToString()
         {
