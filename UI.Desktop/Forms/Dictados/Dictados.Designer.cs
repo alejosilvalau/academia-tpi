@@ -144,7 +144,7 @@ namespace UI.Desktop.Forms.Dictados
             //
             // Cargo
             //
-            this.Cargo.DataPropertyName = "Cargo";
+            this.Cargo.DataPropertyName = "CargoDisplay";
             this.Cargo.HeaderText = "Cargo";
             this.Cargo.MinimumWidth = 120;
             this.Cargo.Name = "Cargo";

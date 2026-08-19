@@ -22,7 +22,9 @@ namespace UI.Desktop.Forms.Personas
         {
             Modo = modo;
             cbxPlan.DataSource = _planServicio.GetAll();
-            cbxTipo.DataSource = Enum.GetValues(typeof(Persona.TiposPersonas));
+            cbxTipo.DataSource = EnumHelper.GetEnumItems<Persona.TiposPersonas>();
+            cbxTipo.DisplayMember = "Display";
+            cbxTipo.ValueMember = "Value";
             SetModo();
         }
 

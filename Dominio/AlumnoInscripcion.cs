@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
@@ -68,8 +69,11 @@ namespace Dominio
 
         public enum Condiciones
         {
+            [Description("Inscripto")]
             Inscripto,
+            [Description("Regular")]
             Regular,
+            [Description("Aprobado")]
             Aprobado
         }
     }

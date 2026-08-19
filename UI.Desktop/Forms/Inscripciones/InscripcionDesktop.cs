@@ -1,6 +1,7 @@
 using Dominio;
 using Repositorio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Inscripciones
 {
@@ -17,7 +18,9 @@ namespace UI.Desktop.Forms.Inscripciones
             _personaActual = persona;
             Modo = modo;
             txtAlumno.Text = persona.ToString();
-            cbxCondicion.DataSource = Enum.GetValues(typeof(AlumnoInscripcion.Condiciones));
+            cbxCondicion.DataSource = EnumHelper.GetEnumItems<AlumnoInscripcion.Condiciones>();
+            cbxCondicion.DisplayMember = "Display";
+            cbxCondicion.ValueMember = "Value";
             cbxCondicion.Enabled = false;
 
             switch (Modo)

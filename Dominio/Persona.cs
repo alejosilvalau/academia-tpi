@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -48,8 +49,11 @@ namespace Dominio
 
         public enum TiposPersonas
         {
+            [Description("Administrador")]
             Administrador,
+            [Description("Alumno")]
             Alumno,
+            [Description("Docente")]
             Docente
         }
 

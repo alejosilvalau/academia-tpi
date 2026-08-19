@@ -25,7 +25,9 @@ namespace UI.Desktop.Forms.Dictados
             Modo = modo;
             cbxCursos.DataSource = _cursoServicio.GetAll();
             cbxDocentes.DataSource = _personaServicio.GetByTipo(Persona.TiposPersonas.Docente);
-            cbxTiposCargos.DataSource = Enum.GetValues(typeof(DocenteCurso.TiposCargos));
+            cbxTiposCargos.DataSource = EnumHelper.GetEnumItems<DocenteCurso.TiposCargos>();
+            cbxTiposCargos.DisplayMember = "Display";
+            cbxTiposCargos.ValueMember = "Value";
             SetModo();
         }
 
