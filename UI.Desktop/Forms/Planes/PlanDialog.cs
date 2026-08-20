@@ -67,7 +67,6 @@ namespace UI.Desktop.Forms.Planes
             {
                 int espId = (int)cbxEspecialidad.SelectedValue;
                 _plan.EspecialidadId = espId;
-                _plan.Especialidad = (Especialidad)cbxEspecialidad.SelectedItem;
             }
         }
 

@@ -44,9 +44,8 @@ namespace UI.Desktop
                     _botonesPermitidos.Add(btnABMComisiones.Name);
                     _botonesPermitidos.Add(btnABMCursos.Name);
                     _botonesPermitidos.Add(btnABMEspecialidades.Name);
-                    _botonesPermitidos.Add(btnABMMaterias.Name);
                     _botonesPermitidos.Add(btnABMPersonas.Name);
-                    _botonesPermitidos.Add(btnABMPlanes.Name);
+                    _botonesPermitidos.Add(btnABMPlanMaterias.Name);
                     _botonesPermitidos.Add(btnABMDictados.Name);
                     _botonesPermitidos.Add(btnABMUsuarios.Name);
                     break;
@@ -134,19 +133,14 @@ namespace UI.Desktop
             OpenForm(new Forms.Especialidades.Especialidades());
         }
 
-        private void btnABMMaterias_Click(object sender, EventArgs e)
-        {
-            OpenForm(new Forms.Materias.Materias());
-        }
-
         private void btnABMPersonas_Click(object sender, EventArgs e)
         {
             OpenForm(new Forms.Personas.Personas());
         }
 
-        private void btnABMPlanes_Click(object sender, EventArgs e)
+        private void btnABMPlanMaterias_Click(object sender, EventArgs e)
         {
-            OpenForm(new Forms.Planes.Planes());
+            OpenForm(new Forms.Planes.PlanMaterias());
         }
 
         private void btnABMDictados_Click(object sender, EventArgs e)

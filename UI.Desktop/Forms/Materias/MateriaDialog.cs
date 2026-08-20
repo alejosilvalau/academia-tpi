@@ -25,6 +25,15 @@ namespace UI.Desktop.Forms.Materias
             SetModo();
         }
 
+        public MateriaDialog(int planId) : this()
+        {
+            Modo = ModoForm.Alta;
+            cbxPlan.DataSource = _planServicio.GetAll();
+            cbxPlan.SelectedValue = planId;
+            cbxPlan.Enabled = false;
+            SetModo();
+        }
+
         public MateriaDialog(int id, ModoForm modo) : this(modo)
         {
             _materia = _servicio.GetOne(id);

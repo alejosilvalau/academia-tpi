@@ -31,13 +31,12 @@ namespace UI.Desktop
             btnReportesRendimientoDocente = new Button();
             btnReportesRendimientoAlumnos = new Button();
             btnABMUsuarios = new Button();
-            btnABMPlanes = new Button();
             btnABMPersonas = new Button();
-            btnABMMaterias = new Button();
             btnABMEspecialidades = new Button();
             btnABMDictados = new Button();
-            btnABMCursos = new Button();
+btnABMCursos = new Button();
             btnABMComisiones = new Button();
+            btnABMPlanMaterias = new Button();
             panelBottom = new Panel();
             btnActualizar = new Button();
             btnSalir = new Button();
@@ -262,13 +261,12 @@ namespace UI.Desktop
             panelSubMenu.Controls.Add(btnReportesRendimientoDocente);
             panelSubMenu.Controls.Add(btnReportesRendimientoAlumnos);
             panelSubMenu.Controls.Add(btnABMUsuarios);
-            panelSubMenu.Controls.Add(btnABMPlanes);
             panelSubMenu.Controls.Add(btnABMPersonas);
-            panelSubMenu.Controls.Add(btnABMMaterias);
             panelSubMenu.Controls.Add(btnABMEspecialidades);
             panelSubMenu.Controls.Add(btnABMDictados);
-            panelSubMenu.Controls.Add(btnABMCursos);
+panelSubMenu.Controls.Add(btnABMCursos);
             panelSubMenu.Controls.Add(btnABMComisiones);
+            panelSubMenu.Controls.Add(btnABMPlanMaterias);
             panelSubMenu.Location = new Point(220, 62);
             panelSubMenu.Margin = new Padding(3, 4, 3, 4);
             panelSubMenu.Name = "panelSubMenu";
@@ -339,27 +337,6 @@ namespace UI.Desktop
             btnABMUsuarios.Visible = false;
             btnABMUsuarios.Click += btnABMUsuarios_Click;
             // 
-            // btnABMPlanes
-            // 
-            btnABMPlanes.AutoSize = true;
-            btnABMPlanes.Dock = DockStyle.Top;
-            btnABMPlanes.FlatAppearance.BorderSize = 0;
-            btnABMPlanes.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMPlanes.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
-            btnABMPlanes.FlatStyle = FlatStyle.Flat;
-            btnABMPlanes.Font = new Font("Segoe UI", 9F);
-            btnABMPlanes.ForeColor = Color.White;
-            btnABMPlanes.Location = new Point(0, 312);
-            btnABMPlanes.Margin = new Padding(3, 4, 3, 4);
-            btnABMPlanes.Name = "btnABMPlanes";
-            btnABMPlanes.Padding = new Padding(15, 8, 15, 8);
-            btnABMPlanes.Size = new Size(200, 52);
-            btnABMPlanes.TabIndex = 5;
-            btnABMPlanes.Text = "Planes";
-            btnABMPlanes.TextAlign = ContentAlignment.MiddleLeft;
-            btnABMPlanes.Visible = false;
-            btnABMPlanes.Click += btnABMPlanes_Click;
-            // 
             // btnABMPersonas
             // 
             btnABMPersonas.AutoSize = true;
@@ -380,27 +357,6 @@ namespace UI.Desktop
             btnABMPersonas.TextAlign = ContentAlignment.MiddleLeft;
             btnABMPersonas.Visible = false;
             btnABMPersonas.Click += btnABMPersonas_Click;
-            // 
-            // btnABMMaterias
-            // 
-            btnABMMaterias.AutoSize = true;
-            btnABMMaterias.Dock = DockStyle.Top;
-            btnABMMaterias.FlatAppearance.BorderSize = 0;
-            btnABMMaterias.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnABMMaterias.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
-            btnABMMaterias.FlatStyle = FlatStyle.Flat;
-            btnABMMaterias.Font = new Font("Segoe UI", 9F);
-            btnABMMaterias.ForeColor = Color.White;
-            btnABMMaterias.Location = new Point(0, 208);
-            btnABMMaterias.Margin = new Padding(3, 4, 3, 4);
-            btnABMMaterias.Name = "btnABMMaterias";
-            btnABMMaterias.Padding = new Padding(15, 8, 15, 8);
-            btnABMMaterias.Size = new Size(200, 52);
-            btnABMMaterias.TabIndex = 3;
-            btnABMMaterias.Text = "Materias";
-            btnABMMaterias.TextAlign = ContentAlignment.MiddleLeft;
-            btnABMMaterias.Visible = false;
-            btnABMMaterias.Click += btnABMMaterias_Click;
             // 
             // btnABMEspecialidades
             // 
@@ -482,9 +438,30 @@ namespace UI.Desktop
             btnABMComisiones.Size = new Size(200, 52);
             btnABMComisiones.TabIndex = 0;
             btnABMComisiones.Text = "Comisiones";
-            btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
+btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             btnABMComisiones.Visible = false;
             btnABMComisiones.Click += btnABMComisiones_Click;
+            // 
+            // btnABMPlanMaterias
+            // 
+            btnABMPlanMaterias.AutoSize = true;
+            btnABMPlanMaterias.Dock = DockStyle.Top;
+            btnABMPlanMaterias.FlatAppearance.BorderSize = 0;
+            btnABMPlanMaterias.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
+            btnABMPlanMaterias.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
+            btnABMPlanMaterias.FlatStyle = FlatStyle.Flat;
+            btnABMPlanMaterias.Font = new Font("Segoe UI", 9F);
+            btnABMPlanMaterias.ForeColor = Color.White;
+            btnABMPlanMaterias.Location = new Point(0, 520);
+            btnABMPlanMaterias.Margin = new Padding(3, 4, 3, 4);
+            btnABMPlanMaterias.Name = "btnABMPlanMaterias";
+            btnABMPlanMaterias.Padding = new Padding(15, 8, 15, 8);
+            btnABMPlanMaterias.Size = new Size(200, 52);
+            btnABMPlanMaterias.TabIndex = 10;
+            btnABMPlanMaterias.Text = "Plan/Materias";
+            btnABMPlanMaterias.TextAlign = ContentAlignment.MiddleLeft;
+            btnABMPlanMaterias.Visible = false;
+            btnABMPlanMaterias.Click += btnABMPlanMaterias_Click;
             // 
             // panelBottom
             // 
@@ -581,13 +558,12 @@ namespace UI.Desktop
         private System.Windows.Forms.Button btnReportesRendimientoDocente;
         private System.Windows.Forms.Button btnReportesRendimientoAlumnos;
         private System.Windows.Forms.Button btnABMUsuarios;
-        private System.Windows.Forms.Button btnABMPlanes;
         private System.Windows.Forms.Button btnABMPersonas;
-        private System.Windows.Forms.Button btnABMMaterias;
         private System.Windows.Forms.Button btnABMEspecialidades;
         private System.Windows.Forms.Button btnABMDictados;
         private System.Windows.Forms.Button btnABMCursos;
         private System.Windows.Forms.Button btnABMComisiones;
+        private System.Windows.Forms.Button btnABMPlanMaterias;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnSalir;
