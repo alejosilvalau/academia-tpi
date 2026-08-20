@@ -90,7 +90,10 @@ namespace UI.Desktop.Forms.Personas
 
         private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            tsbEditar_Click(sender, e);
+            if (tsbSeleccionar.Visible)
+                tsbSeleccionar_Click(sender, e);
+            else
+                tsbEditar_Click(sender, e);
         }
     }
 }
