@@ -1,6 +1,6 @@
 namespace UI.Desktop.Forms.Personas
 {
-    partial class PersonaDesktop
+    partial class PersonaDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -382,7 +382,7 @@ namespace UI.Desktop.Forms.Personas
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
-            // PersonaDesktop
+            // PersonaDialog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -391,7 +391,7 @@ namespace UI.Desktop.Forms.Personas
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.panelBotones);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.Name = "PersonaDesktop";
+            this.Name = "PersonaDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Persona";
             this.tableLayoutPanel1.ResumeLayout(false);

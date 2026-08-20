@@ -5,27 +5,27 @@ using Utils;
 
 namespace UI.Desktop.Forms.Usuarios
 {
-    public partial class UsuarioDesktop : ApplicationForm
+    public partial class UsuarioDialog : ApplicationForm
     {
         private readonly UsuarioServicio _servicio;
         private readonly PersonaServicio _personaServicio;
         private Usuario? _usuario;
 
-        public UsuarioDesktop() : base()
+        public UsuarioDialog() : base()
         {
             InitializeComponent();
             _servicio = new UsuarioServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
-        public UsuarioDesktop(ModoForm modo) : this()
+        public UsuarioDialog(ModoForm modo) : this()
         {
             Modo = modo;
             cbxPersona.DataSource = _personaServicio.GetAll();
             SetModo();
         }
 
-        public UsuarioDesktop(int id, ModoForm modo) : this(modo)
+        public UsuarioDialog(int id, ModoForm modo) : this(modo)
         {
             _usuario = _servicio.GetOne(id);
             MapearDeDatos();

@@ -1,6 +1,6 @@
 namespace UI.Desktop.Forms.Usuarios
 {
-    partial class UsuarioDesktop
+    partial class UsuarioDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -242,7 +242,7 @@ namespace UI.Desktop.Forms.Usuarios
             btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click;
             // 
-            // UsuarioDesktop
+            // UsuarioDialog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -251,7 +251,7 @@ namespace UI.Desktop.Forms.Usuarios
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
             Margin = new Padding(3, 5, 3, 5);
-            Name = "UsuarioDesktop";
+            Name = "UsuarioDialog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Usuario";
             tableLayoutPanel1.ResumeLayout(false);

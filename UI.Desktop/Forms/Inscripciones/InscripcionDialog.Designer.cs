@@ -1,6 +1,6 @@
 namespace UI.Desktop.Forms.Inscripciones
 {
-    partial class InscripcionDesktop
+    partial class InscripcionDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -241,7 +241,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             //
-            // InscripcionDesktop
+            // InscripcionDialog
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -251,7 +251,7 @@ namespace UI.Desktop.Forms.Inscripciones
             this.Controls.Add(this.panelBotones);
             this.Controls.Add(this.panelTop);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
-            this.Name = "InscripcionDesktop";
+            this.Name = "InscripcionDialog";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Inscripción";
             this.panelTop.ResumeLayout(false);

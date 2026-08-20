@@ -1,6 +1,6 @@
 namespace UI.Desktop.Forms.Especialidades
 {
-    partial class EspecialidadDesktop
+    partial class EspecialidadDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -76,6 +76,7 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             // txtID
             // 
+            txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtID.BackColor = Color.FromArgb(238, 238, 238);
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Enabled = false;
@@ -151,7 +152,7 @@ namespace UI.Desktop.Forms.Especialidades
             btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click;
             // 
-            // EspecialidadDesktop
+            // EspecialidadDialog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -160,7 +161,7 @@ namespace UI.Desktop.Forms.Especialidades
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
             Margin = new Padding(3, 5, 3, 5);
-            Name = "EspecialidadDesktop";
+            Name = "EspecialidadDialog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Especialidad";
             tableLayoutPanel1.ResumeLayout(false);

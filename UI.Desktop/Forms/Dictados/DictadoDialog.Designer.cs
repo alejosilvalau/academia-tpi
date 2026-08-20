@@ -1,6 +1,6 @@
 namespace UI.Desktop.Forms.Dictados
 {
-    partial class DictadoDesktop
+    partial class DictadoDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -217,7 +217,7 @@ namespace UI.Desktop.Forms.Dictados
             btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click;
             // 
-            // DictadoDesktop
+            // DictadoDialog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -226,7 +226,7 @@ namespace UI.Desktop.Forms.Dictados
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
             Margin = new Padding(3, 5, 3, 5);
-            Name = "DictadoDesktop";
+            Name = "DictadoDialog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Dictado";
             tableLayoutPanel1.ResumeLayout(false);

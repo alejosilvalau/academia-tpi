@@ -5,20 +5,20 @@ using Utils;
 
 namespace UI.Desktop.Forms.Personas
 {
-    public partial class PersonaDesktop : ApplicationForm
+    public partial class PersonaDialog : ApplicationForm
     {
         private readonly PersonaServicio _servicio;
         private readonly PlanServicio _planServicio;
         private Persona? _persona;
 
-        public PersonaDesktop() : base()
+        public PersonaDialog() : base()
         {
             InitializeComponent();
             _servicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
-        public PersonaDesktop(ModoForm modo) : this()
+        public PersonaDialog(ModoForm modo) : this()
         {
             Modo = modo;
             cbxPlan.DataSource = _planServicio.GetAll();
@@ -28,7 +28,7 @@ namespace UI.Desktop.Forms.Personas
             SetModo();
         }
 
-        public PersonaDesktop(int id, ModoForm modo) : this(modo)
+        public PersonaDialog(int id, ModoForm modo) : this(modo)
         {
             _persona = _servicio.GetOne(id);
             MapearDeDatos();

@@ -5,24 +5,24 @@ using Utils;
 
 namespace UI.Desktop.Forms.Especialidades
 {
-    public partial class EspecialidadDesktop : ApplicationForm
+    public partial class EspecialidadDialog : ApplicationForm
     {
         private readonly EspecialidadServicio _servicio;
         private Especialidad? _especialidad;
 
-        public EspecialidadDesktop(ModoForm modo) : this()
+        public EspecialidadDialog(ModoForm modo) : this()
         {
             Modo = modo;
             SetModo();
         }
 
-        public EspecialidadDesktop(int id, ModoForm modo) : this(modo)
+        public EspecialidadDialog(int id, ModoForm modo) : this(modo)
         {
             _especialidad = _servicio.GetOne(id);
             MapearDeDatos();
         }
 
-        public EspecialidadDesktop() : base()
+        public EspecialidadDialog() : base()
         {
             InitializeComponent();
             _servicio = new EspecialidadServicio(new AcademiaContext(), new UsuarioContextoDesktop());

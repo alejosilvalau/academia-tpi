@@ -4,27 +4,27 @@ using Servicios;
 
 namespace UI.Desktop.Forms.Comisiones
 {
-    public partial class ComisionDesktop : ApplicationForm
+    public partial class ComisionDialog : ApplicationForm
     {
         private readonly ComisionServicio _servicio;
         private readonly PlanServicio _planServicio;
         private Comision? _comision;
 
-        public ComisionDesktop() : base()
+        public ComisionDialog() : base()
         {
             InitializeComponent();
             _servicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
-        public ComisionDesktop(ModoForm modo) : this()
+        public ComisionDialog(ModoForm modo) : this()
         {
             Modo = modo;
             cbxPlan.DataSource = _planServicio.GetAll();
             SetModo();
         }
 
-        public ComisionDesktop(int id, ModoForm modo) : this(modo)
+        public ComisionDialog(int id, ModoForm modo) : this(modo)
         {
             _comision = _servicio.GetOne(id);
             MapearDeDatos();

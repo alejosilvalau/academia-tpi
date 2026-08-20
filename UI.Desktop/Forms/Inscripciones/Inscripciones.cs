@@ -37,7 +37,7 @@ namespace UI.Desktop.Forms.Inscripciones
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new InscripcionDesktop(_personaActual, ModoForm.Alta).ShowDialog();
+            new InscripcionDialog(_personaActual, ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -45,7 +45,7 @@ namespace UI.Desktop.Forms.Inscripciones
         {
             if (!IsRowSelected(dgvInscripciones)) return;
             int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
-            new InscripcionDesktop(_personaActual, id, ModoForm.Baja).ShowDialog();
+            new InscripcionDialog(_personaActual, id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvInscripciones);
             Listar();
             SeleccionarFila(dgvInscripciones, id);

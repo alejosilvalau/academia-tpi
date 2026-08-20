@@ -30,7 +30,7 @@ namespace UI.Desktop.Forms.Especialidades
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new EspecialidadDesktop(ModoForm.Alta).ShowDialog();
+            new EspecialidadDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -38,7 +38,7 @@ namespace UI.Desktop.Forms.Especialidades
         {
             if (!IsRowSelected(dgvEspecialidades)) return;
             int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
-            new EspecialidadDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new EspecialidadDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvEspecialidades);
             Listar();
             SeleccionarFila(dgvEspecialidades, id);
@@ -49,7 +49,7 @@ namespace UI.Desktop.Forms.Especialidades
         {
             if (!IsRowSelected(dgvEspecialidades)) return;
             int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
-            new EspecialidadDesktop(id, ModoForm.Baja).ShowDialog();
+            new EspecialidadDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvEspecialidades);
             Listar();
             SeleccionarFila(dgvEspecialidades, id);

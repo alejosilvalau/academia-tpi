@@ -1,6 +1,6 @@
-namespace UI.Desktop.Forms.Materias
+namespace UI.Desktop.Forms.Comisiones
 {
-    partial class MateriaDesktop
+    partial class ComisionDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -20,12 +20,10 @@ namespace UI.Desktop.Forms.Materias
             tableLayoutPanel1 = new TableLayoutPanel();
             lblID = new Label();
             txtID = new TextBox();
-            lblHsSemanales = new Label();
-            txtHsSemanales = new TextBox();
             lblDescripcion = new Label();
             txtDescripcion = new TextBox();
-            lblHsTotales = new Label();
-            txtHsTotales = new TextBox();
+            lblAnioEspecialidad = new Label();
+            txtAnioEspecialidad = new TextBox();
             lblPlan = new Label();
             cbxPlan = new ComboBox();
             panelBottom = new Panel();
@@ -45,24 +43,21 @@ namespace UI.Desktop.Forms.Materias
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(lblID, 0, 0);
             tableLayoutPanel1.Controls.Add(txtID, 1, 0);
-            tableLayoutPanel1.Controls.Add(lblHsSemanales, 2, 0);
-            tableLayoutPanel1.Controls.Add(txtHsSemanales, 3, 0);
             tableLayoutPanel1.Controls.Add(lblDescripcion, 0, 1);
             tableLayoutPanel1.Controls.Add(txtDescripcion, 1, 1);
-            tableLayoutPanel1.Controls.Add(lblHsTotales, 2, 1);
-            tableLayoutPanel1.Controls.Add(txtHsTotales, 3, 1);
-            tableLayoutPanel1.Controls.Add(lblPlan, 0, 2);
-            tableLayoutPanel1.Controls.Add(cbxPlan, 1, 2);
+            tableLayoutPanel1.Controls.Add(lblAnioEspecialidad, 2, 0);
+            tableLayoutPanel1.Controls.Add(txtAnioEspecialidad, 3, 0);
+            tableLayoutPanel1.Controls.Add(lblPlan, 2, 1);
+            tableLayoutPanel1.Controls.Add(cbxPlan, 3, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(20, 19, 20, 19);
-            tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
-            tableLayoutPanel1.Size = new Size(580, 178);
+            tableLayoutPanel1.RowCount = 2;
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.RowStyles.Add(new RowStyle());
+            tableLayoutPanel1.Size = new Size(580, 128);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblID
@@ -71,7 +66,7 @@ namespace UI.Desktop.Forms.Materias
             lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(33, 33, 33);
-            lblID.Location = new Point(69, 30);
+            lblID.Location = new Point(94, 26);
             lblID.Name = "lblID";
             lblID.Size = new Size(31, 23);
             lblID.TabIndex = 0;
@@ -85,37 +80,12 @@ namespace UI.Desktop.Forms.Materias
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(117, 117, 117);
-            txtID.Location = new Point(106, 26);
+            txtID.Location = new Point(131, 23);
             txtID.Margin = new Padding(3, 4, 3, 4);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
-            txtID.Size = new Size(147, 30);
+            txtID.Size = new Size(135, 30);
             txtID.TabIndex = 1;
-            // 
-            // lblHsSemanales
-            // 
-            lblHsSemanales.Anchor = AnchorStyles.Right;
-            lblHsSemanales.AutoSize = true;
-            lblHsSemanales.Font = new Font("Segoe UI", 10F);
-            lblHsSemanales.ForeColor = Color.FromArgb(33, 33, 33);
-            lblHsSemanales.Location = new Point(259, 30);
-            lblHsSemanales.Name = "lblHsSemanales";
-            lblHsSemanales.Size = new Size(144, 23);
-            lblHsSemanales.TabIndex = 2;
-            lblHsSemanales.Text = "Horas Semanales:";
-            // 
-            // txtHsSemanales
-            // 
-            txtHsSemanales.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtHsSemanales.BackColor = Color.White;
-            txtHsSemanales.BorderStyle = BorderStyle.FixedSingle;
-            txtHsSemanales.Font = new Font("Segoe UI", 10F);
-            txtHsSemanales.ForeColor = Color.FromArgb(33, 33, 33);
-            txtHsSemanales.Location = new Point(409, 26);
-            txtHsSemanales.Margin = new Padding(3, 4, 3, 4);
-            txtHsSemanales.Name = "txtHsSemanales";
-            txtHsSemanales.Size = new Size(148, 30);
-            txtHsSemanales.TabIndex = 3;
             // 
             // lblDescripcion
             // 
@@ -123,11 +93,11 @@ namespace UI.Desktop.Forms.Materias
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 10F);
             lblDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
-            lblDescripcion.Location = new Point(23, 75);
+            lblDescripcion.Location = new Point(23, 71);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(77, 23);
-            lblDescripcion.TabIndex = 4;
-            lblDescripcion.Text = "Nombre:";
+            lblDescripcion.Size = new Size(102, 23);
+            lblDescripcion.TabIndex = 2;
+            lblDescripcion.Text = "Descripción:";
             // 
             // txtDescripcion
             // 
@@ -136,36 +106,36 @@ namespace UI.Desktop.Forms.Materias
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Font = new Font("Segoe UI", 10F);
             txtDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
-            txtDescripcion.Location = new Point(106, 71);
+            txtDescripcion.Location = new Point(131, 68);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
-            txtDescripcion.Size = new Size(147, 30);
-            txtDescripcion.TabIndex = 5;
+            txtDescripcion.Size = new Size(135, 30);
+            txtDescripcion.TabIndex = 3;
             // 
-            // lblHsTotales
+            // lblAnioEspecialidad
             // 
-            lblHsTotales.Anchor = AnchorStyles.Right;
-            lblHsTotales.AutoSize = true;
-            lblHsTotales.Font = new Font("Segoe UI", 10F);
-            lblHsTotales.ForeColor = Color.FromArgb(33, 33, 33);
-            lblHsTotales.Location = new Point(288, 75);
-            lblHsTotales.Name = "lblHsTotales";
-            lblHsTotales.Size = new Size(115, 23);
-            lblHsTotales.TabIndex = 6;
-            lblHsTotales.Text = "Horas Totales:";
+            lblAnioEspecialidad.Anchor = AnchorStyles.Right;
+            lblAnioEspecialidad.AutoSize = true;
+            lblAnioEspecialidad.Font = new Font("Segoe UI", 10F);
+            lblAnioEspecialidad.ForeColor = Color.FromArgb(33, 33, 33);
+            lblAnioEspecialidad.Location = new Point(272, 26);
+            lblAnioEspecialidad.Name = "lblAnioEspecialidad";
+            lblAnioEspecialidad.Size = new Size(143, 23);
+            lblAnioEspecialidad.TabIndex = 4;
+            lblAnioEspecialidad.Text = "Año Especialidad:";
             // 
-            // txtHsTotales
+            // txtAnioEspecialidad
             // 
-            txtHsTotales.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtHsTotales.BackColor = Color.White;
-            txtHsTotales.BorderStyle = BorderStyle.FixedSingle;
-            txtHsTotales.Font = new Font("Segoe UI", 10F);
-            txtHsTotales.ForeColor = Color.FromArgb(33, 33, 33);
-            txtHsTotales.Location = new Point(409, 71);
-            txtHsTotales.Margin = new Padding(3, 4, 3, 4);
-            txtHsTotales.Name = "txtHsTotales";
-            txtHsTotales.Size = new Size(148, 30);
-            txtHsTotales.TabIndex = 7;
+            txtAnioEspecialidad.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtAnioEspecialidad.BackColor = Color.White;
+            txtAnioEspecialidad.BorderStyle = BorderStyle.FixedSingle;
+            txtAnioEspecialidad.Font = new Font("Segoe UI", 10F);
+            txtAnioEspecialidad.ForeColor = Color.FromArgb(33, 33, 33);
+            txtAnioEspecialidad.Location = new Point(421, 23);
+            txtAnioEspecialidad.Margin = new Padding(3, 4, 3, 4);
+            txtAnioEspecialidad.Name = "txtAnioEspecialidad";
+            txtAnioEspecialidad.Size = new Size(136, 30);
+            txtAnioEspecialidad.TabIndex = 5;
             // 
             // lblPlan
             // 
@@ -173,27 +143,26 @@ namespace UI.Desktop.Forms.Materias
             lblPlan.AutoSize = true;
             lblPlan.Font = new Font("Segoe UI", 10F);
             lblPlan.ForeColor = Color.FromArgb(33, 33, 33);
-            lblPlan.Location = new Point(53, 122);
+            lblPlan.Location = new Point(368, 71);
             lblPlan.Name = "lblPlan";
             lblPlan.Size = new Size(47, 23);
-            lblPlan.TabIndex = 8;
+            lblPlan.TabIndex = 6;
             lblPlan.Text = "Plan:";
             // 
             // cbxPlan
             // 
             cbxPlan.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxPlan.BackColor = Color.White;
-            tableLayoutPanel1.SetColumnSpan(cbxPlan, 3);
             cbxPlan.DisplayMember = "Descripcion";
             cbxPlan.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPlan.Font = new Font("Segoe UI", 10F);
             cbxPlan.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPlan.FormattingEnabled = true;
-            cbxPlan.Location = new Point(106, 118);
+            cbxPlan.Location = new Point(421, 67);
             cbxPlan.Margin = new Padding(3, 4, 3, 4);
             cbxPlan.Name = "cbxPlan";
-            cbxPlan.Size = new Size(451, 31);
-            cbxPlan.TabIndex = 9;
+            cbxPlan.Size = new Size(136, 31);
+            cbxPlan.TabIndex = 7;
             cbxPlan.ValueMember = "ID";
             // 
             // panelBottom
@@ -202,7 +171,7 @@ namespace UI.Desktop.Forms.Materias
             panelBottom.Controls.Add(btnCancelar);
             panelBottom.Controls.Add(btnAceptar);
             panelBottom.Dock = DockStyle.Bottom;
-            panelBottom.Location = new Point(0, 178);
+            panelBottom.Location = new Point(0, 128);
             panelBottom.Margin = new Padding(3, 4, 3, 4);
             panelBottom.Name = "panelBottom";
             panelBottom.Size = new Size(580, 56);
@@ -246,18 +215,18 @@ namespace UI.Desktop.Forms.Materias
             btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click;
             // 
-            // MateriaDesktop
+            // ComisionDialog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(580, 234);
+            ClientSize = new Size(580, 184);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBottom);
             Margin = new Padding(3, 5, 3, 5);
-            Name = "MateriaDesktop";
+            Name = "ComisionDialog";
             StartPosition = FormStartPosition.CenterParent;
-            Text = "Materia";
+            Text = "Comision";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panelBottom.ResumeLayout(false);
@@ -269,12 +238,10 @@ namespace UI.Desktop.Forms.Materias
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label lblID;
         private System.Windows.Forms.TextBox txtID;
-        private System.Windows.Forms.Label lblHsSemanales;
-        private System.Windows.Forms.TextBox txtHsSemanales;
         private System.Windows.Forms.Label lblDescripcion;
         private System.Windows.Forms.TextBox txtDescripcion;
-        private System.Windows.Forms.Label lblHsTotales;
-        private System.Windows.Forms.TextBox txtHsTotales;
+        private System.Windows.Forms.Label lblAnioEspecialidad;
+        private System.Windows.Forms.TextBox txtAnioEspecialidad;
         private System.Windows.Forms.Label lblPlan;
         private System.Windows.Forms.ComboBox cbxPlan;
         private System.Windows.Forms.Panel panelBottom;

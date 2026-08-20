@@ -1,6 +1,6 @@
 namespace UI.Desktop.Forms.Planes
 {
-    partial class PlanDesktop
+    partial class PlanDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -183,7 +183,7 @@ namespace UI.Desktop.Forms.Planes
             btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click;
             // 
-            // PlanDesktop
+            // PlanDialog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -192,7 +192,7 @@ namespace UI.Desktop.Forms.Planes
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
             Margin = new Padding(3, 5, 3, 5);
-            Name = "PlanDesktop";
+            Name = "PlanDialog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Plan";
             tableLayoutPanel1.ResumeLayout(false);

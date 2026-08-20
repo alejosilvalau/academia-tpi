@@ -30,7 +30,7 @@ namespace UI.Desktop.Forms.Planes
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new PlanDesktop(ModoForm.Alta).ShowDialog();
+            new PlanDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -38,7 +38,7 @@ namespace UI.Desktop.Forms.Planes
         {
             if (!IsRowSelected(dgvPlanes)) return;
             int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
-            new PlanDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new PlanDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvPlanes);
             Listar();
             SeleccionarFila(dgvPlanes, id);
@@ -49,7 +49,7 @@ namespace UI.Desktop.Forms.Planes
         {
             if (!IsRowSelected(dgvPlanes)) return;
             int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
-            new PlanDesktop(id, ModoForm.Baja).ShowDialog();
+            new PlanDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvPlanes);
             Listar();
             SeleccionarFila(dgvPlanes, id);

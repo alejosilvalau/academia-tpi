@@ -30,7 +30,7 @@ namespace UI.Desktop.Forms.Comisiones
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new ComisionDesktop(ModoForm.Alta).ShowDialog();
+            new ComisionDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -38,7 +38,7 @@ namespace UI.Desktop.Forms.Comisiones
         {
             if (!IsRowSelected(dgvComisiones)) return;
             int id = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
-            new ComisionDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new ComisionDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvComisiones);
             Listar();
             SeleccionarFila(dgvComisiones, id);
@@ -49,7 +49,7 @@ namespace UI.Desktop.Forms.Comisiones
         {
             if (!IsRowSelected(dgvComisiones)) return;
             int id = ((Comision)dgvComisiones.SelectedRows[0].DataBoundItem).ID;
-            new ComisionDesktop(id, ModoForm.Baja).ShowDialog();
+            new ComisionDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvComisiones);
             Listar();
             SeleccionarFila(dgvComisiones, id);

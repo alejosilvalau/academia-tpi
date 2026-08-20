@@ -5,14 +5,14 @@ using Utils;
 
 namespace UI.Desktop.Forms.Dictados
 {
-    public partial class DictadoDesktop : ApplicationForm
+    public partial class DictadoDialog : ApplicationForm
     {
         private readonly DocenteCursoServicio _servicio;
         private readonly CursoServicio _cursoServicio;
         private readonly PersonaServicio _personaServicio;
         private DocenteCurso? _dictado;
 
-        public DictadoDesktop() : base()
+        public DictadoDialog() : base()
         {
             InitializeComponent();
             _servicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
@@ -20,7 +20,7 @@ namespace UI.Desktop.Forms.Dictados
             _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
-        public DictadoDesktop(ModoForm modo) : this()
+        public DictadoDialog(ModoForm modo) : this()
         {
             Modo = modo;
             cbxCursos.DataSource = _cursoServicio.GetAll();
@@ -31,7 +31,7 @@ namespace UI.Desktop.Forms.Dictados
             SetModo();
         }
 
-        public DictadoDesktop(int id, ModoForm modo) : this(modo)
+        public DictadoDialog(int id, ModoForm modo) : this(modo)
         {
             _dictado = _servicio.GetOne(id);
             MapearDeDatos();

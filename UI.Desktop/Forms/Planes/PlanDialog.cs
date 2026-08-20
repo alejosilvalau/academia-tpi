@@ -5,25 +5,25 @@ using Utils;
 
 namespace UI.Desktop.Forms.Planes
 {
-    public partial class PlanDesktop : ApplicationForm
+    public partial class PlanDialog : ApplicationForm
     {
         private readonly PlanServicio _planServicio;
         private readonly EspecialidadServicio _especialidadServicio;
         private Plan? _plan;
 
-        public PlanDesktop(ModoForm modo) : this()
+        public PlanDialog(ModoForm modo) : this()
         {
             Modo = modo;
             SetModo();
         }
 
-        public PlanDesktop(int id, ModoForm modo) : this(modo)
+        public PlanDialog(int id, ModoForm modo) : this(modo)
         {
             _plan = _planServicio.GetOne(id);
             MapearDeDatos();
         }
 
-        public PlanDesktop() : base()
+        public PlanDialog() : base()
         {
             InitializeComponent();
             _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());

@@ -30,7 +30,7 @@ namespace UI.Desktop.Forms.Usuarios
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new UsuarioDesktop(ModoForm.Alta).ShowDialog();
+            new UsuarioDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -38,7 +38,7 @@ namespace UI.Desktop.Forms.Usuarios
         {
             if (!IsRowSelected(dgvUsuarios)) return;
             int id = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-            new UsuarioDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new UsuarioDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvUsuarios);
             Listar();
             SeleccionarFila(dgvUsuarios, id);
@@ -49,7 +49,7 @@ namespace UI.Desktop.Forms.Usuarios
         {
             if (!IsRowSelected(dgvUsuarios)) return;
             int id = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
-            new UsuarioDesktop(id, ModoForm.Baja).ShowDialog();
+            new UsuarioDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvUsuarios);
             Listar();
             SeleccionarFila(dgvUsuarios, id);

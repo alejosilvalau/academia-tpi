@@ -45,7 +45,7 @@ namespace UI.Desktop.Forms.Personas
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new PersonaDesktop(ModoForm.Alta).ShowDialog();
+            new PersonaDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -53,7 +53,7 @@ namespace UI.Desktop.Forms.Personas
         {
             if (!IsRowSelected(dgvPersonas)) return;
             int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
-            new PersonaDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new PersonaDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvPersonas);
             Listar();
             SeleccionarFila(dgvPersonas, id);
@@ -64,7 +64,7 @@ namespace UI.Desktop.Forms.Personas
         {
             if (!IsRowSelected(dgvPersonas)) return;
             int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
-            new PersonaDesktop(id, ModoForm.Baja).ShowDialog();
+            new PersonaDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvPersonas);
             Listar();
             SeleccionarFila(dgvPersonas, id);

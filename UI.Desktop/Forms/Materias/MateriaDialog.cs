@@ -5,27 +5,27 @@ using Utils;
 
 namespace UI.Desktop.Forms.Materias
 {
-    public partial class MateriaDesktop : ApplicationForm
+    public partial class MateriaDialog : ApplicationForm
     {
         private readonly MateriaServicio _servicio;
         private readonly PlanServicio _planServicio;
         private Materia? _materia;
 
-        public MateriaDesktop() : base()
+        public MateriaDialog() : base()
         {
             InitializeComponent();
             _servicio = new MateriaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
-        public MateriaDesktop(ModoForm modo) : this()
+        public MateriaDialog(ModoForm modo) : this()
         {
             Modo = modo;
             cbxPlan.DataSource = _planServicio.GetAll();
             SetModo();
         }
 
-        public MateriaDesktop(int id, ModoForm modo) : this(modo)
+        public MateriaDialog(int id, ModoForm modo) : this(modo)
         {
             _materia = _servicio.GetOne(id);
             MapearDeDatos();

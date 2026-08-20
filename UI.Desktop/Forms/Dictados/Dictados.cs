@@ -30,7 +30,7 @@ namespace UI.Desktop.Forms.Dictados
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new DictadoDesktop(ModoForm.Alta).ShowDialog();
+            new DictadoDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -38,7 +38,7 @@ namespace UI.Desktop.Forms.Dictados
         {
             if (!IsRowSelected(dgvDocentes)) return;
             int id = ((DocenteCurso)dgvDocentes.SelectedRows[0].DataBoundItem).ID;
-            new DictadoDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new DictadoDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvDocentes);
             Listar();
             SeleccionarFila(dgvDocentes, id);
@@ -49,7 +49,7 @@ namespace UI.Desktop.Forms.Dictados
         {
             if (!IsRowSelected(dgvDocentes)) return;
             int id = ((DocenteCurso)dgvDocentes.SelectedRows[0].DataBoundItem).ID;
-            new DictadoDesktop(id, ModoForm.Baja).ShowDialog();
+            new DictadoDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvDocentes);
             Listar();
             SeleccionarFila(dgvDocentes, id);

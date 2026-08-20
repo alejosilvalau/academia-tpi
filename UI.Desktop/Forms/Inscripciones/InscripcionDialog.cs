@@ -5,13 +5,13 @@ using Utils;
 
 namespace UI.Desktop.Forms.Inscripciones
 {
-    public partial class InscripcionDesktop : ApplicationForm
+    public partial class InscripcionDialog : ApplicationForm
     {
         private readonly InscripcionServicio _servicio;
         private readonly Persona _personaActual;
         private AlumnoInscripcion? _inscripcion;
 
-        public InscripcionDesktop(Persona persona, ModoForm modo)
+        public InscripcionDialog(Persona persona, ModoForm modo)
         {
             InitializeComponent();
             _servicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
@@ -37,7 +37,7 @@ namespace UI.Desktop.Forms.Inscripciones
             }
         }
 
-        public InscripcionDesktop(Persona persona, int id, ModoForm modo) : this(persona, modo)
+        public InscripcionDialog(Persona persona, int id, ModoForm modo) : this(persona, modo)
         {
             _inscripcion = _servicio.GetOne(id);
             MapearDeDatos();

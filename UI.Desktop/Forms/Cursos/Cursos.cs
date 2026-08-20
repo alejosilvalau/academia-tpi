@@ -30,7 +30,7 @@ namespace UI.Desktop.Forms.Cursos
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new CursoDesktop(ModoForm.Alta).ShowDialog();
+            new CursoDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -38,7 +38,7 @@ namespace UI.Desktop.Forms.Cursos
         {
             if (!IsRowSelected(dgvCursos)) return;
             int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
-            new CursoDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new CursoDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvCursos);
             Listar();
             SeleccionarFila(dgvCursos, id);
@@ -49,7 +49,7 @@ namespace UI.Desktop.Forms.Cursos
         {
             if (!IsRowSelected(dgvCursos)) return;
             int id = ((Curso)dgvCursos.SelectedRows[0].DataBoundItem).ID;
-            new CursoDesktop(id, ModoForm.Baja).ShowDialog();
+            new CursoDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvCursos);
             Listar();
             SeleccionarFila(dgvCursos, id);

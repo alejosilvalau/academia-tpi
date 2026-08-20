@@ -1,18 +1,17 @@
 using Dominio;
 using Repositorio;
 using Servicios;
-using Utils;
 
 namespace UI.Desktop.Forms.Cursos
 {
-    public partial class CursoDesktop : ApplicationForm
+    public partial class CursoDialog : ApplicationForm
     {
         private readonly CursoServicio _servicio;
         private readonly MateriaServicio _materiaServicio;
         private readonly ComisionServicio _comisionServicio;
         private Curso? _curso;
 
-        public CursoDesktop() : base()
+        public CursoDialog() : base()
         {
             InitializeComponent();
             _servicio = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
@@ -20,7 +19,7 @@ namespace UI.Desktop.Forms.Cursos
             _comisionServicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
         }
 
-        public CursoDesktop(ModoForm modo) : this()
+        public CursoDialog(ModoForm modo) : this()
         {
             Modo = modo;
             cbxMateria.DataSource = _materiaServicio.GetAll();
@@ -28,7 +27,7 @@ namespace UI.Desktop.Forms.Cursos
             SetModo();
         }
 
-        public CursoDesktop(int id, ModoForm modo) : this(modo)
+        public CursoDialog(int id, ModoForm modo) : this(modo)
         {
             _curso = _servicio.GetOne(id);
             MapearDeDatos();
@@ -84,5 +83,10 @@ namespace UI.Desktop.Forms.Cursos
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();
+
+        private void CursoDialog_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

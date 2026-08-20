@@ -1,6 +1,6 @@
 namespace UI.Desktop.Forms.Cursos
 {
-    partial class CursoDesktop
+    partial class CursoDialog
     {
         private System.ComponentModel.IContainer components = null;
 
@@ -43,11 +43,10 @@ namespace UI.Desktop.Forms.Cursos
             tableLayoutPanel1.ColumnCount = 4;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 120F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 140F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(lblID, 0, 0);
             tableLayoutPanel1.Controls.Add(txtID, 1, 0);
-            tableLayoutPanel1.Controls.Add(lblAnioCalendario, 2, 0);
             tableLayoutPanel1.Controls.Add(txtAnioCalendario, 3, 0);
             tableLayoutPanel1.Controls.Add(lblDescripcion, 0, 1);
             tableLayoutPanel1.Controls.Add(txtDescripcion, 1, 1);
@@ -57,6 +56,7 @@ namespace UI.Desktop.Forms.Cursos
             tableLayoutPanel1.Controls.Add(cbxMateria, 1, 2);
             tableLayoutPanel1.Controls.Add(lblComision, 2, 2);
             tableLayoutPanel1.Controls.Add(cbxComision, 3, 2);
+            tableLayoutPanel1.Controls.Add(lblAnioCalendario, 2, 0);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
@@ -66,7 +66,7 @@ namespace UI.Desktop.Forms.Cursos
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
-            tableLayoutPanel1.Size = new Size(560, 185);
+            tableLayoutPanel1.Size = new Size(649, 185);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblID
@@ -93,7 +93,7 @@ namespace UI.Desktop.Forms.Cursos
             txtID.Margin = new Padding(3, 4, 3, 4);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
-            txtID.Size = new Size(134, 30);
+            txtID.Size = new Size(168, 30);
             txtID.TabIndex = 1;
             // 
             // lblAnioCalendario
@@ -102,9 +102,9 @@ namespace UI.Desktop.Forms.Cursos
             lblAnioCalendario.AutoSize = true;
             lblAnioCalendario.Font = new Font("Segoe UI", 10F);
             lblAnioCalendario.ForeColor = Color.FromArgb(117, 117, 117);
-            lblAnioCalendario.Location = new Point(301, 20);
+            lblAnioCalendario.Location = new Point(319, 31);
             lblAnioCalendario.Name = "lblAnioCalendario";
-            lblAnioCalendario.Size = new Size(96, 46);
+            lblAnioCalendario.Size = new Size(132, 23);
             lblAnioCalendario.TabIndex = 2;
             lblAnioCalendario.Text = "Año Calendario:";
             // 
@@ -115,10 +115,10 @@ namespace UI.Desktop.Forms.Cursos
             txtAnioCalendario.BorderStyle = BorderStyle.FixedSingle;
             txtAnioCalendario.Font = new Font("Segoe UI", 10F);
             txtAnioCalendario.ForeColor = Color.FromArgb(33, 33, 33);
-            txtAnioCalendario.Location = new Point(403, 28);
+            txtAnioCalendario.Location = new Point(457, 28);
             txtAnioCalendario.Margin = new Padding(3, 4, 3, 4);
             txtAnioCalendario.Name = "txtAnioCalendario";
-            txtAnioCalendario.Size = new Size(134, 30);
+            txtAnioCalendario.Size = new Size(169, 30);
             txtAnioCalendario.TabIndex = 3;
             // 
             // lblDescripcion
@@ -144,7 +144,7 @@ namespace UI.Desktop.Forms.Cursos
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.ReadOnly = true;
-            txtDescripcion.Size = new Size(134, 30);
+            txtDescripcion.Size = new Size(168, 30);
             txtDescripcion.TabIndex = 5;
             // 
             // lblCupo
@@ -153,7 +153,7 @@ namespace UI.Desktop.Forms.Cursos
             lblCupo.AutoSize = true;
             lblCupo.Font = new Font("Segoe UI", 10F);
             lblCupo.ForeColor = Color.FromArgb(117, 117, 117);
-            lblCupo.Location = new Point(342, 87);
+            lblCupo.Location = new Point(396, 87);
             lblCupo.Name = "lblCupo";
             lblCupo.Size = new Size(55, 23);
             lblCupo.TabIndex = 6;
@@ -166,10 +166,10 @@ namespace UI.Desktop.Forms.Cursos
             txtCupo.BorderStyle = BorderStyle.FixedSingle;
             txtCupo.Font = new Font("Segoe UI", 10F);
             txtCupo.ForeColor = Color.FromArgb(33, 33, 33);
-            txtCupo.Location = new Point(403, 84);
+            txtCupo.Location = new Point(457, 84);
             txtCupo.Margin = new Padding(3, 4, 3, 4);
             txtCupo.Name = "txtCupo";
-            txtCupo.Size = new Size(134, 30);
+            txtCupo.Size = new Size(169, 30);
             txtCupo.TabIndex = 7;
             // 
             // lblMateria
@@ -196,7 +196,7 @@ namespace UI.Desktop.Forms.Cursos
             cbxMateria.Location = new Point(143, 139);
             cbxMateria.Margin = new Padding(3, 4, 3, 4);
             cbxMateria.Name = "cbxMateria";
-            cbxMateria.Size = new Size(134, 31);
+            cbxMateria.Size = new Size(168, 31);
             cbxMateria.TabIndex = 9;
             cbxMateria.ValueMember = "ID";
             // 
@@ -206,7 +206,7 @@ namespace UI.Desktop.Forms.Cursos
             lblComision.AutoSize = true;
             lblComision.Font = new Font("Segoe UI", 10F);
             lblComision.ForeColor = Color.FromArgb(117, 117, 117);
-            lblComision.Location = new Point(312, 143);
+            lblComision.Location = new Point(366, 143);
             lblComision.Name = "lblComision";
             lblComision.Size = new Size(85, 23);
             lblComision.TabIndex = 10;
@@ -221,10 +221,10 @@ namespace UI.Desktop.Forms.Cursos
             cbxComision.Font = new Font("Segoe UI", 10F);
             cbxComision.ForeColor = Color.FromArgb(33, 33, 33);
             cbxComision.FormattingEnabled = true;
-            cbxComision.Location = new Point(403, 139);
+            cbxComision.Location = new Point(457, 139);
             cbxComision.Margin = new Padding(3, 4, 3, 4);
             cbxComision.Name = "cbxComision";
-            cbxComision.Size = new Size(134, 31);
+            cbxComision.Size = new Size(169, 31);
             cbxComision.TabIndex = 11;
             cbxComision.ValueMember = "ID";
             // 
@@ -237,7 +237,7 @@ namespace UI.Desktop.Forms.Cursos
             panelBotones.Location = new Point(0, 185);
             panelBotones.Margin = new Padding(3, 4, 3, 4);
             panelBotones.Name = "panelBotones";
-            panelBotones.Size = new Size(560, 60);
+            panelBotones.Size = new Size(649, 60);
             panelBotones.TabIndex = 1;
             // 
             // btnCancelar
@@ -250,7 +250,7 @@ namespace UI.Desktop.Forms.Cursos
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(175, 10);
+            btnCancelar.Location = new Point(219, 10);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 40);
             btnCancelar.TabIndex = 1;
@@ -268,7 +268,7 @@ namespace UI.Desktop.Forms.Cursos
             btnAceptar.FlatStyle = FlatStyle.Flat;
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
-            btnAceptar.Location = new Point(285, 10);
+            btnAceptar.Location = new Point(329, 10);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(100, 40);
             btnAceptar.TabIndex = 0;
@@ -276,18 +276,19 @@ namespace UI.Desktop.Forms.Cursos
             btnAceptar.UseVisualStyleBackColor = false;
             btnAceptar.Click += btnAceptar_Click;
             // 
-            // CursoDesktop
+            // CursoDialog
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(560, 245);
+            ClientSize = new Size(649, 245);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
             Margin = new Padding(3, 5, 3, 5);
-            Name = "CursoDesktop";
+            Name = "CursoDialog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Curso";
+            Load += CursoDialog_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panelBotones.ResumeLayout(false);

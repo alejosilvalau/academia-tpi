@@ -30,7 +30,7 @@ namespace UI.Desktop.Forms.Materias
 
         private void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new MateriaDesktop(ModoForm.Alta).ShowDialog();
+            new MateriaDialog(ModoForm.Alta).ShowDialog();
             Listar();
         }
 
@@ -38,7 +38,7 @@ namespace UI.Desktop.Forms.Materias
         {
             if (!IsRowSelected(dgvMaterias)) return;
             int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
-            new MateriaDesktop(id, ModoForm.Modificacion).ShowDialog();
+            new MateriaDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvMaterias);
             Listar();
             SeleccionarFila(dgvMaterias, id);
@@ -49,7 +49,7 @@ namespace UI.Desktop.Forms.Materias
         {
             if (!IsRowSelected(dgvMaterias)) return;
             int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
-            new MateriaDesktop(id, ModoForm.Baja).ShowDialog();
+            new MateriaDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvMaterias);
             Listar();
             SeleccionarFila(dgvMaterias, id);
