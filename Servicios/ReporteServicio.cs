@@ -49,6 +49,24 @@ namespace Servicios
             }
         }
 
+        public DataTable ObtenerAlumnosDeDocente(int docenteId)
+        {
+            RequiereAdminODocente();
+            try
+            {
+                int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
+                return _generador.ObtenerAlumnosDeDocente(idResuelto);
+            }
+            catch (ServicioException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw new ServicioException("No se pudieron obtener los alumnos del docente para el reporte. Intente nuevamente.");
+            }
+        }
+
         public FastReport.Report GenerarReporteRendimientoDocente(int docenteId)
         {
             RequiereAdminODocente();
@@ -70,12 +88,19 @@ namespace Servicios
         public FastReport.Report GenerarReporteRendimientoAlumno(int alumnoId)
         {
             RequiereAutenticacion();
-            var tipo = TipoUsuarioActual();
-            if (tipo == Persona.TiposPersonas.Docente)
-                throw new AccesoNoAutorizadoException("Los docentes no pueden generar el reporte individual de un alumno. Utilice el reporte de sus alumnos.");
-
             try
             {
+                var tipo = TipoUsuarioActual();
+                if (tipo == Persona.TiposPersonas.Docente)
+                {
+                    int docenteId = PersonaIdActual()!.Value;
+                    var alumnosDocente = _generador.ObtenerAlumnosDeDocente(docenteId);
+                    if (!alumnosDocente.AsEnumerable().Any(r => Convert.ToInt32(r["ID"]) == alumnoId))
+                        throw new AccesoNoAutorizadoException("Solo puede generar el reporte de rendimiento de alumnos que dicta.");
+
+                    return _generador.GenerarReporteRendimientoAlumno(alumnoId);
+                }
+
                 int idResuelto = EsAdmin() ? alumnoId : PersonaIdActual()!.Value;
                 return _generador.GenerarReporteRendimientoAlumno(idResuelto);
             }

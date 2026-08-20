@@ -47,6 +47,25 @@ namespace Repositorio
             return dataTable;
         }
 
+        public DataTable GetAlumnosDeDocente(int docenteId)
+        {
+            using var connection = new SqlConnection(_connectionString);
+            using var command = new SqlCommand(
+                "SELECT DISTINCT p.ID, p.Nombre, p.Apellido, p.Legajo " +
+                "FROM AlumnoInscripciones ai " +
+                "INNER JOIN Personas p ON ai.AlumnoId = p.ID " +
+                "INNER JOIN DocenteCursos dc ON ai.CursoId = dc.CursoId " +
+                "WHERE dc.DocenteId = @DocenteId " +
+                "ORDER BY p.Apellido, p.Nombre", connection);
+
+            command.Parameters.AddWithValue("@DocenteId", docenteId);
+
+            var adapter = new SqlDataAdapter(command);
+            var dataTable = new DataTable();
+            adapter.Fill(dataTable);
+            return dataTable;
+        }
+
         public DataRow? GetPersona(int personaId)
         {
             using var connection = new SqlConnection(_connectionString);

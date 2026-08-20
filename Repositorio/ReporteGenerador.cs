@@ -23,6 +23,11 @@ namespace Repositorio
             return _datos.GetAlumnos();
         }
 
+        public DataTable ObtenerAlumnosDeDocente(int docenteId)
+        {
+            return _datos.GetAlumnosDeDocente(docenteId);
+        }
+
         public Report GenerarReporteRendimientoDocente(int docenteId)
         {
             var persona = _datos.GetPersona(docenteId);

@@ -55,10 +55,32 @@ namespace UI.Desktop
                 cbxSelector.Visible = true;
                 CargarSelectorAdmin();
             }
+            else if (tipo == Persona.TiposPersonas.Docente && _modo == ModoReporte.RendimientoAlumnos)
+            {
+                lblSelector.Visible = true;
+                cbxSelector.Visible = true;
+                lblSelector.Text = "Alumno:";
+                CargarSelectorDocente();
+            }
             else
             {
                 lblSelector.Visible = false;
                 cbxSelector.Visible = false;
+            }
+        }
+
+        private void CargarSelectorDocente()
+        {
+            try
+            {
+                cbxSelector.DataSource = _servicio.ObtenerAlumnosDeDocente(Login.UsuarioActual!.Persona!.ID);
+                cbxSelector.DisplayMember = "Apellido";
+                cbxSelector.ValueMember = "ID";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar alumnos: " + ex.Message,
+                    "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -90,7 +112,15 @@ namespace UI.Desktop
         {
             var persona = Login.UsuarioActual?.Persona;
             if (persona != null && persona.Tipo != Persona.TiposPersonas.Administrador)
+            {
+                if (persona.Tipo == Persona.TiposPersonas.Docente && _modo == ModoReporte.RendimientoAlumnos)
+                {
+                    if (cbxSelector.SelectedValue == null)
+                        throw new InvalidOperationException("Seleccione un alumno.");
+                    return Convert.ToInt32(cbxSelector.SelectedValue);
+                }
                 return persona.ID;
+            }
 
             if (cbxSelector.SelectedValue == null)
                 throw new InvalidOperationException("Seleccione una persona.");

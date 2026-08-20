@@ -94,7 +94,7 @@ namespace UI.Desktop
             btnReportes.FlatStyle = FlatStyle.Flat;
             btnReportes.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnReportes.ForeColor = Color.White;
-            btnReportes.Location = new Point(0, 308);
+            btnReportes.Location = new Point(0, 328);
             btnReportes.Margin = new Padding(3, 4, 3, 4);
             btnReportes.Name = "btnReportes";
             btnReportes.Padding = new Padding(10);
@@ -116,7 +116,7 @@ namespace UI.Desktop
             btnNotas.FlatStyle = FlatStyle.Flat;
             btnNotas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnNotas.ForeColor = Color.White;
-            btnNotas.Location = new Point(0, 247);
+            btnNotas.Location = new Point(0, 267);
             btnNotas.Margin = new Padding(3, 4, 3, 4);
             btnNotas.Name = "btnNotas";
             btnNotas.Padding = new Padding(10);
@@ -137,7 +137,7 @@ namespace UI.Desktop
             btnInscripcion.FlatStyle = FlatStyle.Flat;
             btnInscripcion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnInscripcion.ForeColor = Color.White;
-            btnInscripcion.Location = new Point(0, 186);
+            btnInscripcion.Location = new Point(0, 206);
             btnInscripcion.Margin = new Padding(3, 4, 3, 4);
             btnInscripcion.Name = "btnInscripcion";
             btnInscripcion.Padding = new Padding(10);
@@ -158,7 +158,7 @@ namespace UI.Desktop
             btnAdministracion.FlatStyle = FlatStyle.Flat;
             btnAdministracion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAdministracion.ForeColor = Color.White;
-            btnAdministracion.Location = new Point(0, 125);
+            btnAdministracion.Location = new Point(0, 145);
             btnAdministracion.Margin = new Padding(3, 4, 3, 4);
             btnAdministracion.Name = "btnAdministracion";
             btnAdministracion.Padding = new Padding(10);
