@@ -32,9 +32,13 @@ namespace UI.Desktop.Forms.Inscripciones
                 case ModoForm.Modificacion:
                     btnAceptar.Text = "Guardar";
                     cbxCondicion.Enabled = true;
+                    dgvCursos.Visible = false;
+                    ClientSize = new Size(600, 140);
                     break;
                 case ModoForm.Baja:
                     btnAceptar.Text = "Eliminar";
+                    dgvCursos.Visible = false;
+                    ClientSize = new Size(600, 140);
                     break;
             }
         }
