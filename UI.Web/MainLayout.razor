@@ -1,5 +1,6 @@
 ﻿@inherits LayoutComponentBase
 @inject UI.Web.Services.SesionService Sesion
+@inject IJSRuntime JS
 @inject NavigationManager Nav
 
 @if (Sesion.IsLoggedIn)
@@ -151,7 +152,8 @@ else
 
     private void CerrarSesion()
     {
-        Sesion.Logout();
+        _ = JS.InvokeVoidAsync("academiaLogout", "/api/auth/logout");
+        Sesion.Invalidar();
         Nav.NavigateTo("/login", forceLoad: true);
     }
 }

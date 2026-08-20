@@ -33,6 +33,27 @@
 
     <script src="_framework/blazor.server.js"></script>
     <script>
+        window.academiaLogin = async (url, nombreUsuario, clave) => {
+            try {
+                const res = await fetch(url, {
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ nombreUsuario: nombreUsuario, clave: clave })
+                });
+                return res.ok;
+            } catch (e) {
+                return false;
+            }
+        };
+
+        window.academiaLogout = async (url) => {
+            try {
+                await fetch(url, { method: 'POST', credentials: 'include' });
+            } catch (e) { }
+        };
+    </script>
+    <script>
         window.downloadFile = (filename, contentType, base64) => {
             const byteCharacters = atob(base64);
             const byteNumbers = new Array(byteCharacters.length);

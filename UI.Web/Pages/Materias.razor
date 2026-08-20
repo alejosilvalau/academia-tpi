@@ -1,4 +1,5 @@
 @page "/materias"
+@attribute [Authorize(Roles="Administrador")]
 @inject MateriaServicio MateriaServicio
 @inject PlanServicio PlanServicio
 @inject UI.Web.Services.SesionService Sesion

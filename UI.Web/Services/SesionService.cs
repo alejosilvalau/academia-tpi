@@ -1,34 +1,78 @@
+using System.Security.Claims;
 using Dominio;
+using Microsoft.AspNetCore.Components.Authorization;
 
 namespace UI.Web.Services
 {
     public class SesionService
     {
-        private Usuario? _usuarioActual;
+        private readonly AuthenticationStateProvider _authStateProvider;
+        private ClaimsPrincipal? _cachedPrincipal;
+        private bool _cargado;
 
-        public Usuario? UsuarioActual => _usuarioActual;
+        public SesionService(AuthenticationStateProvider authStateProvider)
+        {
+            _authStateProvider = authStateProvider;
+        }
 
-        public bool IsLoggedIn => _usuarioActual != null;
+        private ClaimsPrincipal? ObtenerPrincipal()
+        {
+            if (_cargado) return _cachedPrincipal;
 
-        public Persona.TiposPersonas? TipoUsuario => _usuarioActual?.Persona?.Tipo;
+            var task = _authStateProvider.GetAuthenticationStateAsync();
+            // El estado ya está completado cuando Blazor renderiza el circuito.
+            var state = task.IsCompleted
+                ? task.Result
+                : task.GetAwaiter().GetResult();
+
+            _cachedPrincipal = state.User;
+            _cargado = true;
+            return _cachedPrincipal;
+        }
+
+        public Usuario? UsuarioActual
+        {
+            get
+            {
+                var p = ObtenerPrincipal();
+                if (p?.Identity?.IsAuthenticated != true) return null;
+
+                return new Usuario
+                {
+                    NombreUsuario = p.Identity.Name ?? "",
+                    PersonaId = int.TryParse(p.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var id) ? id : 0,
+                    Persona = new Persona
+                    {
+                        Tipo = ObtenerTipo(p) ?? Persona.TiposPersonas.Alumno
+                    }
+                };
+            }
+        }
+
+        public bool IsLoggedIn => ObtenerPrincipal()?.Identity?.IsAuthenticated == true;
+
+        public Persona.TiposPersonas? TipoUsuario => ObtenerTipo(ObtenerPrincipal());
 
         public bool IsAdmin => TipoUsuario == Persona.TiposPersonas.Administrador;
         public bool IsAlumno => TipoUsuario == Persona.TiposPersonas.Alumno;
         public bool IsDocente => TipoUsuario == Persona.TiposPersonas.Docente;
 
-        public void Login(Usuario usuario)
-        {
-            _usuarioActual = usuario;
-        }
-
-        public void Logout()
-        {
-            _usuarioActual = null;
-        }
-
         public bool ValidarPermisos(Persona.TiposPersonas tipoRequerido)
         {
             return IsAdmin || TipoUsuario == tipoRequerido;
+        }
+
+        public void Invalidar()
+        {
+            _cargado = false;
+            _cachedPrincipal = null;
+        }
+
+        private static Persona.TiposPersonas? ObtenerTipo(ClaimsPrincipal? principal)
+        {
+            if (principal?.Identity?.IsAuthenticated != true) return null;
+            var role = principal.FindFirst(ClaimTypes.Role)?.Value;
+            return Enum.TryParse<Persona.TiposPersonas>(role, out var tipo) ? tipo : null;
         }
     }
 }

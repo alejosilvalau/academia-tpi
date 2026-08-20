@@ -1,4 +1,5 @@
 @page "/especialidades"
+@attribute [Authorize(Roles="Administrador")]
 @inject EspecialidadServicio Servicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation

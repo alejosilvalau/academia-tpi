@@ -205,18 +205,18 @@ namespace Repositorio
             );
 
             modelBuilder.Entity<Usuario>().HasData(
-                new Usuario { ID = 1, NombreUsuario = "lferreyra", Clave = "admin123", Habilitado = true, PersonaId = 1 },
-                new Usuario { ID = 2, NombreUsuario = "vrios", Clave = "doc2024", Habilitado = true, PersonaId = 2 },
-                new Usuario { ID = 3, NombreUsuario = "mherrera", Clave = "doc2024", Habilitado = true, PersonaId = 3 },
-                new Usuario { ID = 4, NombreUsuario = "clopez", Clave = "alu2024", Habilitado = true, PersonaId = 4 },
-                new Usuario { ID = 5, NombreUsuario = "tgimenez", Clave = "alu2024", Habilitado = true, PersonaId = 5 },
-                new Usuario { ID = 6, NombreUsuario = "icastro", Clave = "alu2024", Habilitado = true, PersonaId = 6 },
-                new Usuario { ID = 7, NombreUsuario = "bmorales", Clave = "alu2024", Habilitado = true, PersonaId = 7 },
-                new Usuario { ID = 8, NombreUsuario = "avega", Clave = "alu2024", Habilitado = true, PersonaId = 8 },
-                new Usuario { ID = 9, NombreUsuario = "dromero", Clave = "alu2024", Habilitado = true, PersonaId = 9 },
-                new Usuario { ID = 10, NombreUsuario = "facosta", Clave = "doc2024", Habilitado = true, PersonaId = 10 },
-                new Usuario { ID = 11, NombreUsuario = "nmedina", Clave = "doc2024", Habilitado = true, PersonaId = 11 },
-                new Usuario { ID = 12, NombreUsuario = "esilva", Clave = "alu2024", Habilitado = true, PersonaId = 12 }
+                new Usuario { ID = 1, NombreUsuario = "lferreyra", Clave = "AYGcUEkRDZzqxjWWRRtoRjf1kQdNl232iQMqNXozFbCunYxw8LrSdV5EsDAl+5q62Q==", Habilitado = true, PersonaId = 1 },
+                new Usuario { ID = 2, NombreUsuario = "vrios", Clave = "Aei65iSnp+ENxeZfFow6Q98YTQRP6e2d8JR6o3fMKxyI4C2ZbtBBXSdpI2FAmi9c7A==", Habilitado = true, PersonaId = 2 },
+                new Usuario { ID = 3, NombreUsuario = "mherrera", Clave = "Aei65iSnp+ENxeZfFow6Q98YTQRP6e2d8JR6o3fMKxyI4C2ZbtBBXSdpI2FAmi9c7A==", Habilitado = true, PersonaId = 3 },
+                new Usuario { ID = 4, NombreUsuario = "clopez", Clave = "AbKGt9UxtWFDyTYPMs7I9+nFhxT9mR/qC4eCdUOX84djH0k73tfjIk2WdOpgAslyjQ==", Habilitado = true, PersonaId = 4 },
+                new Usuario { ID = 5, NombreUsuario = "tgimenez", Clave = "AbKGt9UxtWFDyTYPMs7I9+nFhxT9mR/qC4eCdUOX84djH0k73tfjIk2WdOpgAslyjQ==", Habilitado = true, PersonaId = 5 },
+                new Usuario { ID = 6, NombreUsuario = "icastro", Clave = "AbKGt9UxtWFDyTYPMs7I9+nFhxT9mR/qC4eCdUOX84djH0k73tfjIk2WdOpgAslyjQ==", Habilitado = true, PersonaId = 6 },
+                new Usuario { ID = 7, NombreUsuario = "bmorales", Clave = "AbKGt9UxtWFDyTYPMs7I9+nFhxT9mR/qC4eCdUOX84djH0k73tfjIk2WdOpgAslyjQ==", Habilitado = true, PersonaId = 7 },
+                new Usuario { ID = 8, NombreUsuario = "avega", Clave = "AbKGt9UxtWFDyTYPMs7I9+nFhxT9mR/qC4eCdUOX84djH0k73tfjIk2WdOpgAslyjQ==", Habilitado = true, PersonaId = 8 },
+                new Usuario { ID = 9, NombreUsuario = "dromero", Clave = "AbKGt9UxtWFDyTYPMs7I9+nFhxT9mR/qC4eCdUOX84djH0k73tfjIk2WdOpgAslyjQ==", Habilitado = true, PersonaId = 9 },
+                new Usuario { ID = 10, NombreUsuario = "facosta", Clave = "Aei65iSnp+ENxeZfFow6Q98YTQRP6e2d8JR6o3fMKxyI4C2ZbtBBXSdpI2FAmi9c7A==", Habilitado = true, PersonaId = 10 },
+                new Usuario { ID = 11, NombreUsuario = "nmedina", Clave = "Aei65iSnp+ENxeZfFow6Q98YTQRP6e2d8JR6o3fMKxyI4C2ZbtBBXSdpI2FAmi9c7A==", Habilitado = true, PersonaId = 11 },
+                new Usuario { ID = 12, NombreUsuario = "esilva", Clave = "AbKGt9UxtWFDyTYPMs7I9+nFhxT9mR/qC4eCdUOX84djH0k73tfjIk2WdOpgAslyjQ==", Habilitado = true, PersonaId = 12 }
             );
 
             modelBuilder.Entity<DocenteCurso>().HasData(

@@ -38,7 +38,7 @@ namespace Servicios
         public Usuario? Login(string nombreUsuario, string clave)
         {
             var usuario = _repositorio.GetByUsername(nombreUsuario);
-            if (usuario != null && usuario.Habilitado && usuario.Clave == clave)
+            if (usuario != null && usuario.Habilitado && PasswordHasher.Verify(clave, usuario.Clave))
             {
                 return usuario;
             }
@@ -51,6 +51,7 @@ namespace Servicios
             ValidarBasicos(usuario);
             ValidarFormato(usuario);
             ValidarReglasNegocio(usuario, esAlta: true);
+            usuario.Clave = PasswordHasher.Hash(usuario.Clave);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Add(usuario);
@@ -64,6 +65,7 @@ namespace Servicios
             ValidarBasicos(usuario);
             ValidarFormato(usuario);
             ValidarReglasNegocio(usuario, esAlta: false);
+            ReHashearSiCambioClave(usuario);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Update(usuario);
@@ -93,6 +95,15 @@ namespace Servicios
                 if (!usuario.PersonaId.HasValue || usuario.PersonaId <= 0)
                     throw new ArgumentException("El usuario debe estar asociado a una persona.");
             });
+        }
+
+        private void ReHashearSiCambioClave(Usuario usuario)
+        {
+            var previo = _repositorio.GetOne(usuario.ID);
+            if (previo == null)
+                throw new ReglaNegocioException("El usuario a actualizar no existe.");
+            if (!PasswordHasher.Verify(usuario.Clave, previo.Clave))
+                usuario.Clave = PasswordHasher.Hash(usuario.Clave);
         }
 
         private void ValidarFormato(Usuario usuario)
