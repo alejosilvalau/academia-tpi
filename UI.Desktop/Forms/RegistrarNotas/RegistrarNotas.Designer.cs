@@ -69,7 +69,6 @@ namespace UI.Desktop.Forms.RegistrarNotas
             // 
             cbxCursos.BackColor = Color.White;
             cbxCursos.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbxCursos.FlatStyle = FlatStyle.Flat;
             cbxCursos.Font = new Font("Segoe UI", 10F);
             cbxCursos.ForeColor = Color.FromArgb(33, 33, 33);
             cbxCursos.FormattingEnabled = true;

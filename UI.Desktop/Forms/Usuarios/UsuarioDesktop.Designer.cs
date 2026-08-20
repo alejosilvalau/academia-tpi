@@ -62,7 +62,7 @@ namespace UI.Desktop.Forms.Usuarios
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
-            tableLayoutPanel1.Size = new Size(450, 316);
+            tableLayoutPanel1.Size = new Size(450, 306);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblID
@@ -172,7 +172,7 @@ namespace UI.Desktop.Forms.Usuarios
             lblPersona.AutoSize = true;
             lblPersona.Font = new Font("Segoe UI", 10F);
             lblPersona.ForeColor = Color.FromArgb(117, 117, 117);
-            lblPersona.Location = new Point(33, 258);
+            lblPersona.Location = new Point(33, 255);
             lblPersona.Name = "lblPersona";
             lblPersona.Size = new Size(74, 23);
             lblPersona.TabIndex = 8;
@@ -187,7 +187,7 @@ namespace UI.Desktop.Forms.Usuarios
             cbxPersona.Font = new Font("Segoe UI", 10F);
             cbxPersona.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPersona.FormattingEnabled = true;
-            cbxPersona.Location = new Point(113, 254);
+            cbxPersona.Location = new Point(113, 251);
             cbxPersona.Margin = new Padding(3, 4, 3, 4);
             cbxPersona.Name = "cbxPersona";
             cbxPersona.Size = new Size(314, 31);
@@ -200,7 +200,7 @@ namespace UI.Desktop.Forms.Usuarios
             panelBotones.Controls.Add(btnCancelar);
             panelBotones.Controls.Add(btnAceptar);
             panelBotones.Dock = DockStyle.Bottom;
-            panelBotones.Location = new Point(0, 316);
+            panelBotones.Location = new Point(0, 306);
             panelBotones.Margin = new Padding(3, 4, 3, 4);
             panelBotones.Name = "panelBotones";
             panelBotones.Size = new Size(450, 60);
@@ -247,7 +247,7 @@ namespace UI.Desktop.Forms.Usuarios
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(450, 376);
+            ClientSize = new Size(450, 366);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
             Margin = new Padding(3, 5, 3, 5);

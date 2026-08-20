@@ -59,10 +59,10 @@ namespace UI.Desktop.Forms.Materias
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.Padding = new Padding(20, 19, 20, 19);
             tableLayoutPanel1.RowCount = 3;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.Size = new Size(580, 175);
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 45F));
+            tableLayoutPanel1.Size = new Size(580, 178);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblID
@@ -71,7 +71,7 @@ namespace UI.Desktop.Forms.Materias
             lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(33, 33, 33);
-            lblID.Location = new Point(69, 26);
+            lblID.Location = new Point(69, 30);
             lblID.Name = "lblID";
             lblID.Size = new Size(31, 23);
             lblID.TabIndex = 0;
@@ -85,7 +85,7 @@ namespace UI.Desktop.Forms.Materias
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(117, 117, 117);
-            txtID.Location = new Point(106, 23);
+            txtID.Location = new Point(106, 26);
             txtID.Margin = new Padding(3, 4, 3, 4);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
@@ -98,7 +98,7 @@ namespace UI.Desktop.Forms.Materias
             lblHsSemanales.AutoSize = true;
             lblHsSemanales.Font = new Font("Segoe UI", 10F);
             lblHsSemanales.ForeColor = Color.FromArgb(33, 33, 33);
-            lblHsSemanales.Location = new Point(259, 26);
+            lblHsSemanales.Location = new Point(259, 30);
             lblHsSemanales.Name = "lblHsSemanales";
             lblHsSemanales.Size = new Size(144, 23);
             lblHsSemanales.TabIndex = 2;
@@ -111,7 +111,7 @@ namespace UI.Desktop.Forms.Materias
             txtHsSemanales.BorderStyle = BorderStyle.FixedSingle;
             txtHsSemanales.Font = new Font("Segoe UI", 10F);
             txtHsSemanales.ForeColor = Color.FromArgb(33, 33, 33);
-            txtHsSemanales.Location = new Point(409, 23);
+            txtHsSemanales.Location = new Point(409, 26);
             txtHsSemanales.Margin = new Padding(3, 4, 3, 4);
             txtHsSemanales.Name = "txtHsSemanales";
             txtHsSemanales.Size = new Size(148, 30);
@@ -123,7 +123,7 @@ namespace UI.Desktop.Forms.Materias
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 10F);
             lblDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
-            lblDescripcion.Location = new Point(23, 64);
+            lblDescripcion.Location = new Point(23, 75);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(77, 23);
             lblDescripcion.TabIndex = 4;
@@ -136,7 +136,7 @@ namespace UI.Desktop.Forms.Materias
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Font = new Font("Segoe UI", 10F);
             txtDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
-            txtDescripcion.Location = new Point(106, 61);
+            txtDescripcion.Location = new Point(106, 71);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(147, 30);
@@ -148,7 +148,7 @@ namespace UI.Desktop.Forms.Materias
             lblHsTotales.AutoSize = true;
             lblHsTotales.Font = new Font("Segoe UI", 10F);
             lblHsTotales.ForeColor = Color.FromArgb(33, 33, 33);
-            lblHsTotales.Location = new Point(288, 64);
+            lblHsTotales.Location = new Point(288, 75);
             lblHsTotales.Name = "lblHsTotales";
             lblHsTotales.Size = new Size(115, 23);
             lblHsTotales.TabIndex = 6;
@@ -161,7 +161,7 @@ namespace UI.Desktop.Forms.Materias
             txtHsTotales.BorderStyle = BorderStyle.FixedSingle;
             txtHsTotales.Font = new Font("Segoe UI", 10F);
             txtHsTotales.ForeColor = Color.FromArgb(33, 33, 33);
-            txtHsTotales.Location = new Point(409, 61);
+            txtHsTotales.Location = new Point(409, 71);
             txtHsTotales.Margin = new Padding(3, 4, 3, 4);
             txtHsTotales.Name = "txtHsTotales";
             txtHsTotales.Size = new Size(148, 30);
@@ -173,7 +173,7 @@ namespace UI.Desktop.Forms.Materias
             lblPlan.AutoSize = true;
             lblPlan.Font = new Font("Segoe UI", 10F);
             lblPlan.ForeColor = Color.FromArgb(33, 33, 33);
-            lblPlan.Location = new Point(53, 114);
+            lblPlan.Location = new Point(53, 122);
             lblPlan.Name = "lblPlan";
             lblPlan.Size = new Size(47, 23);
             lblPlan.TabIndex = 8;
@@ -189,7 +189,7 @@ namespace UI.Desktop.Forms.Materias
             cbxPlan.Font = new Font("Segoe UI", 10F);
             cbxPlan.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPlan.FormattingEnabled = true;
-            cbxPlan.Location = new Point(106, 110);
+            cbxPlan.Location = new Point(106, 118);
             cbxPlan.Margin = new Padding(3, 4, 3, 4);
             cbxPlan.Name = "cbxPlan";
             cbxPlan.Size = new Size(451, 31);
@@ -202,7 +202,7 @@ namespace UI.Desktop.Forms.Materias
             panelBottom.Controls.Add(btnCancelar);
             panelBottom.Controls.Add(btnAceptar);
             panelBottom.Dock = DockStyle.Bottom;
-            panelBottom.Location = new Point(0, 175);
+            panelBottom.Location = new Point(0, 178);
             panelBottom.Margin = new Padding(3, 4, 3, 4);
             panelBottom.Name = "panelBottom";
             panelBottom.Size = new Size(580, 56);
@@ -251,7 +251,7 @@ namespace UI.Desktop.Forms.Materias
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(580, 231);
+            ClientSize = new Size(580, 234);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBottom);
             Margin = new Padding(3, 5, 3, 5);
