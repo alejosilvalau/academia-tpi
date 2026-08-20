@@ -54,6 +54,8 @@ namespace UI.Desktop
                 lblSelector.Visible = true;
                 cbxSelector.Visible = true;
                 CargarSelectorAdmin();
+                btnGenerar.Location = new System.Drawing.Point(550, 15);
+                btnDescargar.Location = new System.Drawing.Point(695, 15);
             }
             else if (tipo == Persona.TiposPersonas.Docente && _modo == ModoReporte.RendimientoAlumnos)
             {
@@ -61,11 +63,15 @@ namespace UI.Desktop
                 cbxSelector.Visible = true;
                 lblSelector.Text = "Alumno:";
                 CargarSelectorDocente();
+                btnGenerar.Location = new System.Drawing.Point(550, 15);
+                btnDescargar.Location = new System.Drawing.Point(695, 15);
             }
             else
             {
                 lblSelector.Visible = false;
                 cbxSelector.Visible = false;
+                btnGenerar.Location = new System.Drawing.Point(15, 15);
+                btnDescargar.Location = new System.Drawing.Point(160, 15);
             }
         }
 
