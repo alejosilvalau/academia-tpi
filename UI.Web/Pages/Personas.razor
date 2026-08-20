@@ -7,10 +7,17 @@
 
 <div class="md-card">
     <div class="md-card-header-actions">
-        <span>Personas</span>
+        <span>@Titulo</span>
         <div class="md-btn-group">
-            <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nueva</button>
-            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+            @if (modoSeleccion)
+            {
+                <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+            }
+            else
+            {
+                <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nueva</button>
+                <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+            }
         </div>
     </div>
 
@@ -19,7 +26,7 @@
         <div class="md-message @(mensajeEsError ? "md-message-error" : "md-message-success")">@mensaje</div>
     }
 
-    @if (modoForm != ModoForm.Ninguno)
+    @if (!modoSeleccion && modoForm != ModoForm.Ninguno)
     {
         <div class="md-card" style="border:1px solid var(--border);">
             <div class="md-card-header">@(modoForm == ModoForm.Alta ? "Nueva Persona" : "Editar Persona")</div>
@@ -122,8 +129,15 @@
                         <td><span class="md-badge md-badge-primary">@item.Tipo</span></td>
                         <td>@item.EMail</td>
                         <td>
-                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
-                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
+                            @if (modoSeleccion)
+                            {
+                                <button class="md-btn md-btn-accent md-btn-sm" @onclick="() => SeleccionarPersona(item.ID)">Seleccionar</button>
+                            }
+                            else
+                            {
+                                <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
+                                <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
+                            }
                         </td>
                     </tr>
                 }
@@ -144,6 +158,16 @@
     private string? planIdSeleccionado;
     private DateTime fechaNac = DateTime.Now.AddYears(-20);
 
+    [SupplyParameterFromQuery(Name = "tipo")]
+    private string? TipoFiltro { get; set; }
+
+    [SupplyParameterFromQuery(Name = "seleccion")]
+    private string? Seleccion { get; set; }
+
+    private bool modoSeleccion;
+    private Persona.TiposPersonas? tipoSeleccion;
+    private string Titulo => modoSeleccion ? $"Personas - {tipoSeleccion}" : "Personas";
+
     enum ModoForm { Ninguno, Alta, Modificacion }
 
     protected override void OnInitialized()
@@ -153,14 +177,36 @@
             Navigation.NavigateTo("/");
             return;
         }
+
+        if (!string.IsNullOrEmpty(TipoFiltro))
+        {
+            modoSeleccion = true;
+            tipoSeleccion = TipoFiltro.Equals("alumno", StringComparison.OrdinalIgnoreCase)
+                ? Persona.TiposPersonas.Alumno
+                : Persona.TiposPersonas.Docente;
+        }
+
         planes = PlanServicio.GetAll();
         Cargar();
     }
 
     private void Cargar()
     {
-        try { lista = PersonaServicio.GetAll(); }
+        try
+        {
+            lista = modoSeleccion && tipoSeleccion.HasValue
+                ? PersonaServicio.GetByTipo(tipoSeleccion.Value)
+                : PersonaServicio.GetAll();
+        }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void SeleccionarPersona(int id)
+    {
+        if (Seleccion?.Equals("inscripcion", StringComparison.OrdinalIgnoreCase) == true)
+            Navigation.NavigateTo($"/inscripciones/{id}");
+        else if (Seleccion?.Equals("notas", StringComparison.OrdinalIgnoreCase) == true)
+            Navigation.NavigateTo($"/registrar-notas/{id}");
     }
 
     private void Seleccionar(int id) => seleccionadaId = id;

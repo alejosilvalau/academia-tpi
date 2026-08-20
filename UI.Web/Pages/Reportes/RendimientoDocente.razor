@@ -53,6 +53,7 @@
     private int docenteId;
     private string mensaje = string.Empty;
     private string? pdfBase64;
+    private bool _cargarPdf;
 
     protected override void OnInitialized()
     {
@@ -75,6 +76,15 @@
         }
     }
 
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_cargarPdf && pdfBase64 != null)
+        {
+            _cargarPdf = false;
+            await JS.InvokeVoidAsync("setIframeSrc", "pdfFrame", pdfBase64, "application/pdf");
+        }
+    }
+
     private async Task GenerarReporte()
     {
         int idObjetivo = Sesion.IsAdmin ? docenteId : Sesion.UsuarioActual!.Persona!.ID;
@@ -90,7 +100,8 @@
             byte[] pdfBytes = ReporteServicio.ExportarPdf(report);
             pdfBase64 = Convert.ToBase64String(pdfBytes);
 
-            await JS.InvokeVoidAsync("setIframeSrc", "pdfFrame", pdfBase64, "application/pdf");
+            _cargarPdf = true;
+            StateHasChanged();
             mensaje = "Reporte generado correctamente.";
         }
         catch (Exception ex)

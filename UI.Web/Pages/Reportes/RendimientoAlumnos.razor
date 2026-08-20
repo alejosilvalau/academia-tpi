@@ -53,6 +53,7 @@
     private int alumnoId;
     private string mensaje = string.Empty;
     private string? pdfBase64;
+    private bool _cargarPdf;
 
     protected override void OnInitialized()
     {
@@ -72,6 +73,15 @@
         catch (Exception ex)
         {
             mensaje = "Error al cargar alumnos: " + ex.Message;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_cargarPdf && pdfBase64 != null)
+        {
+            _cargarPdf = false;
+            await JS.InvokeVoidAsync("setIframeSrc", "pdfFrame", pdfBase64, "application/pdf");
         }
     }
 
@@ -105,7 +115,8 @@
             }
 
             pdfBase64 = Convert.ToBase64String(pdfBytes);
-            await JS.InvokeVoidAsync("setIframeSrc", "pdfFrame", pdfBase64, "application/pdf");
+            _cargarPdf = true;
+            StateHasChanged();
             mensaje = "Reporte generado correctamente.";
         }
         catch (Exception ex)

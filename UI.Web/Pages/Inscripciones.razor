@@ -1,4 +1,5 @@
 @page "/inscripciones"
+@page "/inscripciones/{alumnoId:int}"
 @attribute [Authorize(Roles="Administrador,Alumno")]
 @inject InscripcionServicio InscripcionServicio
 @inject CursoServicio CursoServicio
@@ -8,7 +9,7 @@
 
 <div class="md-card">
 <div class="md-card-header-actions">
-        <span>Inscripciones</span>
+        <span>Inscripciones @(esAdminConAlumno ? $"- {alumnoObjetivo}" : "")</span>
         <div class="md-btn-group">
             @if (Sesion.IsAdmin)
             {
@@ -35,20 +36,7 @@
                 <div class="md-form-row">
                     <div class="md-form-group">
                         <label class="md-label">Alumno</label>
-                        <select class="md-select" @bind="alumnoIdSeleccionado">
-                            <option value="0">-- Seleccione --</option>
-                            @if (Sesion.IsAdmin)
-                            {
-                                @foreach (var a in alumnos)
-                                {
-                                    <option value="@a.ID">@a.Nombre @a.Apellido (Legajo: @a.Legajo)</option>
-                                }
-                            }
-                            else
-                            {
-                                <option value="@Sesion.UsuarioActual.PersonaId">@Sesion.UsuarioActual.Persona.Nombre @Sesion.UsuarioActual.Persona.Apellido (Legajo: @Sesion.UsuarioActual.Persona.Legajo)</option>
-                            }
-                        </select>
+                        <input class="md-input" value="@NombreAlumnoFijo" disabled />
                     </div>
                     <div class="md-form-group">
                         <label class="md-label">Curso</label>
@@ -120,16 +108,21 @@
 </div>
 
 @code {
+    [Parameter]
+    public int? alumnoId { get; set; }
+
     private List<AlumnoInscripcion>? lista;
     private List<Curso>? cursos;
-    private List<Persona>? alumnos;
     private AlumnoInscripcion nuevaInscripcion = new();
     private ModoForm modoForm = ModoForm.Ninguno;
     private int seleccionadaId;
     private string mensaje = "";
     private bool mensajeEsError = false;
-    private int alumnoIdSeleccionado;
     private int cursoIdSeleccionado;
+    private int alumnoObjetivoId;
+    private string alumnoObjetivo = "";
+    private bool esAdminConAlumno => Sesion.IsAdmin && alumnoObjetivoId > 0;
+    private string NombreAlumnoFijo => esAdminConAlumno ? alumnoObjetivo : Sesion.UsuarioActual?.Persona?.ToString() ?? "";
 
     enum ModoForm { Ninguno, Alta }
 
@@ -141,8 +134,28 @@
             return;
         }
 
+        if (Sesion.IsAdmin)
+        {
+            if (alumnoId == null || alumnoId.Value <= 0)
+            {
+                Navigation.NavigateTo("/personas?tipo=alumno&seleccion=inscripcion");
+                return;
+            }
+            var alumno = PersonaServicio.GetOne(alumnoId.Value);
+            if (alumno == null)
+            {
+                Navigation.NavigateTo("/personas?tipo=alumno&seleccion=inscripcion");
+                return;
+            }
+            alumnoObjetivoId = alumno.ID;
+            alumnoObjetivo = alumno.ToString();
+        }
+        else
+        {
+            alumnoObjetivoId = Sesion.UsuarioActual?.PersonaId ?? 0;
+        }
+
         cursos = CursoServicio.GetAll();
-        alumnos = PersonaServicio.GetByTipo(Persona.TiposPersonas.Alumno);
         Cargar();
     }
 
@@ -150,10 +163,7 @@
     {
         try
         {
-            if (Sesion.IsAlumno && Sesion.UsuarioActual?.PersonaId != null)
-                lista = InscripcionServicio.GetByAlumno(Sesion.UsuarioActual.PersonaId.Value);
-            else
-                lista = InscripcionServicio.GetAll();
+            lista = InscripcionServicio.GetByAlumno(alumnoObjetivoId);
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
@@ -163,7 +173,6 @@
     private void Nuevo()
     {
         nuevaInscripcion = new AlumnoInscripcion();
-        alumnoIdSeleccionado = 0;
         cursoIdSeleccionado = 0;
         modoForm = ModoForm.Alta;
     }
@@ -178,10 +187,9 @@
     {
         try
         {
-            if (alumnoIdSeleccionado == 0) { mostrarMensaje("Seleccione un alumno.", true); return; }
             if (cursoIdSeleccionado == 0) { mostrarMensaje("Seleccione un curso.", true); return; }
 
-            InscripcionServicio.InscribirAlumno(alumnoIdSeleccionado, cursoIdSeleccionado);
+            InscripcionServicio.InscribirAlumno(alumnoObjetivoId, cursoIdSeleccionado);
             mostrarMensaje("Inscripcion realizada correctamente.", false);
             Cancelar();
             Cargar();

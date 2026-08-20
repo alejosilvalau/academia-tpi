@@ -1,4 +1,5 @@
 @page "/registrar-notas"
+@page "/registrar-notas/{docenteId:int}"
 @attribute [Authorize(Roles="Administrador,Docente")]
 @inject InscripcionServicio InscripcionServicio
 @inject CursoServicio CursoServicio
@@ -9,9 +10,9 @@
 
 <div class="md-card">
     <div class="md-card-header-actions">
-        <span>Registrar Notas</span>
+        <span>Registrar Notas @(tituloDocente)</span>
         <div class="md-btn-group">
-            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+            <button class="md-btn md-btn-primary" @onclick="CargarInscripciones">Actualizar</button>
         </div>
     </div>
 
@@ -20,70 +21,82 @@
         <div class="md-message @(mensajeEsError ? "md-message-error" : "md-message-success")">@mensaje</div>
     }
 
-    <div class="md-form-row">
-        <div class="md-form-group">
-            <label class="md-label">Curso</label>
-            <select class="md-select" @bind="cursoIdSeleccionado" @bind:after="CargarInscripciones">
-                <option value="0">-- Seleccione un curso --</option>
-                @if (cursos != null)
-                {
+    @if (cursos == null)
+    {
+        <div class="md-loading"><div class="md-spinner"></div><p>Cargando...</p></div>
+    }
+    else if (cursos.Count == 0)
+    {
+        <div class="md-empty"><div class="md-empty-icon">&#9998;</div><p>El docente no tiene cursos asignados</p></div>
+    }
+    else
+    {
+        <div class="md-form-row">
+            <div class="md-form-group">
+                <label class="md-label">Curso</label>
+                <select class="md-select" @bind="cursoIdSeleccionado" @bind:after="CargarInscripciones">
+                    <option value="0">-- Seleccione un curso --</option>
                     @foreach (var c in cursos)
                     {
                         <option value="@c.ID">@c.Descripcion</option>
                     }
-                }
-            </select>
+                </select>
+            </div>
+            <div class="md-form-group"></div>
         </div>
-        <div class="md-form-group"></div>
-    </div>
 
-    @if (inscripciones != null && inscripciones.Count > 0)
-    {
-        <table class="md-table">
-            <thead>
-                <tr>
-                    <th>Legajo</th>
-                    <th>Alumno</th>
-                    <th>Condicion Actual</th>
-                    <th>Nota Actual</th>
-                    <th>Nueva Nota</th>
-                    <th style="width:100px;">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in inscripciones)
-                {
+        @if (inscripciones != null && inscripciones.Count > 0)
+        {
+            <table class="md-table">
+                <thead>
                     <tr>
-                        <td>@item.Legajo</td>
-                        <td>@item.Nombre @item.Apellido</td>
-                        <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
-                        <td>@(item.Nota?.ToString() ?? "-")</td>
-                        <td>
-                            <input class="md-input" type="number" min="0" max="10" style="width:80px;"
-                                   @bind="notas[item.ID]" />
-                        </td>
-                        <td>
-                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Calificar(item.ID)">Calificar</button>
-                        </td>
+                        <th>Legajo</th>
+                        <th>Alumno</th>
+                        <th>Condicion Actual</th>
+                        <th>Nota Actual</th>
+                        <th>Nueva Nota</th>
+                        <th style="width:100px;">Acciones</th>
                     </tr>
-                }
-            </tbody>
-        </table>
-    }
-    else if (cursoIdSeleccionado != 0)
-    {
-        <div class="md-empty"><div class="md-empty-icon">&#9998;</div><p>No hay inscripciones en este curso</p></div>
+                </thead>
+                <tbody>
+                    @foreach (var item in inscripciones)
+                    {
+                        <tr>
+                            <td>@item.Legajo</td>
+                            <td>@item.Nombre @item.Apellido</td>
+                            <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
+                            <td>@(item.Nota?.ToString() ?? "-")</td>
+                            <td>
+                                <input class="md-input" type="number" min="0" max="10" style="width:80px;"
+                                       @bind="notas[item.ID]" />
+                            </td>
+                            <td>
+                                <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Calificar(item.ID)">Calificar</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else if (cursoIdSeleccionado != 0)
+        {
+            <div class="md-empty"><div class="md-empty-icon">&#9998;</div><p>No hay inscripciones en este curso</p></div>
+        }
     }
 </div>
 
 @code {
+    [Parameter]
+    public int? docenteId { get; set; }
+
     private List<Curso>? cursos;
     private List<AlumnoInscripcion>? inscripciones;
     private string mensaje = "";
     private bool mensajeEsError = false;
     private int cursoIdSeleccionado;
     private Dictionary<int, int?> notas = new();
-    private List<Persona>? docentes;
+    private int docenteObjetivoId;
+    private string tituloDocente = "";
 
     protected override void OnInitialized()
     {
@@ -95,20 +108,29 @@
 
         if (Sesion.IsAdmin)
         {
-            // Admin: show dropdown to select a Docente
-            docentes = PersonaServicio.GetByTipo(Persona.TiposPersonas.Docente);
+            if (docenteId == null || docenteId.Value <= 0)
+            {
+                Navigation.NavigateTo("/personas?tipo=docente&seleccion=notas");
+                return;
+            }
+            var docente = PersonaServicio.GetOne(docenteId.Value);
+            if (docente == null)
+            {
+                Navigation.NavigateTo("/personas?tipo=docente&seleccion=notas");
+                return;
+            }
+            docenteObjetivoId = docente.ID;
+            tituloDocente = $"- {docente}";
         }
         else
         {
-            // Docente: load own courses directly
-            if (Sesion.IsDocente && Sesion.UsuarioActual?.PersonaId != null)
-            {
-                var asignaciones = DocenteCursoServicio.GetByDocente(Sesion.UsuarioActual.PersonaId.Value);
-                cursos = asignaciones.Select(a => a.Curso).Where(c => c != null).DistinctBy(c => c!.ID).ToList();
-            }
+            docenteObjetivoId = Sesion.UsuarioActual?.PersonaId ?? 0;
         }
 
-        Cargar();
+        var asignaciones = DocenteCursoServicio.GetByDocente(docenteObjetivoId);
+        cursos = asignaciones.Select(a => a.Curso).Where(c => c != null).DistinctBy(c => c!.ID).ToList();
+
+        CargarInscripciones();
     }
 
     private void CargarInscripciones()
@@ -149,8 +171,6 @@
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
-
-    private void Cargar() => CargarInscripciones();
 
     private void mostrarMensaje(string msg, bool esError)
     {

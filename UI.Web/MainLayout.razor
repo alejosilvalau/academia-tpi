@@ -67,19 +67,21 @@
                 </div>
             </div>
 
-            @if (Sesion.IsAlumno)
+            @if (Sesion.IsAdmin || Sesion.IsAlumno)
             {
                 <div class="sidebar-section">
-                    <a href="/inscripciones" class="sidebar-link @(IsActive("/inscripciones"))">
-                        <span class="icon">&#9998;</span> Inscripciones
+                    <a href="@(Sesion.IsAdmin ? "/personas?tipo=alumno&seleccion=inscripcion" : "/inscripciones")"
+                       class="sidebar-link @(IsActive("/inscripciones"))">
+                        <span class="icon">&#9998;</span> Inscripcion
                     </a>
                 </div>
             }
 
-            @if (Sesion.IsDocente)
+            @if (Sesion.IsAdmin || Sesion.IsDocente)
             {
                 <div class="sidebar-section">
-                    <a href="/registrar-notas" class="sidebar-link @(IsActive("/registrar-notas"))">
+                    <a href="@(Sesion.IsAdmin ? "/personas?tipo=docente&seleccion=notas" : "/registrar-notas")"
+                       class="sidebar-link @(IsActive("/registrar-notas"))">
                         <span class="icon">&#9998;</span> Registrar Notas
                     </a>
                 </div>
