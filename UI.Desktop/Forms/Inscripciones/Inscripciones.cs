@@ -19,7 +19,6 @@ namespace UI.Desktop.Forms.Inscripciones
 
             if (!admin)
             {
-                tsbEditar.Visible = false;
                 tsbEliminar.Visible = false;
             }
         }
@@ -42,17 +41,6 @@ namespace UI.Desktop.Forms.Inscripciones
             Listar();
         }
 
-        private void tsbEditar_Click(object sender, EventArgs e)
-        {
-            if (!IsRowSelected(dgvInscripciones)) return;
-            int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
-            new InscripcionDesktop(_personaActual, id, ModoForm.Modificacion).ShowDialog();
-            CongelarGrilla(dgvInscripciones);
-            Listar();
-            SeleccionarFila(dgvInscripciones, id);
-            DescongelarGrilla(dgvInscripciones);
-        }
-
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvInscripciones)) return;
@@ -64,9 +52,5 @@ namespace UI.Desktop.Forms.Inscripciones
             DescongelarGrilla(dgvInscripciones);
         }
 
-        private void dgv_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
-        {
-            tsbEditar_Click(sender, e);
-        }
     }
 }

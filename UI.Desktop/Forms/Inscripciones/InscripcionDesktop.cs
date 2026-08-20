@@ -29,12 +29,6 @@ namespace UI.Desktop.Forms.Inscripciones
                     btnAceptar.Text = "Inscribir";
                     dgvCursos.DataSource = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop()).GetAll();
                     break;
-                case ModoForm.Modificacion:
-                    btnAceptar.Text = "Guardar";
-                    cbxCondicion.Enabled = true;
-                    dgvCursos.Visible = false;
-                    ClientSize = new Size(600, 140);
-                    break;
                 case ModoForm.Baja:
                     btnAceptar.Text = "Eliminar";
                     dgvCursos.Visible = false;

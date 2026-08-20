@@ -26,7 +26,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.FillSpacer = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.tsbAgregar = new System.Windows.Forms.ToolStripButton();
-            this.tsbEditar = new System.Windows.Forms.ToolStripButton();
             this.tsbEliminar = new System.Windows.Forms.ToolStripButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInscripciones)).BeginInit();
             this.toolStrip1.SuspendLayout();
@@ -38,7 +37,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsbAgregar,
-            this.tsbEditar,
             this.tsbEliminar});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
@@ -56,18 +54,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.tsbAgregar.Size = new System.Drawing.Size(35, 37);
             this.tsbAgregar.Text = "Agregar";
             this.tsbAgregar.Click += new System.EventHandler(this.tsbAgregar_Click);
-            //
-            // tsbEditar
-            //
-            this.tsbEditar.BackColor = MaterialColors.PrimaryDark;
-            this.tsbEditar.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.tsbEditar.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.tsbEditar.ForeColor = MaterialColors.TextOnPrimary;
-            this.tsbEditar.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.tsbEditar.Name = "tsbEditar";
-            this.tsbEditar.Size = new System.Drawing.Size(55, 37);
-            this.tsbEditar.Text = "Editar";
-            this.tsbEditar.Click += new System.EventHandler(this.tsbEditar_Click);
             //
             // tsbEliminar
             //
@@ -120,7 +106,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.dgvInscripciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvInscripciones.Size = new System.Drawing.Size(800, 410);
             this.dgvInscripciones.TabIndex = 1;
-            this.dgvInscripciones.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_CellDoubleClick);
             //
             // ID
             //
@@ -202,7 +187,6 @@ namespace UI.Desktop.Forms.Inscripciones
         private System.Windows.Forms.DataGridViewTextBoxColumn FillSpacer;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripButton tsbAgregar;
-        private System.Windows.Forms.ToolStripButton tsbEditar;
         private System.Windows.Forms.ToolStripButton tsbEliminar;
     }
 }

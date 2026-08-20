@@ -77,7 +77,7 @@ namespace UI.Desktop
             btnCerrarSesion.Location = new Point(0, 690);
             btnCerrarSesion.Margin = new Padding(3, 4, 3, 4);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Padding = new Padding(10);
+            btnCerrarSesion.Padding = new Padding(10, 10, 20, 10);
             btnCerrarSesion.Size = new Size(220, 60);
             btnCerrarSesion.TabIndex = 5;
             btnCerrarSesion.Text = "  Cerrar Sesión";
