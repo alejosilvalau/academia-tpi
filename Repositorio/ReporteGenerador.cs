@@ -43,6 +43,9 @@ namespace Repositorio
             var ds = report.GetDataSource("Rendimiento");
             if (ds != null) ds.Enabled = true;
 
+            var dataBand = report.FindObject("DataResumen") as DataBand;
+            if (dataBand != null) dataBand.DataSource = ds;
+
             report.SetParameterValue("DocenteNombre", nombre);
             report.SetParameterValue("DocenteLegajo", legajo);
             report.SetParameterValue("FechaGeneracion", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
@@ -99,6 +102,9 @@ namespace Repositorio
             report.RegisterData(dataTable, "Alumnos");
             var dsAl = report.GetDataSource("Alumnos");
             if (dsAl != null) dsAl.Enabled = true;
+
+            var dataBandAl = report.FindObject("DataDetalle") as DataBand;
+            if (dataBandAl != null) dataBandAl.DataSource = dsAl;
 
             report.SetParameterValue("TituloFiltro", titulo);
             report.SetParameterValue("FechaGeneracion", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
