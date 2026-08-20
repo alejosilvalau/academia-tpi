@@ -5,16 +5,16 @@ namespace Repositorio
 {
     public static class GraficoGenerador
     {
-        private const int Ancho = 720;
-        private const int Alto = 360;
+        private const int AnchoDefecto = 720;
+        private const int AltoDefecto = 360;
 
         private static readonly SKColor ColorAprobados = new(0x4C, 0xAF, 0x50);
         private static readonly SKColor ColorRegulares = new(0xFF, 0xC1, 0x07);
         private static readonly SKColor ColorSinNota = new(0xEF, 0x5C, 0x52);
 
-        public static byte[] BarrasRendimientoDocente(DataTable tabla)
+        public static byte[] BarrasRendimientoDocente(DataTable tabla, int ancho = AnchoDefecto, int alto = AltoDefecto)
         {
-            using var surface = SKSurface.Create(new SKImageInfo(Ancho, Alto));
+            using var surface = SKSurface.Create(new SKImageInfo(ancho, alto));
             var canvas = surface.Canvas;
             canvas.Clear(SKColors.White);
 
@@ -51,7 +51,7 @@ namespace Repositorio
             canvas.DrawText("Condiciones por curso", 16, 26, tituloFont);
 
             var leyendas = new[] { ("Aprobados", ColorAprobados), ("Regulares", ColorRegulares), ("Sin nota", ColorSinNota) };
-            int lx = Ancho - 200;
+            int lx = ancho - 200;
             for (int i = 0; i < leyendas.Length; i++)
             {
                 using var box = new SKPaint { Color = leyendas[i].Item2, IsAntialias = true };
@@ -62,7 +62,7 @@ namespace Repositorio
             int filas = tabla.Rows.Count;
             if (filas == 0)
             {
-                canvas.DrawText("Sin datos para mostrar.", Ancho / 2 - 80, Alto / 2, etiquetaFont);
+                canvas.DrawText("Sin datos para mostrar.", ancho / 2 - 80, alto / 2, etiquetaFont);
                 return Encode(surface);
             }
 
@@ -75,14 +75,14 @@ namespace Repositorio
             const int margenDer = 20;
             const int margenSup = 50;
             const int margenInf = 70;
-            int areaAncho = Ancho - margenIzq - margenDer;
-            int areaAlto = Alto - margenSup - margenInf;
+            int areaAncho = ancho - margenIzq - margenDer;
+            int areaAlto = alto - margenSup - margenInf;
 
             for (int i = 0; i <= 5; i++)
             {
                 float y = margenSup + areaAlto - (areaAlto * i / 5f);
                 float val = maxValor * i / 5f;
-                canvas.DrawLine(margenIzq, y, Ancho - margenDer, y, ejePaint);
+                canvas.DrawLine(margenIzq, y, ancho - margenDer, y, ejePaint);
                 canvas.DrawText(((int)val).ToString(), 10, y + 4, valorFont);
             }
 
@@ -118,7 +118,7 @@ namespace Repositorio
                 var textoRect = new SKRect();
                 etiquetaFont.MeasureText(etiqueta, ref textoRect);
                 canvas.Save();
-                canvas.Translate(etiquetaX - textoRect.Width / 2, Alto - margenInf + 8);
+                canvas.Translate(etiquetaX - textoRect.Width / 2, alto - margenInf + 8);
                 canvas.RotateDegrees(45);
                 canvas.DrawText(etiqueta, 0, 0, etiquetaFont);
                 canvas.Restore();
@@ -127,9 +127,9 @@ namespace Repositorio
             return Encode(surface);
         }
 
-        public static byte[] TortaCondiciones(DataTable tabla)
+        public static byte[] TortaCondiciones(DataTable tabla, int ancho = AnchoDefecto, int alto = AltoDefecto)
         {
-            using var surface = SKSurface.Create(new SKImageInfo(Ancho, Alto));
+            using var surface = SKSurface.Create(new SKImageInfo(ancho, alto));
             var canvas = surface.Canvas;
             canvas.Clear(SKColors.White);
 
@@ -169,7 +169,7 @@ namespace Repositorio
                     Typeface = SKTypeface.FromFamilyName("Segoe UI", SKFontStyleWeight.Normal, SKFontStyleWidth.Normal, SKFontStyleSlant.Upright),
                     TextSize = 12
                 };
-                canvas.DrawText("Sin datos para mostrar.", Ancho / 2 - 80, Alto / 2, avisoFont);
+                canvas.DrawText("Sin datos para mostrar.", ancho / 2 - 80, alto / 2, avisoFont);
                 return Encode(surface);
             }
 
@@ -180,7 +180,7 @@ namespace Repositorio
                 (inscriptos, ColorSinNota, "Inscriptos (sin nota)")
             };
 
-            float cx = 220, cy = Alto / 2 + 10, radio = 130;
+            float cx = 220, cy = alto / 2 + 10, radio = 130;
             float startAngle = -90f;
             using var stroke = new SKPaint { Color = SKColors.White, IsStroke = true, StrokeWidth = 2, IsAntialias = true };
 
@@ -198,13 +198,14 @@ namespace Repositorio
                 startAngle += sweep;
             }
 
+            int legendX = (int)(cx + radio + 30);
             int ly = 80;
             foreach (var seg in segmentos)
             {
                 using var box = new SKPaint { Color = seg.Item2, IsAntialias = true };
-                canvas.DrawRect(440, ly, 14, 14, box);
+                canvas.DrawRect(legendX, ly, 14, 14, box);
                 int pct = total == 0 ? 0 : seg.Item1 * 100 / total;
-                canvas.DrawText($"{seg.Item3}: {seg.Item1} ({pct}%)", 462, ly + 12, legendFont);
+                canvas.DrawText($"{seg.Item3}: {seg.Item1} ({pct}%)", legendX + 22, ly + 12, legendFont);
                 ly += 28;
             }
 
