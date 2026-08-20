@@ -11,12 +11,12 @@
         <div class="md-btn-group">
             @if (modoSeleccion)
             {
-                <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+                <button class="md-btn md-btn-primary" @onclick="Cargar">Refrescar</button>
             }
             else
             {
                 <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nueva</button>
-                <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+                <button class="md-btn md-btn-primary" @onclick="Cargar">Refrescar</button>
             }
         </div>
     </div>
@@ -128,7 +128,7 @@
                         <td>@item.Legajo</td>
                         <td><span class="md-badge md-badge-primary">@item.Tipo</span></td>
                         <td>@item.EMail</td>
-                        <td>
+                        <td class="md-table-actions">
                             @if (modoSeleccion)
                             {
                                 <button class="md-btn md-btn-accent md-btn-sm" @onclick="() => SeleccionarPersona(item.ID)">Seleccionar</button>

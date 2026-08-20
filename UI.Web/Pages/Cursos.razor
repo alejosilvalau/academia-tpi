@@ -11,7 +11,7 @@
         <span>Cursos</span>
         <div class="md-btn-group">
             <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nuevo</button>
-            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+            <button class="md-btn md-btn-primary" @onclick="Cargar">Refrescar</button>
         </div>
     </div>
 
@@ -102,7 +102,7 @@
                         <td>@item.Comision?.Descripcion</td>
                         <td>@item.AnioCalendario</td>
                         <td>@item.Cupo</td>
-                        <td>
+                        <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
                             <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
                         </td>

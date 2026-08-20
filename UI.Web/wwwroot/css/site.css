@@ -280,6 +280,18 @@ a:hover { color: var(--primary-dark); }
   flex-wrap: wrap;
 }
 
+.md-table-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.md-table-actions .md-btn {
+  width: 120px;
+  justify-content: center;
+}
+
 /* ===================== TABLE ===================== */
 .md-table {
   width: 100%;

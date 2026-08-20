@@ -10,7 +10,7 @@
         <span>Planes</span>
         <div class="md-btn-group">
             <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nuevo</button>
-            <button class="md-btn md-btn-primary" @onclick="Cargar">Actualizar</button>
+            <button class="md-btn md-btn-primary" @onclick="Cargar">Refrescar</button>
         </div>
     </div>
 
@@ -77,7 +77,7 @@
                         <td>@item.ID</td>
                         <td>@item.Descripcion</td>
                         <td>@item.Especialidad?.Descripcion</td>
-                        <td>
+                        <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
                             <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
                         </td>
