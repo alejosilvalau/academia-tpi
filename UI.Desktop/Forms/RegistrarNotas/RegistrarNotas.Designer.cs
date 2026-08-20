@@ -162,6 +162,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             dgvAlumnos.RowHeadersWidth = 51;
             dgvAlumnos.RowTemplate.Height = 35;
             dgvAlumnos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvAlumnos.CellClick += dgvAlumnos_CellClick;
             dgvAlumnos.Size = new Size(1435, 604);
             dgvAlumnos.TabIndex = 1;
             // 

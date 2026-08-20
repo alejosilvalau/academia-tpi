@@ -24,6 +24,13 @@ namespace UI.Desktop.Forms.RegistrarNotas
 
         private void RegistrarNotas_Load(object sender, EventArgs e) => Listar();
 
+        private void dgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+            var alumno = (AlumnoInscripcion)dgvAlumnos.Rows[e.RowIndex].DataBoundItem;
+            txtNota.Text = alumno.Nota?.ToString() ?? string.Empty;
+        }
+
         private void cbxCursos_SelectedIndexChanged(object sender, EventArgs e) => Listar();
 
         public override void Listar()
