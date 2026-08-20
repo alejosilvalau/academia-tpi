@@ -150,9 +150,9 @@ else
         };
     }
 
-    private void CerrarSesion()
+    private async Task CerrarSesion()
     {
-        _ = JS.InvokeVoidAsync("academiaLogout", "/api/auth/logout");
+        await JS.InvokeVoidAsync("academiaLogout", "/api/auth/logout");
         Sesion.Invalidar();
         Nav.NavigateTo("/login", forceLoad: true);
     }
