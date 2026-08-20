@@ -17,9 +17,9 @@ namespace UI.Desktop.Forms.RegistrarNotas
 
         private void InitializeComponent()
         {
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             panelTop = new Panel();
             lblCurso = new Label();
             cbxCursos = new ComboBox();
@@ -125,31 +125,31 @@ namespace UI.Desktop.Forms.RegistrarNotas
             // 
             dgvAlumnos.AllowUserToAddRows = false;
             dgvAlumnos.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle1.BackColor = Color.FromArgb(236, 239, 241);
-            dgvAlumnos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(236, 239, 241);
+            dgvAlumnos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             dgvAlumnos.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvAlumnos.BackgroundColor = Color.White;
             dgvAlumnos.BorderStyle = BorderStyle.None;
             dgvAlumnos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = Color.FromArgb(69, 90, 100);
-            dataGridViewCellStyle2.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            dataGridViewCellStyle2.ForeColor = Color.White;
-            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(69, 90, 100);
-            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
-            dgvAlumnos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle5.BackColor = Color.FromArgb(69, 90, 100);
+            dataGridViewCellStyle5.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            dataGridViewCellStyle5.ForeColor = Color.White;
+            dataGridViewCellStyle5.SelectionBackColor = Color.FromArgb(69, 90, 100);
+            dataGridViewCellStyle5.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle5.WrapMode = DataGridViewTriState.True;
+            dgvAlumnos.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             dgvAlumnos.ColumnHeadersHeight = 40;
             dgvAlumnos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             dgvAlumnos.Columns.AddRange(new DataGridViewColumn[] { ID, Nombre, Apellido, Legajo, Condicion, Nota, FillSpacer });
-            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = Color.White;
-            dataGridViewCellStyle3.Font = new Font("Segoe UI", 10F);
-            dataGridViewCellStyle3.ForeColor = Color.FromArgb(33, 33, 33);
-            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(255, 193, 7);
-            dataGridViewCellStyle3.SelectionForeColor = Color.FromArgb(33, 33, 33);
-            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
-            dgvAlumnos.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle6.BackColor = Color.White;
+            dataGridViewCellStyle6.Font = new Font("Segoe UI", 10F);
+            dataGridViewCellStyle6.ForeColor = Color.FromArgb(33, 33, 33);
+            dataGridViewCellStyle6.SelectionBackColor = Color.FromArgb(255, 193, 7);
+            dataGridViewCellStyle6.SelectionForeColor = Color.FromArgb(33, 33, 33);
+            dataGridViewCellStyle6.WrapMode = DataGridViewTriState.False;
+            dgvAlumnos.DefaultCellStyle = dataGridViewCellStyle6;
             dgvAlumnos.Dock = DockStyle.Fill;
             dgvAlumnos.EnableHeadersVisualStyles = false;
             dgvAlumnos.GridColor = Color.FromArgb(176, 190, 197);
@@ -162,9 +162,9 @@ namespace UI.Desktop.Forms.RegistrarNotas
             dgvAlumnos.RowHeadersWidth = 51;
             dgvAlumnos.RowTemplate.Height = 35;
             dgvAlumnos.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvAlumnos.CellClick += dgvAlumnos_CellClick;
             dgvAlumnos.Size = new Size(1435, 604);
             dgvAlumnos.TabIndex = 1;
+            dgvAlumnos.CellClick += dgvAlumnos_CellClick;
             // 
             // ID
             // 
@@ -219,6 +219,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             // FillSpacer
             // 
             FillSpacer.HeaderText = "";
+            FillSpacer.MinimumWidth = 6;
             FillSpacer.Name = "FillSpacer";
             FillSpacer.ReadOnly = true;
             FillSpacer.Resizable = DataGridViewTriState.False;

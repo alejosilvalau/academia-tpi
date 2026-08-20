@@ -66,166 +66,166 @@ namespace UI.Desktop.Forms.Cursos
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
-            tableLayoutPanel1.Size = new Size(560, 219);
+            tableLayoutPanel1.Size = new Size(560, 185);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblID
             // 
+            lblID.Anchor = AnchorStyles.Right;
             lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(117, 117, 117);
-            lblID.Location = new Point(3, 0);
+            lblID.Location = new Point(106, 31);
             lblID.Name = "lblID";
-            lblID.Size = new Size(114, 56);
+            lblID.Size = new Size(31, 23);
             lblID.TabIndex = 0;
             lblID.Text = "ID:";
-            lblID.Anchor = AnchorStyles.Right;
             // 
             // txtID
             // 
-            txtID.BackColor = MaterialColors.ReadOnlyBack;
-            txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtID.BackColor = Color.FromArgb(238, 238, 238);
+            txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
-            txtID.Location = new Point(123, 4);
+            txtID.Location = new Point(143, 28);
             txtID.Margin = new Padding(3, 4, 3, 4);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
-            txtID.Size = new Size(154, 30);
+            txtID.Size = new Size(134, 30);
             txtID.TabIndex = 1;
             // 
             // lblAnioCalendario
             // 
+            lblAnioCalendario.Anchor = AnchorStyles.Right;
             lblAnioCalendario.AutoSize = true;
             lblAnioCalendario.Font = new Font("Segoe UI", 10F);
             lblAnioCalendario.ForeColor = Color.FromArgb(117, 117, 117);
-            lblAnioCalendario.Location = new Point(283, 0);
+            lblAnioCalendario.Location = new Point(301, 20);
             lblAnioCalendario.Name = "lblAnioCalendario";
-            lblAnioCalendario.Size = new Size(114, 56);
+            lblAnioCalendario.Size = new Size(96, 46);
             lblAnioCalendario.TabIndex = 2;
             lblAnioCalendario.Text = "Año Calendario:";
-            lblAnioCalendario.Anchor = AnchorStyles.Right;
             // 
             // txtAnioCalendario
             // 
+            txtAnioCalendario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtAnioCalendario.BackColor = Color.White;
             txtAnioCalendario.BorderStyle = BorderStyle.FixedSingle;
-            txtAnioCalendario.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtAnioCalendario.Font = new Font("Segoe UI", 10F);
             txtAnioCalendario.ForeColor = Color.FromArgb(33, 33, 33);
-            txtAnioCalendario.Location = new Point(403, 4);
+            txtAnioCalendario.Location = new Point(403, 28);
             txtAnioCalendario.Margin = new Padding(3, 4, 3, 4);
             txtAnioCalendario.Name = "txtAnioCalendario";
-            txtAnioCalendario.Size = new Size(154, 30);
+            txtAnioCalendario.Size = new Size(134, 30);
             txtAnioCalendario.TabIndex = 3;
             // 
             // lblDescripcion
             // 
+            lblDescripcion.Anchor = AnchorStyles.Right;
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 10F);
             lblDescripcion.ForeColor = Color.FromArgb(117, 117, 117);
-            lblDescripcion.Location = new Point(3, 56);
+            lblDescripcion.Location = new Point(35, 87);
             lblDescripcion.Name = "lblDescripcion";
-            lblDescripcion.Size = new Size(114, 56);
+            lblDescripcion.Size = new Size(102, 23);
             lblDescripcion.TabIndex = 4;
             lblDescripcion.Text = "Descripción:";
-            lblDescripcion.Anchor = AnchorStyles.Right;
             // 
             // txtDescripcion
             // 
-            txtDescripcion.BackColor = MaterialColors.ReadOnlyBack;
-            txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtDescripcion.BackColor = Color.FromArgb(238, 238, 238);
+            txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Font = new Font("Segoe UI", 10F);
             txtDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
-            txtDescripcion.Location = new Point(123, 60);
+            txtDescripcion.Location = new Point(143, 84);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.ReadOnly = true;
-            txtDescripcion.Size = new Size(154, 30);
+            txtDescripcion.Size = new Size(134, 30);
             txtDescripcion.TabIndex = 5;
             // 
             // lblCupo
             // 
+            lblCupo.Anchor = AnchorStyles.Right;
             lblCupo.AutoSize = true;
             lblCupo.Font = new Font("Segoe UI", 10F);
             lblCupo.ForeColor = Color.FromArgb(117, 117, 117);
-            lblCupo.Location = new Point(283, 56);
+            lblCupo.Location = new Point(342, 87);
             lblCupo.Name = "lblCupo";
-            lblCupo.Size = new Size(114, 56);
+            lblCupo.Size = new Size(55, 23);
             lblCupo.TabIndex = 6;
             lblCupo.Text = "Cupo:";
-            lblCupo.Anchor = AnchorStyles.Right;
             // 
             // txtCupo
             // 
+            txtCupo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtCupo.BackColor = Color.White;
             txtCupo.BorderStyle = BorderStyle.FixedSingle;
-            txtCupo.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             txtCupo.Font = new Font("Segoe UI", 10F);
             txtCupo.ForeColor = Color.FromArgb(33, 33, 33);
-            txtCupo.Location = new Point(403, 60);
+            txtCupo.Location = new Point(403, 84);
             txtCupo.Margin = new Padding(3, 4, 3, 4);
             txtCupo.Name = "txtCupo";
-            txtCupo.Size = new Size(154, 30);
+            txtCupo.Size = new Size(134, 30);
             txtCupo.TabIndex = 7;
             // 
             // lblMateria
             // 
+            lblMateria.Anchor = AnchorStyles.Right;
             lblMateria.AutoSize = true;
             lblMateria.Font = new Font("Segoe UI", 10F);
             lblMateria.ForeColor = Color.FromArgb(117, 117, 117);
-            lblMateria.Location = new Point(3, 112);
+            lblMateria.Location = new Point(65, 143);
             lblMateria.Name = "lblMateria";
-            lblMateria.Size = new Size(114, 107);
+            lblMateria.Size = new Size(72, 23);
             lblMateria.TabIndex = 8;
             lblMateria.Text = "Materia:";
-            lblMateria.Anchor = AnchorStyles.Right;
             // 
             // cbxMateria
             // 
-            cbxMateria.BackColor = Color.White;
             cbxMateria.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cbxMateria.BackColor = Color.White;
+            cbxMateria.DisplayMember = "Descripcion";
             cbxMateria.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxMateria.Font = new Font("Segoe UI", 10F);
             cbxMateria.ForeColor = Color.FromArgb(33, 33, 33);
             cbxMateria.FormattingEnabled = true;
-            cbxMateria.Location = new Point(123, 116);
+            cbxMateria.Location = new Point(143, 139);
             cbxMateria.Margin = new Padding(3, 4, 3, 4);
             cbxMateria.Name = "cbxMateria";
-            cbxMateria.Size = new Size(154, 31);
+            cbxMateria.Size = new Size(134, 31);
             cbxMateria.TabIndex = 9;
-            cbxMateria.DisplayMember = "Descripcion";
             cbxMateria.ValueMember = "ID";
             // 
             // lblComision
             // 
+            lblComision.Anchor = AnchorStyles.Right;
             lblComision.AutoSize = true;
             lblComision.Font = new Font("Segoe UI", 10F);
             lblComision.ForeColor = Color.FromArgb(117, 117, 117);
-            lblComision.Location = new Point(283, 112);
+            lblComision.Location = new Point(312, 143);
             lblComision.Name = "lblComision";
-            lblComision.Size = new Size(114, 107);
+            lblComision.Size = new Size(85, 23);
             lblComision.TabIndex = 10;
             lblComision.Text = "Comisión:";
-            lblComision.Anchor = AnchorStyles.Right;
             // 
             // cbxComision
             // 
-            cbxComision.BackColor = Color.White;
             cbxComision.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cbxComision.BackColor = Color.White;
+            cbxComision.DisplayMember = "Descripcion";
             cbxComision.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxComision.Font = new Font("Segoe UI", 10F);
             cbxComision.ForeColor = Color.FromArgb(33, 33, 33);
             cbxComision.FormattingEnabled = true;
-            cbxComision.Location = new Point(403, 116);
+            cbxComision.Location = new Point(403, 139);
             cbxComision.Margin = new Padding(3, 4, 3, 4);
             cbxComision.Name = "cbxComision";
-            cbxComision.Size = new Size(154, 31);
+            cbxComision.Size = new Size(134, 31);
             cbxComision.TabIndex = 11;
-            cbxComision.DisplayMember = "Descripcion";
             cbxComision.ValueMember = "ID";
             // 
             // panelBotones
@@ -234,7 +234,7 @@ namespace UI.Desktop.Forms.Cursos
             panelBotones.Controls.Add(btnCancelar);
             panelBotones.Controls.Add(btnAceptar);
             panelBotones.Dock = DockStyle.Bottom;
-            panelBotones.Location = new Point(0, 219);
+            panelBotones.Location = new Point(0, 185);
             panelBotones.Margin = new Padding(3, 4, 3, 4);
             panelBotones.Name = "panelBotones";
             panelBotones.Size = new Size(560, 60);
@@ -242,6 +242,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // btnCancelar
             // 
+            btnCancelar.Anchor = AnchorStyles.None;
             btnCancelar.BackColor = Color.FromArgb(144, 164, 174);
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 144, 156);
@@ -249,7 +250,6 @@ namespace UI.Desktop.Forms.Cursos
             btnCancelar.FlatStyle = FlatStyle.Flat;
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
-            btnCancelar.Anchor = AnchorStyles.None;
             btnCancelar.Location = new Point(175, 10);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 40);
@@ -260,6 +260,7 @@ namespace UI.Desktop.Forms.Cursos
             // 
             // btnAceptar
             // 
+            btnAceptar.Anchor = AnchorStyles.None;
             btnAceptar.BackColor = Color.FromArgb(255, 193, 7);
             btnAceptar.FlatAppearance.BorderSize = 0;
             btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
@@ -267,7 +268,6 @@ namespace UI.Desktop.Forms.Cursos
             btnAceptar.FlatStyle = FlatStyle.Flat;
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
-            btnAceptar.Anchor = AnchorStyles.None;
             btnAceptar.Location = new Point(285, 10);
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(100, 40);
@@ -281,10 +281,9 @@ namespace UI.Desktop.Forms.Cursos
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(560, 281);
+            ClientSize = new Size(560, 245);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
-            FormBorderStyle = FormBorderStyle.Sizable;
             Margin = new Padding(3, 5, 3, 5);
             Name = "CursoDesktop";
             StartPosition = FormStartPosition.CenterParent;

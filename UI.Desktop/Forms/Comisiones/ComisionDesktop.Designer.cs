@@ -57,7 +57,7 @@ namespace UI.Desktop.Forms.Comisiones
             tableLayoutPanel1.RowCount = 2;
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
             tableLayoutPanel1.RowStyles.Add(new RowStyle());
-            tableLayoutPanel1.Size = new Size(580, 188);
+            tableLayoutPanel1.Size = new Size(580, 128);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblID
@@ -75,7 +75,7 @@ namespace UI.Desktop.Forms.Comisiones
             // txtID
             // 
             txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtID.BackColor = MaterialColors.ReadOnlyBack;
+            txtID.BackColor = Color.FromArgb(238, 238, 238);
             txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
@@ -93,7 +93,7 @@ namespace UI.Desktop.Forms.Comisiones
             lblDescripcion.AutoSize = true;
             lblDescripcion.Font = new Font("Segoe UI", 10F);
             lblDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
-            lblDescripcion.Location = new Point(23, 101);
+            lblDescripcion.Location = new Point(23, 71);
             lblDescripcion.Name = "lblDescripcion";
             lblDescripcion.Size = new Size(102, 23);
             lblDescripcion.TabIndex = 2;
@@ -106,7 +106,7 @@ namespace UI.Desktop.Forms.Comisiones
             txtDescripcion.BorderStyle = BorderStyle.FixedSingle;
             txtDescripcion.Font = new Font("Segoe UI", 10F);
             txtDescripcion.ForeColor = Color.FromArgb(33, 33, 33);
-            txtDescripcion.Location = new Point(131, 98);
+            txtDescripcion.Location = new Point(131, 68);
             txtDescripcion.Margin = new Padding(3, 4, 3, 4);
             txtDescripcion.Name = "txtDescripcion";
             txtDescripcion.Size = new Size(135, 30);
@@ -143,7 +143,7 @@ namespace UI.Desktop.Forms.Comisiones
             lblPlan.AutoSize = true;
             lblPlan.Font = new Font("Segoe UI", 10F);
             lblPlan.ForeColor = Color.FromArgb(33, 33, 33);
-            lblPlan.Location = new Point(368, 101);
+            lblPlan.Location = new Point(368, 71);
             lblPlan.Name = "lblPlan";
             lblPlan.Size = new Size(47, 23);
             lblPlan.TabIndex = 6;
@@ -158,7 +158,7 @@ namespace UI.Desktop.Forms.Comisiones
             cbxPlan.Font = new Font("Segoe UI", 10F);
             cbxPlan.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPlan.FormattingEnabled = true;
-            cbxPlan.Location = new Point(421, 97);
+            cbxPlan.Location = new Point(421, 67);
             cbxPlan.Margin = new Padding(3, 4, 3, 4);
             cbxPlan.Name = "cbxPlan";
             cbxPlan.Size = new Size(136, 31);
@@ -171,7 +171,7 @@ namespace UI.Desktop.Forms.Comisiones
             panelBottom.Controls.Add(btnCancelar);
             panelBottom.Controls.Add(btnAceptar);
             panelBottom.Dock = DockStyle.Bottom;
-            panelBottom.Location = new Point(0, 188);
+            panelBottom.Location = new Point(0, 128);
             panelBottom.Margin = new Padding(3, 4, 3, 4);
             panelBottom.Name = "panelBottom";
             panelBottom.Size = new Size(580, 56);
@@ -220,7 +220,7 @@ namespace UI.Desktop.Forms.Comisiones
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(580, 244);
+            ClientSize = new Size(580, 184);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBottom);
             Margin = new Padding(3, 5, 3, 5);

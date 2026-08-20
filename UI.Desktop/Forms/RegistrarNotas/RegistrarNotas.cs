@@ -50,13 +50,17 @@ namespace UI.Desktop.Forms.RegistrarNotas
             try
             {
                 var alumno = (AlumnoInscripcion)dgvAlumnos.SelectedRows[0].DataBoundItem;
+                int id = alumno.ID;
                 int.TryParse(txtNota.Text, out int nota);
                 alumno.Nota = nota;
                 if (nota >= 6) alumno.Condicion = AlumnoInscripcion.Condiciones.Aprobado;
                 else if (nota >= 4) alumno.Condicion = AlumnoInscripcion.Condiciones.Regular;
                 else alumno.Condicion = AlumnoInscripcion.Condiciones.Inscripto;
                 _inscripcionServicio.Update(alumno);
+                CongelarGrilla(dgvAlumnos);
                 Listar();
+                SeleccionarFila(dgvAlumnos, id);
+                DescongelarGrilla(dgvAlumnos);
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }

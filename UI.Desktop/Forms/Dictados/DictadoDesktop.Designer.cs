@@ -45,8 +45,8 @@ namespace UI.Desktop.Forms.Dictados
             tableLayoutPanel1.Controls.Add(cbxCursos, 1, 1);
             tableLayoutPanel1.Controls.Add(lblDocente, 0, 2);
             tableLayoutPanel1.Controls.Add(cbxDocentes, 1, 2);
-            tableLayoutPanel1.Controls.Add(lblCargo, 0, 3);
             tableLayoutPanel1.Controls.Add(cbxTiposCargos, 1, 3);
+            tableLayoutPanel1.Controls.Add(lblCargo, 0, 3);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Margin = new Padding(3, 4, 3, 4);
@@ -57,7 +57,7 @@ namespace UI.Desktop.Forms.Dictados
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 56F));
-            tableLayoutPanel1.Size = new Size(460, 276);
+            tableLayoutPanel1.Size = new Size(460, 253);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // lblID
@@ -66,25 +66,25 @@ namespace UI.Desktop.Forms.Dictados
             lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(117, 117, 117);
-            lblID.Location = new Point(3, 0);
+            lblID.Location = new Point(106, 31);
             lblID.Name = "lblID";
-            lblID.Size = new Size(114, 56);
+            lblID.Size = new Size(31, 23);
             lblID.TabIndex = 0;
             lblID.Text = "ID:";
             // 
             // txtID
             // 
-            txtID.BackColor = MaterialColors.ReadOnlyBack;
-            txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtID.BackColor = Color.FromArgb(238, 238, 238);
+            txtID.BorderStyle = BorderStyle.FixedSingle;
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
-            txtID.Location = new Point(123, 4);
+            txtID.Location = new Point(143, 28);
             txtID.Margin = new Padding(3, 4, 3, 4);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
-            txtID.Size = new Size(334, 30);
+            txtID.Size = new Size(294, 30);
             txtID.TabIndex = 1;
             // 
             // lblCurso
@@ -93,26 +93,26 @@ namespace UI.Desktop.Forms.Dictados
             lblCurso.AutoSize = true;
             lblCurso.Font = new Font("Segoe UI", 10F);
             lblCurso.ForeColor = Color.FromArgb(117, 117, 117);
-            lblCurso.Location = new Point(3, 56);
+            lblCurso.Location = new Point(79, 87);
             lblCurso.Name = "lblCurso";
-            lblCurso.Size = new Size(114, 56);
+            lblCurso.Size = new Size(58, 23);
             lblCurso.TabIndex = 2;
             lblCurso.Text = "Curso:";
             // 
             // cbxCursos
             // 
-            cbxCursos.BackColor = Color.White;
             cbxCursos.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cbxCursos.BackColor = Color.White;
+            cbxCursos.DisplayMember = "Descripcion";
             cbxCursos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxCursos.Font = new Font("Segoe UI", 10F);
             cbxCursos.ForeColor = Color.FromArgb(33, 33, 33);
             cbxCursos.FormattingEnabled = true;
-            cbxCursos.Location = new Point(123, 60);
+            cbxCursos.Location = new Point(143, 83);
             cbxCursos.Margin = new Padding(3, 4, 3, 4);
             cbxCursos.Name = "cbxCursos";
-            cbxCursos.Size = new Size(334, 31);
+            cbxCursos.Size = new Size(294, 31);
             cbxCursos.TabIndex = 3;
-            cbxCursos.DisplayMember = "Descripcion";
             cbxCursos.ValueMember = "ID";
             // 
             // lblDocente
@@ -121,26 +121,26 @@ namespace UI.Desktop.Forms.Dictados
             lblDocente.AutoSize = true;
             lblDocente.Font = new Font("Segoe UI", 10F);
             lblDocente.ForeColor = Color.FromArgb(117, 117, 117);
-            lblDocente.Location = new Point(3, 112);
+            lblDocente.Location = new Point(59, 143);
             lblDocente.Name = "lblDocente";
-            lblDocente.Size = new Size(114, 56);
+            lblDocente.Size = new Size(78, 23);
             lblDocente.TabIndex = 4;
             lblDocente.Text = "Docente:";
             // 
             // cbxDocentes
             // 
-            cbxDocentes.BackColor = Color.White;
             cbxDocentes.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cbxDocentes.BackColor = Color.White;
+            cbxDocentes.DisplayMember = "NombreCompleto";
             cbxDocentes.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxDocentes.Font = new Font("Segoe UI", 10F);
             cbxDocentes.ForeColor = Color.FromArgb(33, 33, 33);
             cbxDocentes.FormattingEnabled = true;
-            cbxDocentes.Location = new Point(123, 116);
+            cbxDocentes.Location = new Point(143, 139);
             cbxDocentes.Margin = new Padding(3, 4, 3, 4);
             cbxDocentes.Name = "cbxDocentes";
-            cbxDocentes.Size = new Size(334, 31);
+            cbxDocentes.Size = new Size(294, 31);
             cbxDocentes.TabIndex = 5;
-            cbxDocentes.DisplayMember = "NombreCompleto";
             cbxDocentes.ValueMember = "ID";
             // 
             // lblCargo
@@ -149,24 +149,24 @@ namespace UI.Desktop.Forms.Dictados
             lblCargo.AutoSize = true;
             lblCargo.Font = new Font("Segoe UI", 10F);
             lblCargo.ForeColor = Color.FromArgb(117, 117, 117);
-            lblCargo.Location = new Point(3, 168);
+            lblCargo.Location = new Point(77, 199);
             lblCargo.Name = "lblCargo";
-            lblCargo.Size = new Size(114, 108);
+            lblCargo.Size = new Size(60, 23);
             lblCargo.TabIndex = 6;
             lblCargo.Text = "Cargo:";
             // 
             // cbxTiposCargos
             // 
-            cbxTiposCargos.BackColor = Color.White;
             cbxTiposCargos.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            cbxTiposCargos.BackColor = Color.White;
             cbxTiposCargos.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTiposCargos.Font = new Font("Segoe UI", 10F);
             cbxTiposCargos.ForeColor = Color.FromArgb(33, 33, 33);
             cbxTiposCargos.FormattingEnabled = true;
-            cbxTiposCargos.Location = new Point(123, 172);
+            cbxTiposCargos.Location = new Point(143, 195);
             cbxTiposCargos.Margin = new Padding(3, 4, 3, 4);
             cbxTiposCargos.Name = "cbxTiposCargos";
-            cbxTiposCargos.Size = new Size(334, 31);
+            cbxTiposCargos.Size = new Size(294, 31);
             cbxTiposCargos.TabIndex = 7;
             // 
             // panelBotones
@@ -175,7 +175,7 @@ namespace UI.Desktop.Forms.Dictados
             panelBotones.Controls.Add(btnCancelar);
             panelBotones.Controls.Add(btnAceptar);
             panelBotones.Dock = DockStyle.Bottom;
-            panelBotones.Location = new Point(0, 276);
+            panelBotones.Location = new Point(0, 253);
             panelBotones.Margin = new Padding(3, 4, 3, 4);
             panelBotones.Name = "panelBotones";
             panelBotones.Size = new Size(460, 60);
@@ -183,6 +183,7 @@ namespace UI.Desktop.Forms.Dictados
             // 
             // btnCancelar
             // 
+            btnCancelar.Anchor = AnchorStyles.None;
             btnCancelar.BackColor = Color.FromArgb(144, 164, 174);
             btnCancelar.FlatAppearance.BorderSize = 0;
             btnCancelar.FlatAppearance.MouseDownBackColor = Color.FromArgb(120, 144, 156);
@@ -191,7 +192,6 @@ namespace UI.Desktop.Forms.Dictados
             btnCancelar.Font = new Font("Segoe UI", 10F);
             btnCancelar.ForeColor = Color.White;
             btnCancelar.Location = new Point(125, 10);
-            btnCancelar.Anchor = AnchorStyles.None;
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(100, 40);
             btnCancelar.TabIndex = 1;
@@ -201,6 +201,7 @@ namespace UI.Desktop.Forms.Dictados
             // 
             // btnAceptar
             // 
+            btnAceptar.Anchor = AnchorStyles.None;
             btnAceptar.BackColor = Color.FromArgb(255, 193, 7);
             btnAceptar.FlatAppearance.BorderSize = 0;
             btnAceptar.FlatAppearance.MouseDownBackColor = Color.FromArgb(255, 171, 0);
@@ -209,7 +210,6 @@ namespace UI.Desktop.Forms.Dictados
             btnAceptar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAceptar.ForeColor = Color.FromArgb(33, 33, 33);
             btnAceptar.Location = new Point(235, 10);
-            btnAceptar.Anchor = AnchorStyles.None;
             btnAceptar.Name = "btnAceptar";
             btnAceptar.Size = new Size(100, 40);
             btnAceptar.TabIndex = 0;
@@ -222,10 +222,9 @@ namespace UI.Desktop.Forms.Dictados
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(245, 245, 245);
-            ClientSize = new Size(460, 338);
+            ClientSize = new Size(460, 313);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(panelBotones);
-            FormBorderStyle = FormBorderStyle.Sizable;
             Margin = new Padding(3, 5, 3, 5);
             Name = "DictadoDesktop";
             StartPosition = FormStartPosition.CenterParent;
