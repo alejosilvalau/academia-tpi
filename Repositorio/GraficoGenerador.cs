@@ -1,5 +1,5 @@
-using System.Data;
 using SkiaSharp;
+using System.Data;
 
 namespace Repositorio
 {
@@ -9,10 +9,11 @@ namespace Repositorio
         private static readonly SKColor ColorRegulares = new(0xFF, 0xC1, 0x07);
         private static readonly SKColor ColorSinNota = new(0xEF, 0x5C, 0x52);
 
-        public static byte[] BarrasRendimientoDocente(DataTable tabla, int ancho = 500, int alto = 226)
+        public static byte[] BarrasRendimientoDocente(DataTable tabla, int ancho = 500, int alto = 350)
         {
-            using var surface = SKSurface.Create(new SKImageInfo(ancho, alto));
+            using var surface = SKSurface.Create(new SKImageInfo(ancho * 2, alto * 2));
             var canvas = surface.Canvas;
+            canvas.Scale(2);
             canvas.Clear(SKColors.White);
 
             using var tituloFont = new SKPaint
@@ -58,14 +59,14 @@ namespace Repositorio
             foreach (var l in leyendas)
             {
                 using var box = new SKPaint { Color = l.Item2, IsAntialias = true };
-                canvas.DrawRect(lx, 2, 10, 10, box);
-                canvas.DrawText(l.Item1, lx + 14, 11, legendFont);
+                canvas.DrawRect(lx, 6, 10, 10, box);
+                canvas.DrawText(l.Item1, lx + 14, 15, legendFont);
                 var rr = new SKRect();
                 legendFont.MeasureText(l.Item1, ref rr);
                 lx += 12 + 4 + rr.Width + 14;
             }
 
-            canvas.DrawText("Condiciones por curso", 10, 26, tituloFont);
+            canvas.DrawText("Condiciones por curso", 10, 30, tituloFont);
 
             int filas = tabla.Rows.Count;
             if (filas == 0)
@@ -81,8 +82,8 @@ namespace Repositorio
 
             int margenIzq = 40;
             int margenDer = 10;
-            int margenSup = 34;
-            int margenInf = 48;
+            int margenSup = 50;
+            int margenInf = 70;
             int areaAncho = ancho - margenIzq - margenDer;
             int areaAlto = alto - margenSup - margenInf;
 
@@ -135,10 +136,11 @@ namespace Repositorio
             return Encode(surface);
         }
 
-        public static byte[] TortaCondiciones(DataTable tabla, int ancho = 500, int alto = 226)
+        public static byte[] TortaCondiciones(DataTable tabla, int ancho = 500, int alto = 350)
         {
-            using var surface = SKSurface.Create(new SKImageInfo(ancho, alto));
+            using var surface = SKSurface.Create(new SKImageInfo(ancho * 2, alto * 2));
             var canvas = surface.Canvas;
+            canvas.Scale(2);
             canvas.Clear(SKColors.White);
 
             using var tituloFont = new SKPaint
