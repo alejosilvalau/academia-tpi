@@ -17,29 +17,27 @@
       <Column Name="NotaTexto" DataType="System.String"/>
     </TableDataSource>
   </Dictionary>
-  <ReportPage Name="Page1" PaperWidth="210" PaperHeight="297" LeftMargin="30" RightMargin="30" TopMargin="12" BottomMargin="12">
-    <ReportTitleBand Name="ReportTitle1" Width="632" Height="450">
-      <TextObject Name="Title" Left="0" Top="0" Width="632" Height="34" Text="Reporte de Rendimiento de Alumnos" HorzAlign="Center" Font="Segoe UI, 18pt, style=Bold" TextFill.Color="CornflowerBlue"/>
-      <TextObject Name="SubTituloFiltro" Left="0" Top="38" Width="632" Height="18" Text="[TituloFiltro]" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
-      <TextObject Name="SubTituloFecha" Left="0" Top="58" Width="632" Height="14" Text="Generado: [FechaGeneracion]" HorzAlign="Center" Font="Segoe UI, 8pt" TextFill.Color="Gray"/>
-      <PictureObject Name="GraficoGeneral" Left="18" Top="78" Width="596" Height="360" ImageFormat="Png"/>
+  <ReportPage Name="Page1" PaperWidth="210" PaperHeight="297" LeftMargin="25" RightMargin="25" TopMargin="12" BottomMargin="12">
+    <ReportTitleBand Name="ReportTitle1" Width="596" Height="228">
+      <TextObject Name="Title" Left="0" Top="0" Width="596" Height="28" Text="Reporte de Rendimiento de Alumnos" HorzAlign="Center" Font="Segoe UI, 16pt, style=Bold" TextFill.Color="CornflowerBlue"/>
+      <TextObject Name="SubTituloFiltro" Left="0" Top="30" Width="596" Height="16" Text="[TituloFiltro]" HorzAlign="Center" Font="Segoe UI, 9pt, style=Bold"/>
+      <TextObject Name="SubTituloFecha" Left="0" Top="48" Width="596" Height="12" Text="Generado: [FechaGeneracion]" HorzAlign="Center" Font="Segoe UI, 8pt" TextFill.Color="Gray"/>
+      <PictureObject Name="GraficoGeneral" Left="48" Top="64" Width="500" Height="140" ImageFormat="Png"/>
+      <TextObject Name="SubtituloTabla" Left="0" Top="208" Width="596" Height="18" Text="Detalle de inscripciones" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
     </ReportTitleBand>
-    <GroupHeaderBand Name="GroupAlumno" Top="454" Width="632" Height="28" Condition="[Alumnos.AlumnoId]" SortOrder="Ascending">
-      <TextObject Name="GrupoAlumno" Left="0" Top="0" Width="632" Height="28" Text="[Alumnos.Apellido], [Alumnos.Nombre]  -  Legajo: [Alumnos.Legajo]" Font="Segoe UI, 11pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-    </GroupHeaderBand>
-    <DataHeaderBand Name="HeaderDetalle" Top="482" Width="632" Height="26">
-      <TextObject Name="HMateria2" Left="0" Top="0" Width="180" Height="26" Text="Materia" Font="Segoe UI, 9pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HComision2" Left="180" Top="0" Width="95" Height="26" Text="Comisión" Font="Segoe UI, 9pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HAnio2" Left="275" Top="0" Width="55" Height="26" Text="Año" HorzAlign="Center" Font="Segoe UI, 9pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HNota2" Left="330" Top="0" Width="70" Height="26" Text="Nota" HorzAlign="Center" Font="Segoe UI, 9pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HCondicion2" Left="400" Top="0" Width="232" Height="26" Text="Condición" Font="Segoe UI, 9pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+    <DataHeaderBand Name="HeaderDetalle" Top="232" Width="596" Height="24">
+      <TextObject Name="HMateria2" Left="0" Top="0" Width="150" Height="24" Text="Materia" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HComision2" Left="150" Top="0" Width="75" Height="24" Text="Comisión" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HAnio2" Left="225" Top="0" Width="50" Height="24" Text="Año" HorzAlign="Center" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HNota2" Left="275" Top="0" Width="60" Height="24" Text="Nota" HorzAlign="Center" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HCondicion2" Left="335" Top="0" Width="261" Height="24" Text="Condición" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
     </DataHeaderBand>
-    <DataBand Name="DataDetalle" Top="508" Width="632" Height="28" DataSourceName="Alumnos">
-      <TextObject Name="VMateria2" Left="0" Top="0" Width="180" Height="28" Text="[Alumnos.Materia]" Font="Segoe UI, 9pt" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="VComision2" Left="180" Top="0" Width="95" Height="28" Text="[Alumnos.Comision]" Font="Segoe UI, 9pt" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="VAnio2" Left="275" Top="0" Width="55" Height="28" Text="[Alumnos.Anio]" HorzAlign="Center" Font="Segoe UI, 9pt" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="VNota2" Left="330" Top="0" Width="70" Height="28" Text="[Alumnos.NotaTexto]" HorzAlign="Center" Font="Segoe UI, 9pt" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="VCondicion2" Left="400" Top="0" Width="232" Height="28" Text="[Alumnos.CondicionTexto]" Font="Segoe UI, 9pt" Border.Lines="All" VertAlign="Center"/>
+    <DataBand Name="DataDetalle" Top="256" Width="596" Height="24" DataSourceName="Alumnos">
+      <TextObject Name="VMateria2" Left="0" Top="0" Width="150" Height="24" Text="[Alumnos.Materia]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="VComision2" Left="150" Top="0" Width="75" Height="24" Text="[Alumnos.Comision]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="VAnio2" Left="225" Top="0" Width="50" Height="24" Text="[Alumnos.Anio]" HorzAlign="Center" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="VNota2" Left="275" Top="0" Width="60" Height="24" Text="[Alumnos.NotaTexto]" HorzAlign="Center" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="VCondicion2" Left="335" Top="0" Width="261" Height="24" Text="[Alumnos.CondicionTexto]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
     </DataBand>
   </ReportPage>
 </Report>

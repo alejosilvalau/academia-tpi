@@ -16,34 +16,35 @@
       <Column Name="PromedioTexto" DataType="System.String"/>
     </TableDataSource>
   </Dictionary>
-  <ReportPage Name="Page1" PaperWidth="297" PaperHeight="210" LeftMargin="40" RightMargin="40" TopMargin="15" BottomMargin="15">
-    <ReportTitleBand Name="ReportTitle1" Width="840" Height="450">
-      <TextObject Name="Title" Left="0" Top="0" Width="840" Height="36" Text="Reporte de Rendimiento Docente" HorzAlign="Center" Font="Segoe UI, 20pt, style=Bold" TextFill.Color="CornflowerBlue"/>
-      <TextObject Name="SubTituloNombre" Left="0" Top="40" Width="840" Height="22" Text="Docente: [DocenteNombre] - Legajo: [DocenteLegajo]" HorzAlign="Center" Font="Segoe UI, 11pt, style=Bold"/>
-      <TextObject Name="SubTituloFecha" Left="0" Top="64" Width="840" Height="14" Text="Generado: [FechaGeneracion]" HorzAlign="Center" Font="Segoe UI, 9pt" TextFill.Color="Gray"/>
-      <PictureObject Name="GraficoGeneral" Left="60" Top="84" Width="720" Height="360" ImageFormat="Png"/>
+  <ReportPage Name="Page1" PaperWidth="210" PaperHeight="297" LeftMargin="25" RightMargin="25" TopMargin="12" BottomMargin="12">
+    <ReportTitleBand Name="ReportTitle1" Width="596" Height="228">
+      <TextObject Name="Title" Left="0" Top="0" Width="596" Height="28" Text="Reporte de Rendimiento Docente" HorzAlign="Center" Font="Segoe UI, 16pt, style=Bold" TextFill.Color="CornflowerBlue"/>
+      <TextObject Name="SubTituloNombre" Left="0" Top="30" Width="596" Height="16" Text="Docente: [DocenteNombre] - Legajo: [DocenteLegajo]" HorzAlign="Center" Font="Segoe UI, 9pt, style=Bold"/>
+      <TextObject Name="SubTituloFecha" Left="0" Top="48" Width="596" Height="12" Text="Generado: [FechaGeneracion]" HorzAlign="Center" Font="Segoe UI, 8pt" TextFill.Color="Gray"/>
+      <PictureObject Name="GraficoGeneral" Left="48" Top="64" Width="500" Height="140" ImageFormat="Png"/>
+      <TextObject Name="SubtituloTabla" Left="0" Top="208" Width="596" Height="18" Text="Rendimiento por curso" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
     </ReportTitleBand>
-    <DataHeaderBand Name="HeaderResumen" Top="454" Width="840" Height="30">
-      <TextObject Name="HMateria" Left="0" Top="0" Width="210" Height="30" Text="Materia" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HComision" Left="210" Top="0" Width="95" Height="30" Text="Comisión" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HAnio" Left="305" Top="0" Width="60" Height="30" Text="Año" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HCargo" Left="365" Top="0" Width="125" Height="30" Text="Cargo" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="HInscriptos" Left="490" Top="0" Width="80" Height="30" Text="Inscriptos" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="HAprobados" Left="570" Top="0" Width="80" Height="30" Text="Aprobados" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="HRegulares" Left="650" Top="0" Width="80" Height="30" Text="Regulares" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="HSinNota" Left="730" Top="0" Width="60" Height="30" Text="Sin nota" Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="HPromedio" Left="790" Top="0" Width="50" Height="30" Text="Prom." Font="Segoe UI, 10pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+    <DataHeaderBand Name="HeaderResumen" Top="232" Width="596" Height="24">
+      <TextObject Name="HMateria" Left="0" Top="0" Width="150" Height="24" Text="Materia" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HComision" Left="150" Top="0" Width="65" Height="24" Text="Comisión" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HAnio" Left="215" Top="0" Width="45" Height="24" Text="Año" HorzAlign="Center" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HCargo" Left="260" Top="0" Width="90" Height="24" Text="Cargo" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="HInscriptos" Left="350" Top="0" Width="45" Height="24" Text="Inscr." Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="HAprobados" Left="395" Top="0" Width="45" Height="24" Text="Aprob." Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="HRegulares" Left="440" Top="0" Width="45" Height="24" Text="Reg." Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="HSinNota" Left="485" Top="0" Width="45" Height="24" Text="S/n" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="HPromedio" Left="530" Top="0" Width="66" Height="24" Text="Promedio" Font="Segoe UI, 8pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
     </DataHeaderBand>
-    <DataBand Name="DataResumen" Top="484" Width="840" Height="36" DataSourceName="Rendimiento">
-      <TextObject Name="VMateria" Left="0" Top="0" Width="210" Height="36" Text="[Rendimiento.Materia]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="VComision" Left="210" Top="0" Width="95" Height="36" Text="[Rendimiento.Comision]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="VAnio" Left="305" Top="0" Width="60" Height="36" Text="[Rendimiento.Anio]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="VCargo" Left="365" Top="0" Width="125" Height="36" Text="[Rendimiento.CargoTexto]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center"/>
-      <TextObject Name="VInscriptos" Left="490" Top="0" Width="80" Height="36" Text="[Rendimiento.Inscriptos]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="VAprobados" Left="570" Top="0" Width="80" Height="36" Text="[Rendimiento.Aprobados]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="VRegulares" Left="650" Top="0" Width="80" Height="36" Text="[Rendimiento.Regulares]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="VSinNota" Left="730" Top="0" Width="60" Height="36" Text="[Rendimiento.SinNota]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
-      <TextObject Name="VPromedio" Left="790" Top="0" Width="50" Height="36" Text="[Rendimiento.PromedioTexto]" Font="Segoe UI, 10pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+    <DataBand Name="DataResumen" Top="256" Width="596" Height="24" DataSourceName="Rendimiento">
+      <TextObject Name="VMateria" Left="0" Top="0" Width="150" Height="24" Text="[Rendimiento.Materia]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="VComision" Left="150" Top="0" Width="65" Height="24" Text="[Rendimiento.Comision]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="VAnio" Left="215" Top="0" Width="45" Height="24" Text="[Rendimiento.Anio]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="VCargo" Left="260" Top="0" Width="90" Height="24" Text="[Rendimiento.CargoTexto]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center"/>
+      <TextObject Name="VInscriptos" Left="350" Top="0" Width="45" Height="24" Text="[Rendimiento.Inscriptos]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="VAprobados" Left="395" Top="0" Width="45" Height="24" Text="[Rendimiento.Aprobados]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="VRegulares" Left="440" Top="0" Width="45" Height="24" Text="[Rendimiento.Regulares]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="VSinNota" Left="485" Top="0" Width="45" Height="24" Text="[Rendimiento.SinNota]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
+      <TextObject Name="VPromedio" Left="530" Top="0" Width="66" Height="24" Text="[Rendimiento.PromedioTexto]" Font="Segoe UI, 8pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
     </DataBand>
   </ReportPage>
 </Report>

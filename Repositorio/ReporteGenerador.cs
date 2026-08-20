@@ -101,7 +101,7 @@ namespace Repositorio
 
             if (dataTable.Rows.Count > 0)
             {
-                var imagen = GraficoGenerador.TortaCondiciones(dataTable, 596, 360);
+                var imagen = GraficoGenerador.TortaCondiciones(dataTable, 500, 226);
                 AsignarImagen(report, "GraficoGeneral", imagen);
             }
 
