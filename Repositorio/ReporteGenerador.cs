@@ -40,6 +40,8 @@ namespace Repositorio
             var report = new Report();
             report.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reportes", "RendimientoDocenteReport.frx"));
             report.RegisterData(dataTable, "Rendimiento");
+            var ds = report.GetDataSource("Rendimiento");
+            if (ds != null) ds.Enabled = true;
 
             report.SetParameterValue("DocenteNombre", nombre);
             report.SetParameterValue("DocenteLegajo", legajo);
@@ -95,6 +97,8 @@ namespace Repositorio
             var report = new Report();
             report.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Reportes", "RendimientoAlumnosReport.frx"));
             report.RegisterData(dataTable, "Alumnos");
+            var dsAl = report.GetDataSource("Alumnos");
+            if (dsAl != null) dsAl.Enabled = true;
 
             report.SetParameterValue("TituloFiltro", titulo);
             report.SetParameterValue("FechaGeneracion", DateTime.Now.ToString("dd/MM/yyyy HH:mm"));
