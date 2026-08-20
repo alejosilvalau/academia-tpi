@@ -178,6 +178,14 @@
             return;
         }
 
+        planes = PlanServicio.GetAll();
+    }
+
+    protected override void OnParametersSet()
+    {
+        modoSeleccion = false;
+        tipoSeleccion = null;
+
         if (!string.IsNullOrEmpty(TipoFiltro))
         {
             modoSeleccion = true;
@@ -186,7 +194,6 @@
                 : Persona.TiposPersonas.Docente;
         }
 
-        planes = PlanServicio.GetAll();
         Cargar();
     }
 
