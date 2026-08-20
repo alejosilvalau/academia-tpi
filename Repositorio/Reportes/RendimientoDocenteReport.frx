@@ -17,12 +17,12 @@
     </TableDataSource>
   </Dictionary>
   <ReportPage Name="Page1" PaperWidth="210" PaperHeight="297" LeftMargin="20" RightMargin="20" TopMargin="15" BottomMargin="15">
-    <ReportTitleBand Name="ReportTitle1" Width="636" Height="400">
+    <ReportTitleBand Name="ReportTitle1" Width="636" Height="410">
       <TextObject Name="Title" Left="0" Top="10" Width="636" Height="32" Text="Reporte de Rendimiento Docente" HorzAlign="Center" Font="Segoe UI, 18pt, style=Bold" TextFill.Color="CornflowerBlue"/>
       <TextObject Name="SubTituloNombre" Left="0" Top="46" Width="636" Height="18" Text="Docente: [DocenteNombre] - Legajo: [DocenteLegajo]" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
       <TextObject Name="SubTituloFecha" Left="0" Top="68" Width="636" Height="14" Text="Generado: [FechaGeneracion]" HorzAlign="Center" Font="Segoe UI, 8pt" TextFill.Color="Gray"/>
       <PictureObject Name="GraficoGeneral" Left="68" Top="90" Width="500" Height="280" ImageFormat="Png"/>
-      <TextObject Name="SubtituloTabla" Left="0" Top="380" Width="636" Height="18" Text="Rendimiento por curso" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
+      <TextObject Name="SubtituloTabla" Left="0" Top="382" Width="636" Height="18" Text="Rendimiento por curso" HorzAlign="Center" Font="Segoe UI, 10pt, style=Bold"/>
     </ReportTitleBand>
     <ColumnHeaderBand Name="HeaderResumen" Width="636" Height="28">
       <TextObject Name="HMateria" Left="0" Top="0" Width="150" Height="28" Text="Materia" WordWrap="false" Font="Segoe UI, 7pt, style=Bold" Fill.Color="CornflowerBlue" TextFill.Color="White" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
