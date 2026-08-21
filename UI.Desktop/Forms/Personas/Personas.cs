@@ -20,7 +20,7 @@ namespace UI.Desktop.Forms.Personas
         public Personas(Persona.TiposPersonas tipo) : this()
         {
             _filtroTipo = tipo;
-            Text = $"Personas - {tipo}";
+            Text = tipo == Persona.TiposPersonas.Alumno ? "Inscripciones" : "Registrar Notas";
 
             tsbAgregar.Visible = false;
             tsbEditar.Visible = false;
