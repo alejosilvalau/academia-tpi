@@ -22,7 +22,9 @@ namespace UI.Web.Auth
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.NombreUsuario),
                 new Claim(ClaimTypes.Name, usuario.NombreUsuario),
                 new Claim(ClaimTypes.NameIdentifier, (usuario.PersonaId ?? 0).ToString()),
-                new Claim(ClaimTypes.Role, (usuario.Persona?.Tipo ?? Persona.TiposPersonas.Alumno).ToString())
+                new Claim(ClaimTypes.Role, (usuario.Persona?.Tipo ?? Persona.TiposPersonas.Alumno).ToString()),
+                new Claim("Nombre", usuario.Persona?.Nombre ?? ""),
+                new Claim("Apellido", usuario.Persona?.Apellido ?? "")
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["Jwt:Key"]!));

@@ -535,6 +535,7 @@ a:hover { color: var(--primary-dark); }
   padding: 12px;
   font-size: 14px;
   margin-top: 8px;
+  justify-content: center;
 }
 
 /* ===================== DASHBOARD ===================== */

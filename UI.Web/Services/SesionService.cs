@@ -43,6 +43,8 @@ namespace UI.Web.Services
                     PersonaId = int.TryParse(p.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var id) ? id : 0,
                     Persona = new Persona
                     {
+                        Nombre = p.FindFirst("Nombre")?.Value ?? "",
+                        Apellido = p.FindFirst("Apellido")?.Value ?? "",
                         Tipo = ObtenerTipo(p) ?? Persona.TiposPersonas.Alumno
                     }
                 };

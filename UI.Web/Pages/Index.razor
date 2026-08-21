@@ -5,7 +5,7 @@
 @if (Sesion.IsLoggedIn)
 {
     <div class="md-card">
-        <div class="md-card-header">Bienvenido, @Sesion.UsuarioActual?.Persona?.Nombre</div>
+        <div class="md-card-header">Bienvenido, @Sesion.UsuarioActual?.Persona?.Nombre @Sesion.UsuarioActual?.Persona?.Apellido</div>
         <p style="color:var(--text-secondary);margin-bottom:20px;">
             Sistema de gestion academica - Rol: <strong>@Sesion.TipoUsuario</strong>
         </p>
