@@ -43,7 +43,6 @@ namespace UI.Desktop
             // btnDescargar
             // 
             btnDescargar.BackColor = Color.FromArgb(96, 125, 139);
-            btnDescargar.Enabled = false;
             btnDescargar.FlatAppearance.BorderSize = 0;
             btnDescargar.FlatStyle = FlatStyle.Flat;
             btnDescargar.Font = new Font("Segoe UI", 10F, FontStyle.Bold);

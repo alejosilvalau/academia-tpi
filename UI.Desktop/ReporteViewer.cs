@@ -80,8 +80,6 @@ namespace UI.Desktop
                 btnGenerar.Visible = false;
                 btnDescargar.Location = new System.Drawing.Point(15, 15);
             }
-
-            SetBtnDescargarEstado(false);
         }
 
         private void CargarSelectorDocente()
@@ -169,7 +167,13 @@ namespace UI.Desktop
 
         private void btnDescargar_Click(object? sender, EventArgs e)
         {
-            if (_pdfActual == null) return;
+            if (_pdfActual == null)
+            {
+                MessageBox.Show("No hay reporte generado. Se generara antes de descargar.",
+                    "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                GenerarReporte();
+                if (_pdfActual == null) return;
+            }
 
             var persona = Login.UsuarioActual?.Persona;
             string prefijo = _modo == ModoReporte.RendimientoDocente
