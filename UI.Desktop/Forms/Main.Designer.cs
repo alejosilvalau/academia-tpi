@@ -50,7 +50,7 @@ btnABMCursos = new Button();
             // 
             // panelDashboard
             // 
-            panelDashboard.AutoScroll = true;
+            panelDashboard.AutoScroll = false;
             panelDashboard.BackColor = Color.FromArgb(245, 245, 245);
             panelDashboard.Dock = DockStyle.Fill;
             panelDashboard.Location = new Point(220, 62);

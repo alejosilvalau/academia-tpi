@@ -91,7 +91,7 @@ namespace UI.Desktop
                 cards.Add(("Plan/Materias", "Gestionar planes de estudio y materias", "\u25C6", () => OpenForm(new Forms.Planes.PlanMaterias())));
                 cards.Add(("Comisiones", "Gestionar comisiones", "\u25C6", () => OpenForm(new Forms.Comisiones.Comisiones())));
                 cards.Add(("Cursos", "Gestionar cursos", "\u25C6", () => OpenForm(new Forms.Cursos.Cursos())));
-                cards.Add(("Personas", "Gestionar alumnos, docentes y administradores", "\u25C6", () => OpenForm(new Forms.Personas.Personas())));
+                cards.Add(("Personas", "Gestionar alumnos, docentes y admins", "\u25C6", () => OpenForm(new Forms.Personas.Personas())));
                 cards.Add(("Dictados", "Gestionar asignacion de docentes a cursos", "\u25C6", () => OpenForm(new Forms.Dictados.Dictados())));
                 cards.Add(("Usuarios", "Gestionar usuarios del sistema", "\u25C6", () => OpenForm(new Forms.Usuarios.Usuarios())));
                 cards.Add(("Inscripciones", "Inscribir alumnos a cursos", "\u270E", () => OpenForm(new Forms.Personas.Personas(Persona.TiposPersonas.Alumno))));
@@ -102,13 +102,13 @@ namespace UI.Desktop
             else if (tipo == Persona.TiposPersonas.Alumno)
             {
                 cards.Add(("Inscripciones", "Inscribirse a cursos", "\u270E", () => OpenForm(new Forms.Inscripciones.Inscripciones(Login.UsuarioActual!.Persona!))));
-                cards.Add(("Rendimiento Alumnos", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
+                cards.Add(("Rend. Alumnos", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
             }
             else if (tipo == Persona.TiposPersonas.Docente)
             {
                 cards.Add(("Registrar Notas", "Calificar alumnos en cursos", "\u270E", () => OpenForm(new Forms.RegistrarNotas.RegistrarNotas(Login.UsuarioActual!.Persona!))));
-                cards.Add(("Rendimiento Docente", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoDocente))));
-                cards.Add(("Rendimiento Alumnos", "Ver reporte de rendimiento de alumnos", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
+                cards.Add(("Rend. Docente", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoDocente))));
+                cards.Add(("Rend. Alumnos", "Ver reporte de rendimiento de alumnos", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
             }
 
             foreach (var (titulo, desc, icono, onClick) in cards)
@@ -125,7 +125,7 @@ namespace UI.Desktop
         {
             var card = new Panel
             {
-                Size = new Size(280, 150),
+                Size = new Size(280, 130),
                 Margin = new Padding(10),
                 BackColor = Color.White,
                 Cursor = Cursors.Hand
@@ -134,17 +134,10 @@ namespace UI.Desktop
             var lblIcono = new Label
             {
                 Text = icono,
-                Font = new Font("Segoe UI Symbol", 32F),
+                Font = new Font("Segoe UI Symbol", 30F),
                 ForeColor = Color.FromArgb(96, 125, 139),
-                Dock = DockStyle.Left,
-                Width = 75,
-                TextAlign = ContentAlignment.MiddleCenter
-            };
-
-            var panelTexto = new Panel
-            {
-                Dock = DockStyle.Fill,
-                Padding = new Padding(5, 15, 15, 15)
+                Location = new Point(10, 25),
+                AutoSize = true
             };
 
             var lblTitulo = new Label
@@ -152,9 +145,8 @@ namespace UI.Desktop
                 Text = titulo,
                 Font = new Font("Segoe UI", 12F, FontStyle.Bold),
                 ForeColor = Color.FromArgb(33, 33, 33),
-                Dock = DockStyle.Top,
-                Height = 30,
-                TextAlign = ContentAlignment.MiddleLeft
+                Location = new Point(85, 35),
+                AutoSize = true
             };
 
             var lblDesc = new Label
@@ -162,19 +154,18 @@ namespace UI.Desktop
                 Text = desc,
                 Font = new Font("Segoe UI", 9F),
                 ForeColor = Color.FromArgb(117, 117, 117),
-                Dock = DockStyle.Fill,
-                TextAlign = ContentAlignment.TopLeft
+                Location = new Point(85, 65),
+                AutoSize = true,
+                MaximumSize = new Size(190, 0)
             };
 
-            panelTexto.Controls.Add(lblDesc);
-            panelTexto.Controls.Add(lblTitulo);
             card.Controls.Add(lblIcono);
-            card.Controls.Add(panelTexto);
+            card.Controls.Add(lblTitulo);
+            card.Controls.Add(lblDesc);
 
             EventHandler handler = (s, e) => onClick();
             card.Click += handler;
             lblIcono.Click += handler;
-            panelTexto.Click += handler;
             lblTitulo.Click += handler;
             lblDesc.Click += handler;
 
