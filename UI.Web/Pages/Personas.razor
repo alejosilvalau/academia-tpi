@@ -166,7 +166,18 @@
 
     private bool modoSeleccion;
     private Persona.TiposPersonas? tipoSeleccion;
-    private string Titulo => modoSeleccion ? $"Personas - {tipoSeleccion}" : "Personas";
+    private string Titulo
+    {
+        get
+        {
+            if (!modoSeleccion || !tipoSeleccion.HasValue) return "Personas";
+            if (Seleccion?.Equals("inscripcion", StringComparison.OrdinalIgnoreCase) == true)
+                return "Inscripciones";
+            if (Seleccion?.Equals("notas", StringComparison.OrdinalIgnoreCase) == true)
+                return "Registrar Notas";
+            return $"Personas - {tipoSeleccion}";
+        }
+    }
 
     enum ModoForm { Ninguno, Alta, Modificacion }
 

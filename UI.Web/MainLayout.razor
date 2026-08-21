@@ -72,7 +72,7 @@
                 <div class="sidebar-section">
                     <a href="@(Sesion.IsAdmin ? "/personas?tipo=alumno&seleccion=inscripcion" : "/inscripciones")"
                        class="sidebar-link @(IsActive("/inscripciones"))">
-                        <span class="icon">&#9998;</span> Inscripcion
+                        <span class="icon">&#9998;</span> Inscripciones
                     </a>
                 </div>
             }
@@ -133,6 +133,17 @@ else
     private string GetPageTitle()
     {
         var uri = new Uri(Nav.Uri);
+        var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+
+        if (uri.AbsolutePath == "/personas")
+        {
+            var seleccion = query["seleccion"];
+            if (seleccion?.Equals("inscripcion", StringComparison.OrdinalIgnoreCase) == true)
+                return "Inscripciones";
+            if (seleccion?.Equals("notas", StringComparison.OrdinalIgnoreCase) == true)
+                return "Registrar Notas";
+        }
+
         return uri.AbsolutePath switch
         {
             "/" => "Inicio",
