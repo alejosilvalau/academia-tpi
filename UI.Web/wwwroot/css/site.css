@@ -391,6 +391,24 @@ a:hover { color: var(--primary-dark); }
   padding-right: 30px;
 }
 
+.md-input:disabled,
+.md-input[readonly],
+.md-select:disabled {
+  background: #dcdcdc;
+  color: #555;
+  border-color: #b8b8b8;
+  cursor: not-allowed;
+}
+
+.md-input:disabled::placeholder,
+.md-input[readonly]::placeholder {
+  color: #777;
+}
+
+.md-btn:disabled {
+  cursor: not-allowed;
+}
+
 .md-checkbox-group {
   display: flex;
   align-items: center;

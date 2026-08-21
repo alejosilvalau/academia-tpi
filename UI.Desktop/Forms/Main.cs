@@ -189,6 +189,7 @@ namespace UI.Desktop
             panelFormLoader.Controls.Add(form);
             lblTitulo.Text = form.Text;
             form.Show();
+            panelDashboard.Visible = false;
         }
 
         private void btnAdministracion_Click(object sender, EventArgs e)
