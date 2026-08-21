@@ -257,10 +257,10 @@ a:hover { color: var(--primary-dark); }
 .md-btn-danger:hover:not(:disabled) { background: #B71C1C; }
 
 .md-btn-cancel {
-  background: var(--cancel);
+  background: var(--error);
   color: var(--text-on-primary);
 }
-.md-btn-cancel:hover:not(:disabled) { background: #78909C; }
+.md-btn-cancel:hover:not(:disabled) { background: #B71C1C; }
 
 .md-btn-text {
   background: transparent;

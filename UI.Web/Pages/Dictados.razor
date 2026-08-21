@@ -56,7 +56,7 @@
                         <label class="md-label">Cargo</label>
                         <select class="md-select" @bind="cargoSeleccionado">
                             <option value="0">Profesor</option>
-                            <option value="1">JefeDeCatedra</option>
+                            <option value="1">Jefe De Catedra</option>
                             <option value="2">Auxiliar</option>
                         </select>
                     </div>
@@ -96,7 +96,7 @@
                         <td>@item.ID</td>
                         <td>@item.Curso?.Descripcion</td>
                         <td>@item.Docente?.Nombre @item.Docente?.Apellido</td>
-                        <td><span class="md-badge md-badge-accent">@item.Cargo</span></td>
+                        <td><span class="md-badge md-badge-accent">@FormatCargo(item.Cargo)</span></td>
                         <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
                             <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
@@ -203,4 +203,12 @@
         mensaje = msg;
         mensajeEsError = esError;
     }
+
+    private string FormatCargo(DocenteCurso.TiposCargos cargo) => cargo switch
+    {
+        DocenteCurso.TiposCargos.Profesor => "Profesor",
+        DocenteCurso.TiposCargos.JefeDeCatedra => "Jefe De Catedra",
+        DocenteCurso.TiposCargos.Auxiliar => "Auxiliar",
+        _ => cargo.ToString()
+    };
 }
