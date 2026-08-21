@@ -82,6 +82,7 @@ app.MapPost("/api/auth/login", async (LoginRequest req, HttpContext http, Usuari
         new Claim(ClaimTypes.Role, (usuario.Persona?.Tipo ?? Dominio.Persona.TiposPersonas.Alumno).ToString()),
         new Claim("Nombre", usuario.Persona?.Nombre ?? ""),
         new Claim("Apellido", usuario.Persona?.Apellido ?? ""),
+        new Claim("PersonaId", (usuario.PersonaId ?? 0).ToString()),
         new Claim("jwt", token)
     };
     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);

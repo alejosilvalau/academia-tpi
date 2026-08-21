@@ -37,12 +37,16 @@ namespace UI.Web.Services
                 var p = ObtenerPrincipal();
                 if (p?.Identity?.IsAuthenticated != true) return null;
 
+                var personaId = int.TryParse(p.FindFirst("PersonaId")?.Value, out var pid) ? pid :
+                    (int.TryParse(p.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var id) ? id : 0);
+
                 return new Usuario
                 {
                     NombreUsuario = p.Identity.Name ?? "",
-                    PersonaId = int.TryParse(p.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var id) ? id : 0,
+                    PersonaId = personaId,
                     Persona = new Persona
                     {
+                        ID = personaId,
                         Nombre = p.FindFirst("Nombre")?.Value ?? "",
                         Apellido = p.FindFirst("Apellido")?.Value ?? "",
                         Tipo = ObtenerTipo(p) ?? Persona.TiposPersonas.Alumno
