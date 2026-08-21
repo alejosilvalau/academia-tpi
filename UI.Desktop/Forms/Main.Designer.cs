@@ -39,7 +39,7 @@ btnABMCursos = new Button();
             btnABMComisiones = new Button();
             btnABMPlanMaterias = new Button();
 panelBottom = new Panel();
-            btnSalir = new Button();
+            btnInicio = new Button();
             panelMenu.SuspendLayout();
             panelPerfil.SuspendLayout();
             panelTop.SuspendLayout();
@@ -66,6 +66,7 @@ panelBottom = new Panel();
             panelMenu.Controls.Add(btnNotas);
             panelMenu.Controls.Add(btnInscripcion);
             panelMenu.Controls.Add(btnAdministracion);
+            panelMenu.Controls.Add(btnInicio);
             panelMenu.Controls.Add(panelPerfil);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
@@ -476,8 +477,7 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panelBottom
             // 
-panelBottom.BackColor = Color.FromArgb(69, 90, 100);
-            panelBottom.Controls.Add(btnSalir);
+            panelBottom.BackColor = Color.FromArgb(69, 90, 100);
             panelBottom.Dock = DockStyle.Bottom;
             panelBottom.Location = new Point(220, 688);
             panelBottom.Margin = new Padding(3, 4, 3, 4);
@@ -486,23 +486,24 @@ panelBottom.BackColor = Color.FromArgb(69, 90, 100);
             panelBottom.TabIndex = 4;
 panelBottom.Visible = false;
             // 
-            // btnSalir
-            //
-            btnSalir.Dock = DockStyle.Right;
-            btnSalir.FlatAppearance.BorderSize = 0;
-            btnSalir.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnSalir.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
-            btnSalir.FlatStyle = FlatStyle.Flat;
-            btnSalir.Font = new Font("Segoe UI", 10F);
-            btnSalir.ForeColor = Color.White;
-            btnSalir.Location = new Point(660, 0);
-            btnSalir.Margin = new Padding(3, 4, 3, 4);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(120, 62);
-            btnSalir.TabIndex = 0;
-            btnSalir.Text = "Cerrar Vista";
-            btnSalir.UseVisualStyleBackColor = true;
-            btnSalir.Click += btnSalir_Click;
+            // btnInicio
+            // 
+            btnInicio.AutoSize = true;
+            btnInicio.Dock = DockStyle.Top;
+            btnInicio.FlatAppearance.BorderSize = 0;
+            btnInicio.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
+            btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
+            btnInicio.FlatStyle = FlatStyle.Flat;
+            btnInicio.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnInicio.ForeColor = Color.FromArgb(255, 193, 7);
+            btnInicio.Name = "btnInicio";
+            btnInicio.Padding = new Padding(10);
+            btnInicio.Size = new Size(220, 61);
+            btnInicio.TabIndex = 5;
+            btnInicio.Text = "  Inicio";
+            btnInicio.TextAlign = ContentAlignment.MiddleLeft;
+            btnInicio.UseVisualStyleBackColor = false;
+            btnInicio.Click += btnSalir_Click;
             // 
             // Main
             // 
@@ -558,7 +559,7 @@ panelBottom.Visible = false;
         private System.Windows.Forms.Button btnABMComisiones;
         private System.Windows.Forms.Button btnABMPlanMaterias;
         private System.Windows.Forms.Panel panelBottom;
-        private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Button btnInicio;
         private System.Windows.Forms.Panel panelDashboard;
     }
 }
