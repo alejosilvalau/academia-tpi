@@ -14,7 +14,7 @@
     }
 
     <div class="md-form-row">
-        @if (Sesion.IsAdmin)
+        @if (Sesion.IsAdmin || Sesion.IsDocente)
         {
             <div class="md-form-group">
                 <label class="md-label">Alumno</label>
@@ -31,7 +31,7 @@
             </div>
         }
         <div class="md-form-group" style="display:flex;align-items:flex-end;gap:8px;">
-            <button class="md-btn md-btn-accent" @onclick="GenerarReporte" disabled="@(Sesion.IsAdmin && alumnoId == 0)">
+            <button class="md-btn md-btn-accent" @onclick="GenerarReporte" disabled="@(NecesitaSeleccion && alumnoId == 0)">
                 Generar Reporte
             </button>
             <button class="md-btn" @onclick="DescargarPdf" disabled="@(pdfBase64 == null)">
@@ -55,6 +55,8 @@
     private string? pdfBase64;
     private bool _cargarPdf;
 
+    private bool NecesitaSeleccion => Sesion.IsAdmin || Sesion.IsDocente;
+
     protected override void OnInitialized()
     {
         if (!Sesion.IsLoggedIn)
@@ -68,6 +70,10 @@
             if (Sesion.IsAdmin)
             {
                 alumnos = ReporteServicio.ObtenerAlumnos();
+            }
+            else if (Sesion.IsDocente)
+            {
+                alumnos = ReporteServicio.ObtenerAlumnosDeDocente(Sesion.UsuarioActual!.PersonaId ?? 0);
             }
         }
         catch (Exception ex)
@@ -91,7 +97,7 @@
         {
             byte[] pdfBytes;
 
-            if (Sesion.IsAdmin)
+            if (NecesitaSeleccion)
             {
                 if (alumnoId == 0)
                 {
@@ -101,16 +107,9 @@
                 var report = ReporteServicio.GenerarReporteRendimientoAlumno(alumnoId);
                 pdfBytes = ReporteServicio.ExportarPdf(report);
             }
-            else if (Sesion.IsDocente)
-            {
-                int docenteId = Sesion.UsuarioActual!.Persona!.ID;
-                var report = ReporteServicio.GenerarReporteRendimientoAlumnosDeDocente(docenteId);
-                pdfBytes = ReporteServicio.ExportarPdf(report);
-            }
             else
             {
-                int alumnoSelf = Sesion.UsuarioActual!.Persona!.ID;
-                var report = ReporteServicio.GenerarReporteRendimientoAlumno(alumnoSelf);
+                var report = ReporteServicio.GenerarReporteRendimientoAlumno(Sesion.UsuarioActual!.PersonaId ?? 0);
                 pdfBytes = ReporteServicio.ExportarPdf(report);
             }
 

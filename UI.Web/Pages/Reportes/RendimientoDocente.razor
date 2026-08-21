@@ -87,7 +87,7 @@
 
     private async Task GenerarReporte()
     {
-        int idObjetivo = Sesion.IsAdmin ? docenteId : Sesion.UsuarioActual!.Persona!.ID;
+        int idObjetivo = Sesion.IsAdmin ? docenteId : (Sesion.UsuarioActual!.PersonaId ?? 0);
         if (idObjetivo == 0)
         {
             mensaje = "Seleccione un docente.";
