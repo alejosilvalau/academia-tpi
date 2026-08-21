@@ -4,15 +4,15 @@
 1. [Introducción](#introducción)
    - [Plataformas](#plataformas)
    - [Roles](#roles)
-   - [Funcionalidades principales](#funcionalidades-principales)
-   - [Requisitos no funcionales](#requisitos-no-funcionales)
+   - [Funcionalidades Principales](#funcionalidades-principales)
+   - [Requisitos no Funcionales](#requisitos-no-funcionales)
 2. [Capturas de Pantalla](#capturas-de-pantalla)
    - [Interfaz de Escritorio](#interfaz-de-escritorio)
    - [Interfaz Web](#interfaz-web)
 3. [Modelo de Datos](#modelo-de-datos)
 4. [Modelo de Clases](#modelo-de-clases)
 5. [Arquitectura](#arquitectura)
-   - [Patrones clave](#patrones-clave)
+   - [Patrones Clave](#patrones-clave)
 6. [Tecnologías Utilizadas](#tecnologías-utilizadas)
    - [Paquetes NuGet](#paquetes-nuget)
 7. [Configuración en Local](#configuración-en-local)
@@ -35,14 +35,14 @@
 | **Docente** | Calificar alumnos en cursos asignados, ver reportes propios |
 | **Alumno** | Inscribirse a cursos, ver inscripciones y reportes propios |
 
-### Funcionalidades principales
+### Funcionalidades Principales
 - **ABMC:** Especialidades, Planes, Materias, Comisiones, Cursos, Personas, Usuarios
 - **Dictados:** Asignación de docentes a cursos con cargo (Profesor, Jefe de Cátedra, Auxiliar)
 - **Inscripciones:** Alta/baja con validación de cupo y duplicados
 - **Registro de Notas:** Condición automática (Aprobado ≥6, Regular ≥4, Inscripto <4)
 - **Reportes:** Rendimiento docente (barras) y de alumnos (torta) en PDF con FastReport + SkiaSharp
 
-### Requisitos no funcionales
+### Requisitos no Funcionales
 - **Seguridad:** Hash PBKDF2-SHA256, autorización por rol, protección contra timing attacks
 - **Rendimiento:** `AsNoTracking`, eager loading explícito, cache de `ClaimsPrincipal`
 - **Usabilidad:** Auto-refresh 5s, validaciones en tiempo real, feedback toast, traducción de errores DB
@@ -104,7 +104,7 @@ Arquitectura en capas con 6 proyectos.
 | **UI.Desktop** | Presentación | WinForms con sidebar y navegación por paneles |
 | **UI.Web** | Presentación | Blazor Server con layout, auth por cookies+JWT |
 
-### Patrones clave
+### Patrones Clave
 
 - **Repositorio genérico** `Repositorio<T>` con CRUD reutilizable
 - **Service Layer** con `ServicioBase` abstracto y guards (`RequiereAdmin`, `RequiereAutenticacion`)
