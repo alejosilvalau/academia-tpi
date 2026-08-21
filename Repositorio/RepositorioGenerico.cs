@@ -39,6 +39,7 @@ namespace Repositorio
         public void Save()
         {
             context.SaveChanges();
+            context.ChangeTracker.Clear();
         }
 
         public void Detach(T entity)
