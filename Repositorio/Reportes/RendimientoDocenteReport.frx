@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report ScriptLanguage="CSharp" TextQuality="Regular" ReportInfo.Description="Reporte de rendimiento del docente" ReportInfo.Created="08/19/2026" ReportInfo.CreatorVersion="2026.2.3.0">
+<Report ScriptLanguage="CSharp" TextQuality="Regular" DoublePass="true" ReportInfo.Description="Reporte de rendimiento del docente" ReportInfo.Created="08/19/2026" ReportInfo.CreatorVersion="2026.2.3.0">
   <Dictionary>
     <Parameter Name="DocenteNombre" DataType="System.String"/>
     <Parameter Name="DocenteLegajo" DataType="System.String"/>
@@ -46,5 +46,8 @@
       <TextObject Name="VSinNota" Left="506" Top="0" Width="42" Height="24" Text="[Rendimiento.SinNota]" Font="Segoe UI, 7pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
       <TextObject Name="VPromedio" Left="548" Top="0" Width="88" Height="24" Text="[Rendimiento.PromedioTexto]" Font="Segoe UI, 7pt" Border.Lines="All" VertAlign="Center" HorzAlign="Center"/>
     </DataBand>
+    <PageFooterBand Name="PageFooter1" Width="636" Height="20">
+      <TextObject Name="NumeroPagina" Left="436" Top="0" Width="200" Height="20" Text="[Page] / [TotalPages]" HorzAlign="Right" Font="Segoe UI, 8pt" TextFill.Color="Gray"/>
+    </PageFooterBand>
   </ReportPage>
 </Report>

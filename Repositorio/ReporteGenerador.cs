@@ -61,7 +61,6 @@ namespace Repositorio
                 AsignarImagen(report, "GraficoGeneral", imagen);
             }
 
-            report.Prepare();
             return report;
         }
 
@@ -94,6 +93,7 @@ namespace Repositorio
 
         public byte[] ExportarPdf(Report report)
         {
+            report.Prepare();
             using var stream = new MemoryStream();
             var pdfExport = new PDFSimpleExport();
             pdfExport.Export(report, stream);
@@ -120,7 +120,6 @@ namespace Repositorio
                 AsignarImagen(report, "GraficoGeneral", imagen);
             }
 
-            report.Prepare();
             return report;
         }
 
