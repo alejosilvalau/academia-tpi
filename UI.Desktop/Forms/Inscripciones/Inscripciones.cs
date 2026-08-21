@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Inscripciones
     public partial class Inscripciones : ApplicationForm
     {
         private readonly InscripcionServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvInscripciones;
         private readonly Persona _personaActual;
 
         public Inscripciones(Persona persona, bool admin = false)

@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Personas
     public partial class Personas : ApplicationForm
     {
         private readonly PersonaServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvPersonas;
         private readonly Persona.TiposPersonas? _filtroTipo;
 
         public Personas()

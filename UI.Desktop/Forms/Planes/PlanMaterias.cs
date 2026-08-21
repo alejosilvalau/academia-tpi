@@ -9,6 +9,7 @@ namespace UI.Desktop.Forms.Planes
     {
         private readonly PlanServicio _planServicio;
         private readonly MateriaServicio _materiaServicio;
+        public override DataGridView? GrillaPrincipal => dgvPlanes;
         private int? _planSeleccionadoId;
         private bool _cargando;
 

@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Planes
     public partial class Planes : ApplicationForm
     {
         private readonly PlanServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvPlanes;
 
         public Planes()
         {

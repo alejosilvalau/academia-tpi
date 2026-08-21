@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Cursos
     public partial class Cursos : ApplicationForm
     {
         private readonly CursoServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvCursos;
 
         public Cursos()
         {

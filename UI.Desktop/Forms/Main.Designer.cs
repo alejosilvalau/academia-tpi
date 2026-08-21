@@ -21,6 +21,7 @@ namespace UI.Desktop
             btnNotas = new Button();
             btnInscripcion = new Button();
             btnAdministracion = new Button();
+            btnInicio = new Button();
             panelPerfil = new Panel();
             lblLegajo = new Label();
             lblTipo = new Label();
@@ -35,27 +36,23 @@ namespace UI.Desktop
             btnABMPersonas = new Button();
             btnABMEspecialidades = new Button();
             btnABMDictados = new Button();
-btnABMCursos = new Button();
+            btnABMCursos = new Button();
             btnABMComisiones = new Button();
             btnABMPlanMaterias = new Button();
-panelBottom = new Panel();
-            btnInicio = new Button();
             panelMenu.SuspendLayout();
             panelPerfil.SuspendLayout();
             panelTop.SuspendLayout();
             panelSubMenu.SuspendLayout();
-            panelBottom.SuspendLayout();
             SuspendLayout();
             // 
             // panelDashboard
             // 
-            panelDashboard.AutoScroll = false;
             panelDashboard.BackColor = Color.FromArgb(245, 245, 245);
             panelDashboard.Dock = DockStyle.Fill;
             panelDashboard.Location = new Point(220, 62);
             panelDashboard.Name = "panelDashboard";
             panelDashboard.Padding = new Padding(20);
-            panelDashboard.Size = new Size(780, 626);
+            panelDashboard.Size = new Size(780, 688);
             panelDashboard.TabIndex = 5;
             // 
             // panelMenu
@@ -88,7 +85,7 @@ panelBottom = new Panel();
             btnCerrarSesion.Location = new Point(0, 690);
             btnCerrarSesion.Margin = new Padding(3, 4, 3, 4);
             btnCerrarSesion.Name = "btnCerrarSesion";
-            btnCerrarSesion.Padding = new Padding(10, 10, 20, 10);
+            btnCerrarSesion.Padding = new Padding(10, 10, 25, 10);
             btnCerrarSesion.Size = new Size(220, 60);
             btnCerrarSesion.TabIndex = 5;
             btnCerrarSesion.Text = "  Cerrar Sesión";
@@ -105,7 +102,7 @@ panelBottom = new Panel();
             btnReportes.FlatStyle = FlatStyle.Flat;
             btnReportes.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnReportes.ForeColor = Color.White;
-            btnReportes.Location = new Point(0, 328);
+            btnReportes.Location = new Point(0, 358);
             btnReportes.Margin = new Padding(3, 4, 3, 4);
             btnReportes.Name = "btnReportes";
             btnReportes.Padding = new Padding(10);
@@ -127,7 +124,7 @@ panelBottom = new Panel();
             btnNotas.FlatStyle = FlatStyle.Flat;
             btnNotas.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnNotas.ForeColor = Color.White;
-            btnNotas.Location = new Point(0, 267);
+            btnNotas.Location = new Point(0, 297);
             btnNotas.Margin = new Padding(3, 4, 3, 4);
             btnNotas.Name = "btnNotas";
             btnNotas.Padding = new Padding(10);
@@ -148,7 +145,7 @@ panelBottom = new Panel();
             btnInscripcion.FlatStyle = FlatStyle.Flat;
             btnInscripcion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnInscripcion.ForeColor = Color.White;
-            btnInscripcion.Location = new Point(0, 206);
+            btnInscripcion.Location = new Point(0, 236);
             btnInscripcion.Margin = new Padding(3, 4, 3, 4);
             btnInscripcion.Name = "btnInscripcion";
             btnInscripcion.Padding = new Padding(10);
@@ -169,7 +166,7 @@ panelBottom = new Panel();
             btnAdministracion.FlatStyle = FlatStyle.Flat;
             btnAdministracion.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             btnAdministracion.ForeColor = Color.White;
-            btnAdministracion.Location = new Point(0, 145);
+            btnAdministracion.Location = new Point(0, 175);
             btnAdministracion.Margin = new Padding(3, 4, 3, 4);
             btnAdministracion.Name = "btnAdministracion";
             btnAdministracion.Padding = new Padding(10);
@@ -181,6 +178,25 @@ panelBottom = new Panel();
             btnAdministracion.UseVisualStyleBackColor = false;
             btnAdministracion.Click += btnAdministracion_Click;
             // 
+            // btnInicio
+            // 
+            btnInicio.AutoSize = true;
+            btnInicio.Dock = DockStyle.Top;
+            btnInicio.FlatAppearance.BorderSize = 0;
+            btnInicio.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
+            btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
+            btnInicio.FlatStyle = FlatStyle.Flat;
+            btnInicio.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnInicio.ForeColor = Color.FromArgb(255, 193, 7);
+            btnInicio.Location = new Point(0, 114);
+            btnInicio.Name = "btnInicio";
+            btnInicio.Padding = new Padding(10, 10, 25, 10);
+            btnInicio.Size = new Size(220, 61);
+            btnInicio.TabIndex = 5;
+            btnInicio.Text = "  Inicio";
+            btnInicio.UseVisualStyleBackColor = false;
+            btnInicio.Click += btnSalir_Click;
+            // 
             // panelPerfil
             // 
             panelPerfil.BackColor = Color.FromArgb(69, 90, 100);
@@ -191,7 +207,7 @@ panelBottom = new Panel();
             panelPerfil.Location = new Point(0, 0);
             panelPerfil.Margin = new Padding(3, 4, 3, 4);
             panelPerfil.Name = "panelPerfil";
-            panelPerfil.Size = new Size(220, 145);
+            panelPerfil.Size = new Size(220, 114);
             panelPerfil.TabIndex = 0;
             // 
             // lblLegajo
@@ -261,10 +277,9 @@ panelBottom = new Panel();
             panelFormLoader.Margin = new Padding(3, 4, 3, 4);
             panelFormLoader.Name = "panelFormLoader";
             panelFormLoader.Padding = new Padding(10, 12, 10, 12);
-            panelFormLoader.Size = new Size(780, 626);
+            panelFormLoader.Size = new Size(780, 688);
             panelFormLoader.TabIndex = 2;
             panelFormLoader.Click += panelOutside_Click;
-            panelFormLoader.ControlAdded += panelFormLoader_ControlAdded;
             panelFormLoader.ControlRemoved += panelFormLoader_ControlRemoved;
             // 
             // panelSubMenu
@@ -276,7 +291,7 @@ panelBottom = new Panel();
             panelSubMenu.Controls.Add(btnABMPersonas);
             panelSubMenu.Controls.Add(btnABMEspecialidades);
             panelSubMenu.Controls.Add(btnABMDictados);
-panelSubMenu.Controls.Add(btnABMCursos);
+            panelSubMenu.Controls.Add(btnABMCursos);
             panelSubMenu.Controls.Add(btnABMComisiones);
             panelSubMenu.Controls.Add(btnABMPlanMaterias);
             panelSubMenu.Location = new Point(220, 62);
@@ -296,7 +311,7 @@ panelSubMenu.Controls.Add(btnABMCursos);
             btnReportesRendimientoDocente.FlatStyle = FlatStyle.Flat;
             btnReportesRendimientoDocente.Font = new Font("Segoe UI", 9F);
             btnReportesRendimientoDocente.ForeColor = Color.White;
-            btnReportesRendimientoDocente.Location = new Point(0, 468);
+            btnReportesRendimientoDocente.Location = new Point(0, 416);
             btnReportesRendimientoDocente.Margin = new Padding(3, 4, 3, 4);
             btnReportesRendimientoDocente.Name = "btnReportesRendimientoDocente";
             btnReportesRendimientoDocente.Padding = new Padding(15, 8, 15, 8);
@@ -317,7 +332,7 @@ panelSubMenu.Controls.Add(btnABMCursos);
             btnReportesRendimientoAlumnos.FlatStyle = FlatStyle.Flat;
             btnReportesRendimientoAlumnos.Font = new Font("Segoe UI", 9F);
             btnReportesRendimientoAlumnos.ForeColor = Color.White;
-            btnReportesRendimientoAlumnos.Location = new Point(0, 416);
+            btnReportesRendimientoAlumnos.Location = new Point(0, 364);
             btnReportesRendimientoAlumnos.Margin = new Padding(3, 4, 3, 4);
             btnReportesRendimientoAlumnos.Name = "btnReportesRendimientoAlumnos";
             btnReportesRendimientoAlumnos.Padding = new Padding(15, 8, 15, 8);
@@ -338,7 +353,7 @@ panelSubMenu.Controls.Add(btnABMCursos);
             btnABMUsuarios.FlatStyle = FlatStyle.Flat;
             btnABMUsuarios.Font = new Font("Segoe UI", 9F);
             btnABMUsuarios.ForeColor = Color.White;
-            btnABMUsuarios.Location = new Point(0, 364);
+            btnABMUsuarios.Location = new Point(0, 312);
             btnABMUsuarios.Margin = new Padding(3, 4, 3, 4);
             btnABMUsuarios.Name = "btnABMUsuarios";
             btnABMUsuarios.Padding = new Padding(15, 8, 15, 8);
@@ -380,7 +395,7 @@ panelSubMenu.Controls.Add(btnABMCursos);
             btnABMEspecialidades.FlatStyle = FlatStyle.Flat;
             btnABMEspecialidades.Font = new Font("Segoe UI", 9F);
             btnABMEspecialidades.ForeColor = Color.White;
-            btnABMEspecialidades.Location = new Point(0, 156);
+            btnABMEspecialidades.Location = new Point(0, 208);
             btnABMEspecialidades.Margin = new Padding(3, 4, 3, 4);
             btnABMEspecialidades.Name = "btnABMEspecialidades";
             btnABMEspecialidades.Padding = new Padding(15, 8, 15, 8);
@@ -401,7 +416,7 @@ panelSubMenu.Controls.Add(btnABMCursos);
             btnABMDictados.FlatStyle = FlatStyle.Flat;
             btnABMDictados.Font = new Font("Segoe UI", 9F);
             btnABMDictados.ForeColor = Color.White;
-            btnABMDictados.Location = new Point(0, 104);
+            btnABMDictados.Location = new Point(0, 156);
             btnABMDictados.Margin = new Padding(3, 4, 3, 4);
             btnABMDictados.Name = "btnABMDictados";
             btnABMDictados.Padding = new Padding(15, 8, 15, 8);
@@ -422,7 +437,7 @@ panelSubMenu.Controls.Add(btnABMCursos);
             btnABMCursos.FlatStyle = FlatStyle.Flat;
             btnABMCursos.Font = new Font("Segoe UI", 9F);
             btnABMCursos.ForeColor = Color.White;
-            btnABMCursos.Location = new Point(0, 52);
+            btnABMCursos.Location = new Point(0, 104);
             btnABMCursos.Margin = new Padding(3, 4, 3, 4);
             btnABMCursos.Name = "btnABMCursos";
             btnABMCursos.Padding = new Padding(15, 8, 15, 8);
@@ -443,14 +458,14 @@ panelSubMenu.Controls.Add(btnABMCursos);
             btnABMComisiones.FlatStyle = FlatStyle.Flat;
             btnABMComisiones.Font = new Font("Segoe UI", 9F);
             btnABMComisiones.ForeColor = Color.White;
-            btnABMComisiones.Location = new Point(0, 0);
+            btnABMComisiones.Location = new Point(0, 52);
             btnABMComisiones.Margin = new Padding(3, 4, 3, 4);
             btnABMComisiones.Name = "btnABMComisiones";
             btnABMComisiones.Padding = new Padding(15, 8, 15, 8);
             btnABMComisiones.Size = new Size(200, 52);
             btnABMComisiones.TabIndex = 0;
             btnABMComisiones.Text = "Comisiones";
-btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
+            btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             btnABMComisiones.Visible = false;
             btnABMComisiones.Click += btnABMComisiones_Click;
             // 
@@ -464,7 +479,7 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             btnABMPlanMaterias.FlatStyle = FlatStyle.Flat;
             btnABMPlanMaterias.Font = new Font("Segoe UI", 9F);
             btnABMPlanMaterias.ForeColor = Color.White;
-            btnABMPlanMaterias.Location = new Point(0, 520);
+            btnABMPlanMaterias.Location = new Point(0, 0);
             btnABMPlanMaterias.Margin = new Padding(3, 4, 3, 4);
             btnABMPlanMaterias.Name = "btnABMPlanMaterias";
             btnABMPlanMaterias.Padding = new Padding(15, 8, 15, 8);
@@ -475,36 +490,6 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             btnABMPlanMaterias.Visible = false;
             btnABMPlanMaterias.Click += btnABMPlanMaterias_Click;
             // 
-            // panelBottom
-            // 
-            panelBottom.BackColor = Color.FromArgb(69, 90, 100);
-            panelBottom.Dock = DockStyle.Bottom;
-            panelBottom.Location = new Point(220, 688);
-            panelBottom.Margin = new Padding(3, 4, 3, 4);
-            panelBottom.Name = "panelBottom";
-            panelBottom.Size = new Size(780, 62);
-            panelBottom.TabIndex = 4;
-panelBottom.Visible = false;
-            // 
-            // btnInicio
-            // 
-            btnInicio.AutoSize = true;
-            btnInicio.Dock = DockStyle.Top;
-            btnInicio.FlatAppearance.BorderSize = 0;
-            btnInicio.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnInicio.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
-            btnInicio.FlatStyle = FlatStyle.Flat;
-            btnInicio.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
-            btnInicio.ForeColor = Color.FromArgb(255, 193, 7);
-            btnInicio.Name = "btnInicio";
-            btnInicio.Padding = new Padding(10);
-            btnInicio.Size = new Size(220, 61);
-            btnInicio.TabIndex = 5;
-            btnInicio.Text = "  Inicio";
-            btnInicio.TextAlign = ContentAlignment.MiddleLeft;
-            btnInicio.UseVisualStyleBackColor = false;
-            btnInicio.Click += btnSalir_Click;
-            // 
             // Main
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -513,7 +498,6 @@ panelBottom.Visible = false;
             Controls.Add(panelDashboard);
             Controls.Add(panelFormLoader);
             Controls.Add(panelSubMenu);
-            Controls.Add(panelBottom);
             Controls.Add(panelTop);
             Controls.Add(panelMenu);
             Margin = new Padding(3, 5, 3, 5);
@@ -529,7 +513,6 @@ panelBottom.Visible = false;
             panelTop.PerformLayout();
             panelSubMenu.ResumeLayout(false);
             panelSubMenu.PerformLayout();
-            panelBottom.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -558,7 +541,6 @@ panelBottom.Visible = false;
         private System.Windows.Forms.Button btnABMCursos;
         private System.Windows.Forms.Button btnABMComisiones;
         private System.Windows.Forms.Button btnABMPlanMaterias;
-        private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnInicio;
         private System.Windows.Forms.Panel panelDashboard;
     }

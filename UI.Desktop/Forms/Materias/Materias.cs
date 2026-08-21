@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Materias
     public partial class Materias : ApplicationForm
     {
         private readonly MateriaServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvMaterias;
 
         public Materias()
         {

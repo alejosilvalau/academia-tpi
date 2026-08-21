@@ -308,7 +308,13 @@ namespace UI.Desktop
         {
             if (panelFormLoader.Controls.OfType<ApplicationForm>().FirstOrDefault() is { } form && form.PermitirAutoRefresco)
             {
-                try { form.Listar(); }
+                try
+                {
+                    if (form.GrillaPrincipal is { } dgv)
+                        form.ListarPreservandoSeleccion(dgv);
+                    else
+                        form.Listar();
+                }
                 catch { }
             }
         }
@@ -326,14 +332,8 @@ namespace UI.Desktop
             Application.Restart();
         }
 
-        private void panelFormLoader_ControlAdded(object sender, ControlEventArgs e)
-        {
-            panelBottom.Visible = true;
-        }
-
         private void panelFormLoader_ControlRemoved(object sender, ControlEventArgs e)
         {
-            panelBottom.Visible = false;
             if (panelFormLoader.Controls.Count == 0)
             {
                 panelDashboard.Visible = true;

@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Usuarios
     public partial class Usuarios : ApplicationForm
     {
         private readonly UsuarioServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvUsuarios;
 
         public Usuarios()
         {

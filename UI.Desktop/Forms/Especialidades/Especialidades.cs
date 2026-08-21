@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Especialidades
     public partial class Especialidades : ApplicationForm
     {
         private readonly EspecialidadServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvEspecialidades;
 
         public Especialidades()
         {

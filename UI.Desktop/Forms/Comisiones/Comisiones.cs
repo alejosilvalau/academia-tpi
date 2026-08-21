@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Comisiones
     public partial class Comisiones : ApplicationForm
     {
         private readonly ComisionServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvComisiones;
 
         public Comisiones()
         {

@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Dictados
     public partial class Dictados : ApplicationForm
     {
         private readonly DocenteCursoServicio _servicio;
+        public override DataGridView? GrillaPrincipal => dgvDocentes;
 
         public Dictados()
         {

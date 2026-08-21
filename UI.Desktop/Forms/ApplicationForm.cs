@@ -15,6 +15,8 @@ namespace UI.Desktop
 
         public virtual bool PermitirAutoRefresco => true;
 
+        public virtual DataGridView? GrillaPrincipal => null;
+
         public enum ModoForm
         {
             Alta,
@@ -88,6 +90,22 @@ namespace UI.Desktop
         {
             SendMessage(dgv.Handle, WM_SETREDRAW, (IntPtr)1, IntPtr.Zero);
             dgv.Refresh();
+        }
+
+        public void ListarPreservandoSeleccion(DataGridView dgv)
+        {
+            int? idSeleccionado = null;
+            if (dgv.SelectedRows.Count == 1 && dgv.SelectedRows[0].DataBoundItem != null)
+            {
+                idSeleccionado = dgv.SelectedRows[0].DataBoundItem
+                    .GetType().GetProperty("ID")?.GetValue(dgv.SelectedRows[0].DataBoundItem) as int?;
+            }
+
+            CongelarGrilla(dgv);
+            Listar();
+            if (idSeleccionado.HasValue)
+                SeleccionarFila(dgv, idSeleccionado);
+            DescongelarGrilla(dgv);
         }
 
         [DllImport("user32.dll")]
