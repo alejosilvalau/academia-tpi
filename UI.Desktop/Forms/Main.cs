@@ -65,11 +65,132 @@ namespace UI.Desktop
                     _botonesPermitidos.Add(btnReportesRendimientoAlumnos.Name);
                     break;
             }
+
+            ConstruirDashboard(tipo);
+        }
+
+        private void ConstruirDashboard(Persona.TiposPersonas? tipo)
+        {
+            panelDashboard.Controls.Clear();
+
+            var flow = new FlowLayoutPanel
+            {
+                Dock = DockStyle.Fill,
+                AutoScroll = false,
+                WrapContents = true,
+                FlowDirection = FlowDirection.LeftToRight,
+                Padding = new Padding(10),
+                BackColor = Color.FromArgb(245, 245, 245)
+            };
+
+            var cards = new List<(string titulo, string desc, string icono, Action onClick)>();
+
+            if (tipo == Persona.TiposPersonas.Administrador)
+            {
+                cards.Add(("Especialidades", "Gestionar especialidades", "\u25C6", () => OpenForm(new Forms.Especialidades.Especialidades())));
+                cards.Add(("Plan/Materias", "Gestionar planes de estudio y materias", "\u25C6", () => OpenForm(new Forms.Planes.PlanMaterias())));
+                cards.Add(("Comisiones", "Gestionar comisiones", "\u25C6", () => OpenForm(new Forms.Comisiones.Comisiones())));
+                cards.Add(("Cursos", "Gestionar cursos", "\u25C6", () => OpenForm(new Forms.Cursos.Cursos())));
+                cards.Add(("Personas", "Gestionar alumnos, docentes y administradores", "\u25C6", () => OpenForm(new Forms.Personas.Personas())));
+                cards.Add(("Dictados", "Gestionar asignacion de docentes a cursos", "\u25C6", () => OpenForm(new Forms.Dictados.Dictados())));
+                cards.Add(("Usuarios", "Gestionar usuarios del sistema", "\u25C6", () => OpenForm(new Forms.Usuarios.Usuarios())));
+                cards.Add(("Inscripciones", "Inscribir alumnos a cursos", "\u270E", () => OpenForm(new Forms.Personas.Personas(Persona.TiposPersonas.Alumno))));
+                cards.Add(("Registrar Notas", "Calificar alumnos en cursos", "\u270E", () => OpenForm(new Forms.Personas.Personas(Persona.TiposPersonas.Docente))));
+                cards.Add(("Rend. Docente", "Ver reporte de rendimiento docente", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoDocente))));
+                cards.Add(("Rend. Alumnos", "Ver reporte de rendimiento de alumnos", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
+            }
+            else if (tipo == Persona.TiposPersonas.Alumno)
+            {
+                cards.Add(("Inscripciones", "Inscribirse a cursos", "\u270E", () => OpenForm(new Forms.Inscripciones.Inscripciones(Login.UsuarioActual!.Persona!))));
+                cards.Add(("Rendimiento Alumnos", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
+            }
+            else if (tipo == Persona.TiposPersonas.Docente)
+            {
+                cards.Add(("Registrar Notas", "Calificar alumnos en cursos", "\u270E", () => OpenForm(new Forms.RegistrarNotas.RegistrarNotas(Login.UsuarioActual!.Persona!))));
+                cards.Add(("Rendimiento Docente", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoDocente))));
+                cards.Add(("Rendimiento Alumnos", "Ver reporte de rendimiento de alumnos", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
+            }
+
+            foreach (var (titulo, desc, icono, onClick) in cards)
+            {
+                var card = CrearDashboardCard(titulo, desc, icono, onClick);
+                flow.Controls.Add(card);
+            }
+
+            panelDashboard.Controls.Add(flow);
+            panelDashboard.Visible = true;
+        }
+
+        private Panel CrearDashboardCard(string titulo, string desc, string icono, Action onClick)
+        {
+            var card = new Panel
+            {
+                Size = new Size(280, 150),
+                Margin = new Padding(10),
+                BackColor = Color.White,
+                Cursor = Cursors.Hand
+            };
+
+            var lblIcono = new Label
+            {
+                Text = icono,
+                Font = new Font("Segoe UI Symbol", 32F),
+                ForeColor = Color.FromArgb(96, 125, 139),
+                Dock = DockStyle.Left,
+                Width = 75,
+                TextAlign = ContentAlignment.MiddleCenter
+            };
+
+            var panelTexto = new Panel
+            {
+                Dock = DockStyle.Fill,
+                Padding = new Padding(5, 15, 15, 15)
+            };
+
+            var lblTitulo = new Label
+            {
+                Text = titulo,
+                Font = new Font("Segoe UI", 12F, FontStyle.Bold),
+                ForeColor = Color.FromArgb(33, 33, 33),
+                Dock = DockStyle.Top,
+                Height = 30,
+                TextAlign = ContentAlignment.MiddleLeft
+            };
+
+            var lblDesc = new Label
+            {
+                Text = desc,
+                Font = new Font("Segoe UI", 9F),
+                ForeColor = Color.FromArgb(117, 117, 117),
+                Dock = DockStyle.Fill,
+                TextAlign = ContentAlignment.TopLeft
+            };
+
+            panelTexto.Controls.Add(lblDesc);
+            panelTexto.Controls.Add(lblTitulo);
+            card.Controls.Add(lblIcono);
+            card.Controls.Add(panelTexto);
+
+            EventHandler handler = (s, e) => onClick();
+            card.Click += handler;
+            lblIcono.Click += handler;
+            panelTexto.Click += handler;
+            lblTitulo.Click += handler;
+            lblDesc.Click += handler;
+
+            card.Paint += (s, e) =>
+            {
+                ControlPaint.DrawBorder(e.Graphics, card.ClientRectangle,
+                    Color.FromArgb(176, 190, 197), ButtonBorderStyle.Solid);
+            };
+
+            return card;
         }
 
         internal void OpenForm(ApplicationForm form)
         {
             panelSubMenu.Visible = false;
+            panelDashboard.Visible = false;
             panelFormLoader.Controls.Clear();
             form.Dock = DockStyle.Fill;
             form.FormBorderStyle = FormBorderStyle.None;
@@ -195,7 +316,9 @@ namespace UI.Desktop
         private void btnSalir_Click(object sender, EventArgs e)
         {
             panelFormLoader.Controls.Clear();
-            lblTitulo.Text = $"Bienvenido/a {Login.UsuarioActual?.Persona}";
+            panelDashboard.Visible = true;
+            var persona = Login.UsuarioActual?.Persona;
+            lblTitulo.Text = persona != null ? $"Bienvenido/a {persona.Nombre} {persona.Apellido}" : "Academia TPI";
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -211,8 +334,12 @@ namespace UI.Desktop
         private void panelFormLoader_ControlRemoved(object sender, ControlEventArgs e)
         {
             panelBottom.Visible = false;
-            if (Login.UsuarioActual?.Persona != null)
-                lblTitulo.Text = $"Bienvenido/a {Login.UsuarioActual.Persona.Nombre} {Login.UsuarioActual.Persona.Apellido}";
+            if (panelFormLoader.Controls.Count == 0)
+            {
+                panelDashboard.Visible = true;
+                if (Login.UsuarioActual?.Persona != null)
+                    lblTitulo.Text = $"Bienvenido/a {Login.UsuarioActual.Persona.Nombre} {Login.UsuarioActual.Persona.Apellido}";
+            }
         }
     }
 }

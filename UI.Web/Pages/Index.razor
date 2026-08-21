@@ -24,8 +24,8 @@
             <a href="/planes" class="dashboard-card">
                 <div class="dashboard-card-icon">&#9830;</div>
                 <div class="dashboard-card-text">
-                    <h3>Planes</h3>
-                    <p>Gestionar planes de estudio</p>
+                    <h3>Plan/Materias</h3>
+                    <p>Gestionar planes de estudio y materias</p>
                 </div>
             </a>
             <a href="/comisiones" class="dashboard-card">
@@ -33,13 +33,6 @@
                 <div class="dashboard-card-text">
                     <h3>Comisiones</h3>
                     <p>Gestionar comisiones</p>
-                </div>
-            </a>
-            <a href="/materias" class="dashboard-card">
-                <div class="dashboard-card-icon">&#9830;</div>
-                <div class="dashboard-card-text">
-                    <h3>Materias</h3>
-                    <p>Gestionar materias</p>
                 </div>
             </a>
             <a href="/cursos" class="dashboard-card">
@@ -70,18 +63,32 @@
                     <p>Gestionar usuarios del sistema</p>
                 </div>
             </a>
-            <a href="/reportes/cursos" class="dashboard-card">
-                <div class="dashboard-card-icon">&#9776;</div>
+            <a href="/personas?tipo=alumno&seleccion=inscripcion" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9998;</div>
                 <div class="dashboard-card-text">
-                    <h3>Reporte Cursos</h3>
-                    <p>Generar reporte PDF de cursos</p>
+                    <h3>Inscripciones</h3>
+                    <p>Inscribir alumnos a cursos</p>
                 </div>
             </a>
-            <a href="/reportes/planes" class="dashboard-card">
+            <a href="/personas?tipo=docente&seleccion=notas" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9998;</div>
+                <div class="dashboard-card-text">
+                    <h3>Registrar Notas</h3>
+                    <p>Calificar alumnos en cursos</p>
+                </div>
+            </a>
+            <a href="/reportes/rendimiento-docente" class="dashboard-card">
                 <div class="dashboard-card-icon">&#9776;</div>
                 <div class="dashboard-card-text">
-                    <h3>Reporte Planes</h3>
-                    <p>Generar reporte PDF de planes</p>
+                    <h3>Rendimiento Docente</h3>
+                    <p>Ver reporte de rendimiento docente</p>
+                </div>
+            </a>
+            <a href="/reportes/rendimiento-alumnos" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9776;</div>
+                <div class="dashboard-card-text">
+                    <h3>Rendimiento Alumnos</h3>
+                    <p>Ver reporte de rendimiento de alumnos</p>
                 </div>
             </a>
         }
@@ -94,6 +101,13 @@
                     <p>Inscribirse a cursos</p>
                 </div>
             </a>
+            <a href="/reportes/rendimiento-alumnos" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9776;</div>
+                <div class="dashboard-card-text">
+                    <h3>Rendimiento Alumnos</h3>
+                    <p>Ver reporte de rendimiento</p>
+                </div>
+            </a>
         }
         @if (Sesion.IsDocente)
         {
@@ -102,6 +116,20 @@
                 <div class="dashboard-card-text">
                     <h3>Registrar Notas</h3>
                     <p>Calificar alumnos en cursos</p>
+                </div>
+            </a>
+            <a href="/reportes/rendimiento-docente" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9776;</div>
+                <div class="dashboard-card-text">
+                    <h3>Rendimiento Docente</h3>
+                    <p>Ver reporte de rendimiento</p>
+                </div>
+            </a>
+            <a href="/reportes/rendimiento-alumnos" class="dashboard-card">
+                <div class="dashboard-card-icon">&#9776;</div>
+                <div class="dashboard-card-text">
+                    <h3>Rendimiento Alumnos</h3>
+                    <p>Ver reporte de rendimiento de alumnos</p>
                 </div>
             </a>
         }

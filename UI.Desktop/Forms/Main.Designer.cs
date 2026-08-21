@@ -14,6 +14,7 @@ namespace UI.Desktop
 
         private void InitializeComponent()
         {
+            panelDashboard = new Panel();
             panelMenu = new Panel();
             btnCerrarSesion = new Button();
             btnReportes = new Button();
@@ -46,6 +47,17 @@ btnABMCursos = new Button();
             panelSubMenu.SuspendLayout();
             panelBottom.SuspendLayout();
             SuspendLayout();
+            // 
+            // panelDashboard
+            // 
+            panelDashboard.AutoScroll = true;
+            panelDashboard.BackColor = Color.FromArgb(245, 245, 245);
+            panelDashboard.Dock = DockStyle.Fill;
+            panelDashboard.Location = new Point(220, 62);
+            panelDashboard.Name = "panelDashboard";
+            panelDashboard.Padding = new Padding(20);
+            panelDashboard.Size = new Size(780, 626);
+            panelDashboard.TabIndex = 5;
             // 
             // panelMenu
             // 
@@ -517,6 +529,7 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1000, 750);
+            Controls.Add(panelDashboard);
             Controls.Add(panelFormLoader);
             Controls.Add(panelSubMenu);
             Controls.Add(panelBottom);
@@ -567,5 +580,6 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
         private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnSalir;
+        private System.Windows.Forms.Panel panelDashboard;
     }
 }
