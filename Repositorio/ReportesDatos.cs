@@ -1,5 +1,6 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Repositorio
 {
@@ -9,7 +10,12 @@ namespace Repositorio
 
         public ReportesDatos()
         {
-            _connectionString = "Server=localhost\\SQLEXPRESS;Database=Academia;Trusted_Connection=True;TrustServerCertificate=True;";
+            var configuration = new ConfigurationBuilder()
+                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+                .AddJsonFile("appsettings.Repositorio.json", optional: false)
+                .Build();
+
+            _connectionString = configuration.GetConnectionString("DefaultConnection")!;
         }
 
         public ReportesDatos(string connectionString)

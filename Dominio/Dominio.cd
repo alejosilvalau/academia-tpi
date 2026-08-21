@@ -1,0 +1,138 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDesigner xmlns="http://schemas.microsoft.com/vstudio/2005/classdesigner">
+  <ClassAssembly Name="Dominio" />
+  <ClassShapes>
+    <ClassShape Id="a1b2c3d4-0001-0000-0000-000000000001" File="BusinessEntity.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/BusinessEntity.cs">
+      <ClassMoniker Name="BusinessEntity" Id="a1b2c3d4-0001-0000-0000-000000000001" />
+      <Position X="100" Y="50" />
+      <Size Width="200" Height="120" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0002-0000-0000-000000000002" File="Persona.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/Persona.cs">
+      <ClassMoniker Name="Persona" Id="a1b2c3d4-0002-0000-0000-000000000002" />
+      <Position X="400" Y="50" />
+      <Size Width="250" Height="220" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0003-0000-0000-000000000003" File="Usuario.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/Usuario.cs">
+      <ClassMoniker Name="Usuario" Id="a1b2c3d4-0003-0000-0000-000000000003" />
+      <Position X="400" Y="320" />
+      <Size Width="220" Height="170" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0004-0000-0000-000000000004" File="Especialidad.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/Especialidad.cs">
+      <ClassMoniker Name="Especialidad" Id="a1b2c3d4-0004-0000-0000-000000000004" />
+      <Position X="750" Y="50" />
+      <Size Width="180" Height="100" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0005-0000-0000-000000000005" File="Plan.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/Plan.cs">
+      <ClassMoniker Name="Plan" Id="a1b2c3d4-0005-0000-0000-000000000005" />
+      <Position X="1050" Y="50" />
+      <Size Width="200" Height="130" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0006-0000-0000-000000000006" File="Materia.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/Materia.cs">
+      <ClassMoniker Name="Materia" Id="a1b2c3d4-0006-0000-0000-000000000006" />
+      <Position X="1350" Y="50" />
+      <Size Width="220" Height="140" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0007-0000-0000-000000000007" File="Comision.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/Comision.cs">
+      <ClassMoniker Name="Comision" Id="a1b2c3d4-0007-0000-0000-000000000007" />
+      <Position X="1350" Y="250" />
+      <Size Width="220" Height="130" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0008-0000-0000-000000000008" File="Curso.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/Curso.cs">
+      <ClassMoniker Name="Curso" Id="a1b2c3d4-0008-0000-0000-000000000008" />
+      <Position X="1650" Y="50" />
+      <Size Width="230" Height="170" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0009-0000-0000-000000000009" File="AlumnoInscripcion.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/AlumnoInscripcion.cs">
+      <ClassMoniker Name="AlumnoInscripcion" Id="a1b2c3d4-0009-0000-0000-000000000009" />
+      <Position X="1650" Y="300" />
+      <Size Width="250" Height="220" />
+    </ClassShape>
+    <ClassShape Id="a1b2c3d4-0010-0000-0000-000000000010" File="DocenteCurso.cs" SourceMoniker="file:///C:/Users/Alejo/OneDrive/Escritorio/Job/NET/academia-tpi/Dominio/DocenteCurso.cs">
+      <ClassMoniker Name="DocenteCurso" Id="a1b2c3d4-0010-0000-0000-000000000010" />
+      <Position X="1650" Y="580" />
+      <Size Width="230" Height="170" />
+    </ClassShape>
+  </ClassShapes>
+  <ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c001-0000-0000-000000000001" Source="a1b2c3d4-0002-0000-0000-000000000002" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c002-0000-0000-000000000002" Source="a1b2c3d4-0003-0000-0000-000000000003" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c003-0000-0000-000000000003" Source="a1b2c3d4-0004-0000-0000-000000000004" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c004-0000-0000-000000000004" Source="a1b2c3d4-0005-0000-0000-000000000005" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c005-0000-0000-000000000005" Source="a1b2c3d4-0006-0000-0000-000000000006" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c006-0000-0000-000000000006" Source="a1b2c3d4-0007-0000-0000-000000000007" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c007-0000-0000-000000000007" Source="a1b2c3d4-0008-0000-0000-000000000008" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c008-0000-0000-000000000008" Source="a1b2c3d4-0009-0000-0000-000000000009" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c009-0000-0000-000000000009" Source="a1b2c3d4-0010-0000-0000-000000000010" Target="a1b2c3d4-0001-0000-0000-000000000001" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Inheritance" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c010-0000-0000-000000000010" Source="a1b2c3d4-0005-0000-0000-000000000005" Target="a1b2c3d4-0004-0000-0000-000000000004" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c011-0000-0000-000000000011" Source="a1b2c3d4-0002-0000-0000-000000000002" Target="a1b2c3d4-0005-0000-0000-000000000005" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c012-0000-0000-000000000012" Source="a1b2c3d4-0003-0000-0000-000000000003" Target="a1b2c3d4-0002-0000-0000-000000000002" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c013-0000-0000-000000000013" Source="a1b2c3d4-0006-0000-0000-000000000006" Target="a1b2c3d4-0005-0000-0000-000000000005" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c014-0000-0000-000000000014" Source="a1b2c3d4-0007-0000-0000-000000000007" Target="a1b2c3d4-0005-0000-0000-000000000005" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c015-0000-0000-000000000015" Source="a1b2c3d4-0008-0000-0000-000000000008" Target="a1b2c3d4-0006-0000-0000-000000000006" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c016-0000-0000-000000000016" Source="a1b2c3d4-0008-0000-0000-000000000008" Target="a1b2c3d4-0007-0000-0000-000000000007" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c017-0000-0000-000000000017" Source="a1b2c3d4-0009-0000-0000-000000000009" Target="a1b2c3d4-0002-0000-0000-000000000002" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c018-0000-0000-000000000018" Source="a1b2c3d4-0009-0000-0000-000000000009" Target="a1b2c3d4-0008-0000-0000-000000000008" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c019-0000-0000-000000000019" Source="a1b2c3d4-0010-0000-0000-000000000010" Target="a1b2c3d4-0002-0000-0000-000000000002" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+    <ConnectorConnector Id="a1b2c3d4-c020-0000-0000-000000000020" Source="a1b2c3d4-0010-0000-0000-000000000010" Target="a1b2c3d4-0008-0000-0000-000000000008" SourceMethodName="" TargetMethodName="">
+      <ConnectorMoniker Name="Association" />
+      <LineColor R="0" G="0" B="0" />
+    </ConnectorConnector>
+  </ConnectorConnector>
+</ClassDesigner>
