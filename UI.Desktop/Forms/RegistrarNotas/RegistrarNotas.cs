@@ -11,15 +11,17 @@ namespace UI.Desktop.Forms.RegistrarNotas
         private readonly DocenteCursoServicio _dcServicio;
         private readonly InscripcionServicio _inscripcionServicio;
 
+        public override bool PermitirAutoRefresco => false;
+
         public RegistrarNotas(Persona persona)
         {
             InitializeComponent();
             _personaActual = persona;
             _dcServicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _inscripcionServicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            dgvAlumnos.AutoGenerateColumns = false;
             cbxCursos.DataSource = _dcServicio.GetByDocente(persona.ID);
             cbxCursos.DisplayMember = "Curso";
-            dgvAlumnos.AutoGenerateColumns = false;
         }
 
         private void RegistrarNotas_Load(object sender, EventArgs e) => Listar();

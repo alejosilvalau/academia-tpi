@@ -11,11 +11,9 @@
 <div class="md-card">
     <div class="md-card-header-actions">
         <span>Registrar Notas @(tituloDocente)</span>
-        <div class="md-btn-group">
-            <button class="md-btn md-btn-primary" @onclick="CargarInscripciones">Refrescar</button>
-        </div>
     </div>
 
+    <AutoRefresh OnTick="RefrescarCursos" />
     <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" />
 
     @if (cursos == null)
@@ -143,6 +141,16 @@
             }
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private void RefrescarCursos()
+    {
+        try
+        {
+            var asignaciones = DocenteCursoServicio.GetByDocente(docenteObjetivoId);
+            cursos = asignaciones.Select(a => a.Curso).Where(c => c != null).DistinctBy(c => c!.ID).ToList();
+        }
+        catch { }
     }
 
     private void Calificar(int inscripcionId)

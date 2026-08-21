@@ -8,11 +8,15 @@ namespace UI.Desktop
     {
         private readonly PersonaServicio _personaServicio;
         private readonly HashSet<string> _botonesPermitidos = new();
+        private readonly System.Windows.Forms.Timer _autoRefresh;
 
         public Main()
         {
             InitializeComponent();
             _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _autoRefresh = new System.Windows.Forms.Timer { Interval = 5000 };
+            _autoRefresh.Tick += AutoRefresh_Tick;
+            _autoRefresh.Start();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -300,9 +304,13 @@ namespace UI.Desktop
             }
         }
 
-        private void btnActualizar_Click(object sender, EventArgs e)
+        private void AutoRefresh_Tick(object? sender, EventArgs e)
         {
-            panelFormLoader.Controls.OfType<ApplicationForm>().FirstOrDefault()?.Listar();
+            if (panelFormLoader.Controls.OfType<ApplicationForm>().FirstOrDefault() is { } form && form.PermitirAutoRefresco)
+            {
+                try { form.Listar(); }
+                catch { }
+            }
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

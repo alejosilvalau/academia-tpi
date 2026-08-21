@@ -13,6 +13,8 @@ namespace UI.Desktop
 
         public ModoForm Modo { get; set; }
 
+        public virtual bool PermitirAutoRefresco => true;
+
         public enum ModoForm
         {
             Alta,

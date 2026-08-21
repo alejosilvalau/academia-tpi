@@ -38,8 +38,7 @@ namespace UI.Desktop
 btnABMCursos = new Button();
             btnABMComisiones = new Button();
             btnABMPlanMaterias = new Button();
-            panelBottom = new Panel();
-            btnActualizar = new Button();
+panelBottom = new Panel();
             btnSalir = new Button();
             panelMenu.SuspendLayout();
             panelPerfil.SuspendLayout();
@@ -477,8 +476,7 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panelBottom
             // 
-            panelBottom.BackColor = Color.FromArgb(69, 90, 100);
-            panelBottom.Controls.Add(btnActualizar);
+panelBottom.BackColor = Color.FromArgb(69, 90, 100);
             panelBottom.Controls.Add(btnSalir);
             panelBottom.Dock = DockStyle.Bottom;
             panelBottom.Location = new Point(220, 688);
@@ -486,28 +484,10 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
             panelBottom.Name = "panelBottom";
             panelBottom.Size = new Size(780, 62);
             panelBottom.TabIndex = 4;
-            panelBottom.Visible = false;
-            // 
-            // btnActualizar
-            // 
-            btnActualizar.Dock = DockStyle.Right;
-            btnActualizar.FlatAppearance.BorderSize = 0;
-            btnActualizar.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
-            btnActualizar.FlatAppearance.MouseOverBackColor = Color.FromArgb(96, 125, 139);
-            btnActualizar.FlatStyle = FlatStyle.Flat;
-            btnActualizar.Font = new Font("Segoe UI", 10F);
-            btnActualizar.ForeColor = Color.FromArgb(255, 193, 7);
-            btnActualizar.Location = new Point(503, 0);
-            btnActualizar.Margin = new Padding(3, 4, 3, 4);
-            btnActualizar.Name = "btnActualizar";
-            btnActualizar.Size = new Size(157, 62);
-            btnActualizar.TabIndex = 1;
-            btnActualizar.Text = "Refrescar Datos";
-            btnActualizar.UseVisualStyleBackColor = true;
-            btnActualizar.Click += btnActualizar_Click;
+panelBottom.Visible = false;
             // 
             // btnSalir
-            // 
+            //
             btnSalir.Dock = DockStyle.Right;
             btnSalir.FlatAppearance.BorderSize = 0;
             btnSalir.FlatAppearance.MouseDownBackColor = Color.FromArgb(69, 90, 100);
@@ -578,7 +558,6 @@ btnABMComisiones.TextAlign = ContentAlignment.MiddleLeft;
         private System.Windows.Forms.Button btnABMComisiones;
         private System.Windows.Forms.Button btnABMPlanMaterias;
         private System.Windows.Forms.Panel panelBottom;
-        private System.Windows.Forms.Button btnActualizar;
         private System.Windows.Forms.Button btnSalir;
         private System.Windows.Forms.Panel panelDashboard;
     }

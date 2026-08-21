@@ -19,10 +19,10 @@
             {
                 <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Inscribirme</button>
             }
-            <button class="md-btn md-btn-primary" @onclick="Cargar">Refrescar</button>
         </div>
 </div>
 
+    <AutoRefresh OnTick="Cargar" />
     <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" />
 
     @if (modoForm != ModoForm.Ninguno)

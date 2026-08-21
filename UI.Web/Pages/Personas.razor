@@ -8,19 +8,15 @@
 <div class="md-card">
     <div class="md-card-header-actions">
         <span>@Titulo</span>
-        <div class="md-btn-group">
-            @if (modoSeleccion)
-            {
-                <button class="md-btn md-btn-primary" @onclick="Cargar">Refrescar</button>
-            }
-            else
-            {
+        @if (!modoSeleccion)
+        {
+            <div class="md-btn-group">
                 <button class="md-btn md-btn-accent" @onclick="Nuevo">+ Nueva</button>
-                <button class="md-btn md-btn-primary" @onclick="Cargar">Refrescar</button>
-            }
-        </div>
+            </div>
+        }
     </div>
 
+    <AutoRefresh OnTick="Cargar" />
     <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" />
 
     @if (!modoSeleccion && modoForm != ModoForm.Ninguno)

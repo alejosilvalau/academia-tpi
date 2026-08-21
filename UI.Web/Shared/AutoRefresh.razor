@@ -1,0 +1,43 @@
+@implements IDisposable
+
+@code {
+    [Parameter]
+    public int IntervaloSegundos { get; set; } = 5;
+
+    [Parameter]
+    public EventCallback OnTick { get; set; }
+
+    private System.Threading.Timer? _timer;
+
+    protected override void OnAfterRender(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _timer?.Dispose();
+            _timer = new System.Threading.Timer(
+                _ => DispararTick(),
+                null,
+                TimeSpan.FromSeconds(IntervaloSegundos),
+                TimeSpan.FromSeconds(IntervaloSegundos));
+        }
+    }
+
+    private void DispararTick()
+    {
+        try
+        {
+            _ = InvokeAsync(async () =>
+            {
+                try { await OnTick.InvokeAsync(); }
+                catch { }
+            });
+        }
+        catch { }
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+        _timer = null;
+    }
+}
