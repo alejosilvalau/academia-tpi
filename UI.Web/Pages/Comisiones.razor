@@ -14,10 +14,7 @@
         </div>
     </div>
 
-    @if (!string.IsNullOrEmpty(mensaje))
-    {
-        <div class="md-message @(mensajeEsError ? "md-message-error" : "md-message-success")">@mensaje</div>
-    }
+    <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" />
 
     @if (modoForm != ModoForm.Ninguno)
     {
@@ -180,5 +177,10 @@
     {
         mensaje = msg;
         mensajeEsError = esError;
+    }
+
+    private void OcultarMensaje()
+    {
+        mensaje = "";
     }
 }

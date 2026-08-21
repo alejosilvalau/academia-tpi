@@ -1,0 +1,67 @@
+@if (!string.IsNullOrEmpty(Mensaje))
+{
+    <div class="md-message @(EsError ? "md-message-error" : "md-message-success")">
+        <span>@Mensaje</span>
+        <button type="button" class="md-message-close" @onclick="Cerrar" aria-label="Cerrar">&#10005;</button>
+    </div>
+}
+
+@code {
+    [Parameter]
+    public string? Mensaje { get; set; }
+
+    [Parameter]
+    public bool EsError { get; set; }
+
+    [Parameter]
+    public EventCallback Ocultar { get; set; }
+
+    [Parameter]
+    public int DuracionSegundos { get; set; } = 4;
+
+    private System.Threading.Timer? _timer;
+
+    protected override void OnParametersSet()
+    {
+        _timer?.Dispose();
+        _timer = null;
+
+        if (!string.IsNullOrEmpty(Mensaje))
+        {
+            _timer = new System.Threading.Timer(
+                _ => OcultarDesdeTimer(),
+                null,
+                TimeSpan.FromSeconds(DuracionSegundos),
+                Timeout.InfiniteTimeSpan);
+        }
+    }
+
+    private void Cerrar()
+    {
+        _timer?.Dispose();
+        _timer = null;
+        _ = InvokeAsync(async () =>
+        {
+            try { await Ocultar.InvokeAsync(); }
+            catch { }
+        });
+    }
+
+    private void OcultarDesdeTimer()
+    {
+        try
+        {
+            _ = InvokeAsync(async () =>
+            {
+                try { await Ocultar.InvokeAsync(); }
+                catch { }
+            });
+        }
+        catch { }
+    }
+
+    public void Dispose()
+    {
+        _timer?.Dispose();
+    }
+}

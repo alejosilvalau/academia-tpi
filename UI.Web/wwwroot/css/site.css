@@ -440,6 +440,23 @@ a:hover { color: var(--primary-dark); }
   border: 1px solid #BBDEFB;
 }
 
+.md-message-close {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  color: inherit;
+  padding: 2px;
+  flex-shrink: 0;
+}
+
+.md-message-close:hover {
+  color: inherit;
+  opacity: 0.7;
+}
+
 /* ===================== BADGE ===================== */
 .md-badge {
   display: inline-block;

@@ -8,10 +8,7 @@
 <div class="md-card">
     <div class="md-card-header">Reporte de Rendimiento de Alumnos</div>
 
-    @if (!string.IsNullOrEmpty(mensaje))
-    {
-        <div class="md-message @(mensaje.Contains("Error") ? "md-message-error" : "md-message-success")">@mensaje</div>
-    }
+    <MensajeFeedback Mensaje="@mensaje" EsError='@mensaje.Contains("Error")' Ocultar="OcultarMensaje" />
 
     <div class="md-form-row">
         @if (Sesion.IsAdmin || Sesion.IsDocente)
@@ -131,5 +128,10 @@
             $"ReporteRendimientoAlumnos_{DateTime.Now:yyyyMMdd_HHmm}.pdf",
             "application/pdf",
             pdfBase64);
+    }
+
+    private void OcultarMensaje()
+    {
+        mensaje = string.Empty;
     }
 }
