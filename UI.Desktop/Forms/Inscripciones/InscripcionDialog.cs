@@ -14,6 +14,7 @@ namespace UI.Desktop.Forms.Inscripciones
         public InscripcionDialog(Persona persona, ModoForm modo)
         {
             InitializeComponent();
+            dgvCursos.AutoGenerateColumns = false;
             _servicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
             _personaActual = persona;
             Modo = modo;
