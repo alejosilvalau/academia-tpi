@@ -66,6 +66,10 @@
             {
                 docentes = ReporteServicio.ObtenerDocentes();
             }
+            else
+            {
+                GenerarReporte();
+            }
         }
         catch (Exception ex)
         {
@@ -110,8 +114,12 @@
     private async Task DescargarPdf()
     {
         if (pdfBase64 == null) return;
+        var persona = Sesion.UsuarioActual?.Persona;
+        string nombreArchivo = persona != null
+            ? $"reporte-rendimiento-docente-{persona.Legajo}-{persona.Nombre}-{persona.Apellido}-{DateTime.Now:yyyyMMdd}"
+            : $"reporte-rendimiento-docente-{DateTime.Now:yyyyMMdd}";
         await JS.InvokeVoidAsync("downloadFile",
-            $"ReporteRendimientoDocente_{DateTime.Now:yyyyMMdd_HHmm}.pdf",
+            $"{nombreArchivo}.pdf",
             "application/pdf",
             pdfBase64);
     }

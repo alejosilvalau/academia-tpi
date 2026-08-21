@@ -49,6 +49,7 @@ namespace UI.Web.Services
                         ID = personaId,
                         Nombre = p.FindFirst("Nombre")?.Value ?? "",
                         Apellido = p.FindFirst("Apellido")?.Value ?? "",
+                        Legajo = int.TryParse(p.FindFirst("Legajo")?.Value, out var leg) ? leg : 0,
                         Tipo = ObtenerTipo(p) ?? Persona.TiposPersonas.Alumno
                     }
                 };

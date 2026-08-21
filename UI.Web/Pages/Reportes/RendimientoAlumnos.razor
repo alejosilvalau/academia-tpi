@@ -72,6 +72,10 @@
             {
                 alumnos = ReporteServicio.ObtenerAlumnosDeDocente(Sesion.UsuarioActual!.PersonaId ?? 0);
             }
+            else
+            {
+                GenerarReporte();
+            }
         }
         catch (Exception ex)
         {
@@ -124,8 +128,12 @@
     private async Task DescargarPdf()
     {
         if (pdfBase64 == null) return;
+        var persona = Sesion.UsuarioActual?.Persona;
+        string nombreArchivo = persona != null
+            ? $"reporte-rendimiento-alumno-{persona.Legajo}-{persona.Nombre}-{persona.Apellido}-{DateTime.Now:yyyyMMdd}"
+            : $"reporte-rendimiento-alumno-{DateTime.Now:yyyyMMdd}";
         await JS.InvokeVoidAsync("downloadFile",
-            $"ReporteRendimientoAlumnos_{DateTime.Now:yyyyMMdd_HHmm}.pdf",
+            $"{nombreArchivo}.pdf",
             "application/pdf",
             pdfBase64);
     }

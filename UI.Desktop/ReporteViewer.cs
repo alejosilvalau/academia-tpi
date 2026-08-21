@@ -32,6 +32,13 @@ namespace UI.Desktop
         {
             InicializarWebView();
             ConfigurarPorRol();
+
+            var tipo = Login.UsuarioActual?.Persona?.Tipo;
+            if (tipo != Persona.TiposPersonas.Administrador
+                && !(tipo == Persona.TiposPersonas.Docente && _modo == ModoReporte.RendimientoAlumnos))
+            {
+                GenerarReporte();
+            }
         }
 
         private void InicializarWebView()
@@ -70,9 +77,11 @@ namespace UI.Desktop
             {
                 lblSelector.Visible = false;
                 cbxSelector.Visible = false;
-                btnGenerar.Location = new System.Drawing.Point(15, 15);
-                btnDescargar.Location = new System.Drawing.Point(160, 15);
+                btnGenerar.Visible = false;
+                btnDescargar.Location = new System.Drawing.Point(15, 15);
             }
+
+            SetBtnDescargarEstado(false);
         }
 
         private void CargarSelectorDocente()
@@ -136,6 +145,11 @@ namespace UI.Desktop
 
         private void btnGenerar_Click(object sender, EventArgs e)
         {
+            GenerarReporte();
+        }
+
+        private void GenerarReporte()
+        {
             try
             {
                 var report = _modo == ModoReporte.RendimientoDocente
@@ -144,7 +158,7 @@ namespace UI.Desktop
 
                 _pdfActual = _servicio.ExportarPdf(report);
                 MostrarPdf(_pdfActual);
-                btnDescargar.Enabled = true;
+                SetBtnDescargarEstado(true);
             }
             catch (Exception ex)
             {
@@ -153,14 +167,22 @@ namespace UI.Desktop
             }
         }
 
-        private void btnDescargar_Click(object sender, EventArgs e)
+        private void btnDescargar_Click(object? sender, EventArgs e)
         {
             if (_pdfActual == null) return;
+
+            var persona = Login.UsuarioActual?.Persona;
+            string prefijo = _modo == ModoReporte.RendimientoDocente
+                ? "reporte-rendimiento-docente"
+                : "reporte-rendimiento-alumno";
+            string nombreArchivo = persona != null
+                ? $"{prefijo}-{persona.Legajo}-{persona.Nombre}-{persona.Apellido}-{DateTime.Now:yyyyMMdd}"
+                : $"{prefijo}-{DateTime.Now:yyyyMMdd}";
 
             using var sfd = new SaveFileDialog
             {
                 Filter = "Archivo PDF|*.pdf",
-                FileName = (_modo == ModoReporte.RendimientoDocente ? "ReporteRendimientoDocente" : "ReporteRendimientoAlumnos") + ".pdf"
+                FileName = nombreArchivo + ".pdf"
             };
 
             if (sfd.ShowDialog() == DialogResult.OK)
@@ -176,6 +198,21 @@ namespace UI.Desktop
                     MessageBox.Show("Error al guardar: " + ex.Message,
                         "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+        }
+
+        private void SetBtnDescargarEstado(bool activo)
+        {
+            btnDescargar.Enabled = activo;
+            if (activo)
+            {
+                btnDescargar.BackColor = Color.FromArgb(96, 125, 139);
+                btnDescargar.ForeColor = Color.White;
+            }
+            else
+            {
+                btnDescargar.BackColor = Color.FromArgb(176, 190, 197);
+                btnDescargar.ForeColor = Color.FromArgb(120, 120, 120);
             }
         }
 
