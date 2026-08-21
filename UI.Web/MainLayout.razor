@@ -1,4 +1,4 @@
-﻿@inherits LayoutComponentBase
+@inherits LayoutComponentBase
 @inject UI.Web.Services.SesionService Sesion
 @inject IJSRuntime JS
 @inject NavigationManager Nav
@@ -97,7 +97,11 @@
 
     <div class="topbar">
         <div class="topbar-title">@GetPageTitle()</div>
-        <div class="topbar-user">@Sesion.UsuarioActual?.Persona?.Nombre @Sesion.UsuarioActual?.Persona?.Apellido</div>
+        <div class="topbar-user">
+            <span class="topbar-legajo">Legajo: @Sesion.UsuarioActual?.Persona?.Legajo</span>
+            @Sesion.UsuarioActual?.Persona?.Nombre @Sesion.UsuarioActual?.Persona?.Apellido
+            <span class="topbar-tipo">@Sesion.TipoUsuario</span>
+        </div>
     </div>
 
     <div class="content">

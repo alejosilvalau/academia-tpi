@@ -179,6 +179,21 @@ a:hover { color: var(--primary-dark); }
 .topbar-user {
   font-size: 13px;
   opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.topbar-legajo {
+  opacity: 0.7;
+  font-size: 12px;
+}
+
+.topbar-tipo {
+  font-size: 11px;
+  background: rgba(255,255,255,0.15);
+  padding: 2px 8px;
+  border-radius: 10px;
 }
 
 /* ===================== CONTENT ===================== */
