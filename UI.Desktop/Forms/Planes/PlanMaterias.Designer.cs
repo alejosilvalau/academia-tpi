@@ -53,10 +53,10 @@ namespace UI.Desktop.Forms.Planes
             this.splitContainer.Location = new System.Drawing.Point(0, 0);
             this.splitContainer.Name = "splitContainer";
             this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            this.splitContainer.Panel1.Controls.Add(this.toolStripMaestro);
             this.splitContainer.Panel1.Controls.Add(this.dgvPlanes);
-            this.splitContainer.Panel2.Controls.Add(this.toolStripDetalle);
+            this.splitContainer.Panel1.Controls.Add(this.toolStripMaestro);
             this.splitContainer.Panel2.Controls.Add(this.dgvMaterias);
+            this.splitContainer.Panel2.Controls.Add(this.toolStripDetalle);
             this.splitContainer.Size = new System.Drawing.Size(700, 500);
             this.splitContainer.SplitterDistance = 230;
             this.splitContainer.SplitterWidth = 6;
@@ -139,7 +139,6 @@ namespace UI.Desktop.Forms.Planes
             this.dgvPlanes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPlanes.EnableHeadersVisualStyles = false;
             this.dgvPlanes.GridColor = MaterialColors.Border;
-            this.dgvPlanes.Location = new System.Drawing.Point(0, 40);
             this.dgvPlanes.MultiSelect = false;
             this.dgvPlanes.Name = "dgvPlanes";
             this.dgvPlanes.ReadOnly = true;
@@ -264,7 +263,6 @@ namespace UI.Desktop.Forms.Planes
             this.dgvMaterias.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMaterias.EnableHeadersVisualStyles = false;
             this.dgvMaterias.GridColor = MaterialColors.Border;
-            this.dgvMaterias.Location = new System.Drawing.Point(0, 40);
             this.dgvMaterias.MultiSelect = false;
             this.dgvMaterias.Name = "dgvMaterias";
             this.dgvMaterias.ReadOnly = true;
