@@ -50,23 +50,6 @@
                 </div>
             }
 
-            <div class="sidebar-section">
-                <div class="sidebar-section-title @(reportesOpen ? "open" : "")" @onclick="ToggleReportes">
-                    Reportes <span class="arrow">&#9654;</span>
-                </div>
-                <div class="sidebar-section-items @(reportesOpen ? "open" : "")">
-                    @if (Sesion.IsAdmin || Sesion.IsDocente)
-                    {
-                        <a href="/reportes/rendimiento-docente" class="sidebar-link @(IsActive("/reportes/rendimiento-docente"))">
-                            <span class="icon">&#9776;</span> Rendimiento Docente
-                        </a>
-                    }
-                    <a href="/reportes/rendimiento-alumnos" class="sidebar-link @(IsActive("/reportes/rendimiento-alumnos"))">
-                        <span class="icon">&#9776;</span> Rendimiento Alumnos
-                    </a>
-                </div>
-            </div>
-
             @if (Sesion.IsAdmin || Sesion.IsAlumno)
             {
                 <div class="sidebar-section">
@@ -86,6 +69,23 @@
                     </a>
                 </div>
             }
+
+            <div class="sidebar-section">
+                <div class="sidebar-section-title @(reportesOpen ? "open" : "")" @onclick="ToggleReportes">
+                    Reportes <span class="arrow">&#9654;</span>
+                </div>
+                <div class="sidebar-section-items @(reportesOpen ? "open" : "")">
+                    @if (Sesion.IsAdmin || Sesion.IsDocente)
+                    {
+                        <a href="/reportes/rendimiento-docente" class="sidebar-link @(IsActive("/reportes/rendimiento-docente"))">
+                            <span class="icon">&#9776;</span> Rendimiento Docente
+                        </a>
+                    }
+                    <a href="/reportes/rendimiento-alumnos" class="sidebar-link @(IsActive("/reportes/rendimiento-alumnos"))">
+                        <span class="icon">&#9776;</span> Rendimiento Alumnos
+                    </a>
+                </div>
+            </div>
         </nav>
 
         <div class="sidebar-footer">
