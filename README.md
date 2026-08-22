@@ -19,7 +19,7 @@
    - [Credenciales de Prueba](#credenciales-de-prueba)
 
 ## Introducción
-**Academia TPI** es un sistema para la administración de actividades académicas: inscripciones, registro de notas, asignación de docentes a cursos, ABMC de entidades, y reportes de rendimiento con gráficos estadísticos.
+**Academia TPI** es un sistema para la administración de actividades académicas: inscripciones, registro de notas, asignación de docentes a cursos, CRUD de entidades, y reportes de rendimiento con gráficos estadísticos.
 
 ### Plataformas
 | | |
@@ -31,12 +31,12 @@
 ### Roles
 | Rol | Permisos |
 |-----|----------|
-| **Administrador** | ABMC de todas las entidades, inscripciones, calificaciones |
+| **Administrador** | CRUD de todas las entidades, inscripciones, calificaciones |
 | **Docente** | Calificar alumnos en cursos asignados, ver reportes propios |
 | **Alumno** | Inscribirse a cursos, ver inscripciones y reportes propios |
 
 ### Funcionalidades Principales
-- **ABMC:** Especialidades, Planes, Materias, Comisiones, Cursos, Personas, Usuarios
+- **CRUD:** Especialidades, Planes, Materias, Comisiones, Cursos, Personas, Usuarios
 - **Dictados:** Asignación de docentes a cursos con cargo (Profesor, Jefe de Cátedra, Auxiliar)
 - **Inscripciones:** Alta/baja con validación de cupo y duplicados
 - **Registro de Notas:** Condición automática (Aprobado ≥6, Regular ≥4, Inscripto <4)
@@ -110,6 +110,7 @@ Arquitectura en capas con 6 proyectos.
 - **Service Layer** con `ServicioBase` abstracto y guards (`RequiereAdmin`, `RequiereAutenticacion`)
 - **Traducción de errores DB** a mensajes amigables (FK, unique constraint)
 - **`IUsuarioContexto`** para abstraer el contexto de usuario entre Desktop y Web
+- **CRUD Maestro/Detalle:** Formulario `PlanMaterias` con grilla superior (Plan) e inferior (Materias) sincronizadas por selección 
 
 ## Tecnologías Utilizadas
 | Categoría | Tecnología | Versión |
@@ -152,7 +153,7 @@ Si tu instancia de SQL Server se llama distinto, cambiá el Server. La base de d
 ### Credenciales de Prueba
 | Usuario   | Contraseña | Tipo          | Acceso                |
 |-----------|------------|---------------|-----------------------|
-| lferreyra | admin123   | Administrador | Todo (ABM + Reportes) |
+| lferreyra | admin123   | Administrador | Todo (CRUD + Reportes) |
 | vrios     | doc2024    | Docente       | Registrar Notas       |
 | clopez    | alu2024    | Alumno        | Inscripciones         |
 
