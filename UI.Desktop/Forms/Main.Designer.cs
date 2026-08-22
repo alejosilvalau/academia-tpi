@@ -285,15 +285,15 @@ namespace UI.Desktop
             // panelSubMenu
             // 
             panelSubMenu.BackColor = Color.FromArgb(48, 63, 71);
-            panelSubMenu.Controls.Add(btnReportesRendimientoDocente);
-            panelSubMenu.Controls.Add(btnReportesRendimientoAlumnos);
             panelSubMenu.Controls.Add(btnABMUsuarios);
-            panelSubMenu.Controls.Add(btnABMPersonas);
-            panelSubMenu.Controls.Add(btnABMEspecialidades);
             panelSubMenu.Controls.Add(btnABMDictados);
+            panelSubMenu.Controls.Add(btnABMPersonas);
             panelSubMenu.Controls.Add(btnABMCursos);
             panelSubMenu.Controls.Add(btnABMComisiones);
             panelSubMenu.Controls.Add(btnABMPlanMaterias);
+            panelSubMenu.Controls.Add(btnABMEspecialidades);
+            panelSubMenu.Controls.Add(btnReportesRendimientoAlumnos);
+            panelSubMenu.Controls.Add(btnReportesRendimientoDocente);
             panelSubMenu.Location = new Point(220, 62);
             panelSubMenu.Margin = new Padding(3, 4, 3, 4);
             panelSubMenu.Name = "panelSubMenu";
