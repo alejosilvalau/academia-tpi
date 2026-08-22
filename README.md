@@ -110,7 +110,7 @@ Arquitectura en capas con 6 proyectos.
 - **Service Layer** con `ServicioBase` abstracto y guards (`RequiereAdmin`, `RequiereAutenticacion`)
 - **Traducción de errores DB** a mensajes amigables (FK, unique constraint)
 - **`IUsuarioContexto`** para abstraer el contexto de usuario entre Desktop y Web
-- **CRUD Maestro/Detalle:** Formulario `PlanMaterias` con grilla superior (Plan) e inferior (Materias) sincronizadas por selección 
+- **CRUD Maestro/Detalle:** Formulario `PlanMaterias` con grilla superior (Plan) e inferior (Materias) sincronizadas por selección (Solo disponible en Desktop)
 
 ## Tecnologías Utilizadas
 | Categoría | Tecnología | Versión |
