@@ -39,7 +39,7 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             tableLayoutPanel1.BackColor = Color.White;
             tableLayoutPanel1.ColumnCount = 2;
-            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 90F));
+            tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 100F));
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
             tableLayoutPanel1.Controls.Add(lblID, 0, 0);
             tableLayoutPanel1.Controls.Add(txtID, 1, 0);
@@ -71,7 +71,7 @@ namespace UI.Desktop.Forms.Usuarios
             lblID.AutoSize = true;
             lblID.Font = new Font("Segoe UI", 10F);
             lblID.ForeColor = Color.FromArgb(117, 117, 117);
-            lblID.Location = new Point(76, 31);
+            lblID.Location = new Point(86, 31);
             lblID.Name = "lblID";
             lblID.Size = new Size(31, 23);
             lblID.TabIndex = 0;
@@ -85,11 +85,11 @@ namespace UI.Desktop.Forms.Usuarios
             txtID.Enabled = false;
             txtID.Font = new Font("Segoe UI", 10F);
             txtID.ForeColor = Color.FromArgb(33, 33, 33);
-            txtID.Location = new Point(113, 28);
+            txtID.Location = new Point(123, 28);
             txtID.Margin = new Padding(3, 4, 3, 4);
             txtID.Name = "txtID";
             txtID.ReadOnly = true;
-            txtID.Size = new Size(314, 30);
+            txtID.Size = new Size(304, 30);
             txtID.TabIndex = 1;
             // 
             // lblUsuario
@@ -98,7 +98,7 @@ namespace UI.Desktop.Forms.Usuarios
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 10F);
             lblUsuario.ForeColor = Color.FromArgb(117, 117, 117);
-            lblUsuario.Location = new Point(35, 87);
+            lblUsuario.Location = new Point(45, 87);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.Size = new Size(72, 23);
             lblUsuario.TabIndex = 2;
@@ -111,10 +111,10 @@ namespace UI.Desktop.Forms.Usuarios
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
             txtUsuario.Font = new Font("Segoe UI", 10F);
             txtUsuario.ForeColor = Color.FromArgb(33, 33, 33);
-            txtUsuario.Location = new Point(113, 84);
+            txtUsuario.Location = new Point(123, 84);
             txtUsuario.Margin = new Padding(3, 4, 3, 4);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(314, 30);
+            txtUsuario.Size = new Size(304, 30);
             txtUsuario.TabIndex = 3;
             // 
             // lblClave
@@ -123,7 +123,7 @@ namespace UI.Desktop.Forms.Usuarios
             lblClave.AutoSize = true;
             lblClave.Font = new Font("Segoe UI", 10F);
             lblClave.ForeColor = Color.FromArgb(117, 117, 117);
-            lblClave.Location = new Point(52, 143);
+            lblClave.Location = new Point(62, 143);
             lblClave.Name = "lblClave";
             lblClave.Size = new Size(55, 23);
             lblClave.TabIndex = 4;
@@ -136,10 +136,10 @@ namespace UI.Desktop.Forms.Usuarios
             txtClave.BorderStyle = BorderStyle.FixedSingle;
             txtClave.Font = new Font("Segoe UI", 10F);
             txtClave.ForeColor = Color.FromArgb(33, 33, 33);
-            txtClave.Location = new Point(113, 140);
+            txtClave.Location = new Point(123, 140);
             txtClave.Margin = new Padding(3, 4, 3, 4);
             txtClave.Name = "txtClave";
-            txtClave.Size = new Size(314, 30);
+            txtClave.Size = new Size(304, 30);
             txtClave.TabIndex = 5;
             // 
             // lblHabilitado
@@ -148,9 +148,9 @@ namespace UI.Desktop.Forms.Usuarios
             lblHabilitado.AutoSize = true;
             lblHabilitado.Font = new Font("Segoe UI", 10F);
             lblHabilitado.ForeColor = Color.FromArgb(117, 117, 117);
-            lblHabilitado.Location = new Point(29, 188);
+            lblHabilitado.Location = new Point(25, 199);
             lblHabilitado.Name = "lblHabilitado";
-            lblHabilitado.Size = new Size(78, 46);
+            lblHabilitado.Size = new Size(92, 23);
             lblHabilitado.TabIndex = 6;
             lblHabilitado.Text = "Habilitado:";
             // 
@@ -159,10 +159,10 @@ namespace UI.Desktop.Forms.Usuarios
             chkHabilitado.Anchor = AnchorStyles.Left;
             chkHabilitado.Font = new Font("Segoe UI", 10F);
             chkHabilitado.ForeColor = Color.FromArgb(33, 33, 33);
-            chkHabilitado.Location = new Point(113, 187);
+            chkHabilitado.Location = new Point(123, 187);
             chkHabilitado.Margin = new Padding(3, 4, 3, 4);
             chkHabilitado.Name = "chkHabilitado";
-            chkHabilitado.Size = new Size(314, 48);
+            chkHabilitado.Size = new Size(304, 48);
             chkHabilitado.TabIndex = 7;
             chkHabilitado.UseVisualStyleBackColor = true;
             // 
@@ -172,7 +172,7 @@ namespace UI.Desktop.Forms.Usuarios
             lblPersona.AutoSize = true;
             lblPersona.Font = new Font("Segoe UI", 10F);
             lblPersona.ForeColor = Color.FromArgb(117, 117, 117);
-            lblPersona.Location = new Point(33, 255);
+            lblPersona.Location = new Point(43, 255);
             lblPersona.Name = "lblPersona";
             lblPersona.Size = new Size(74, 23);
             lblPersona.TabIndex = 8;
@@ -187,10 +187,10 @@ namespace UI.Desktop.Forms.Usuarios
             cbxPersona.Font = new Font("Segoe UI", 10F);
             cbxPersona.ForeColor = Color.FromArgb(33, 33, 33);
             cbxPersona.FormattingEnabled = true;
-            cbxPersona.Location = new Point(113, 251);
+            cbxPersona.Location = new Point(123, 251);
             cbxPersona.Margin = new Padding(3, 4, 3, 4);
             cbxPersona.Name = "cbxPersona";
-            cbxPersona.Size = new Size(314, 31);
+            cbxPersona.Size = new Size(304, 31);
             cbxPersona.TabIndex = 9;
             cbxPersona.ValueMember = "ID";
             // 
