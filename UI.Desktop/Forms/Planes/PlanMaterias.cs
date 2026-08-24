@@ -45,6 +45,11 @@ namespace UI.Desktop.Forms.Planes
         {
             try
             {
+                int? materiaSeleccionadaId = null;
+                if (dgvMaterias.SelectedRows.Count == 1 && dgvMaterias.SelectedRows[0].DataBoundItem != null)
+                    materiaSeleccionadaId = dgvMaterias.SelectedRows[0].DataBoundItem
+                        .GetType().GetProperty("ID")?.GetValue(dgvMaterias.SelectedRows[0].DataBoundItem) as int?;
+
                 if (dgvPlanes.SelectedRows.Count != 1)
                 {
                     dgvMaterias.DataSource = null;
@@ -55,6 +60,9 @@ namespace UI.Desktop.Forms.Planes
                 _planSeleccionadoId = plan.ID;
                 dgvMaterias.DataSource = null;
                 dgvMaterias.DataSource = _materiaServicio.GetByPlan(plan.ID);
+
+                if (materiaSeleccionadaId.HasValue)
+                    SeleccionarFila(dgvMaterias, materiaSeleccionadaId);
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }

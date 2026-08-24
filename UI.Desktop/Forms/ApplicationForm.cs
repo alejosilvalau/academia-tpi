@@ -75,6 +75,7 @@ namespace UI.Desktop
                     rowId == id.Value)
                 {
                     row.Selected = true;
+                    dgv.CurrentCell = row.Cells[0];
                     dgv.FirstDisplayedScrollingRowIndex = row.Index;
                     break;
                 }
