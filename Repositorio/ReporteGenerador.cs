@@ -1,4 +1,5 @@
 using System.Data;
+using Dominio;
 using FastReport;
 using FastReport.Export.PdfSimple;
 
@@ -26,6 +27,13 @@ namespace Repositorio
         public DataTable ObtenerAlumnosDeDocente(int docenteId)
         {
             return _datos.GetAlumnosDeDocente(docenteId);
+        }
+
+        public Persona.TiposPersonas? ObtenerTipoPersona(int personaId)
+        {
+            var persona = _datos.GetPersona(personaId);
+            if (persona == null || persona["Tipo"] == DBNull.Value) return null;
+            return (Persona.TiposPersonas)Convert.ToInt32(persona["Tipo"]);
         }
 
         public Report GenerarReporteRendimientoDocente(int docenteId)

@@ -1,7 +1,7 @@
-using System.Data;
 using Dominio;
 using Repositorio;
 using Servicios.Excepciones;
+using System.Data;
 
 namespace Servicios
 {
@@ -55,6 +55,7 @@ namespace Servicios
             try
             {
                 int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
+                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Docente, "docente");
                 return _generador.ObtenerAlumnosDeDocente(idResuelto);
             }
             catch (ServicioException)
@@ -73,6 +74,7 @@ namespace Servicios
             try
             {
                 int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
+                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Docente, "docente");
                 return _generador.GenerarReporteRendimientoDocente(idResuelto);
             }
             catch (ServicioException)
@@ -91,17 +93,21 @@ namespace Servicios
             try
             {
                 var tipo = TipoUsuarioActual();
+                int idResuelto;
                 if (tipo == Persona.TiposPersonas.Docente)
                 {
                     int docenteId = PersonaIdActual()!.Value;
                     var alumnosDocente = _generador.ObtenerAlumnosDeDocente(docenteId);
                     if (!alumnosDocente.AsEnumerable().Any(r => Convert.ToInt32(r["ID"]) == alumnoId))
                         throw new AccesoNoAutorizadoException("Solo puede generar el reporte de rendimiento de alumnos que dicta.");
-
-                    return _generador.GenerarReporteRendimientoAlumno(alumnoId);
+                    idResuelto = alumnoId;
+                }
+                else
+                {
+                    idResuelto = EsAdmin() ? alumnoId : PersonaIdActual()!.Value;
                 }
 
-                int idResuelto = EsAdmin() ? alumnoId : PersonaIdActual()!.Value;
+                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Alumno, "alumno");
                 return _generador.GenerarReporteRendimientoAlumno(idResuelto);
             }
             catch (ServicioException)
@@ -120,6 +126,7 @@ namespace Servicios
             try
             {
                 int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
+                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Docente, "docente");
                 return _generador.GenerarReporteRendimientoAlumnosDeDocente(idResuelto);
             }
             catch (ServicioException)
@@ -147,6 +154,15 @@ namespace Servicios
             {
                 throw new ServicioException("No se pudo exportar el reporte a PDF. Intente nuevamente.");
             }
+        }
+
+        private void ValidarTipoPersona(int personaId, Persona.TiposPersonas esperado, string nombreRol)
+        {
+            var tipo = _generador.ObtenerTipoPersona(personaId);
+            if (tipo == null)
+                throw new ReglaNegocioException($"El {nombreRol} especificado no existe.");
+            if (tipo != esperado)
+                throw new ReglaNegocioException($"La persona seleccionada no es de tipo {nombreRol}.");
         }
     }
 }
