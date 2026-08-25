@@ -1,9 +1,11 @@
 @page "/reportes/rendimiento-docente"
 @attribute [Authorize(Roles="Administrador,Docente")]
 @inject ReporteServicio ReporteServicio
+@inject AcademiaContext Contexto
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
+@using Microsoft.EntityFrameworkCore
 
 <div class="md-card">
     <div class="md-card-header">Reporte de Rendimiento Docente</div>
@@ -51,6 +53,7 @@
     private string mensaje = string.Empty;
     private string? pdfBase64;
     private bool _cargarPdf;
+    private Persona? personaObjetivo;
 
     protected override void OnInitialized()
     {
@@ -100,6 +103,7 @@
             var report = ReporteServicio.GenerarReporteRendimientoDocente(idObjetivo);
             byte[] pdfBytes = ReporteServicio.ExportarPdf(report);
             pdfBase64 = Convert.ToBase64String(pdfBytes);
+            personaObjetivo = Contexto.Personas.AsNoTracking().FirstOrDefault(p => p.ID == idObjetivo);
 
             _cargarPdf = true;
             StateHasChanged();
@@ -114,7 +118,7 @@
     private async Task DescargarPdf()
     {
         if (pdfBase64 == null) return;
-        var persona = Sesion.UsuarioActual?.Persona;
+        var persona = personaObjetivo;
         string nombreArchivo = persona != null
             ? $"reporte-rendimiento-docente-{persona.Legajo}-{persona.Nombre}-{persona.Apellido}-{DateTime.Now:yyyyMMdd}"
             : $"reporte-rendimiento-docente-{DateTime.Now:yyyyMMdd}";

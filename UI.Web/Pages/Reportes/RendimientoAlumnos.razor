@@ -1,9 +1,11 @@
 @page "/reportes/rendimiento-alumnos"
 @attribute [Authorize(Roles="Administrador,Docente,Alumno")]
 @inject ReporteServicio ReporteServicio
+@inject AcademiaContext Contexto
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
+@using Microsoft.EntityFrameworkCore
 
 <div class="md-card">
     <div class="md-card-header">Reporte de Rendimiento de Alumnos</div>
@@ -51,6 +53,7 @@
     private string mensaje = string.Empty;
     private string? pdfBase64;
     private bool _cargarPdf;
+    private Persona? personaObjetivo;
 
     private bool NecesitaSeleccion => Sesion.IsAdmin || Sesion.IsDocente;
 
@@ -107,11 +110,14 @@
                 }
                 var report = ReporteServicio.GenerarReporteRendimientoAlumno(alumnoId);
                 pdfBytes = ReporteServicio.ExportarPdf(report);
+                personaObjetivo = Contexto.Personas.AsNoTracking().FirstOrDefault(p => p.ID == alumnoId);
             }
             else
             {
-                var report = ReporteServicio.GenerarReporteRendimientoAlumno(Sesion.UsuarioActual!.PersonaId ?? 0);
+                var personaId = Sesion.UsuarioActual!.PersonaId ?? 0;
+                var report = ReporteServicio.GenerarReporteRendimientoAlumno(personaId);
                 pdfBytes = ReporteServicio.ExportarPdf(report);
+                personaObjetivo = Contexto.Personas.AsNoTracking().FirstOrDefault(p => p.ID == personaId);
             }
 
             pdfBase64 = Convert.ToBase64String(pdfBytes);
@@ -128,7 +134,7 @@
     private async Task DescargarPdf()
     {
         if (pdfBase64 == null) return;
-        var persona = Sesion.UsuarioActual?.Persona;
+        var persona = personaObjetivo;
         string nombreArchivo = persona != null
             ? $"reporte-rendimiento-alumno-{persona.Legajo}-{persona.Nombre}-{persona.Apellido}-{DateTime.Now:yyyyMMdd}"
             : $"reporte-rendimiento-alumno-{DateTime.Now:yyyyMMdd}";

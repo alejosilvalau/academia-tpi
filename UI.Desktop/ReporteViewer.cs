@@ -1,6 +1,7 @@
 using Dominio;
 using Repositorio;
 using Servicios;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Web.WebView2.WinForms;
 
 namespace UI.Desktop
@@ -17,6 +18,7 @@ namespace UI.Desktop
         private readonly ModoReporte _modo;
         private byte[]? _pdfActual;
         private string? _tempPath;
+        private Persona? _personaObjetivo;
 
         public ReporteViewer(ModoReporte modo)
         {
@@ -150,11 +152,13 @@ namespace UI.Desktop
         {
             try
             {
+                int idObjetivo = ObtenerIdObjetivo();
                 var report = _modo == ModoReporte.RendimientoDocente
-                    ? _servicio.GenerarReporteRendimientoDocente(ObtenerIdObjetivo())
-                    : _servicio.GenerarReporteRendimientoAlumno(ObtenerIdObjetivo());
+                    ? _servicio.GenerarReporteRendimientoDocente(idObjetivo)
+                    : _servicio.GenerarReporteRendimientoAlumno(idObjetivo);
 
                 _pdfActual = _servicio.ExportarPdf(report);
+                _personaObjetivo = ObtenerPersona(idObjetivo);
                 MostrarPdf(_pdfActual);
                 SetBtnDescargarEstado(true);
             }
@@ -163,6 +167,12 @@ namespace UI.Desktop
                 MessageBox.Show("Error al generar reporte: " + ex.Message,
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private Persona? ObtenerPersona(int id)
+        {
+            using var ctx = new AcademiaContext();
+            return ctx.Personas.AsNoTracking().FirstOrDefault(p => p.ID == id);
         }
 
         private void btnDescargar_Click(object? sender, EventArgs e)
@@ -175,7 +185,7 @@ namespace UI.Desktop
                 if (_pdfActual == null) return;
             }
 
-            var persona = Login.UsuarioActual?.Persona;
+            var persona = _personaObjetivo;
             string prefijo = _modo == ModoReporte.RendimientoDocente
                 ? "reporte-rendimiento-docente"
                 : "reporte-rendimiento-alumno";
