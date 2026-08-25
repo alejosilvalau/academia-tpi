@@ -13,9 +13,10 @@
 4. [Modelo de Clases](#modelo-de-clases)
 5. [Arquitectura](#arquitectura)
    - [Patrones Clave](#patrones-clave)
-6. [Tecnologías Utilizadas](#tecnologías-utilizadas)
+6. [API REST y Swagger](#api-rest-y-swagger)
+7. [Tecnologías Utilizadas](#tecnologías-utilizadas)
    - [Paquetes NuGet](#paquetes-nuget)
-7. [Configuración en Local](#configuración-en-local)
+8. [Configuración en Local](#configuración-en-local)
    - [Credenciales de Prueba](#credenciales-de-prueba)
 
 ## Introducción
@@ -26,6 +27,7 @@
 |---|---|
 | **Escritorio** | WinForms (.NET 8.0) |
 | **Web** | Blazor Server |
+| **API** | Minimal API (.NET 8.0) + Swagger |
 | **Base de datos** | Microsoft SQL Server + Entity Framework Core |
 
 ### Roles
@@ -91,7 +93,7 @@
 ![modelo-de-clases](./capturas/modelo-de-clases.jpg)
 
 ## Arquitectura
-Arquitectura en capas con 6 proyectos.
+Arquitectura en capas con 7 proyectos.
 
 ![diagrama-de-arquitectura](./capturas/diagrama-de-arquitectura.png)
 
@@ -103,6 +105,7 @@ Arquitectura en capas con 6 proyectos.
 | **Utils** | Transversal | Hash de contrasenas, regex, helpers de enums |
 | **UI.Desktop** | Presentación | WinForms con sidebar y navegación por paneles |
 | **UI.Web** | Presentación | Blazor Server con layout, auth por cookies+JWT |
+| **UI.Api** | Presentación | Minimal API REST con Swagger, auth por JWT |
 
 ### Patrones Clave
 
@@ -112,6 +115,37 @@ Arquitectura en capas con 6 proyectos.
 - **`IUsuarioContexto`** para abstraer el contexto de usuario entre Desktop y Web
 - **CRUD Maestro/Detalle:** Formulario `PlanMaterias` con grilla superior (Plan) e inferior (Materias) sincronizadas por selección (Solo disponible en Desktop)
 
+## API REST y Swagger
+El proyecto **UI.Api** (Minimal API .NET 8.0) expone todos los servicios como endpoints REST con documentación interactiva en Swagger. Permite probar el sistema independientemente de las interfaces (WinForms/Blazor).
+
+### Cómo ejecutar
+```
+dotnet run --project UI.Api
+```
+Abrir http://localhost:5006/swagger (o https://localhost:7103/swagger).
+
+### Autenticación
+1. Ejecutar `POST /api/auth/login` con las credenciales de prueba (ej. `lferreyra` / `admin123`).
+2. Copiar el `token` devuelto.
+3. Click en **Authorize** y pegar el token. Los endpoints protegidos muestran candado y envían el token automáticamente.
+4. El endpoint `/api/auth/login` es público (sin candado).
+
+### Endpoints
+| Grupo | Endpoints |
+|-------|-----------|
+| Especialidades | `GET/POST /api/especialidades`, `GET/PUT/DELETE /api/especialidades/{id}` |
+| Planes | CRUD + `GET /api/planes/por-especialidad/{especialidadId}` |
+| Materias | CRUD + `GET /api/materias/por-plan/{planId}` |
+| Comisiones | CRUD + `GET /api/comisiones/por-plan/{planId}` |
+| Cursos | CRUD + `GET /api/cursos/por-materia-comision?materiaId&comisionId` |
+| Personas | CRUD + `GET /api/personas/por-tipo/{tipo}`, `GET /api/personas/por-legajo/{legajo}` |
+| Usuarios | CRUD + `GET /api/usuarios/por-usuario/{nombreUsuario}` |
+| DocenteCurso | CRUD + `GET /api/docentes-cursos/por-docente/{docenteId}`, `por-curso/{cursoId}`, `POST /api/docentes-cursos/asignar` |
+| Inscripciones | CRUD + `GET /api/inscripciones/por-alumno/{alumnoId}`, `por-curso/{cursoId}`, `POST /api/inscripciones/inscribir` |
+| Reportes | `GET /api/reportes/docentes`, `alumnos`, `alumnos-de-docente/{docenteId}` y PDFs de rendimiento (`/rendimiento-.../pdf`) |
+
+Los permisos se validan igual que en las interfaces: los guards de `ServicioBase` devuelven `401` (no autenticado) o `403` (rol sin permisos) según el token.
+
 ## Tecnologías Utilizadas
 | Categoría | Tecnología | Versión |
 |-----------|-----------|---------|
@@ -119,6 +153,7 @@ Arquitectura en capas con 6 proyectos.
 | **IDE** | Visual Studio | 2022 |
 | **Base de datos** | Microsoft SQL Server Express | — |
 | **Web** | Blazor Server | — |
+| **API** | Minimal API + Swagger | — |
 | **Escritorio** | Windows Forms | — |
 
 ### Paquetes NuGet
@@ -135,7 +170,8 @@ Arquitectura en capas con 6 proyectos.
 | Microsoft.Extensions.Configuration | Repositorio | 8.0.0 | Lectura de archivos de configuración |
 | Microsoft.Extensions.Configuration.Json | Repositorio | 8.0.0 | Lectura de appsettings.json |
 | Microsoft.Web.WebView2 | UI.Desktop | 1.0.2903.40 | Visor de PDF integrado en WinForms |
-| Microsoft.AspNetCore.Authentication.JwtBearer | UI.Web | 8.0.30 | Autenticación JWT para Blazor Server |
+| Microsoft.AspNetCore.Authentication.JwtBearer | UI.Web, UI.Api | 8.0.30 | Autenticación JWT (Blazor Server y API REST) |
+| Swashbuckle.AspNetCore | UI.Api | 6.6.2 | Documentación Swagger / OpenAPI |
 
 ## Configuración en Local
 El connection string está en `Repositorio/appsettings.Repositorio.json`:
