@@ -8,6 +8,7 @@ using Servicios;
 using UI.Api.Auth;
 using UI.Api.Endpoints;
 using UI.Api.Middleware;
+using UI.Api.Swagger;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -67,20 +68,7 @@ builder.Services.AddSwaggerGen(options =>
         Description = "Ingrese el token JWT obtenido en POST /api/auth/login."
     });
 
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
-        {
-            new OpenApiSecurityScheme
-            {
-                Reference = new OpenApiReference
-                {
-                    Type = ReferenceType.SecurityScheme,
-                    Id = "Bearer"
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+    options.OperationFilter<QuitarSeguridadParaAnonimos>();
 });
 
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -114,7 +102,7 @@ app.MapPost("/api/auth/login", (LoginRequest req, UsuarioServicio servicio, JwtT
 
     var token = jwt.GenerarToken(usuario);
     return Results.Ok(new { token });
-});
+}).AllowAnonymous();
 
 app.MapApiEndpoints();
 
