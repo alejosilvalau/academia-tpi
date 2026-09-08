@@ -5,6 +5,7 @@
 @inject PersonaServicio PersonaServicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -168,6 +169,7 @@
         {
             if (actual.CursoId == 0) { mostrarMensaje("Seleccione un curso.", true); return; }
             if (actual.DocenteId == 0) { mostrarMensaje("Seleccione un docente.", true); return; }
+            if (int.Parse(cargoSeleccionado) < 0) { mostrarMensaje("Seleccione un cargo.", true); return; }
             actual.Cargo = (DocenteCurso.TiposCargos)int.Parse(cargoSeleccionado);
 
             if (modoForm == ModoForm.Alta)

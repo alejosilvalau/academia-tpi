@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop.Forms.Comisiones
@@ -12,7 +11,7 @@ namespace UI.Desktop.Forms.Comisiones
         public Comisiones()
         {
             InitializeComponent();
-            _servicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Comision();
             dgvComisiones.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

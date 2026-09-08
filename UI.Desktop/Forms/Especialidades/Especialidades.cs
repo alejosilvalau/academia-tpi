@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop.Forms.Especialidades
@@ -12,7 +11,7 @@ namespace UI.Desktop.Forms.Especialidades
         public Especialidades()
         {
             InitializeComponent();
-            _servicio = new EspecialidadServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Especialidad();
             dgvEspecialidades.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

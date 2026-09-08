@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -17,8 +16,8 @@ namespace UI.Desktop.Forms.RegistrarNotas
         {
             InitializeComponent();
             _personaActual = persona;
-            _dcServicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _inscripcionServicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _dcServicio = ServicioFactory.DocenteCurso();
+            _inscripcionServicio = ServicioFactory.Inscripcion();
             dgvAlumnos.AutoGenerateColumns = false;
             cbxCursos.DataSource = _dcServicio.GetByDocente(persona.ID);
             cbxCursos.DisplayMember = "Curso";

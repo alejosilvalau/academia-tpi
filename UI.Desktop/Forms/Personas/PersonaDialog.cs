@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -14,8 +13,8 @@ namespace UI.Desktop.Forms.Personas
         public PersonaDialog() : base()
         {
             InitializeComponent();
-            _servicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Persona();
+            _planServicio = ServicioFactory.Plan();
         }
 
         public PersonaDialog(ModoForm modo) : this()
@@ -85,9 +84,29 @@ namespace UI.Desktop.Forms.Personas
             else _servicio.Update(_persona);
         }
 
+        public override bool Validar()
+        {
+            Validaciones.AsegurarNombreOApellido(txtNombre.Text, "Nombre");
+            Validaciones.AsegurarNombreOApellido(txtApellido.Text, "Apellido");
+            Validaciones.AsegurarEnteroParseable(txtLegajo.Text, "Legajo");
+            Validaciones.AsegurarPositivo(int.Parse(txtLegajo.Text), "Legajo");
+            Validaciones.AsegurarEmail(txtEMail.Text);
+            Validaciones.AsegurarTelefono(txtTelefono.Text);
+            if (cbxTipo.SelectedItem == null)
+                throw new ArgumentException("El campo Tipo es obligatorio.");
+            if (cbxPlan.SelectedValue == null)
+                throw new ArgumentException("El campo Plan es obligatorio.");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

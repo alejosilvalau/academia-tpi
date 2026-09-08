@@ -2,6 +2,7 @@
 @inject UI.Web.Services.SesionService Sesion
 @inject IJSRuntime JS
 @inject NavigationManager Nav
+@using Utils
 
 @if (!Sesion.IsLoggedIn)
 {
@@ -63,6 +64,13 @@
 
         try
         {
+            if (string.IsNullOrWhiteSpace(nombreUsuario) || string.IsNullOrWhiteSpace(clave))
+            {
+                mensaje = "Complete todos los campos para continuar.";
+                cargando = false;
+                return;
+            }
+
             var ok = await JS.InvokeAsync<bool>("academiaLogin", "/api/auth/login", nombreUsuario, clave);
             if (!ok)
             {

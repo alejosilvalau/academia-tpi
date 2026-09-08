@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop.Forms.Cursos
@@ -12,7 +11,7 @@ namespace UI.Desktop.Forms.Cursos
         public Cursos()
         {
             InitializeComponent();
-            _servicio = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Curso();
             dgvCursos.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

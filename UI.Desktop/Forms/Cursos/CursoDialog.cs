@@ -1,6 +1,6 @@
 using Dominio;
-using Repositorio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Cursos
 {
@@ -14,9 +14,9 @@ namespace UI.Desktop.Forms.Cursos
         public CursoDialog() : base()
         {
             InitializeComponent();
-            _servicio = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _materiaServicio = new MateriaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _comisionServicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Curso();
+            _materiaServicio = ServicioFactory.Materia();
+            _comisionServicio = ServicioFactory.Comision();
         }
 
         public CursoDialog(ModoForm modo) : this()
@@ -76,9 +76,27 @@ namespace UI.Desktop.Forms.Cursos
             else _servicio.Update(_curso);
         }
 
+        public override bool Validar()
+        {
+            Validaciones.AsegurarEnteroParseable(txtAnioCalendario.Text, "Año Calendario");
+            Validaciones.AsegurarPositivo(int.Parse(txtAnioCalendario.Text), "Año Calendario");
+            Validaciones.AsegurarEnteroParseable(txtCupo.Text, "Cupo");
+            Validaciones.AsegurarPositivo(int.Parse(txtCupo.Text), "Cupo");
+            if (cbxMateria.SelectedValue == null)
+                throw new ArgumentException("El campo Materia es obligatorio.");
+            if (cbxComision.SelectedValue == null)
+                throw new ArgumentException("El campo Comisión es obligatorio.");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

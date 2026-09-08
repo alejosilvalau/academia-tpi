@@ -27,6 +27,12 @@ namespace Servicios
             return _repositorio.GetOne(id);
         }
 
+        public Persona? GetOneBasico(int id)
+        {
+            RequiereAutenticacion();
+            return _repositorio.GetOne(id);
+        }
+
         public List<Persona> GetByTipo(Persona.TiposPersonas tipo)
         {
             RequiereAdmin();

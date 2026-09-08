@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -14,8 +13,8 @@ namespace UI.Desktop.Forms.Usuarios
         public UsuarioDialog() : base()
         {
             InitializeComponent();
-            _servicio = new UsuarioServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Usuario();
+            _personaServicio = ServicioFactory.Persona();
         }
 
         public UsuarioDialog(ModoForm modo) : this()
@@ -71,9 +70,24 @@ namespace UI.Desktop.Forms.Usuarios
             else _servicio.Update(_usuario);
         }
 
+        public override bool Validar()
+        {
+            Validaciones.AsegurarLongitudUsuario(txtUsuario.Text);
+            if (Modo == ModoForm.Alta)
+                Validaciones.AsegurarClave(txtClave.Text);
+            if (cbxPersona.SelectedValue == null)
+                throw new ArgumentException("El campo Persona es obligatorio.");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

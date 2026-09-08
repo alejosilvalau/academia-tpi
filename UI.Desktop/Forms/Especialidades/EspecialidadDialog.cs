@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -25,7 +24,7 @@ namespace UI.Desktop.Forms.Especialidades
         public EspecialidadDialog() : base()
         {
             InitializeComponent();
-            _servicio = new EspecialidadServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Especialidad();
         }
 
         private void SetModo()
@@ -66,9 +65,20 @@ namespace UI.Desktop.Forms.Especialidades
                 _servicio.Update(_especialidad);
         }
 
+        public override bool Validar()
+        {
+            Validaciones.AsegurarDescripcion(txtDescripcion.Text, "Descripción");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop.Forms.Dictados
@@ -12,7 +11,7 @@ namespace UI.Desktop.Forms.Dictados
         public Dictados()
         {
             InitializeComponent();
-            _servicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.DocenteCurso();
             dgvDocentes.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -15,9 +14,9 @@ namespace UI.Desktop.Forms.Dictados
         public DictadoDialog() : base()
         {
             InitializeComponent();
-            _servicio = new DocenteCursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _cursoServicio = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.DocenteCurso();
+            _cursoServicio = ServicioFactory.Curso();
+            _personaServicio = ServicioFactory.Persona();
         }
 
         public DictadoDialog(ModoForm modo) : this()
@@ -75,9 +74,25 @@ namespace UI.Desktop.Forms.Dictados
             else _servicio.Update(_dictado);
         }
 
+        public override bool Validar()
+        {
+            if (cbxCursos.SelectedValue == null)
+                throw new ArgumentException("El campo Curso es obligatorio.");
+            if (cbxDocentes.SelectedValue == null)
+                throw new ArgumentException("El campo Docente es obligatorio.");
+            if (cbxTiposCargos.SelectedValue == null)
+                throw new ArgumentException("El campo Cargo es obligatorio.");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

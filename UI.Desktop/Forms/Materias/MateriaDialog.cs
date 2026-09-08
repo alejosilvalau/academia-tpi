@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -14,8 +13,8 @@ namespace UI.Desktop.Forms.Materias
         public MateriaDialog() : base()
         {
             InitializeComponent();
-            _servicio = new MateriaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Materia();
+            _planServicio = ServicioFactory.Plan();
         }
 
         public MateriaDialog(ModoForm modo) : this()
@@ -82,9 +81,26 @@ namespace UI.Desktop.Forms.Materias
             else _servicio.Update(_materia);
         }
 
+        public override bool Validar()
+        {
+            Validaciones.AsegurarDescripcion(txtDescripcion.Text, "Descripción");
+            Validaciones.AsegurarEnteroParseable(txtHsSemanales.Text, "Horas Semanales");
+            Validaciones.AsegurarPositivo(int.Parse(txtHsSemanales.Text), "Horas Semanales");
+            Validaciones.AsegurarEnteroParseable(txtHsTotales.Text, "Horas Totales");
+            Validaciones.AsegurarPositivo(int.Parse(txtHsTotales.Text), "Horas Totales");
+            if (cbxPlan.SelectedValue == null)
+                throw new ArgumentException("El campo Plan es obligatorio.");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

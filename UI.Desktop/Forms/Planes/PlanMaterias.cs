@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using UI.Desktop.Forms.Materias;
 
@@ -16,8 +15,8 @@ namespace UI.Desktop.Forms.Planes
         public PlanMaterias()
         {
             InitializeComponent();
-            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _materiaServicio = new MateriaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _planServicio = ServicioFactory.Plan();
+            _materiaServicio = ServicioFactory.Materia();
             dgvPlanes.AutoGenerateColumns = false;
             dgvMaterias.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStripMaestro, MaterialColors.Primary);

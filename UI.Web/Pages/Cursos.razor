@@ -5,6 +5,7 @@
 @inject ComisionServicio ComisionServicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -168,6 +169,8 @@
     {
         try
         {
+            Validaciones.AsegurarPositivo(actual.AnioCalendario, "Anio Calendario");
+            Validaciones.AsegurarPositivo(actual.Cupo, "Cupo");
             if (actual.MateriaId == 0) { mostrarMensaje("Seleccione una materia.", true); return; }
             if (actual.ComisionId == 0) { mostrarMensaje("Seleccione una comision.", true); return; }
             if (modoForm == ModoForm.Alta)

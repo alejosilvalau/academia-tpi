@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop
@@ -13,7 +12,7 @@ namespace UI.Desktop
         public Login()
         {
             InitializeComponent();
-            _usuarioServicio = new UsuarioServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _usuarioServicio = ServicioFactory.Usuario();
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)

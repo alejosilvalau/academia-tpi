@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -15,7 +14,7 @@ namespace UI.Desktop.Forms.Inscripciones
         {
             InitializeComponent();
             dgvCursos.AutoGenerateColumns = false;
-            _servicio = new InscripcionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Inscripcion();
             _personaActual = persona;
             Modo = modo;
             txtAlumno.Text = persona.ToString();
@@ -28,7 +27,7 @@ namespace UI.Desktop.Forms.Inscripciones
             {
                 case ModoForm.Alta:
                     btnAceptar.Text = "Inscribir";
-                    dgvCursos.DataSource = new CursoServicio(new AcademiaContext(), new UsuarioContextoDesktop()).GetAll();
+                    dgvCursos.DataSource = ServicioFactory.Curso().GetAll();
                     break;
                 case ModoForm.Baja:
                     btnAceptar.Text = "Eliminar";

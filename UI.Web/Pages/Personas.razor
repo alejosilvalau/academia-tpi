@@ -4,6 +4,7 @@
 @inject PlanServicio PlanServicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -254,6 +255,12 @@
     {
         try
         {
+            Validaciones.AsegurarNombreOApellido(actual.Nombre, "Nombre");
+            Validaciones.AsegurarNombreOApellido(actual.Apellido, "Apellido");
+            Validaciones.AsegurarPositivo(actual.Legajo, "Legajo");
+            Validaciones.AsegurarEmail(actual.EMail);
+            Validaciones.AsegurarTelefono(actual.Telefono);
+
             actual.Tipo = (Persona.TiposPersonas)int.Parse(tipoSeleccionado);
             actual.FechaNacimiento = fechaNac;
             if (int.TryParse(planIdSeleccionado, out int pid))

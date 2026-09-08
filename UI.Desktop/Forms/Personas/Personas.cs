@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop.Forms.Personas
@@ -13,7 +12,7 @@ namespace UI.Desktop.Forms.Personas
         public Personas()
         {
             InitializeComponent();
-            _servicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Persona();
             dgvPersonas.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

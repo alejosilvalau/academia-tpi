@@ -4,6 +4,7 @@
 @inject PersonaServicio PersonaServicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -170,6 +171,10 @@
     {
         try
         {
+            Validaciones.AsegurarLongitudUsuario(actual.NombreUsuario);
+            if (modoForm == ModoForm.Alta)
+                Validaciones.AsegurarClave(actual.Clave);
+
             if (int.TryParse(personaIdSeleccionada, out int pid))
                 actual.PersonaId = pid;
             else

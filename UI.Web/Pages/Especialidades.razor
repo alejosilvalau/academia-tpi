@@ -3,6 +3,7 @@
 @inject EspecialidadServicio Servicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -121,6 +122,8 @@
     {
         try
         {
+            Validaciones.AsegurarDescripcion(actual.Descripcion, "Descripcion");
+
             if (modoForm == ModoForm.Alta)
                 Servicio.Save(actual);
             else

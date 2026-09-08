@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 using Utils;
 
@@ -26,8 +25,8 @@ namespace UI.Desktop.Forms.Planes
         public PlanDialog() : base()
         {
             InitializeComponent();
-            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _especialidadServicio = new EspecialidadServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _planServicio = ServicioFactory.Plan();
+            _especialidadServicio = ServicioFactory.Especialidad();
             CargarEspecialidades();
         }
 
@@ -82,9 +81,22 @@ namespace UI.Desktop.Forms.Planes
                 _planServicio.Update(_plan);
         }
 
+        public override bool Validar()
+        {
+            Validaciones.AsegurarDescripcion(txtDescripcion.Text, "Descripción");
+            if (cbxEspecialidad.SelectedValue == null)
+                throw new ArgumentException("El campo Especialidad es obligatorio.");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

@@ -4,6 +4,7 @@
 @inject PlanServicio PlanServicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -147,6 +148,8 @@
     {
         try
         {
+            Validaciones.AsegurarDescripcion(actual.Descripcion, "Descripcion");
+            Validaciones.AsegurarPositivo(actual.AnioEspecialidad, "Anio Especialidad");
             if (actual.PlanId == 0) { mostrarMensaje("Seleccione un plan.", true); return; }
             if (modoForm == ModoForm.Alta)
                 ComisionServicio.Save(actual);

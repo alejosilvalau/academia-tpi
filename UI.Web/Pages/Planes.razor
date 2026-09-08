@@ -4,6 +4,7 @@
 @inject EspecialidadServicio EspecialidadServicio
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -141,6 +142,7 @@
     {
         try
         {
+            Validaciones.AsegurarDescripcion(actual.Descripcion, "Descripcion");
             if (actual.EspecialidadId == 0) { mostrarMensaje("Seleccione una especialidad.", true); return; }
             if (modoForm == ModoForm.Alta)
                 PlanServicio.Save(actual);

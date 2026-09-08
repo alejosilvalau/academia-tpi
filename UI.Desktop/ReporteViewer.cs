@@ -1,7 +1,5 @@
 using Dominio;
-using Repositorio;
 using Servicios;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Web.WebView2.WinForms;
 
 namespace UI.Desktop
@@ -15,6 +13,7 @@ namespace UI.Desktop
     public partial class ReporteViewer : ApplicationForm
     {
         private readonly ReporteServicio _servicio;
+        private readonly PersonaServicio _personaServicio;
         private readonly ModoReporte _modo;
         private byte[]? _pdfActual;
         private string? _tempPath;
@@ -23,7 +22,8 @@ namespace UI.Desktop
         public ReporteViewer(ModoReporte modo)
         {
             InitializeComponent();
-            _servicio = new ReporteServicio(new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Reporte();
+            _personaServicio = ServicioFactory.Persona();
             _modo = modo;
             Text = modo == ModoReporte.RendimientoDocente
                 ? "Reporte de Rendimiento Docente"
@@ -171,8 +171,7 @@ namespace UI.Desktop
 
         private Persona? ObtenerPersona(int id)
         {
-            using var ctx = new AcademiaContext();
-            return ctx.Personas.AsNoTracking().FirstOrDefault(p => p.ID == id);
+            return _personaServicio.GetOneBasico(id);
         }
 
         private void btnDescargar_Click(object? sender, EventArgs e)

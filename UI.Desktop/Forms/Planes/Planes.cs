@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop.Forms.Planes
@@ -12,7 +11,7 @@ namespace UI.Desktop.Forms.Planes
         public Planes()
         {
             InitializeComponent();
-            _servicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Plan();
             dgvPlanes.AutoGenerateColumns = false;
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

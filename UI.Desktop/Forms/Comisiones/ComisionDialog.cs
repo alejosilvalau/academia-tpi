@@ -1,6 +1,6 @@
 using Dominio;
-using Repositorio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Comisiones
 {
@@ -13,8 +13,8 @@ namespace UI.Desktop.Forms.Comisiones
         public ComisionDialog() : base()
         {
             InitializeComponent();
-            _servicio = new ComisionServicio(new AcademiaContext(), new UsuarioContextoDesktop());
-            _planServicio = new PlanServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _servicio = ServicioFactory.Comision();
+            _planServicio = ServicioFactory.Plan();
         }
 
         public ComisionDialog(ModoForm modo) : this()
@@ -69,9 +69,24 @@ namespace UI.Desktop.Forms.Comisiones
             else _servicio.Update(_comision);
         }
 
+        public override bool Validar()
+        {
+            Validaciones.AsegurarDescripcion(txtDescripcion.Text, "Descripción");
+            Validaciones.AsegurarEnteroParseable(txtAnioEspecialidad.Text, "Año Especialidad");
+            Validaciones.AsegurarPositivo(int.Parse(txtAnioEspecialidad.Text), "Año Especialidad");
+            if (cbxPlan.SelectedValue == null)
+                throw new ArgumentException("El campo Plan es obligatorio.");
+            return true;
+        }
+
         private void btnAceptar_Click(object sender, EventArgs e)
         {
-            try { GuardarCambios(); Close(); }
+            try
+            {
+                if (!Validar()) return;
+                GuardarCambios();
+                Close();
+            }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

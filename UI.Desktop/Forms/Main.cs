@@ -1,5 +1,4 @@
 using Dominio;
-using Repositorio;
 using Servicios;
 
 namespace UI.Desktop
@@ -13,7 +12,7 @@ namespace UI.Desktop
         public Main()
         {
             InitializeComponent();
-            _personaServicio = new PersonaServicio(new AcademiaContext(), new UsuarioContextoDesktop());
+            _personaServicio = ServicioFactory.Persona();
             _autoRefresh = new System.Windows.Forms.Timer { Interval = 5000 };
             _autoRefresh.Tick += AutoRefresh_Tick;
             _autoRefresh.Start();
