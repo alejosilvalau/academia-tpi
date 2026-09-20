@@ -1,20 +1,18 @@
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Web;
-using Servicios;
 using Repositorio;
+using Servicios;
+using System.Security.Claims;
+using UI.Web;
 using UI.Web.Auth;
 using UI.Web.Services;
-using UI.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContextPool<AcademiaContext>(options => { });
+builder.Services.AddDbContext<AcademiaContext>(options => { });
 builder.Services.AddScoped<IUsuarioContexto, UsuarioContextoWeb>();
 builder.Services.AddScoped<EspecialidadServicio>();
 builder.Services.AddScoped<PlanServicio>();

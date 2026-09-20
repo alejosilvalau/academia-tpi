@@ -1,10 +1,10 @@
-using System.Text;
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repositorio;
 using Servicios;
+using System.Text;
+using System.Text.Json.Serialization;
 using UI.Api.Auth;
 using UI.Api.Endpoints;
 using UI.Api.Middleware;
@@ -13,7 +13,7 @@ using UI.Api.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContextPool<AcademiaContext>(options => { });
+builder.Services.AddDbContext<AcademiaContext>(options => { });
 builder.Services.AddScoped<IUsuarioContexto, UsuarioContextoApi>();
 builder.Services.AddScoped<EspecialidadServicio>();
 builder.Services.AddScoped<PlanServicio>();

@@ -6,6 +6,8 @@ namespace Repositorio
 {
     public class AcademiaContext : DbContext
     {
+        public AcademiaContext(DbContextOptions<AcademiaContext> options) : base(options) { }
+
         public DbSet<Especialidad> Especialidades { get; set; }
         public DbSet<Plan> Planes { get; set; }
         public DbSet<Materia> Materias { get; set; }
