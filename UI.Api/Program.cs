@@ -13,7 +13,7 @@ using UI.Api.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<AcademiaContext>();
+builder.Services.AddDbContextPool<AcademiaContext>(options => { });
 builder.Services.AddScoped<IUsuarioContexto, UsuarioContextoApi>();
 builder.Services.AddScoped<EspecialidadServicio>();
 builder.Services.AddScoped<PlanServicio>();

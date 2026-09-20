@@ -1,12 +1,17 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Servicios.Excepciones;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 using Repositorio;
+using Servicios;
+using Servicios.Excepciones;
 
 namespace UI.Desktop;
 
 static class Program
 {
+    public static IServiceProvider? ServiceProvider { get; private set; }
+
     [STAThread]
     static void Main()
     {
@@ -19,10 +24,17 @@ static class Program
             if (e.ExceptionObject is Exception ex) MostrarFatal(ex);
         };
 
-        using (var context = new AcademiaContext())
+        var services = new ServiceCollection();
+        services.AddDbContextFactory<AcademiaContext>(options => { });
+        ServiceProvider = services.BuildServiceProvider();
+
+        using (var scope = ServiceProvider.CreateScope())
         {
+            var context = scope.ServiceProvider.GetRequiredService<AcademiaContext>();
             context.Database.EnsureCreated();
         }
+
+        ServicioFactory.Initialize(ServiceProvider);
 
         var icon = GenerateIcon();
 
