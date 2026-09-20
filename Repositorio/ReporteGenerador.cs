@@ -9,9 +9,9 @@ namespace Repositorio
     {
         private readonly ReportesDatos _datos;
 
-        public ReporteGenerador()
+        public ReporteGenerador(string connectionString)
         {
-            _datos = new ReportesDatos();
+            _datos = new ReportesDatos(connectionString);
         }
 
         public DataTable ObtenerDocentes()

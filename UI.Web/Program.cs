@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
 using Repositorio;
 using Servicios;
 using System.Security.Claims;
@@ -12,7 +13,8 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContext<AcademiaContext>(options => { });
+builder.Services.AddDbContextPool<AcademiaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUsuarioContexto, UsuarioContextoWeb>();
 builder.Services.AddScoped<EspecialidadServicio>();
 builder.Services.AddScoped<PlanServicio>();

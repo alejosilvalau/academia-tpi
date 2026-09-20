@@ -1,4 +1,5 @@
 using Dominio;
+using Microsoft.Extensions.Configuration;
 using Repositorio;
 using Servicios.Excepciones;
 using System.Data;
@@ -9,10 +10,10 @@ namespace Servicios
     {
         private readonly ReporteGenerador _generador;
 
-        public ReporteServicio(IUsuarioContexto? usuarioContexto)
+        public ReporteServicio(IUsuarioContexto? usuarioContexto, IConfiguration configuration)
             : base(usuarioContexto)
         {
-            _generador = new ReporteGenerador();
+            _generador = new ReporteGenerador(configuration.GetConnectionString("DefaultConnection")!);
         }
 
         public DataTable ObtenerDocentes()

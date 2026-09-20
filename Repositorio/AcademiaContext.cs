@@ -1,6 +1,5 @@
 using Dominio;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace Repositorio
 {
@@ -17,20 +16,6 @@ namespace Repositorio
         public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<DocenteCurso> DocenteCursos { get; set; }
         public DbSet<AlumnoInscripcion> AlumnoInscripciones { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            if (!optionsBuilder.IsConfigured)
-            {
-                var configuration = new ConfigurationBuilder()
-                    .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                    .AddJsonFile("appsettings.Repositorio.json", optional: false)
-                    .Build();
-
-                var connectionString = configuration.GetConnectionString("DefaultConnection");
-                optionsBuilder.UseSqlServer(connectionString);
-            }
-        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

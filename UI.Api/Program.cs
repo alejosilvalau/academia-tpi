@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repositorio;
@@ -13,7 +14,8 @@ using UI.Api.Swagger;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddDbContext<AcademiaContext>(options => { });
+builder.Services.AddDbContextPool<AcademiaContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IUsuarioContexto, UsuarioContextoApi>();
 builder.Services.AddScoped<EspecialidadServicio>();
 builder.Services.AddScoped<PlanServicio>();

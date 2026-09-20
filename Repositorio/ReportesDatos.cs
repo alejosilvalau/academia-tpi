@@ -1,22 +1,11 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
 
 namespace Repositorio
 {
     public class ReportesDatos
     {
         private readonly string _connectionString;
-
-        public ReportesDatos()
-        {
-            var configuration = new ConfigurationBuilder()
-                .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
-                .AddJsonFile("appsettings.Repositorio.json", optional: false)
-                .Build();
-
-            _connectionString = configuration.GetConnectionString("DefaultConnection")!;
-        }
 
         public ReportesDatos(string connectionString)
         {

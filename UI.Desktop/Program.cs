@@ -1,6 +1,7 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Repositorio;
 using Servicios;
@@ -25,7 +26,15 @@ static class Program
         };
 
         var services = new ServiceCollection();
-        services.AddDbContextFactory<AcademiaContext>(options => { });
+
+        var configuration = new ConfigurationBuilder()
+            .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
+            .AddJsonFile("appsettings.json", optional: false)
+            .Build();
+
+        services.AddSingleton<IConfiguration>(configuration);
+        services.AddDbContextFactory<AcademiaContext>(options =>
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
         ServiceProvider = services.BuildServiceProvider();
 
         using (var scope = ServiceProvider.CreateScope())
