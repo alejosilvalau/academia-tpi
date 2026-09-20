@@ -60,6 +60,8 @@ namespace Repositorio
                 entity.HasOne(c => c.Comision).WithMany()
                     .HasForeignKey(c => c.ComisionId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(c => new { c.MateriaId, c.ComisionId, c.AnioCalendario }).IsUnique();
             });
 
             modelBuilder.Entity<Persona>(entity =>
@@ -71,6 +73,8 @@ namespace Repositorio
                 entity.HasOne(p => p.Plan).WithMany()
                     .HasForeignKey(p => p.PlanId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(p => p.Legajo).IsUnique();
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -84,6 +88,8 @@ namespace Repositorio
                 entity.HasOne(u => u.Persona).WithMany()
                     .HasForeignKey(u => u.PersonaId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(u => u.NombreUsuario).IsUnique();
             });
 
             modelBuilder.Entity<DocenteCurso>(entity =>
@@ -98,6 +104,8 @@ namespace Repositorio
                 entity.HasOne(dc => dc.Docente).WithMany()
                     .HasForeignKey(dc => dc.DocenteId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(dc => new { dc.DocenteId, dc.CursoId, dc.Cargo }).IsUnique();
             });
 
             modelBuilder.Entity<AlumnoInscripcion>(entity =>
@@ -113,6 +121,8 @@ namespace Repositorio
                 entity.HasOne(ai => ai.Curso).WithMany()
                     .HasForeignKey(ai => ai.CursoId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(ai => new { ai.AlumnoId, ai.CursoId }).IsUnique();
             });
 
             SeedData(modelBuilder);
@@ -238,28 +248,14 @@ namespace Repositorio
                 new AlumnoInscripcion { ID = 13, AlumnoId = 12, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
                 new AlumnoInscripcion { ID = 14, AlumnoId = 12, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
                 new AlumnoInscripcion { ID = 15, AlumnoId = 13, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
-                new AlumnoInscripcion { ID = 16, AlumnoId = 5, CursoId = 2, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 8 },
-                new AlumnoInscripcion { ID = 17, AlumnoId = 5, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
-                new AlumnoInscripcion { ID = 18, AlumnoId = 5, CursoId = 4, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 4 },
-                new AlumnoInscripcion { ID = 19, AlumnoId = 5, CursoId = 5, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
-                new AlumnoInscripcion { ID = 20, AlumnoId = 5, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 3 },
-                new AlumnoInscripcion { ID = 21, AlumnoId = 5, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
-                new AlumnoInscripcion { ID = 22, AlumnoId = 5, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
-                new AlumnoInscripcion { ID = 23, AlumnoId = 5, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 10 },
-                new AlumnoInscripcion { ID = 24, AlumnoId = 5, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 2 },
-                new AlumnoInscripcion { ID = 25, AlumnoId = 5, CursoId = 1, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
-                new AlumnoInscripcion { ID = 26, AlumnoId = 5, CursoId = 2, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 1 },
-                new AlumnoInscripcion { ID = 27, AlumnoId = 5, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 8 },
-                new AlumnoInscripcion { ID = 28, AlumnoId = 5, CursoId = 4, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
-                new AlumnoInscripcion { ID = 29, AlumnoId = 5, CursoId = 5, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 3 },
-                new AlumnoInscripcion { ID = 30, AlumnoId = 5, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
-                new AlumnoInscripcion { ID = 31, AlumnoId = 5, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 4 },
-                new AlumnoInscripcion { ID = 32, AlumnoId = 5, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 10 },
-                new AlumnoInscripcion { ID = 33, AlumnoId = 5, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
-                new AlumnoInscripcion { ID = 34, AlumnoId = 5, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 8 },
-                new AlumnoInscripcion { ID = 35, AlumnoId = 5, CursoId = 1, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 2 },
-                new AlumnoInscripcion { ID = 36, AlumnoId = 5, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
-                new AlumnoInscripcion { ID = 37, AlumnoId = 5, CursoId = 5, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 }
+                new AlumnoInscripcion { ID = 16, AlumnoId = 5, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
+                new AlumnoInscripcion { ID = 17, AlumnoId = 5, CursoId = 4, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 4 },
+                new AlumnoInscripcion { ID = 18, AlumnoId = 5, CursoId = 5, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
+                new AlumnoInscripcion { ID = 19, AlumnoId = 5, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 3 },
+                new AlumnoInscripcion { ID = 20, AlumnoId = 5, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
+                new AlumnoInscripcion { ID = 21, AlumnoId = 5, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
+                new AlumnoInscripcion { ID = 22, AlumnoId = 5, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 10 },
+                new AlumnoInscripcion { ID = 23, AlumnoId = 5, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 2 }
             );
         }
     }

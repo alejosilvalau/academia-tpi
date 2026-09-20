@@ -1,5 +1,7 @@
+using System.Data;
 using Dominio;
 using Microsoft.EntityFrameworkCore;
+using Repositorio;
 using Servicios.Excepciones;
 
 namespace Servicios
@@ -93,6 +95,31 @@ namespace Servicios
             }
             catch (Exception)
             {
+                throw new ServicioException(mensajeError);
+            }
+        }
+        protected static void EjecutarPersistenciaTransaccional(
+            AcademiaContext context, Action accion, string mensajeError)
+        {
+            using var transaction = context.Database.BeginTransaction(IsolationLevel.Serializable);
+            try
+            {
+                accion();
+                transaction.Commit();
+            }
+            catch (DbUpdateException ex)
+            {
+                transaction.Rollback();
+                throw ErrorDbTraductor.Traducir(ex);
+            }
+            catch (ServicioException)
+            {
+                transaction.Rollback();
+                throw;
+            }
+            catch (Exception)
+            {
+                transaction.Rollback();
                 throw new ServicioException(mensajeError);
             }
         }

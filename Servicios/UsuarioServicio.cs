@@ -8,10 +8,12 @@ namespace Servicios
     public class UsuarioServicio : ServicioBase
     {
         private UsuarioRepositorio _repositorio;
+        private AcademiaContext _context;
 
         public UsuarioServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
             : base(usuarioContexto)
         {
+            _context = context;
             _repositorio = new UsuarioRepositorio(context);
         }
 
@@ -64,10 +66,10 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(usuario);
             ValidarFormato(usuario);
-            ValidarReglasNegocio(usuario, esAlta: false);
             ReHashearSiCambioClave(usuario);
-            EjecutarPersistencia(() =>
+            EjecutarPersistenciaTransaccional(_context, () =>
             {
+                ValidarReglasNegocio(usuario, esAlta: false);
                 _repositorio.Update(usuario);
                 _repositorio.Save();
             }, "No se pudo actualizar el usuario. Intente nuevamente.");
@@ -76,9 +78,9 @@ namespace Servicios
         public void Delete(Usuario usuario)
         {
             RequiereAdmin();
-            ValidarEliminacion(usuario);
-            EjecutarPersistencia(() =>
+            EjecutarPersistenciaTransaccional(_context, () =>
             {
+                ValidarEliminacion(usuario);
                 _repositorio.Delete(usuario);
                 _repositorio.Save();
             }, "No se pudo eliminar el usuario. Intente nuevamente.");

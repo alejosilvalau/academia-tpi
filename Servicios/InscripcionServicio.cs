@@ -11,10 +11,12 @@ namespace Servicios
         private CursoRepositorio _repositorioCurso;
         private PersonaRepositorio _repositorioPersona;
         private DocenteCursoRepositorio _repositorioDocenteCurso;
+        private AcademiaContext _context;
 
         public InscripcionServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
             : base(usuarioContexto)
         {
+            _context = context;
             _repositorioInscripcion = new AlumnoInscripcionRepositorio(context);
             _repositorioCurso = new CursoRepositorio(context);
             _repositorioPersona = new PersonaRepositorio(context);
@@ -55,17 +57,18 @@ namespace Servicios
             RequiereAutenticacion();
             if (!EsAdmin() && PersonaIdActual() != alumnoId)
                 throw new AccesoNoAutorizadoException("No puede inscribir a otro alumno.");
-            ValidarReglasNegocio(alumnoId, cursoId);
 
-            var inscripcion = new AlumnoInscripcion
+            EjecutarPersistenciaTransaccional(_context, () =>
             {
-                AlumnoId = alumnoId,
-                CursoId = cursoId,
-                Condicion = AlumnoInscripcion.Condiciones.Inscripto
-            };
+                ValidarReglasNegocio(alumnoId, cursoId);
 
-            EjecutarPersistencia(() =>
-            {
+                var inscripcion = new AlumnoInscripcion
+                {
+                    AlumnoId = alumnoId,
+                    CursoId = cursoId,
+                    Condicion = AlumnoInscripcion.Condiciones.Inscripto
+                };
+
                 _repositorioInscripcion.Add(inscripcion);
                 _repositorioInscripcion.Save();
             }, "No se pudo concretar la inscripción. Intente nuevamente.");
