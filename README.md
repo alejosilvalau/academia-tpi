@@ -167,15 +167,39 @@ Los permisos se validan igual que en las interfaces: los guards de `ServicioBase
 | FastReport.OpenSource.Export.PdfSimple | Repositorio, UI.Web | 2026.2.3 | Exportación a PDF |
 | SkiaSharp | Repositorio | 2.88.8 | Generación de gráficos (barras, torta) |
 | SkiaSharp.NativeAssets.Linux.NoDependencies | Repositorio | 2.88.8 | Soporte nativo Linux para SkiaSharp |
-| Microsoft.Extensions.Configuration | Repositorio | 8.0.0 | Lectura de archivos de configuración |
-| Microsoft.Extensions.Configuration.Json | Repositorio | 8.0.0 | Lectura de appsettings.json |
+| Microsoft.Extensions.Configuration | Servicios, UI.Desktop | 8.0.0 | Lectura de archivos de configuración |
+| Microsoft.Extensions.Configuration.Json | UI.Desktop | 8.0.0 | Lectura de appsettings.json |
+| Microsoft.Extensions.Configuration.Abstractions | Servicios | 8.0.0 | Interfaz IConfiguration para inyección de dependencias |
 | Microsoft.Web.WebView2 | UI.Desktop | 1.0.2903.40 | Visor de PDF integrado en WinForms |
 | Microsoft.AspNetCore.Authentication.JwtBearer | UI.Web, UI.Api | 8.0.30 | Autenticación JWT (Blazor Server y API REST) |
 | Swashbuckle.AspNetCore | UI.Api | 6.6.2 | Documentación Swagger / OpenAPI |
 
 ## Configuración en Local
-El connection string está en `Repositorio/appsettings.Repositorio.json`:
+El connection string se configura en el `appsettings.json` de cada proyecto UI junto, en caso de ser necesario, con la clave secreta de JWT:
 
+**UI.Web / UI.Api** (`appsettings.json`):
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=localhost\\SQLEXPRESS;Database=Academia;TrustServerCertificate=True;Trusted_Connection=True;"
+  },
+  "Jwt": {
+    "Key": "ClaveSecretaAcademiaTpi2026!CambiarEnProduccion_GenerarAleatoriaAlMenos32Bytes",
+    "Issuer": "AcademiaTPI",
+    "Audience": "AcademiaTPI.Users",
+    "ExpireMinutes": 60
+  }
+}
+```
+
+**UI.Desktop** (`appsettings.json`):
 ```json
 {
   "ConnectionStrings": {
