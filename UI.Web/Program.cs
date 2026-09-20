@@ -14,7 +14,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor();
 
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<AcademiaContext>();
+builder.Services.AddDbContextPool<AcademiaContext>(options => { });
 builder.Services.AddScoped<IUsuarioContexto, UsuarioContextoWeb>();
 builder.Services.AddScoped<EspecialidadServicio>();
 builder.Services.AddScoped<PlanServicio>();
