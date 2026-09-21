@@ -1,5 +1,6 @@
 using Dominio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Materias
 {
@@ -13,6 +14,11 @@ namespace UI.Desktop.Forms.Materias
             InitializeComponent();
             _servicio = ServicioFactory.Materia();
             dgvMaterias.AutoGenerateColumns = false;
+            dgvMaterias.CellFormatting += (s, e) =>
+            {
+                if (e.Value is string v && dgvMaterias.Columns[e.ColumnIndex].Name == "colDescripcion")
+                    e.Value = Formato.ToTitleCase(v);
+            };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 

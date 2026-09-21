@@ -20,14 +20,16 @@ namespace UI.Desktop.Forms.Materias
         public MateriaDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxPlan.DataSource = _planServicio.GetAll();
+            cbxPlan.DataSource = _planServicio.GetAll()
+                .Select(p => new { p.ID, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
             SetModo();
         }
 
         public MateriaDialog(int planId) : this()
         {
             Modo = ModoForm.Alta;
-            cbxPlan.DataSource = _planServicio.GetAll();
+            cbxPlan.DataSource = _planServicio.GetAll()
+                .Select(p => new { p.ID, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
             cbxPlan.SelectedValue = planId;
             cbxPlan.Enabled = false;
             SetModo();

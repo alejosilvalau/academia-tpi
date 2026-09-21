@@ -1,5 +1,6 @@
 using Dominio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Usuarios
 {
@@ -13,6 +14,15 @@ namespace UI.Desktop.Forms.Usuarios
             InitializeComponent();
             _servicio = ServicioFactory.Usuario();
             dgvUsuarios.AutoGenerateColumns = false;
+            dgvUsuarios.CellFormatting += (s, e) =>
+            {
+                if (e.Value is string v && e.ColumnIndex >= 0)
+                {
+                    var colName = dgvUsuarios.Columns[e.ColumnIndex].Name;
+                    if (colName is "NombreUsuario" or "PersonaNombre" or "PersonaApellido")
+                        e.Value = Formato.ToTitleCase(v);
+                }
+            };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 

@@ -1,5 +1,6 @@
 using Dominio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Comisiones
 {
@@ -13,6 +14,11 @@ namespace UI.Desktop.Forms.Comisiones
             InitializeComponent();
             _servicio = ServicioFactory.Comision();
             dgvComisiones.AutoGenerateColumns = false;
+            dgvComisiones.CellFormatting += (s, e) =>
+            {
+                if (e.Value is string v && dgvComisiones.Columns[e.ColumnIndex].Name == "colDescripcion")
+                    e.Value = Formato.ToTitleCase(v);
+            };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 

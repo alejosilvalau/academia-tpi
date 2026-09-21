@@ -1,5 +1,6 @@
 using Dominio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Especialidades
 {
@@ -13,6 +14,11 @@ namespace UI.Desktop.Forms.Especialidades
             InitializeComponent();
             _servicio = ServicioFactory.Especialidad();
             dgvEspecialidades.AutoGenerateColumns = false;
+            dgvEspecialidades.CellFormatting += (s, e) =>
+            {
+                if (e.Value is string v && dgvEspecialidades.Columns[e.ColumnIndex].Name == "Descripcion")
+                    e.Value = Formato.ToTitleCase(v);
+            };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 

@@ -22,8 +22,10 @@ namespace UI.Desktop.Forms.Cursos
         public CursoDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxMateria.DataSource = _materiaServicio.GetAll();
-            cbxComision.DataSource = _comisionServicio.GetAll();
+            cbxMateria.DataSource = _materiaServicio.GetAll()
+                .Select(m => new { m.ID, Descripcion = Formato.ToTitleCase(m.Descripcion) }).ToList();
+            cbxComision.DataSource = _comisionServicio.GetAll()
+                .Select(c => new { c.ID, Descripcion = Formato.ToTitleCase(c.Descripcion) }).ToList();
             SetModo();
         }
 

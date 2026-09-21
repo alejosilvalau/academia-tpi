@@ -20,7 +20,8 @@ namespace UI.Desktop.Forms.Personas
         public PersonaDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxPlan.DataSource = _planServicio.GetAll();
+            cbxPlan.DataSource = _planServicio.GetAll()
+                .Select(p => new { p.ID, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
             cbxTipo.DataSource = EnumHelper.GetEnumItems<Persona.TiposPersonas>();
             cbxTipo.DisplayMember = "Display";
             cbxTipo.ValueMember = "Value";

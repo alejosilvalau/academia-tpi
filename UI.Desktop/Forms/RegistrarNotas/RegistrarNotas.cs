@@ -19,6 +19,15 @@ namespace UI.Desktop.Forms.RegistrarNotas
             _dcServicio = ServicioFactory.DocenteCurso();
             _inscripcionServicio = ServicioFactory.Inscripcion();
             dgvAlumnos.AutoGenerateColumns = false;
+            dgvAlumnos.CellFormatting += (s, e) =>
+            {
+                if (e.Value is string v && e.ColumnIndex >= 0)
+                {
+                    var colName = dgvAlumnos.Columns[e.ColumnIndex].Name;
+                    if (colName is "Nombre" or "Apellido")
+                        e.Value = Formato.ToTitleCase(v);
+                }
+            };
             cbxCursos.DataSource = _dcServicio.GetByDocente(persona.ID);
             cbxCursos.DisplayMember = "Curso";
         }

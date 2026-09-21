@@ -32,7 +32,8 @@ namespace UI.Desktop.Forms.Planes
 
         private void CargarEspecialidades()
         {
-            cbxEspecialidad.DataSource = _especialidadServicio.GetAll();
+            cbxEspecialidad.DataSource = _especialidadServicio.GetAll()
+                .Select(e => new { e.ID, Descripcion = Formato.ToTitleCase(e.Descripcion) }).ToList();
             cbxEspecialidad.DisplayMember = "Descripcion";
             cbxEspecialidad.ValueMember = "ID";
         }
