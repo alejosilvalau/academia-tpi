@@ -237,6 +237,10 @@
     {
         var item = PersonaServicio.GetOne(id);
         if (item == null) return;
+        item.Nombre = Formato.ToTitleCase(item.Nombre);
+        item.Apellido = Formato.ToTitleCase(item.Apellido);
+        item.EMail = Formato.ToTitleCase(item.EMail);
+        item.Direccion = Formato.ToTitleCase(item.Direccion);
         actual = item;
         tipoSeleccionado = ((int)item.Tipo).ToString();
         planIdSeleccionado = item.PlanId?.ToString();

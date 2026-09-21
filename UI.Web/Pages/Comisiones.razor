@@ -133,6 +133,7 @@
     {
         var item = ComisionServicio.GetOne(id);
         if (item == null) return;
+        item.Descripcion = Formato.ToTitleCase(item.Descripcion);
         actual = item;
         modoForm = ModoForm.Modificacion;
         seleccionadaId = id;
