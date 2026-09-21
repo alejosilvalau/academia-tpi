@@ -17,7 +17,7 @@ namespace Repositorio
             using var connection = new SqlConnection(_connectionString);
             using var command = new SqlCommand(
                 "SELECT ID, Nombre, Apellido, Legajo " +
-                "FROM Personas " +
+                "FROM Persona " +
                 "WHERE Tipo = 2 " +
                 "ORDER BY Apellido, Nombre", connection);
 
@@ -32,7 +32,7 @@ namespace Repositorio
             using var connection = new SqlConnection(_connectionString);
             using var command = new SqlCommand(
                 "SELECT ID, Nombre, Apellido, Legajo " +
-                "FROM Personas " +
+                "FROM Persona " +
                 "WHERE Tipo = 1 " +
                 "ORDER BY Apellido, Nombre", connection);
 
@@ -47,9 +47,9 @@ namespace Repositorio
             using var connection = new SqlConnection(_connectionString);
             using var command = new SqlCommand(
                 "SELECT DISTINCT p.ID, p.Nombre, p.Apellido, p.Legajo " +
-                "FROM AlumnoInscripciones ai " +
-                "INNER JOIN Personas p ON ai.AlumnoId = p.ID " +
-                "INNER JOIN DocenteCursos dc ON ai.CursoId = dc.CursoId " +
+                "FROM AlumnoInscripcion ai " +
+                "INNER JOIN Persona p ON ai.AlumnoId = p.ID " +
+                "INNER JOIN DocenteCurso dc ON ai.CursoId = dc.CursoId " +
                 "WHERE dc.DocenteId = @DocenteId " +
                 "ORDER BY p.Apellido, p.Nombre", connection);
 
@@ -66,7 +66,7 @@ namespace Repositorio
             using var connection = new SqlConnection(_connectionString);
             using var command = new SqlCommand(
                 "SELECT ID, Nombre, Apellido, Legajo, Tipo " +
-                "FROM Personas " +
+                "FROM Persona " +
                 "WHERE ID = @PersonaId", connection);
 
             command.Parameters.AddWithValue("@PersonaId", personaId);
@@ -93,11 +93,11 @@ namespace Repositorio
                 "CASE WHEN SUM(CASE WHEN ai.Nota IS NOT NULL THEN 1 ELSE 0 END) > 0 " +
                 "     THEN CAST(SUM(ai.Nota) AS float) / SUM(CASE WHEN ai.Nota IS NOT NULL THEN 1 ELSE 0 END) " +
                 "     ELSE NULL END AS Promedio " +
-                "FROM DocenteCursos dc " +
-                "INNER JOIN Cursos c ON dc.CursoId = c.ID " +
-                "INNER JOIN Materias m ON c.MateriaId = m.ID " +
-                "INNER JOIN Comisiones com ON c.ComisionId = com.ID " +
-                "LEFT JOIN AlumnoInscripciones ai ON c.ID = ai.CursoId " +
+                "FROM DocenteCurso dc " +
+                "INNER JOIN Curso c ON dc.CursoId = c.ID " +
+                "INNER JOIN Materia m ON c.MateriaId = m.ID " +
+                "INNER JOIN Comision com ON c.ComisionId = com.ID " +
+                "LEFT JOIN AlumnoInscripcion ai ON c.ID = ai.CursoId " +
                 "WHERE dc.DocenteId = @DocenteId " +
                 "GROUP BY dc.DocenteId, m.Descripcion, com.Descripcion, c.AnioCalendario, dc.Cargo, c.ID " +
                 "ORDER BY c.AnioCalendario, m.Descripcion, com.Descripcion", connection);
@@ -120,11 +120,11 @@ namespace Repositorio
                 "com.Descripcion AS Comision, " +
                 "c.AnioCalendario AS Anio, " +
                 "ai.Nota, ai.Condicion " +
-                "FROM AlumnoInscripciones ai " +
-                "INNER JOIN Personas p ON ai.AlumnoId = p.ID " +
-                "INNER JOIN Cursos c ON ai.CursoId = c.ID " +
-                "INNER JOIN Materias m ON c.MateriaId = m.ID " +
-                "INNER JOIN Comisiones com ON c.ComisionId = com.ID " +
+                "FROM AlumnoInscripcion ai " +
+                "INNER JOIN Persona p ON ai.AlumnoId = p.ID " +
+                "INNER JOIN Curso c ON ai.CursoId = c.ID " +
+                "INNER JOIN Materia m ON c.MateriaId = m.ID " +
+                "INNER JOIN Comision com ON c.ComisionId = com.ID " +
                 "WHERE ai.AlumnoId = @AlumnoId " +
                 "ORDER BY c.AnioCalendario, m.Descripcion", connection);
 
@@ -146,12 +146,12 @@ namespace Repositorio
                 "com.Descripcion AS Comision, " +
                 "c.AnioCalendario AS Anio, " +
                 "ai.Nota, ai.Condicion " +
-                "FROM AlumnoInscripciones ai " +
-                "INNER JOIN Personas p ON ai.AlumnoId = p.ID " +
-                "INNER JOIN Cursos c ON ai.CursoId = c.ID " +
-                "INNER JOIN Materias m ON c.MateriaId = m.ID " +
-                "INNER JOIN Comisiones com ON c.ComisionId = com.ID " +
-                "INNER JOIN DocenteCursos dc ON ai.CursoId = dc.CursoId " +
+                "FROM AlumnoInscripcion ai " +
+                "INNER JOIN Persona p ON ai.AlumnoId = p.ID " +
+                "INNER JOIN Curso c ON ai.CursoId = c.ID " +
+                "INNER JOIN Materia m ON c.MateriaId = m.ID " +
+                "INNER JOIN Comision com ON c.ComisionId = com.ID " +
+                "INNER JOIN DocenteCurso dc ON ai.CursoId = dc.CursoId " +
                 "WHERE dc.DocenteId = @DocenteId " +
                 "ORDER BY p.Apellido, p.Nombre, c.AnioCalendario, m.Descripcion", connection);
 
