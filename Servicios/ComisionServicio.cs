@@ -93,7 +93,7 @@ namespace Servicios
         private void ValidarReglasNegocio(Comision comision, bool esAlta)
         {
             var duplicado = _repositorio.GetByPlan(comision.PlanId)
-                .FirstOrDefault(c => c.Descripcion == comision.Descripcion
+                .FirstOrDefault(c => c.Descripcion.ToLower() == comision.Descripcion.ToLower()
                                  && c.AnioEspecialidad == comision.AnioEspecialidad
                                  && c.ID != comision.ID);
             if (duplicado != null)

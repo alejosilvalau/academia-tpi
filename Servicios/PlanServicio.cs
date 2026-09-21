@@ -91,7 +91,7 @@ namespace Servicios
         private void ValidarReglasNegocio(Plan plan, bool esAlta)
         {
             var duplicado = _repositorio.GetByEspecialidad(plan.EspecialidadId)
-                .FirstOrDefault(p => p.Descripcion == plan.Descripcion && p.ID != plan.ID);
+                .FirstOrDefault(p => p.Descripcion.ToLower() == plan.Descripcion.ToLower() && p.ID != plan.ID);
             if (duplicado != null)
                 throw new ReglaNegocioException("Ya existe un plan con esa descripción para la especialidad seleccionada.");
         }

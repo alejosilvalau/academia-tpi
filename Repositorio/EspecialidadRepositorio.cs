@@ -11,7 +11,7 @@ namespace Repositorio
         {
             return context.Especialidades
                 .AsNoTracking()
-                .FirstOrDefault(e => e.Descripcion == descripcion);
+                .FirstOrDefault(e => e.Descripcion.ToLower() == descripcion.ToLower());
         }
     }
 }

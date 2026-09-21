@@ -97,7 +97,7 @@ namespace Servicios
         private void ValidarReglasNegocio(Materia materia, bool esAlta)
         {
             var duplicado = _repositorio.GetByPlan(materia.PlanId)
-                .FirstOrDefault(m => m.Descripcion == materia.Descripcion && m.ID != materia.ID);
+                .FirstOrDefault(m => m.Descripcion.ToLower() == materia.Descripcion.ToLower() && m.ID != materia.ID);
             if (duplicado != null)
                 throw new ReglaNegocioException("Ya existe una materia con esa descripción en el plan seleccionado.");
         }

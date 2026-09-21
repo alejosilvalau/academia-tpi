@@ -19,7 +19,7 @@ namespace Repositorio
         {
             return context.Usuarios
                 .Include(u => u.Persona)
-                .FirstOrDefault(u => u.NombreUsuario == nombreUsuario);
+                .FirstOrDefault(u => u.NombreUsuario.ToLower() == nombreUsuario.ToLower());
         }
 
         public Usuario? GetOneConPersona(int id)
