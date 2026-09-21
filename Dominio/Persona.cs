@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
-    [Table("Personas")]
+    [Table("Persona")]
     public class Persona : BusinessEntity
     {
         [StringLength(100)]

@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
-    [Table("DocenteCursos")]
+    [Table("DocenteCurso")]
     public class DocenteCurso : BusinessEntity
     {
         public TiposCargos Cargo { get; set; }

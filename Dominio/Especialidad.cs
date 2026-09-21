@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
-    [Table("Especialidades")]
+    [Table("Especialidad")]
     public class Especialidad : BusinessEntity
     {
         [StringLength(100)]

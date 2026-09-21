@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
-    [Table("AlumnoInscripciones")]
+    [Table("AlumnoInscripcion")]
     public class AlumnoInscripcion : BusinessEntity
     {
         public AlumnoInscripcion()

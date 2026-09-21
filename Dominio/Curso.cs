@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
-    [Table("Cursos")]
+    [Table("Curso")]
     public class Curso : BusinessEntity
     {
         public int AnioCalendario { get; set; }
