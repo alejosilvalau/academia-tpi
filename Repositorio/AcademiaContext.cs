@@ -180,52 +180,52 @@ namespace Repositorio
         private static void SeedData(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Especialidad>().HasData(
-                new Especialidad { ID = 1, Descripcion = "Ingeniería en Sistemas" },
-                new Especialidad { ID = 2, Descripcion = "Ingeniería Industrial" },
-                new Especialidad { ID = 3, Descripcion = "Ciencias de la Computación" },
-                new Especialidad { ID = 4, Descripcion = "Licenciatura en Administración" },
-                new Especialidad { ID = 5, Descripcion = "Ingeniería Química" }
+                new Especialidad { ID = 1, Descripcion = "ingeniería en sistemas" },
+                new Especialidad { ID = 2, Descripcion = "ingeniería industrial" },
+                new Especialidad { ID = 3, Descripcion = "ciencias de la computación" },
+                new Especialidad { ID = 4, Descripcion = "licenciatura en administración" },
+                new Especialidad { ID = 5, Descripcion = "ingeniería química" }
             );
 
             modelBuilder.Entity<Plan>().HasData(
-                new Plan { ID = 1, Descripcion = "Plan 2015", EspecialidadId = 1 },
-                new Plan { ID = 2, Descripcion = "Plan 2020", EspecialidadId = 1 },
-                new Plan { ID = 3, Descripcion = "Plan 2018", EspecialidadId = 2 },
-                new Plan { ID = 4, Descripcion = "Plan 2015", EspecialidadId = 3 },
-                new Plan { ID = 5, Descripcion = "Plan 2022", EspecialidadId = 3 },
-                new Plan { ID = 6, Descripcion = "Plan 2019", EspecialidadId = 4 },
-                new Plan { ID = 7, Descripcion = "Plan 2016", EspecialidadId = 5 },
-                new Plan { ID = 8, Descripcion = "Plan 2021", EspecialidadId = 5 }
+                new Plan { ID = 1, Descripcion = "plan 2015", EspecialidadId = 1 },
+                new Plan { ID = 2, Descripcion = "plan 2020", EspecialidadId = 1 },
+                new Plan { ID = 3, Descripcion = "plan 2018", EspecialidadId = 2 },
+                new Plan { ID = 4, Descripcion = "plan 2015", EspecialidadId = 3 },
+                new Plan { ID = 5, Descripcion = "plan 2022", EspecialidadId = 3 },
+                new Plan { ID = 6, Descripcion = "plan 2019", EspecialidadId = 4 },
+                new Plan { ID = 7, Descripcion = "plan 2016", EspecialidadId = 5 },
+                new Plan { ID = 8, Descripcion = "plan 2021", EspecialidadId = 5 }
             );
 
             modelBuilder.Entity<Comision>().HasData(
-                new Comision { ID = 1, Descripcion = "1A", AnioEspecialidad = 1, PlanId = 2 },
-                new Comision { ID = 2, Descripcion = "2B", AnioEspecialidad = 2, PlanId = 2 },
-                new Comision { ID = 3, Descripcion = "3C", AnioEspecialidad = 3, PlanId = 2 },
-                new Comision { ID = 4, Descripcion = "1A", AnioEspecialidad = 1, PlanId = 1 },
-                new Comision { ID = 5, Descripcion = "2A", AnioEspecialidad = 2, PlanId = 2 },
-                new Comision { ID = 6, Descripcion = "4B", AnioEspecialidad = 4, PlanId = 2 },
-                new Comision { ID = 7, Descripcion = "5A", AnioEspecialidad = 5, PlanId = 2 },
-                new Comision { ID = 8, Descripcion = "4A", AnioEspecialidad = 4, PlanId = 1 },
-                new Comision { ID = 9, Descripcion = "1B", AnioEspecialidad = 1, PlanId = 4 },
-                new Comision { ID = 10, Descripcion = "2A", AnioEspecialidad = 2, PlanId = 5 },
-                new Comision { ID = 11, Descripcion = "1A", AnioEspecialidad = 1, PlanId = 6 },
-                new Comision { ID = 12, Descripcion = "1B", AnioEspecialidad = 1, PlanId = 7 }
+                new Comision { ID = 1, Descripcion = "1a", AnioEspecialidad = 1, PlanId = 2 },
+                new Comision { ID = 2, Descripcion = "2b", AnioEspecialidad = 2, PlanId = 2 },
+                new Comision { ID = 3, Descripcion = "3c", AnioEspecialidad = 3, PlanId = 2 },
+                new Comision { ID = 4, Descripcion = "1a", AnioEspecialidad = 1, PlanId = 1 },
+                new Comision { ID = 5, Descripcion = "2a", AnioEspecialidad = 2, PlanId = 2 },
+                new Comision { ID = 6, Descripcion = "4b", AnioEspecialidad = 4, PlanId = 2 },
+                new Comision { ID = 7, Descripcion = "5a", AnioEspecialidad = 5, PlanId = 2 },
+                new Comision { ID = 8, Descripcion = "4a", AnioEspecialidad = 4, PlanId = 1 },
+                new Comision { ID = 9, Descripcion = "1b", AnioEspecialidad = 1, PlanId = 4 },
+                new Comision { ID = 10, Descripcion = "2a", AnioEspecialidad = 2, PlanId = 5 },
+                new Comision { ID = 11, Descripcion = "1a", AnioEspecialidad = 1, PlanId = 6 },
+                new Comision { ID = 12, Descripcion = "1b", AnioEspecialidad = 1, PlanId = 7 }
             );
 
             modelBuilder.Entity<Materia>().HasData(
-                new Materia { ID = 1, Descripcion = "Programación I", HorasSemanales = 4, HorasTotales = 64, PlanId = 2 },
-                new Materia { ID = 2, Descripcion = "Análisis de Sistemas", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
-                new Materia { ID = 3, Descripcion = "Algebra Lineal", HorasSemanales = 4, HorasTotales = 64, PlanId = 1 },
-                new Materia { ID = 4, Descripcion = "Física I", HorasSemanales = 4, HorasTotales = 64, PlanId = 2 },
-                new Materia { ID = 5, Descripcion = "Base de Datos", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
-                new Materia { ID = 6, Descripcion = "Estadística", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
-                new Materia { ID = 7, Descripcion = "Redes de Computadoras", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
-                new Materia { ID = 8, Descripcion = "Cálculo I", HorasSemanales = 4, HorasTotales = 64, PlanId = 4 },
-                new Materia { ID = 9, Descripcion = "Química General", HorasSemanales = 3, HorasTotales = 48, PlanId = 8 },
-                new Materia { ID = 10, Descripcion = "Microeconomía", HorasSemanales = 3, HorasTotales = 48, PlanId = 6 },
-                new Materia { ID = 11, Descripcion = "Termodinámica", HorasSemanales = 4, HorasTotales = 64, PlanId = 7 },
-                new Materia { ID = 12, Descripcion = "Contabilidad", HorasSemanales = 3, HorasTotales = 48, PlanId = 6 }
+                new Materia { ID = 1, Descripcion = "programación i", HorasSemanales = 4, HorasTotales = 64, PlanId = 2 },
+                new Materia { ID = 2, Descripcion = "análisis de sistemas", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
+                new Materia { ID = 3, Descripcion = "algebra lineal", HorasSemanales = 4, HorasTotales = 64, PlanId = 1 },
+                new Materia { ID = 4, Descripcion = "física i", HorasSemanales = 4, HorasTotales = 64, PlanId = 2 },
+                new Materia { ID = 5, Descripcion = "base de datos", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
+                new Materia { ID = 6, Descripcion = "estadística", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
+                new Materia { ID = 7, Descripcion = "redes de computadoras", HorasSemanales = 3, HorasTotales = 48, PlanId = 2 },
+                new Materia { ID = 8, Descripcion = "cálculo i", HorasSemanales = 4, HorasTotales = 64, PlanId = 4 },
+                new Materia { ID = 9, Descripcion = "química general", HorasSemanales = 3, HorasTotales = 48, PlanId = 8 },
+                new Materia { ID = 10, Descripcion = "microeconomía", HorasSemanales = 3, HorasTotales = 48, PlanId = 6 },
+                new Materia { ID = 11, Descripcion = "termodinámica", HorasSemanales = 4, HorasTotales = 64, PlanId = 7 },
+                new Materia { ID = 12, Descripcion = "contabilidad", HorasSemanales = 3, HorasTotales = 48, PlanId = 6 }
             );
 
             modelBuilder.Entity<Curso>().HasData(
@@ -242,19 +242,19 @@ namespace Repositorio
             );
 
             modelBuilder.Entity<Persona>().HasData(
-                new Persona { ID = 1, Nombre = "Luciano", Apellido = "Ferreyra", Legajo = 10000, EMail = "lferreyra@academia.com", Direccion = "San Martin 1250", Telefono = "291-4567890", FechaNacimiento = new DateTime(1988, 3, 15), Tipo = Persona.TiposPersonas.Administrador, PlanId = null },
-                new Persona { ID = 2, Nombre = "Valentina", Apellido = "Ríos", Legajo = 10001, EMail = "vrios@academia.com", Direccion = "Belgrano 890", Telefono = "291-5551234", FechaNacimiento = new DateTime(1990, 7, 22), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 3, Nombre = "Matías", Apellido = "Herrera", Legajo = 10002, EMail = "mherrera@academia.com", Direccion = "Rivadavia 2340", Telefono = "291-6667890", FechaNacimiento = new DateTime(1985, 11, 8), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 4, Nombre = "Camila", Apellido = "López", Legajo = 48102, EMail = "clopez@alumnos.edu", Direccion = "Uruguay 1450", Telefono = "291-7771234", FechaNacimiento = new DateTime(2002, 4, 12), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
-                new Persona { ID = 5, Nombre = "Tomás", Apellido = "Giménez", Legajo = 48230, EMail = "tgimenez@alumnos.edu", Direccion = "Mitre 560", Telefono = "291-8885678", FechaNacimiento = new DateTime(2001, 9, 3), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
-                new Persona { ID = 6, Nombre = "Isidora", Apellido = "Castro", Legajo = 48315, EMail = "icastro@alumnos.edu", Direccion = "Sarmiento 1820", Telefono = "291-9993210", FechaNacimiento = new DateTime(2003, 1, 27), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
-                new Persona { ID = 7, Nombre = "Benjamín", Apellido = "Morales", Legajo = 48401, EMail = "bmorales@alumnos.edu", Direccion = "Dorrego 970", Telefono = "291-1114567", FechaNacimiento = new DateTime(2000, 12, 14), Tipo = Persona.TiposPersonas.Alumno, PlanId = 1 },
-                new Persona { ID = 8, Nombre = "Antonella", Apellido = "Vega", Legajo = 48520, EMail = "avega@alumnos.edu", Direccion = "Pellegrini 3210", Telefono = "291-2228901", FechaNacimiento = new DateTime(2002, 6, 30), Tipo = Persona.TiposPersonas.Alumno, PlanId = 4 },
-                new Persona { ID = 9, Nombre = "Dante", Apellido = "Romero", Legajo = 48610, EMail = "dromero@alumnos.edu", Direccion = "Entre Rios 1560", Telefono = "291-3336789", FechaNacimiento = new DateTime(2001, 2, 18), Tipo = Persona.TiposPersonas.Alumno, PlanId = 5 },
-                new Persona { ID = 10, Nombre = "Florencia", Apellido = "Acosta", Legajo = 10003, EMail = "facosta@academia.com", Direccion = "Mendoza 2100", Telefono = "291-4442345", FechaNacimiento = new DateTime(1992, 8, 5), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 11, Nombre = "Nicolás", Apellido = "Medina", Legajo = 10004, EMail = "nmedina@academia.com", Direccion = "Junin 780", Telefono = "291-5559012", FechaNacimiento = new DateTime(1987, 5, 20), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 12, Nombre = "Emilia", Apellido = "Silva", Legajo = 48705, EMail = "esilva@alumnos.edu", Direccion = "La Rioja 1890", Telefono = "291-6663456", FechaNacimiento = new DateTime(2003, 10, 9), Tipo = Persona.TiposPersonas.Alumno, PlanId = 6 },
-                new Persona { ID = 13, Nombre = "Santiago", Apellido = "Pereyra", Legajo = 48812, EMail = "spereyra@alumnos.edu", Direccion = "Catamarca 430", Telefono = "291-7777890", FechaNacimiento = new DateTime(2000, 7, 25), Tipo = Persona.TiposPersonas.Alumno, PlanId = 7 }
+                new Persona { ID = 1, Nombre = "luciano", Apellido = "ferreyra", Legajo = 10000, EMail = "lferreyra@academia.com", Direccion = "san martin 1250", Telefono = "291-4567890", FechaNacimiento = new DateTime(1988, 3, 15), Tipo = Persona.TiposPersonas.Administrador, PlanId = null },
+                new Persona { ID = 2, Nombre = "valentina", Apellido = "ríos", Legajo = 10001, EMail = "vrios@academia.com", Direccion = "belgrano 890", Telefono = "291-5551234", FechaNacimiento = new DateTime(1990, 7, 22), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
+                new Persona { ID = 3, Nombre = "matías", Apellido = "herrera", Legajo = 10002, EMail = "mherrera@academia.com", Direccion = "rivadavia 2340", Telefono = "291-6667890", FechaNacimiento = new DateTime(1985, 11, 8), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
+                new Persona { ID = 4, Nombre = "camila", Apellido = "lópez", Legajo = 48102, EMail = "clopez@alumnos.edu", Direccion = "uruguay 1450", Telefono = "291-7771234", FechaNacimiento = new DateTime(2002, 4, 12), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
+                new Persona { ID = 5, Nombre = "tomás", Apellido = "giménez", Legajo = 48230, EMail = "tgimenez@alumnos.edu", Direccion = "mitre 560", Telefono = "291-8885678", FechaNacimiento = new DateTime(2001, 9, 3), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
+                new Persona { ID = 6, Nombre = "isidora", Apellido = "castro", Legajo = 48315, EMail = "icastro@alumnos.edu", Direccion = "sarmiento 1820", Telefono = "291-9993210", FechaNacimiento = new DateTime(2003, 1, 27), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
+                new Persona { ID = 7, Nombre = "benjamín", Apellido = "morales", Legajo = 48401, EMail = "bmorales@alumnos.edu", Direccion = "dorrego 970", Telefono = "291-1114567", FechaNacimiento = new DateTime(2000, 12, 14), Tipo = Persona.TiposPersonas.Alumno, PlanId = 1 },
+                new Persona { ID = 8, Nombre = "antonella", Apellido = "vega", Legajo = 48520, EMail = "avega@alumnos.edu", Direccion = "pellegrini 3210", Telefono = "291-2228901", FechaNacimiento = new DateTime(2002, 6, 30), Tipo = Persona.TiposPersonas.Alumno, PlanId = 4 },
+                new Persona { ID = 9, Nombre = "dante", Apellido = "romero", Legajo = 48610, EMail = "dromero@alumnos.edu", Direccion = "entre rios 1560", Telefono = "291-3336789", FechaNacimiento = new DateTime(2001, 2, 18), Tipo = Persona.TiposPersonas.Alumno, PlanId = 5 },
+                new Persona { ID = 10, Nombre = "florencia", Apellido = "acosta", Legajo = 10003, EMail = "facosta@academia.com", Direccion = "mendoza 2100", Telefono = "291-4442345", FechaNacimiento = new DateTime(1992, 8, 5), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
+                new Persona { ID = 11, Nombre = "nicolás", Apellido = "medina", Legajo = 10004, EMail = "nmedina@academia.com", Direccion = "junin 780", Telefono = "291-5559012", FechaNacimiento = new DateTime(1987, 5, 20), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
+                new Persona { ID = 12, Nombre = "emilia", Apellido = "silva", Legajo = 48705, EMail = "esilva@alumnos.edu", Direccion = "la rioja 1890", Telefono = "291-6663456", FechaNacimiento = new DateTime(2003, 10, 9), Tipo = Persona.TiposPersonas.Alumno, PlanId = 6 },
+                new Persona { ID = 13, Nombre = "santiago", Apellido = "pereyra", Legajo = 48812, EMail = "spereyra@alumnos.edu", Direccion = "catamarca 430", Telefono = "291-7777890", FechaNacimiento = new DateTime(2000, 7, 25), Tipo = Persona.TiposPersonas.Alumno, PlanId = 7 }
             );
 
             modelBuilder.Entity<Usuario>().HasData(
