@@ -19,6 +19,11 @@ namespace Repositorio
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Especialidad>(entity =>
+            {
+                entity.HasIndex(e => e.Descripcion).IsUnique();
+            });
+
             modelBuilder.Entity<Plan>(entity =>
             {
                 entity.Metadata.FindNavigation(nameof(Plan.Especialidad))!
@@ -26,6 +31,8 @@ namespace Repositorio
                 entity.HasOne(p => p.Especialidad).WithMany()
                     .HasForeignKey(p => p.EspecialidadId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(p => new { p.EspecialidadId, p.Descripcion }).IsUnique();
             });
 
             modelBuilder.Entity<Materia>(entity =>
@@ -35,6 +42,8 @@ namespace Repositorio
                 entity.HasOne(m => m.Plan).WithMany()
                     .HasForeignKey(m => m.PlanId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(m => new { m.PlanId, m.Descripcion }).IsUnique();
             });
 
             modelBuilder.Entity<Comision>(entity =>
@@ -44,6 +53,8 @@ namespace Repositorio
                 entity.HasOne(c => c.Plan).WithMany()
                     .HasForeignKey(c => c.PlanId)
                     .OnDelete(DeleteBehavior.Restrict);
+
+                entity.HasIndex(c => new { c.PlanId, c.Descripcion, c.AnioEspecialidad }).IsUnique();
             });
 
             modelBuilder.Entity<Curso>(entity =>
@@ -75,6 +86,8 @@ namespace Repositorio
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(p => p.Legajo).IsUnique();
+                entity.HasIndex(p => p.Tipo);
+                entity.HasIndex(p => p.PlanId);
             });
 
             modelBuilder.Entity<Usuario>(entity =>
@@ -90,6 +103,7 @@ namespace Repositorio
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(u => u.NombreUsuario).IsUnique();
+                entity.HasIndex(u => u.PersonaId);
             });
 
             modelBuilder.Entity<DocenteCurso>(entity =>
@@ -106,6 +120,7 @@ namespace Repositorio
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(dc => new { dc.DocenteId, dc.CursoId, dc.Cargo }).IsUnique();
+                entity.HasIndex(dc => dc.CursoId);
             });
 
             modelBuilder.Entity<AlumnoInscripcion>(entity =>
@@ -123,6 +138,7 @@ namespace Repositorio
                     .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasIndex(ai => new { ai.AlumnoId, ai.CursoId }).IsUnique();
+                entity.HasIndex(ai => ai.CursoId);
             });
 
             SeedData(modelBuilder);
