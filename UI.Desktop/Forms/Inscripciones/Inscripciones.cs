@@ -23,7 +23,7 @@ namespace UI.Desktop.Forms.Inscripciones
                 if (dgvInscripciones.Rows[e.RowIndex].DataBoundItem is AlumnoInscripcion ins)
                 {
                     if (colName == "DescripcionMateria")
-                        e.Value = Formato.ToTitleCase(ins.Curso.Materia.ToString());
+                        e.Value = Formato.ToTitleCase(ins.Curso.Materia.Descripcion);
                     else if (colName == "Legajo")
                         e.Value = ins.Alumno.Legajo;
                 }

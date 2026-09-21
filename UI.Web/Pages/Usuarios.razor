@@ -41,7 +41,7 @@
                             {
                                 @foreach (var p in personas)
                                 {
-                                    <option value="@p.ID">@p (Legajo: @p.Legajo)</option>
+                                    <option value="@p.ID">@Formato.ToTitleCase(p.Nombre) @Formato.ToTitleCase(p.Apellido) (Legajo: @p.Legajo)</option>
                                 }
                             }
                         </select>

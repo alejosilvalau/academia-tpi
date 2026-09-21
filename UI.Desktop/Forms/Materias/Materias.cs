@@ -16,8 +16,12 @@ namespace UI.Desktop.Forms.Materias
             dgvMaterias.AutoGenerateColumns = false;
             dgvMaterias.CellFormatting += (s, e) =>
             {
-                if (e.Value is string v && dgvMaterias.Columns[e.ColumnIndex].Name == "colDescripcion")
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvMaterias.Columns[e.ColumnIndex].Name;
+                if (colName == "colDescripcion" && e.Value is string v)
                     e.Value = Formato.ToTitleCase(v);
+                else if (colName == "colPlan" && dgvMaterias.Rows[e.RowIndex].DataBoundItem is Materia m)
+                    e.Value = Formato.ToTitleCase(m.Plan.Descripcion);
             };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

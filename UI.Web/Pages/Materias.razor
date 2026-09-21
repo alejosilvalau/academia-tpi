@@ -35,7 +35,7 @@
                             {
                                 @foreach (var p in planes)
                                 {
-                                    <option value="@p.ID">@p</option>
+                                    <option value="@p.ID">@Formato.ToTitleCase(p.Descripcion)</option>
                                 }
                             }
                         </select>
@@ -85,10 +85,10 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item</td>
+                        <td>@Formato.ToTitleCase(item.Descripcion)</td>
                         <td>@item.HorasSemanales</td>
                         <td>@item.HorasTotales</td>
-                        <td>@item.Plan</td>
+                        <td>@Formato.ToTitleCase(item.Plan.Descripcion)</td>
                         <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
                             <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>

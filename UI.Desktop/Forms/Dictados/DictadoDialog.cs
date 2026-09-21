@@ -22,8 +22,14 @@ namespace UI.Desktop.Forms.Dictados
         public DictadoDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxCursos.DataSource = _cursoServicio.GetAll();
-            cbxDocentes.DataSource = _personaServicio.GetByTipo(Persona.TiposPersonas.Docente);
+            cbxCursos.DataSource = _cursoServicio.GetAll()
+                .Select(c => new { c.ID, Display = $"{Formato.ToTitleCase(c.Materia.Descripcion)} - {Formato.ToTitleCase(c.Comision.Descripcion)} - {c.AnioCalendario}" }).ToList();
+            cbxCursos.DisplayMember = "Display";
+            cbxCursos.ValueMember = "ID";
+            cbxDocentes.DataSource = _personaServicio.GetByTipo(Persona.TiposPersonas.Docente)
+                .Select(p => new { p.ID, Display = $"{Formato.ToTitleCase(p.Nombre)} {Formato.ToTitleCase(p.Apellido)}" }).ToList();
+            cbxDocentes.DisplayMember = "Display";
+            cbxDocentes.ValueMember = "ID";
             cbxTiposCargos.DataSource = EnumHelper.GetEnumItems<DocenteCurso.TiposCargos>();
             cbxTiposCargos.DisplayMember = "Display";
             cbxTiposCargos.ValueMember = "Value";

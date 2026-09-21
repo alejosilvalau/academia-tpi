@@ -182,7 +182,6 @@ namespace UI.Desktop.Forms.Usuarios
             // 
             cbxPersona.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxPersona.BackColor = Color.White;
-            cbxPersona.DisplayMember = "";
             cbxPersona.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxPersona.Font = new Font("Segoe UI", 10F);
             cbxPersona.ForeColor = Color.FromArgb(33, 33, 33);

@@ -76,7 +76,7 @@
                             {
                                 @foreach (var p in planes)
                                 {
-                                    <option value="@p.ID">@p</option>
+                                    <option value="@p.ID">@Formato.ToTitleCase(p.Descripcion)</option>
                                 }
                             }
                         </select>

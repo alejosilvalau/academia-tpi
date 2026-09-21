@@ -16,8 +16,12 @@ namespace UI.Desktop.Forms.Comisiones
             dgvComisiones.AutoGenerateColumns = false;
             dgvComisiones.CellFormatting += (s, e) =>
             {
-                if (e.Value is string v && dgvComisiones.Columns[e.ColumnIndex].Name == "colDescripcion")
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvComisiones.Columns[e.ColumnIndex].Name;
+                if (colName == "colDescripcion" && e.Value is string v)
                     e.Value = Formato.ToTitleCase(v);
+                else if (colName == "colPlan" && dgvComisiones.Rows[e.RowIndex].DataBoundItem is Comision c)
+                    e.Value = Formato.ToTitleCase(c.Plan.Descripcion);
             };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

@@ -18,12 +18,20 @@ namespace UI.Desktop.Forms.Dictados
             dgvDocentes.AutoGenerateColumns = false;
             dgvDocentes.CellFormatting += (s, e) =>
             {
-                if (e.ColumnIndex >= 0 && dgvDocentes.Columns[e.ColumnIndex].Name == "Cargo"
-                    && e.Value is DocenteCurso.TiposCargos cargo)
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvDocentes.Columns[e.ColumnIndex].Name;
+                if (dgvDocentes.Rows[e.RowIndex].DataBoundItem is DocenteCurso dc)
                 {
-                    var field = typeof(DocenteCurso.TiposCargos).GetField(cargo.ToString());
-                    var attr = field?.GetCustomAttribute<DescriptionAttribute>();
-                    e.Value = attr?.Description ?? cargo.ToString();
+                    if (colName == "Curso")
+                        e.Value = $"{Formato.ToTitleCase(dc.Curso.Materia.Descripcion)} - {Formato.ToTitleCase(dc.Curso.Comision.Descripcion)} - {dc.Curso.AnioCalendario}";
+                    else if (colName == "Docente")
+                        e.Value = $"{Formato.ToTitleCase(dc.Docente.Nombre)} {Formato.ToTitleCase(dc.Docente.Apellido)}";
+                    else if (colName == "Cargo" && e.Value is DocenteCurso.TiposCargos cargo)
+                    {
+                        var field = typeof(DocenteCurso.TiposCargos).GetField(cargo.ToString());
+                        var attr = field?.GetCustomAttribute<DescriptionAttribute>();
+                        e.Value = attr?.Description ?? cargo.ToString();
+                    }
                 }
             };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);

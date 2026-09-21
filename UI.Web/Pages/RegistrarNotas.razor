@@ -33,7 +33,7 @@
                     <option value="0">-- Seleccione un curso --</option>
                     @foreach (var c in cursos)
                     {
-                        <option value="@c.ID">@c</option>
+                        <option value="@c.ID">@Formato.ToTitleCase(c.Materia.Descripcion) - @Formato.ToTitleCase(c.Comision.Descripcion) - @c.AnioCalendario</option>
                     }
                 </select>
             </div>

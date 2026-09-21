@@ -1,6 +1,5 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using Utils;
 
 namespace Dominio
 {
@@ -30,9 +29,5 @@ namespace Dominio
             }
         }
 
-        public override string ToString()
-        {
-            return Formato.ToTitleCase(Descripcion);
-        }
     }
 }

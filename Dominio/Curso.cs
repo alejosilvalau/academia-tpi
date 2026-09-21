@@ -46,9 +46,5 @@ namespace Dominio
             }
         }
 
-        public override string ToString()
-        {
-            return $"{Materia} - {Comision} - {AnioCalendario}";
-        }
     }
 }

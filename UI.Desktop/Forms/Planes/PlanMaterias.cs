@@ -22,8 +22,12 @@ namespace UI.Desktop.Forms.Planes
             dgvMaterias.AutoGenerateColumns = false;
             dgvPlanes.CellFormatting += (s, e) =>
             {
-                if (e.Value is string v && dgvPlanes.Columns[e.ColumnIndex].Name == "colPlanDescripcion")
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvPlanes.Columns[e.ColumnIndex].Name;
+                if (colName == "colPlanDescripcion" && e.Value is string v)
                     e.Value = Formato.ToTitleCase(v);
+                else if (colName == "colPlanEspecialidad" && dgvPlanes.Rows[e.RowIndex].DataBoundItem is Plan p)
+                    e.Value = Formato.ToTitleCase(p.Especialidad.Descripcion);
             };
             dgvMaterias.CellFormatting += (s, e) =>
             {

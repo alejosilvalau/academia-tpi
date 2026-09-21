@@ -20,7 +20,10 @@ namespace UI.Desktop.Forms.Usuarios
         public UsuarioDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxPersona.DataSource = _personaServicio.GetAll();
+            cbxPersona.DataSource = _personaServicio.GetAll()
+                .Select(p => new { p.ID, Display = $"{Formato.ToTitleCase(p.Nombre)} {Formato.ToTitleCase(p.Apellido)}" }).ToList();
+            cbxPersona.DisplayMember = "Display";
+            cbxPersona.ValueMember = "ID";
             SetModo();
         }
 

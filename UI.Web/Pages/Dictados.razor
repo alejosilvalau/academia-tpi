@@ -32,7 +32,7 @@
                             {
                                 @foreach (var c in cursos)
                                 {
-                                    <option value="@c.ID">@c</option>
+                                    <option value="@c.ID">@Formato.ToTitleCase(c.Materia.Descripcion) - @Formato.ToTitleCase(c.Comision.Descripcion) - @c.AnioCalendario</option>
                                 }
                             }
                         </select>
@@ -45,7 +45,7 @@
                             {
                                 @foreach (var d in docentes)
                                 {
-                                    <option value="@d.ID">@d</option>
+                                    <option value="@d.ID">@Formato.ToTitleCase(d.Nombre) @Formato.ToTitleCase(d.Apellido)</option>
                                 }
                             }
                         </select>
@@ -92,8 +92,8 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item.Curso</td>
-                        <td>@item.Docente</td>
+                        <td>@Formato.ToTitleCase(item.Curso.Materia.Descripcion) - @Formato.ToTitleCase(item.Curso.Comision.Descripcion) - @item.Curso.AnioCalendario</td>
+                        <td>@Formato.ToTitleCase(item.Docente.Nombre) @Formato.ToTitleCase(item.Docente.Apellido)</td>
                         <td><span class="md-badge md-badge-accent">@FormatCargo(item.Cargo)</span></td>
                         <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>

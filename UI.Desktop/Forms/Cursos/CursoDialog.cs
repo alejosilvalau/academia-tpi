@@ -50,7 +50,7 @@ namespace UI.Desktop.Forms.Cursos
         {
             if (_curso == null) return;
             txtID.Text = _curso.ID.ToString();
-            txtDescripcion.Text = _curso.ToString();
+            txtDescripcion.Text = $"{Formato.ToTitleCase(_curso.Materia.Descripcion)} - {Formato.ToTitleCase(_curso.Comision.Descripcion)} - {_curso.AnioCalendario}";
             txtAnioCalendario.Text = _curso.AnioCalendario.ToString();
             txtCupo.Text = _curso.Cupo.ToString();
             cbxMateria.SelectedValue = _curso.MateriaId;

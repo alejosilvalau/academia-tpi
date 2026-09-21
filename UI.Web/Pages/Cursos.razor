@@ -32,7 +32,7 @@
                             {
                                 @foreach (var m in materias)
                                 {
-                                    <option value="@m.ID">@m</option>
+                                    <option value="@m.ID">@Formato.ToTitleCase(m.Descripcion)</option>
                                 }
                             }
                         </select>
@@ -45,7 +45,7 @@
                             {
                                 @foreach (var c in comisiones)
                                 {
-                                    <option value="@c.ID">@c</option>
+                                    <option value="@c.ID">@Formato.ToTitleCase(c.Descripcion)</option>
                                 }
                             }
                         </select>
@@ -96,8 +96,8 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item.Materia</td>
-                        <td>@item.Comision</td>
+                        <td>@Formato.ToTitleCase(item.Materia.Descripcion)</td>
+                        <td>@Formato.ToTitleCase(item.Comision.Descripcion)</td>
                         <td>@item.AnioCalendario</td>
                         <td>@item.Cupo</td>
                         <td class="md-table-actions">

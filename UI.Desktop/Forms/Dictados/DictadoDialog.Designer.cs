@@ -131,7 +131,6 @@ namespace UI.Desktop.Forms.Dictados
             // 
             cbxDocentes.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             cbxDocentes.BackColor = Color.White;
-            cbxDocentes.DisplayMember = "";
             cbxDocentes.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxDocentes.Font = new Font("Segoe UI", 10F);
             cbxDocentes.ForeColor = Color.FromArgb(33, 33, 33);

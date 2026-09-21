@@ -16,8 +16,12 @@ namespace UI.Desktop.Forms.Planes
             dgvPlanes.AutoGenerateColumns = false;
             dgvPlanes.CellFormatting += (s, e) =>
             {
-                if (e.Value is string v && dgvPlanes.Columns[e.ColumnIndex].Name == "Descripcion")
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvPlanes.Columns[e.ColumnIndex].Name;
+                if (colName == "Descripcion" && e.Value is string v)
                     e.Value = Formato.ToTitleCase(v);
+                else if (colName == "Especialidad" && dgvPlanes.Rows[e.RowIndex].DataBoundItem is Plan p)
+                    e.Value = Formato.ToTitleCase(p.Especialidad.Descripcion);
             };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }

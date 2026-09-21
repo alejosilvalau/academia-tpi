@@ -14,10 +14,22 @@ namespace UI.Desktop.Forms.Inscripciones
         {
             InitializeComponent();
             dgvCursos.AutoGenerateColumns = false;
+            dgvCursos.CellFormatting += (s, e) =>
+            {
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvCursos.Columns[e.ColumnIndex].Name;
+                if (dgvCursos.Rows[e.RowIndex].DataBoundItem is Curso curso)
+                {
+                    if (colName == "Materia")
+                        e.Value = Formato.ToTitleCase(curso.Materia.Descripcion);
+                    else if (colName == "Comision")
+                        e.Value = Formato.ToTitleCase(curso.Comision.Descripcion);
+                }
+            };
             _servicio = ServicioFactory.Inscripcion();
             _personaActual = persona;
             Modo = modo;
-            txtAlumno.Text = persona.ToString();
+            txtAlumno.Text = $"{Formato.ToTitleCase(persona.Nombre)} {Formato.ToTitleCase(persona.Apellido)}";
             cbxCondicion.DataSource = EnumHelper.GetEnumItems<AlumnoInscripcion.Condiciones>();
             cbxCondicion.DisplayMember = "Display";
             cbxCondicion.ValueMember = "Value";

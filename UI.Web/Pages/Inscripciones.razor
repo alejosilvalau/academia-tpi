@@ -44,7 +44,7 @@
                             {
                                 @foreach (var c in cursos)
                                 {
-                                    <option value="@c.ID">@c</option>
+                                    <option value="@c.ID">@Formato.ToTitleCase(c.Materia.Descripcion) - @Formato.ToTitleCase(c.Comision.Descripcion) - @c.AnioCalendario</option>
                                 }
                             }
                         </select>
@@ -88,8 +88,8 @@
                         <td>@item.ID</td>
                         <td>@item.Alumno.Legajo</td>
                         <td>@Formato.ToTitleCase(item.Alumno.Nombre) @Formato.ToTitleCase(item.Alumno.Apellido)</td>
-                        <td>@item.Curso.Materia</td>
-                        <td>@item.Curso.Comision</td>
+                        <td>@Formato.ToTitleCase(item.Curso.Materia.Descripcion)</td>
+                        <td>@Formato.ToTitleCase(item.Curso.Comision.Descripcion)</td>
                         <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
                         <td>@(item.Nota?.ToString() ?? "-")</td>
                         <td>
@@ -120,7 +120,7 @@
     private int alumnoObjetivoId;
     private string alumnoObjetivo = "";
     private bool esAdminConAlumno => Sesion.IsAdmin && alumnoObjetivoId > 0;
-    private string NombreAlumnoFijo => esAdminConAlumno ? alumnoObjetivo : Sesion.UsuarioActual?.Persona?.ToString() ?? "";
+    private string NombreAlumnoFijo => esAdminConAlumno ? alumnoObjetivo : (Sesion.UsuarioActual?.Persona != null ? $"{Formato.ToTitleCase(Sesion.UsuarioActual.Persona.Nombre)} {Formato.ToTitleCase(Sesion.UsuarioActual.Persona.Apellido)}" : "");
 
     enum ModoForm { Ninguno, Alta }
 
@@ -146,7 +146,7 @@
                 return;
             }
             alumnoObjetivoId = alumno.ID;
-            alumnoObjetivo = alumno.ToString();
+            alumnoObjetivo = $"{Formato.ToTitleCase(alumno.Nombre)} {Formato.ToTitleCase(alumno.Apellido)}";
         }
         else
         {
