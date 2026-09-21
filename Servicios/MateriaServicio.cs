@@ -38,6 +38,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(materia);
             ValidarFormato(materia);
+            ValidarReglasNegocio(materia, esAlta: true);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Add(materia);
@@ -50,6 +51,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(materia);
             ValidarFormato(materia);
+            ValidarReglasNegocio(materia, esAlta: false);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Update(materia);
@@ -90,6 +92,14 @@ namespace Servicios
                 if (materia.HorasTotales < materia.HorasSemanales)
                     throw new ArgumentException("Las horas totales no pueden ser menores que las horas semanales.");
             });
+        }
+
+        private void ValidarReglasNegocio(Materia materia, bool esAlta)
+        {
+            var duplicado = _repositorio.GetByPlan(materia.PlanId)
+                .FirstOrDefault(m => m.Descripcion == materia.Descripcion && m.ID != materia.ID);
+            if (duplicado != null)
+                throw new ReglaNegocioException("Ya existe una materia con esa descripción en el plan seleccionado.");
         }
     }
 }

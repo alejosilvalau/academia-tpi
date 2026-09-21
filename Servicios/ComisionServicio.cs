@@ -38,6 +38,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(comision);
             ValidarFormato(comision);
+            ValidarReglasNegocio(comision, esAlta: true);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Add(comision);
@@ -50,6 +51,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(comision);
             ValidarFormato(comision);
+            ValidarReglasNegocio(comision, esAlta: false);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Update(comision);
@@ -86,6 +88,16 @@ namespace Servicios
                 Validaciones.AsegurarDescripcion(comision.Descripcion, "Descripción");
                 Validaciones.AsegurarRangoEntero(comision.AnioEspecialidad, 1, 10, "Año de especialidad");
             });
+        }
+
+        private void ValidarReglasNegocio(Comision comision, bool esAlta)
+        {
+            var duplicado = _repositorio.GetByPlan(comision.PlanId)
+                .FirstOrDefault(c => c.Descripcion == comision.Descripcion
+                                 && c.AnioEspecialidad == comision.AnioEspecialidad
+                                 && c.ID != comision.ID);
+            if (duplicado != null)
+                throw new ReglaNegocioException("Ya existe una comisión con esa descripción y año de especialidad en el plan seleccionado.");
         }
     }
 }

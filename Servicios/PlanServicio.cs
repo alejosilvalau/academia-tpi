@@ -38,6 +38,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(plan);
             ValidarFormato(plan);
+            ValidarReglasNegocio(plan, esAlta: true);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Add(plan);
@@ -50,6 +51,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(plan);
             ValidarFormato(plan);
+            ValidarReglasNegocio(plan, esAlta: false);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Update(plan);
@@ -84,6 +86,14 @@ namespace Servicios
             {
                 Validaciones.AsegurarDescripcion(plan.Descripcion, "Descripción");
             });
+        }
+
+        private void ValidarReglasNegocio(Plan plan, bool esAlta)
+        {
+            var duplicado = _repositorio.GetByEspecialidad(plan.EspecialidadId)
+                .FirstOrDefault(p => p.Descripcion == plan.Descripcion && p.ID != plan.ID);
+            if (duplicado != null)
+                throw new ReglaNegocioException("Ya existe un plan con esa descripción para la especialidad seleccionada.");
         }
     }
 }

@@ -32,6 +32,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(especialidad);
             ValidarFormato(especialidad);
+            ValidarReglasNegocio(especialidad, esAlta: true);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Add(especialidad);
@@ -44,6 +45,7 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(especialidad);
             ValidarFormato(especialidad);
+            ValidarReglasNegocio(especialidad, esAlta: false);
             EjecutarPersistencia(() =>
             {
                 _repositorio.Update(especialidad);
@@ -77,6 +79,13 @@ namespace Servicios
             {
                 Validaciones.AsegurarDescripcion(especialidad.Descripcion, "Descripción");
             });
+        }
+
+        private void ValidarReglasNegocio(Especialidad especialidad, bool esAlta)
+        {
+            var existente = _repositorio.GetByDescripcion(especialidad.Descripcion);
+            if (existente != null && existente.ID != especialidad.ID)
+                throw new ReglaNegocioException("Ya existe una especialidad con esa descripción.");
         }
     }
 }
