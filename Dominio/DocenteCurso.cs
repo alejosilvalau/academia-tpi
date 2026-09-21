@@ -1,6 +1,5 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Reflection;
 
 namespace Dominio
 {
@@ -8,17 +7,6 @@ namespace Dominio
     public class DocenteCurso : BusinessEntity
     {
         public TiposCargos Cargo { get; set; }
-
-        [NotMapped]
-        public string CargoDisplay
-        {
-            get
-            {
-                var field = typeof(TiposCargos).GetField(Cargo.ToString());
-                var attr = field?.GetCustomAttribute<DescriptionAttribute>();
-                return attr?.Description ?? Cargo.ToString();
-            }
-        }
 
         [ForeignKey("Curso")]
         public int CursoId { get; set; }

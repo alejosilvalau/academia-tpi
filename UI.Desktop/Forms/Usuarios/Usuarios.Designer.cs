@@ -143,7 +143,7 @@ namespace UI.Desktop.Forms.Usuarios
             // PersonaNombre
             //
             this.PersonaNombre.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PersonaNombre.DataPropertyName = "PersonaNombre";
+            this.PersonaNombre.DataPropertyName = "Nombre";
             this.PersonaNombre.HeaderText = "Nombre";
             this.PersonaNombre.MinimumWidth = 150;
             this.PersonaNombre.Name = "PersonaNombre";
@@ -152,7 +152,7 @@ namespace UI.Desktop.Forms.Usuarios
             // PersonaApellido
             //
             this.PersonaApellido.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PersonaApellido.DataPropertyName = "PersonaApellido";
+            this.PersonaApellido.DataPropertyName = "Apellido";
             this.PersonaApellido.HeaderText = "Apellido";
             this.PersonaApellido.MinimumWidth = 150;
             this.PersonaApellido.Name = "PersonaApellido";

@@ -21,11 +21,16 @@ namespace UI.Desktop.Forms.RegistrarNotas
             dgvAlumnos.AutoGenerateColumns = false;
             dgvAlumnos.CellFormatting += (s, e) =>
             {
-                if (e.Value is string v && e.ColumnIndex >= 0)
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvAlumnos.Columns[e.ColumnIndex].Name;
+                if (dgvAlumnos.Rows[e.RowIndex].DataBoundItem is AlumnoInscripcion ins)
                 {
-                    var colName = dgvAlumnos.Columns[e.ColumnIndex].Name;
-                    if (colName is "Nombre" or "Apellido")
-                        e.Value = Formato.ToTitleCase(v);
+                    if (colName == "Nombre")
+                        e.Value = Formato.ToTitleCase(ins.Alumno.Nombre);
+                    else if (colName == "Apellido")
+                        e.Value = Formato.ToTitleCase(ins.Alumno.Apellido);
+                    else if (colName == "Legajo")
+                        e.Value = ins.Alumno.Legajo;
                 }
             };
             cbxCursos.DataSource = _dcServicio.GetByDocente(persona.ID);

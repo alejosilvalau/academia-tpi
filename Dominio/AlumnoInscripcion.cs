@@ -22,51 +22,6 @@ namespace Dominio
         public int CursoId { get; set; }
         public virtual Curso Curso { get; set; } = null!;
 
-        [NotMapped]
-        public string DescripcionMateria
-        {
-            get
-            {
-                return $"{Curso.Materia}";
-            }
-        }
-
-        [NotMapped]
-        public int? Legajo
-        {
-            get
-            {
-                return Alumno.Legajo;
-            }
-        }
-
-        [NotMapped]
-        public string Nombre
-        {
-            get
-            {
-                return Alumno.Nombre;
-            }
-        }
-
-        [NotMapped]
-        public string Apellido
-        {
-            get
-            {
-                return Alumno.Apellido;
-            }
-        }
-
-        [NotMapped]
-        public string DescripcionComision
-        {
-            get
-            {
-                return $"{Curso.Comision}";
-            }
-        }
-
         public enum Condiciones
         {
             [Description("Inscripto")]

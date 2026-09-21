@@ -1,5 +1,6 @@
 using Dominio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Inscripciones
 {
@@ -15,6 +16,18 @@ namespace UI.Desktop.Forms.Inscripciones
             _servicio = ServicioFactory.Inscripcion();
             _personaActual = persona;
             dgvInscripciones.AutoGenerateColumns = false;
+            dgvInscripciones.CellFormatting += (s, e) =>
+            {
+                if (e.ColumnIndex < 0) return;
+                var colName = dgvInscripciones.Columns[e.ColumnIndex].Name;
+                if (dgvInscripciones.Rows[e.RowIndex].DataBoundItem is AlumnoInscripcion ins)
+                {
+                    if (colName == "DescripcionMateria")
+                        e.Value = Formato.ToTitleCase(ins.Curso.Materia.ToString());
+                    else if (colName == "Legajo")
+                        e.Value = ins.Alumno.Legajo;
+                }
+            };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
 
             if (!admin)

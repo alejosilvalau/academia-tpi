@@ -19,7 +19,6 @@ namespace UI.Desktop.Forms.Cursos
         {
             this.dgvCursos = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AnioCalendario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -97,7 +96,6 @@ namespace UI.Desktop.Forms.Cursos
             this.dgvCursos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvCursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
-            this.Descripcion,
             this.AnioCalendario,
             this.Cupo,
             this.Materia,
@@ -131,14 +129,6 @@ namespace UI.Desktop.Forms.Cursos
             this.ID.MinimumWidth = 60;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
-            //
-            // Descripcion
-            //
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripción";
-            this.Descripcion.MinimumWidth = 150;
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
             //
             // AnioCalendario
             //
@@ -203,7 +193,6 @@ namespace UI.Desktop.Forms.Cursos
 
         private System.Windows.Forms.DataGridView dgvCursos;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn AnioCalendario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materia;

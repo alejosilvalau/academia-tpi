@@ -44,7 +44,7 @@
                             {
                                 @foreach (var c in cursos)
                                 {
-                                    <option value="@c.ID">@c.Descripcion</option>
+                                    <option value="@c.ID">@c</option>
                                 }
                             }
                         </select>
@@ -86,10 +86,10 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item.Legajo</td>
-                        <td>@Formato.ToTitleCase(item.Nombre) @Formato.ToTitleCase(item.Apellido)</td>
-                        <td>@item.DescripcionMateria</td>
-                        <td>@item.DescripcionComision</td>
+                        <td>@item.Alumno.Legajo</td>
+                        <td>@Formato.ToTitleCase(item.Alumno.Nombre) @Formato.ToTitleCase(item.Alumno.Apellido)</td>
+                        <td>@item.Curso.Materia</td>
+                        <td>@item.Curso.Comision</td>
                         <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
                         <td>@(item.Nota?.ToString() ?? "-")</td>
                         <td>

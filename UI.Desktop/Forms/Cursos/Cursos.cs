@@ -1,5 +1,6 @@
 using Dominio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Cursos
 {
@@ -13,6 +14,19 @@ namespace UI.Desktop.Forms.Cursos
             InitializeComponent();
             _servicio = ServicioFactory.Curso();
             dgvCursos.AutoGenerateColumns = false;
+            dgvCursos.CellFormatting += (s, e) =>
+            {
+                if (e.ColumnIndex >= 0 && dgvCursos.Columns[e.ColumnIndex].Name == "Materia"
+                    && e.Value is Materia m)
+                {
+                    e.Value = Formato.ToTitleCase(m.Descripcion);
+                }
+                if (e.ColumnIndex >= 0 && dgvCursos.Columns[e.ColumnIndex].Name == "Comision"
+                    && e.Value is Comision c)
+                {
+                    e.Value = Formato.ToTitleCase(c.Descripcion);
+                }
+            };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 

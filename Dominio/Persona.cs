@@ -45,9 +45,6 @@ namespace Dominio
             }
         }
 
-        [NotMapped]
-        public string NombreCompleto => ToString();
-
         public enum TiposPersonas
         {
             [Description("Administrador")]

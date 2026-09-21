@@ -92,8 +92,6 @@ namespace Repositorio
 
             modelBuilder.Entity<Curso>(entity =>
             {
-                entity.Ignore(c => c.Descripcion);
-
                 entity.Metadata.FindNavigation(nameof(Curso.Materia))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
                 entity.Metadata.FindNavigation(nameof(Curso.Comision))!
@@ -110,8 +108,6 @@ namespace Repositorio
 
             modelBuilder.Entity<Persona>(entity =>
             {
-                entity.Ignore(p => p.NombreCompleto);
-
                 entity.Metadata.FindNavigation(nameof(Persona.Plan))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
                 entity.HasOne(p => p.Plan).WithMany()
@@ -125,10 +121,6 @@ namespace Repositorio
 
             modelBuilder.Entity<Usuario>(entity =>
             {
-                entity.Ignore(u => u.PersonaNombre);
-                entity.Ignore(u => u.PersonaApellido);
-                entity.Ignore(u => u.PersonaEMail);
-
                 entity.Metadata.FindNavigation(nameof(Usuario.Persona))!
                     .SetPropertyAccessMode(PropertyAccessMode.Field);
                 entity.HasOne(u => u.Persona).WithMany()
@@ -158,11 +150,6 @@ namespace Repositorio
 
             modelBuilder.Entity<AlumnoInscripcion>(entity =>
             {
-                entity.Ignore(ai => ai.DescripcionMateria);
-                entity.Ignore(ai => ai.Legajo);
-                entity.Ignore(ai => ai.Nombre);
-                entity.Ignore(ai => ai.Apellido);
-                entity.Ignore(ai => ai.DescripcionComision);
                 entity.HasOne(ai => ai.Alumno).WithMany()
                     .HasForeignKey(ai => ai.AlumnoId)
                     .OnDelete(DeleteBehavior.Restrict);

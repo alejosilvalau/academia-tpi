@@ -24,7 +24,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.cbxCondicion = new System.Windows.Forms.ComboBox();
             this.dgvCursos = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Descripcion = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.AnioCalendario = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Cupo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Materia = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -112,7 +111,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.dgvCursos.ColumnHeadersHeight = 40;
             this.dgvCursos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
-            this.Descripcion,
             this.AnioCalendario,
             this.Cupo,
             this.Materia,
@@ -144,15 +142,6 @@ namespace UI.Desktop.Forms.Inscripciones
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             this.ID.Width = 50;
-            //
-            // Descripcion
-            //
-            this.Descripcion.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Descripcion.DataPropertyName = "Descripcion";
-            this.Descripcion.HeaderText = "Descripción";
-            this.Descripcion.MinimumWidth = 200;
-            this.Descripcion.Name = "Descripcion";
-            this.Descripcion.ReadOnly = true;
             //
             // AnioCalendario
             //
@@ -270,7 +259,6 @@ namespace UI.Desktop.Forms.Inscripciones
         private System.Windows.Forms.ComboBox cbxCondicion;
         private System.Windows.Forms.DataGridView dgvCursos;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Descripcion;
         private System.Windows.Forms.DataGridViewTextBoxColumn AnioCalendario;
         private System.Windows.Forms.DataGridViewTextBoxColumn Cupo;
         private System.Windows.Forms.DataGridViewTextBoxColumn Materia;

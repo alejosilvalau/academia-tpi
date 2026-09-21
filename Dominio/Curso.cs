@@ -8,15 +8,6 @@ namespace Dominio
         public int AnioCalendario { get; set; }
         public int Cupo { get; set; }
 
-        [NotMapped]
-        public string Descripcion
-        {
-            get
-            {
-                return $"{Materia} - {Comision} - {AnioCalendario}";
-            }
-        }
-
         [ForeignKey("Materia")]
         public int MateriaId { get; set; }
         private Materia _materia = null!;
@@ -57,7 +48,7 @@ namespace Dominio
 
         public override string ToString()
         {
-            return Descripcion;
+            return $"{Materia} - {Comision} - {AnioCalendario}";
         }
     }
 }

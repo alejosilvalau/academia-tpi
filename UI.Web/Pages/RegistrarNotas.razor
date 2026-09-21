@@ -33,7 +33,7 @@
                     <option value="0">-- Seleccione un curso --</option>
                     @foreach (var c in cursos)
                     {
-                        <option value="@c.ID">@c.Descripcion</option>
+                        <option value="@c.ID">@c</option>
                     }
                 </select>
             </div>
@@ -57,8 +57,8 @@
                     @foreach (var item in inscripciones)
                     {
                         <tr>
-                            <td>@item.Legajo</td>
-                            <td>@Formato.ToTitleCase(item.Nombre) @Formato.ToTitleCase(item.Apellido)</td>
+                            <td>@item.Alumno.Legajo</td>
+                            <td>@Formato.ToTitleCase(item.Alumno.Nombre) @Formato.ToTitleCase(item.Alumno.Apellido)</td>
                             <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
                             <td>@(item.Nota?.ToString() ?? "-")</td>
                             <td>

@@ -35,31 +35,5 @@ namespace Dominio
             }
         }
 
-        [NotMapped]
-        public string PersonaNombre
-        {
-            get
-            {
-                return Persona?.Nombre ?? "-";
-            }
-        }
-
-        [NotMapped]
-        public string PersonaApellido
-        {
-            get
-            {
-                return Persona?.Apellido ?? "-";
-            }
-        }
-
-        [NotMapped]
-        public string PersonaEMail
-        {
-            get
-            {
-                return Persona?.EMail ?? "-";
-            }
-        }
     }
 }

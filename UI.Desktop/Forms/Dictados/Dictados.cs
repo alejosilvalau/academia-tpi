@@ -1,5 +1,8 @@
+using System.ComponentModel;
+using System.Reflection;
 using Dominio;
 using Servicios;
+using Utils;
 
 namespace UI.Desktop.Forms.Dictados
 {
@@ -13,6 +16,16 @@ namespace UI.Desktop.Forms.Dictados
             InitializeComponent();
             _servicio = ServicioFactory.DocenteCurso();
             dgvDocentes.AutoGenerateColumns = false;
+            dgvDocentes.CellFormatting += (s, e) =>
+            {
+                if (e.ColumnIndex >= 0 && dgvDocentes.Columns[e.ColumnIndex].Name == "Cargo"
+                    && e.Value is DocenteCurso.TiposCargos cargo)
+                {
+                    var field = typeof(DocenteCurso.TiposCargos).GetField(cargo.ToString());
+                    var attr = field?.GetCustomAttribute<DescriptionAttribute>();
+                    e.Value = attr?.Description ?? cargo.ToString();
+                }
+            };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 

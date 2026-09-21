@@ -7,6 +7,7 @@ namespace UI.Desktop.Forms.Usuarios
     public partial class Usuarios : ApplicationForm
     {
         private readonly UsuarioServicio _servicio;
+        private List<Usuario>? _usuarios;
         public override DataGridView? GrillaPrincipal => dgvUsuarios;
 
         public Usuarios()
@@ -19,7 +20,7 @@ namespace UI.Desktop.Forms.Usuarios
                 if (e.Value is string v && e.ColumnIndex >= 0)
                 {
                     var colName = dgvUsuarios.Columns[e.ColumnIndex].Name;
-                    if (colName is "NombreUsuario" or "PersonaNombre" or "PersonaApellido")
+                    if (colName is "NombreUsuario" or "Nombre" or "Apellido")
                         e.Value = Formato.ToTitleCase(v);
                 }
             };
@@ -33,7 +34,15 @@ namespace UI.Desktop.Forms.Usuarios
             try
             {
                 dgvUsuarios.DataSource = null;
-                dgvUsuarios.DataSource = _servicio.GetAll();
+                _usuarios = _servicio.GetAll();
+                dgvUsuarios.DataSource = _usuarios.Select(u => new
+                {
+                    u.ID,
+                    u.NombreUsuario,
+                    Nombre = u.Persona?.Nombre ?? "-",
+                    Apellido = u.Persona?.Apellido ?? "-",
+                    u.Habilitado
+                }).ToList();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
@@ -47,7 +56,7 @@ namespace UI.Desktop.Forms.Usuarios
         private void tsbEditar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvUsuarios)) return;
-            int id = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+            int id = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
             new UsuarioDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvUsuarios);
             Listar();
@@ -58,7 +67,7 @@ namespace UI.Desktop.Forms.Usuarios
         private void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvUsuarios)) return;
-            int id = ((Usuario)dgvUsuarios.SelectedRows[0].DataBoundItem).ID;
+            int id = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
             new UsuarioDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvUsuarios);
             Listar();

@@ -1,27 +1,10 @@
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Dominio
 {
     public class BusinessEntity
     {
-        public BusinessEntity()
-        {
-            State = States.New;
-        }
-
         [Key]
         public int ID { get; set; }
-
-        [NotMapped]
-        public States State { get; set; }
-
-        public enum States
-        {
-            Deleted,
-            New,
-            Modified,
-            Unmodified
-        }
     }
 }
