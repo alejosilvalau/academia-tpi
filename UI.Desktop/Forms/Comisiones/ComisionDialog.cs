@@ -45,7 +45,7 @@ namespace UI.Desktop.Forms.Comisiones
         {
             if (_comision == null) return;
             txtID.Text = _comision.ID.ToString();
-            txtDescripcion.Text = _comision.Descripcion;
+            txtDescripcion.Text = Formato.ToTitleCase(_comision.Descripcion);
             txtAnioEspecialidad.Text = _comision.AnioEspecialidad.ToString();
             cbxPlan.SelectedValue = _comision.PlanId;
         }

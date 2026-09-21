@@ -48,11 +48,11 @@ namespace UI.Desktop.Forms.Personas
         {
             if (_persona == null) return;
             txtID.Text = _persona.ID.ToString();
-            txtNombre.Text = _persona.Nombre;
-            txtApellido.Text = _persona.Apellido;
+            txtNombre.Text = Formato.ToTitleCase(_persona.Nombre);
+            txtApellido.Text = Formato.ToTitleCase(_persona.Apellido);
             txtLegajo.Text = _persona.Legajo.ToString();
-            txtEMail.Text = _persona.EMail;
-            txtDireccion.Text = _persona.Direccion;
+            txtEMail.Text = Formato.ToTitleCase(_persona.EMail);
+            txtDireccion.Text = Formato.ToTitleCase(_persona.Direccion);
             txtTelefono.Text = _persona.Telefono;
             dtpFechaNacimiento.Value = _persona.FechaNacimiento;
             cbxTipo.SelectedItem = _persona.Tipo;

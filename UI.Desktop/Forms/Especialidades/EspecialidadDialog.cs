@@ -42,7 +42,7 @@ namespace UI.Desktop.Forms.Especialidades
         {
             if (_especialidad == null) return;
             txtID.Text = _especialidad.ID.ToString();
-            txtDescripcion.Text = _especialidad.Descripcion;
+            txtDescripcion.Text = Formato.ToTitleCase(_especialidad.Descripcion);
         }
 
         public override void MapearADatos()

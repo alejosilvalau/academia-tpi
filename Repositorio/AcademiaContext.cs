@@ -1,3 +1,4 @@
+using System.Globalization;
 using Dominio;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,6 +7,38 @@ namespace Repositorio
     public class AcademiaContext : DbContext
     {
         public AcademiaContext(DbContextOptions<AcademiaContext> options) : base(options) { }
+
+        public override int SaveChanges()
+        {
+            foreach (var entry in ChangeTracker.Entries())
+            {
+                if (entry.State == EntityState.Added || entry.State == EntityState.Modified)
+                {
+                    foreach (var prop in entry.Properties)
+                    {
+                        if (prop.CurrentValue is string valor && DebeSerLowercase(entry.Entity, prop.Metadata.Name))
+                            prop.CurrentValue = valor.ToLower();
+                    }
+                }
+            }
+            return base.SaveChanges();
+        }
+
+        private static bool DebeSerLowercase(object entity, string propertyName)
+        {
+            return (entity, propertyName) switch
+            {
+                (Especialidad, "Descripcion") => true,
+                (Plan, "Descripcion") => true,
+                (Materia, "Descripcion") => true,
+                (Comision, "Descripcion") => true,
+                (Persona, "Nombre") => true,
+                (Persona, "Apellido") => true,
+                (Persona, "EMail") => true,
+                (Persona, "Direccion") => true,
+                _ => false
+            };
+        }
 
         public DbSet<Especialidad> Especialidades { get; set; }
         public DbSet<Plan> Planes { get; set; }

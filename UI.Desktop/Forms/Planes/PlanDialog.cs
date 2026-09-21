@@ -52,7 +52,7 @@ namespace UI.Desktop.Forms.Planes
         {
             if (_plan == null) return;
             txtID.Text = _plan.ID.ToString();
-            txtDescripcion.Text = _plan.Descripcion;
+            txtDescripcion.Text = Formato.ToTitleCase(_plan.Descripcion);
             cbxEspecialidad.SelectedValue = _plan.EspecialidadId;
         }
 

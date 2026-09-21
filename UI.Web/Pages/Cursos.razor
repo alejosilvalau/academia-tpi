@@ -32,7 +32,7 @@
                             {
                                 @foreach (var m in materias)
                                 {
-                                    <option value="@m.ID">@m.Descripcion</option>
+                                    <option value="@m.ID">@m</option>
                                 }
                             }
                         </select>
@@ -45,7 +45,7 @@
                             {
                                 @foreach (var c in comisiones)
                                 {
-                                    <option value="@c.ID">@c.Descripcion</option>
+                                    <option value="@c.ID">@c</option>
                                 }
                             }
                         </select>
@@ -96,8 +96,8 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item.Materia?.Descripcion</td>
-                        <td>@item.Comision?.Descripcion</td>
+                        <td>@item.Materia</td>
+                        <td>@item.Comision</td>
                         <td>@item.AnioCalendario</td>
                         <td>@item.Cupo</td>
                         <td class="md-table-actions">

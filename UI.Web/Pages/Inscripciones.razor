@@ -87,7 +87,7 @@
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
                         <td>@item.Legajo</td>
-                        <td>@item.Nombre @item.Apellido</td>
+                        <td>@Formato.ToTitleCase(item.Nombre) @Formato.ToTitleCase(item.Apellido)</td>
                         <td>@item.DescripcionMateria</td>
                         <td>@item.DescripcionComision</td>
                         <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>

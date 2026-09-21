@@ -54,7 +54,7 @@ namespace UI.Desktop.Forms.Materias
         {
             if (_materia == null) return;
             txtID.Text = _materia.ID.ToString();
-            txtDescripcion.Text = _materia.Descripcion;
+            txtDescripcion.Text = Formato.ToTitleCase(_materia.Descripcion);
             txtHsSemanales.Text = _materia.HorasSemanales.ToString();
             txtHsTotales.Text = _materia.HorasTotales.ToString();
             cbxPlan.SelectedValue = _materia.PlanId;

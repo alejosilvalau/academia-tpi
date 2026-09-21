@@ -56,7 +56,7 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item.Descripcion</td>
+                        <td>@item</td>
                         <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
                             <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>

@@ -41,7 +41,7 @@
                             {
                                 @foreach (var p in personas)
                                 {
-                                    <option value="@p.ID">@p.Nombre @p.Apellido (Legajo: @p.Legajo)</option>
+                                    <option value="@p.ID">@p (Legajo: @p.Legajo)</option>
                                 }
                             }
                         </select>
@@ -89,8 +89,8 @@
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
                         <td>@item.NombreUsuario</td>
-                        <td>@item.Persona?.Nombre</td>
-                        <td>@item.Persona?.Apellido</td>
+                        <td>@Formato.ToTitleCase(item.Persona?.Nombre ?? "")</td>
+                        <td>@Formato.ToTitleCase(item.Persona?.Apellido ?? "")</td>
                         <td>
                             @if (item.Habilitado)
                             {

@@ -45,7 +45,7 @@
                             {
                                 @foreach (var d in docentes)
                                 {
-                                    <option value="@d.ID">@d.Nombre @d.Apellido</option>
+                                    <option value="@d.ID">@d</option>
                                 }
                             }
                         </select>
@@ -93,7 +93,7 @@
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
                         <td>@item.Curso?.Descripcion</td>
-                        <td>@item.Docente?.Nombre @item.Docente?.Apellido</td>
+                        <td>@item.Docente</td>
                         <td><span class="md-badge md-badge-accent">@FormatCargo(item.Cargo)</span></td>
                         <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>

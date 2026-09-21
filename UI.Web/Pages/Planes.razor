@@ -35,7 +35,7 @@
                             {
                                 @foreach (var e in especialidades)
                                 {
-                                    <option value="@e.ID">@e.Descripcion</option>
+                                    <option value="@e.ID">@e</option>
                                 }
                             }
                         </select>
@@ -73,8 +73,8 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item.Descripcion</td>
-                        <td>@item.Especialidad?.Descripcion</td>
+                        <td>@item</td>
+                        <td>@item.Especialidad</td>
                         <td class="md-table-actions">
                             <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
                             <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>

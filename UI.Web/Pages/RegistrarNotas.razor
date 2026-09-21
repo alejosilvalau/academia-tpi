@@ -58,7 +58,7 @@
                     {
                         <tr>
                             <td>@item.Legajo</td>
-                            <td>@item.Nombre @item.Apellido</td>
+                            <td>@Formato.ToTitleCase(item.Nombre) @Formato.ToTitleCase(item.Apellido)</td>
                             <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
                             <td>@(item.Nota?.ToString() ?? "-")</td>
                             <td>

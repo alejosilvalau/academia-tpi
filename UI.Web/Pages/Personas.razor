@@ -76,7 +76,7 @@
                             {
                                 @foreach (var p in planes)
                                 {
-                                    <option value="@p.ID">@p.Descripcion</option>
+                                    <option value="@p.ID">@p</option>
                                 }
                             }
                         </select>
@@ -117,11 +117,11 @@
                 {
                     <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
                         <td>@item.ID</td>
-                        <td>@item.Nombre</td>
-                        <td>@item.Apellido</td>
+                        <td>@Formato.ToTitleCase(item.Nombre)</td>
+                        <td>@Formato.ToTitleCase(item.Apellido)</td>
                         <td>@item.Legajo</td>
                         <td><span class="md-badge md-badge-primary">@item.Tipo</span></td>
-                        <td>@item.EMail</td>
+                        <td>@Formato.ToTitleCase(item.EMail)</td>
                         <td class="md-table-actions">
                             @if (modoSeleccion)
                             {
