@@ -1,6 +1,7 @@
 using Dominio;
 using Servicios;
 using UI.Desktop.Forms.Materias;
+using Utils;
 
 namespace UI.Desktop.Forms.Planes
 {
@@ -19,6 +20,16 @@ namespace UI.Desktop.Forms.Planes
             _materiaServicio = ServicioFactory.Materia();
             dgvPlanes.AutoGenerateColumns = false;
             dgvMaterias.AutoGenerateColumns = false;
+            dgvPlanes.CellFormatting += (s, e) =>
+            {
+                if (e.Value is string v && dgvPlanes.Columns[e.ColumnIndex].Name == "colPlanDescripcion")
+                    e.Value = Formato.ToTitleCase(v);
+            };
+            dgvMaterias.CellFormatting += (s, e) =>
+            {
+                if (e.Value is string v && dgvMaterias.Columns[e.ColumnIndex].Name == "colMateriaDescripcion")
+                    e.Value = Formato.ToTitleCase(v);
+            };
             AplicarHoverToolStrip(toolStripMaestro, MaterialColors.Primary);
             AplicarHoverToolStrip(toolStripDetalle, MaterialColors.Primary);
         }
