@@ -1,19 +1,15 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Usuarios
 {
     public partial class Usuarios : ApplicationForm
     {
-        private readonly UsuarioServicio _servicio;
-        private List<Usuario>? _usuarios;
         public override DataGridView? GrillaPrincipal => dgvUsuarios;
 
         public Usuarios()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Usuario();
             dgvUsuarios.AutoGenerateColumns = false;
             dgvUsuarios.CellFormatting += (s, e) =>
             {
@@ -29,48 +25,48 @@ namespace UI.Desktop.Forms.Usuarios
 
         private void Usuarios_Load(object sender, EventArgs e) => Listar();
 
-        public override void Listar()
+        public override async Task ListarAsync()
         {
             try
             {
                 dgvUsuarios.DataSource = null;
-                _usuarios = _servicio.GetAll();
-                dgvUsuarios.DataSource = _usuarios.Select(u => new
+                var usuarios = await ApiEscritorio.Usuario.GetAllAsync();
+                dgvUsuarios.DataSource = usuarios.Select(u => new
                 {
-                    u.ID,
+                    u.Id,
                     u.NombreUsuario,
-                    Nombre = u.Persona?.Nombre ?? "-",
-                    Apellido = u.Persona?.Apellido ?? "-",
+                    Nombre = u.PersonaNombre ?? "-",
+                    Apellido = u.PersonaApellido ?? "-",
                     u.Habilitado
                 }).ToList();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void tsbAgregar_Click(object sender, EventArgs e)
+        private async void tsbAgregar_Click(object sender, EventArgs e)
         {
             new UsuarioDialog(ModoForm.Alta).ShowDialog();
-            Listar();
+            await ListarAsync();
         }
 
-        private void tsbEditar_Click(object sender, EventArgs e)
+        private async void tsbEditar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvUsuarios)) return;
-            int id = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
+            int id = (int)dgvUsuarios.SelectedRows[0].Cells["Id"].Value;
             new UsuarioDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvUsuarios);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvUsuarios, id);
             DescongelarGrilla(dgvUsuarios);
         }
 
-        private void tsbEliminar_Click(object sender, EventArgs e)
+        private async void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvUsuarios)) return;
-            int id = (int)dgvUsuarios.SelectedRows[0].Cells["ID"].Value;
+            int id = (int)dgvUsuarios.SelectedRows[0].Cells["Id"].Value;
             new UsuarioDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvUsuarios);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvUsuarios, id);
             DescongelarGrilla(dgvUsuarios);
         }

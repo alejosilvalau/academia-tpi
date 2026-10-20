@@ -288,7 +288,6 @@ namespace UI.Desktop.Forms.Cursos
             Name = "CursoDialog";
             StartPosition = FormStartPosition.CenterParent;
             Text = "Curso";
-            Load += CursoDialog_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
             panelBotones.ResumeLayout(false);

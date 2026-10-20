@@ -75,7 +75,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
-    options.SerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    options.SerializerOptions.Converters.Add(new JsonStringEnumConverter());
 });
 
 var app = builder.Build();
@@ -96,18 +96,24 @@ app.UseCors("Permisiva");
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapPost("/api/auth/login", (LoginRequest req, UsuarioServicio servicio, JwtTokenService jwt) =>
+app.MapPost("/api/auth/login", (Contratos.LoginRequest req, UsuarioServicio servicio, JwtTokenService jwt) =>
 {
     var usuario = servicio.Login(req.NombreUsuario, req.Clave);
     if (usuario == null)
         return Results.Unauthorized();
 
     var token = jwt.GenerarToken(usuario);
-    return Results.Ok(new { token });
+    return Results.Ok(new Contratos.LoginResponse(
+        token,
+        usuario.NombreUsuario,
+        usuario.PersonaId,
+        usuario.Persona?.Tipo,
+        usuario.Persona?.Legajo,
+        usuario.Persona?.Nombre,
+        usuario.Persona?.Apellido,
+        usuario.Habilitado));
 }).AllowAnonymous();
 
 app.MapApiEndpoints();
 
 app.Run();
-
-public record LoginRequest(string NombreUsuario, string Clave);

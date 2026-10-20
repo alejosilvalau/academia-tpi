@@ -1,6 +1,6 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Contratos;
 
 namespace Dominio
 {
@@ -19,7 +19,7 @@ namespace Dominio
         [StringLength(50)]
         public string Telefono { get; set; } = null!;
         public DateTime FechaNacimiento { get; set; }
-        public TiposPersonas Tipo { get; set; }
+        public TipoPersona Tipo { get; set; }
 
         [ForeignKey("Plan")]
         public int? PlanId { get; set; }
@@ -42,16 +42,6 @@ namespace Dominio
                     PlanId = value.ID;
                 }
             }
-        }
-
-        public enum TiposPersonas
-        {
-            [Description("Administrador")]
-            Administrador,
-            [Description("Alumno")]
-            Alumno,
-            [Description("Docente")]
-            Docente
         }
 
     }

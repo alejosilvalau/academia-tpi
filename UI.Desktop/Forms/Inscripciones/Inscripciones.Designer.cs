@@ -109,7 +109,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             // ID
             //
-            this.ID.DataPropertyName = "ID";
+            this.ID.DataPropertyName = "Id";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 50;
             this.ID.Name = "ID";
@@ -119,7 +119,7 @@ namespace UI.Desktop.Forms.Inscripciones
             // DescripcionMateria
             //
             this.DescripcionMateria.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DescripcionMateria.DataPropertyName = "DescripcionMateria";
+            this.DescripcionMateria.DataPropertyName = "CursoMateriaDescripcion";
             this.DescripcionMateria.HeaderText = "Materia";
             this.DescripcionMateria.MinimumWidth = 200;
             this.DescripcionMateria.Name = "DescripcionMateria";
@@ -143,7 +143,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             // Legajo
             //
-            this.Legajo.DataPropertyName = "Legajo";
+            this.Legajo.DataPropertyName = "AlumnoLegajo";
             this.Legajo.HeaderText = "Legajo";
             this.Legajo.MinimumWidth = 100;
             this.Legajo.Name = "Legajo";

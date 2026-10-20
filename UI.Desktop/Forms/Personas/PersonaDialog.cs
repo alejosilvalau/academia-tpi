@@ -1,37 +1,41 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Personas
 {
     public partial class PersonaDialog : ApplicationForm
     {
-        private readonly PersonaServicio _servicio;
-        private readonly PlanServicio _planServicio;
-        private Persona? _persona;
+        private int? _id;
 
         public PersonaDialog() : base()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Persona();
-            _planServicio = ServicioFactory.Plan();
         }
 
         public PersonaDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxPlan.DataSource = _planServicio.GetAll()
-                .Select(p => new { p.ID, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
-            cbxTipo.DataSource = EnumHelper.GetEnumItems<Persona.TiposPersonas>();
-            cbxTipo.DisplayMember = "Display";
-            cbxTipo.ValueMember = "Value";
+            CargarCatalogos();
             SetModo();
         }
 
         public PersonaDialog(int id, ModoForm modo) : this(modo)
         {
-            _persona = _servicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var persona = ApiEscritorio.Persona.GetOneAsync(id).GetAwaiter().GetResult();
+            if (persona != null) MapearDeDatos(persona);
+        }
+
+        private void CargarCatalogos()
+        {
+            var planes = ApiEscritorio.Plan.GetAllAsync().GetAwaiter().GetResult();
+            cbxPlan.DataSource = planes
+                .Select(p => new { p.Id, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
+            cbxPlan.DisplayMember = "Descripcion";
+            cbxPlan.ValueMember = "Id";
+            cbxTipo.DataSource = EnumHelper.GetEnumItems<TipoPersona>();
+            cbxTipo.DisplayMember = "Display";
+            cbxTipo.ValueMember = "Value";
         }
 
         private void SetModo()
@@ -45,44 +49,47 @@ namespace UI.Desktop.Forms.Personas
             }
         }
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos(PersonaDto persona)
         {
-            if (_persona == null) return;
-            txtID.Text = _persona.ID.ToString();
-            txtNombre.Text = Formato.ToTitleCase(_persona.Nombre);
-            txtApellido.Text = Formato.ToTitleCase(_persona.Apellido);
-            txtLegajo.Text = _persona.Legajo.ToString();
-            txtEMail.Text = Formato.ToTitleCase(_persona.EMail);
-            txtDireccion.Text = Formato.ToTitleCase(_persona.Direccion);
-            txtTelefono.Text = _persona.Telefono;
-            dtpFechaNacimiento.Value = _persona.FechaNacimiento;
-            cbxTipo.SelectedItem = _persona.Tipo;
-            if (_persona.PlanId.HasValue) cbxPlan.SelectedValue = _persona.PlanId.Value;
+            txtID.Text = persona.Id.ToString();
+            txtNombre.Text = Formato.ToTitleCase(persona.Nombre);
+            txtApellido.Text = Formato.ToTitleCase(persona.Apellido);
+            txtLegajo.Text = persona.Legajo.ToString();
+            txtEMail.Text = Formato.ToTitleCase(persona.EMail);
+            txtDireccion.Text = Formato.ToTitleCase(persona.Direccion);
+            txtTelefono.Text = persona.Telefono;
+            dtpFechaNacimiento.Value = persona.FechaNacimiento;
+            cbxTipo.SelectedItem = persona.Tipo;
+            if (persona.PlanId.HasValue) cbxPlan.SelectedValue = persona.PlanId.Value;
         }
 
-        public override void MapearADatos()
+        public override void MapearDeDatos() { }
+
+        private PersonaRequest ConstruirRequest()
         {
-            if (Modo == ModoForm.Alta) _persona = new Persona();
-            if (_persona == null) return;
-            _persona.Nombre = txtNombre.Text;
-            _persona.Apellido = txtApellido.Text;
             int.TryParse(txtLegajo.Text, out int legajo);
-            _persona.Legajo = legajo;
-            _persona.EMail = txtEMail.Text;
-            _persona.Direccion = txtDireccion.Text;
-            _persona.Telefono = txtTelefono.Text;
-            _persona.FechaNacimiento = dtpFechaNacimiento.Value;
-            if (cbxTipo.SelectedItem is Persona.TiposPersonas tipo) _persona.Tipo = tipo;
-            if (cbxPlan.SelectedValue is int planId) _persona.PlanId = planId;
+            return new PersonaRequest
+            {
+                Nombre = txtNombre.Text,
+                Apellido = txtApellido.Text,
+                Legajo = legajo,
+                EMail = txtEMail.Text,
+                Direccion = txtDireccion.Text,
+                Telefono = txtTelefono.Text,
+                FechaNacimiento = dtpFechaNacimiento.Value,
+                Tipo = cbxTipo.SelectedItem is TipoPersona tipo ? tipo : TipoPersona.Alumno,
+                PlanId = cbxPlan.SelectedValue is int planId ? planId : null
+            };
         }
 
-        public override void GuardarCambios()
+        public override async Task GuardarCambiosAsync()
         {
-            MapearADatos();
-            if (_persona == null) return;
-            if (Modo == ModoForm.Baja) _servicio.Delete(_persona);
-            else if (Modo == ModoForm.Alta) _servicio.Save(_persona);
-            else _servicio.Update(_persona);
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.Persona.DeleteAsync(_id.Value);
+            else if (Modo == ModoForm.Alta)
+                await ApiEscritorio.Persona.SaveAsync(ConstruirRequest());
+            else if (_id.HasValue)
+                await ApiEscritorio.Persona.UpdateAsync(_id.Value, ConstruirRequest());
         }
 
         public override bool Validar()
@@ -100,12 +107,12 @@ namespace UI.Desktop.Forms.Personas
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }

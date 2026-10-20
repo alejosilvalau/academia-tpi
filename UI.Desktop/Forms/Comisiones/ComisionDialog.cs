@@ -1,34 +1,38 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Comisiones
 {
     public partial class ComisionDialog : ApplicationForm
     {
-        private readonly ComisionServicio _servicio;
-        private readonly PlanServicio _planServicio;
-        private Comision? _comision;
+        private int? _id;
 
         public ComisionDialog() : base()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Comision();
-            _planServicio = ServicioFactory.Plan();
         }
 
         public ComisionDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxPlan.DataSource = _planServicio.GetAll()
-                .Select(p => new { p.ID, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
+            CargarPlanes();
             SetModo();
         }
 
         public ComisionDialog(int id, ModoForm modo) : this(modo)
         {
-            _comision = _servicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var comision = ApiEscritorio.Comision.GetOneAsync(id).GetAwaiter().GetResult();
+            if (comision != null) MapearDeDatos(comision);
+        }
+
+        private void CargarPlanes()
+        {
+            var planes = ApiEscritorio.Plan.GetAllAsync().GetAwaiter().GetResult();
+            cbxPlan.DataSource = planes
+                .Select(p => new { p.Id, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
+            cbxPlan.DisplayMember = "Descripcion";
+            cbxPlan.ValueMember = "Id";
         }
 
         private void SetModo()
@@ -42,32 +46,35 @@ namespace UI.Desktop.Forms.Comisiones
             }
         }
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos(ComisionDto comision)
         {
-            if (_comision == null) return;
-            txtID.Text = _comision.ID.ToString();
-            txtDescripcion.Text = Formato.ToTitleCase(_comision.Descripcion);
-            txtAnioEspecialidad.Text = _comision.AnioEspecialidad.ToString();
-            cbxPlan.SelectedValue = _comision.PlanId;
+            txtID.Text = comision.Id.ToString();
+            txtDescripcion.Text = Formato.ToTitleCase(comision.Descripcion);
+            txtAnioEspecialidad.Text = comision.AnioEspecialidad.ToString();
+            cbxPlan.SelectedValue = comision.PlanId;
         }
 
-        public override void MapearADatos()
+        public override void MapearDeDatos() { }
+
+        private ComisionRequest ConstruirRequest()
         {
-            if (Modo == ModoForm.Alta) _comision = new Comision();
-            if (_comision == null) return;
-            _comision.Descripcion = txtDescripcion.Text;
             int.TryParse(txtAnioEspecialidad.Text, out int anio);
-            _comision.AnioEspecialidad = anio;
-            if (cbxPlan.SelectedValue is int planId) _comision.PlanId = planId;
+            return new ComisionRequest
+            {
+                Descripcion = txtDescripcion.Text,
+                AnioEspecialidad = anio,
+                PlanId = cbxPlan.SelectedValue is int planId ? planId : 0
+            };
         }
 
-        public override void GuardarCambios()
+        public override async Task GuardarCambiosAsync()
         {
-            MapearADatos();
-            if (_comision == null) return;
-            if (Modo == ModoForm.Baja) _servicio.Delete(_comision);
-            else if (Modo == ModoForm.Alta) _servicio.Save(_comision);
-            else _servicio.Update(_comision);
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.Comision.DeleteAsync(_id.Value);
+            else if (Modo == ModoForm.Alta)
+                await ApiEscritorio.Comision.SaveAsync(ConstruirRequest());
+            else if (_id.HasValue)
+                await ApiEscritorio.Comision.UpdateAsync(_id.Value, ConstruirRequest());
         }
 
         public override bool Validar()
@@ -80,18 +87,17 @@ namespace UI.Desktop.Forms.Comisiones
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();
-
     }
 }

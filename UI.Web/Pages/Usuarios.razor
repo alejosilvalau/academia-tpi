@@ -1,7 +1,7 @@
 @page "/usuarios"
 @attribute [Authorize(Roles="Administrador")]
-@inject UsuarioServicio UsuarioServicio
-@inject PersonaServicio PersonaServicio
+@inject UsuarioClient Api
+@inject PersonaClient PersonaApi
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
 @using Utils
@@ -28,7 +28,7 @@
                         <input class="md-input" @bind="actual.NombreUsuario" />
                     </div>
                     <div class="md-form-group">
-                        <label class="md-label">Clave</label>
+                        <label class="md-label">@(modoForm == ModoForm.Alta ? "Clave" : "Clave (dejar vacio para mantener)")</label>
                         <input class="md-input" type="password" @bind="actual.Clave" />
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                             {
                                 @foreach (var p in personas)
                                 {
-                                    <option value="@p.ID">@Formato.ToTitleCase(p.Nombre) @Formato.ToTitleCase(p.Apellido) (Legajo: @p.Legajo)</option>
+                                    <option value="@p.Id">@Formato.ToTitleCase(p.Nombre) @Formato.ToTitleCase(p.Apellido) (Legajo: @p.Legajo)</option>
                                 }
                             }
                         </select>
@@ -86,11 +86,11 @@
             <tbody>
                 @foreach (var item in lista)
                 {
-                    <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
-                        <td>@item.ID</td>
+                    <tr class="@(seleccionadaId == item.Id ? "selected" : "")" @onclick="() => Seleccionar(item.Id)">
+                        <td>@item.Id</td>
                         <td>@item.NombreUsuario</td>
-                        <td>@Formato.ToTitleCase(item.Persona?.Nombre ?? "")</td>
-                        <td>@Formato.ToTitleCase(item.Persona?.Apellido ?? "")</td>
+                        <td>@Formato.ToTitleCase(item.PersonaNombre ?? "")</td>
+                        <td>@Formato.ToTitleCase(item.PersonaApellido ?? "")</td>
                         <td>
                             @if (item.Habilitado)
                             {
@@ -102,8 +102,8 @@
                             }
                         </td>
                         <td class="md-table-actions">
-                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
-                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
+                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.Id)">Editar</button>
+                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.Id)">Eliminar</button>
                         </td>
                     </tr>
                 }
@@ -113,9 +113,9 @@
 </div>
 
 @code {
-    private List<Usuario>? lista;
-    private List<Persona>? personas;
-    private Usuario actual = new();
+    private List<UsuarioDto>? lista;
+    private List<PersonaDto>? personas;
+    private UsuarioRequest actual = new();
     private ModoForm modoForm = ModoForm.Ninguno;
     private int seleccionadaId;
     private string mensaje = "";
@@ -124,20 +124,21 @@
 
     enum ModoForm { Ninguno, Alta, Modificacion }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        if (!Sesion.ValidarPermisos(Dominio.Persona.TiposPersonas.Administrador))
+        if (!Sesion.ValidarPermisos(TipoPersona.Administrador))
         {
             Navigation.NavigateTo("/");
             return;
         }
-        personas = PersonaServicio.GetAll();
-        Cargar();
+        try { personas = await PersonaApi.GetAllAsync(); }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+        await Cargar();
     }
 
-    private void Cargar()
+    private async Task Cargar()
     {
-        try { lista = UsuarioServicio.GetAll(); }
+        try { lista = await Api.GetAllAsync(); }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
 
@@ -145,17 +146,23 @@
 
     private void Nuevo()
     {
-        actual = new Usuario { Habilitado = true };
+        actual = new UsuarioRequest { Habilitado = true };
         personaIdSeleccionada = null;
         modoForm = ModoForm.Alta;
         seleccionadaId = 0;
     }
 
-    private void Editar(int id)
+    private async Task Editar(int id)
     {
-        var item = UsuarioServicio.GetOne(id);
+        var item = await Api.GetOneAsync(id);
         if (item == null) return;
-        actual = item;
+        actual = new UsuarioRequest
+        {
+            NombreUsuario = item.NombreUsuario,
+            Habilitado = item.Habilitado,
+            PersonaId = item.PersonaId,
+            Clave = null
+        };
         personaIdSeleccionada = item.PersonaId?.ToString();
         modoForm = ModoForm.Modificacion;
         seleccionadaId = id;
@@ -164,10 +171,10 @@
     private void Cancelar()
     {
         modoForm = ModoForm.Ninguno;
-        actual = new Usuario();
+        actual = new UsuarioRequest();
     }
 
-    private void Guardar()
+    private async Task Guardar()
     {
         try
         {
@@ -181,26 +188,24 @@
                 actual.PersonaId = null;
 
             if (modoForm == ModoForm.Alta)
-                UsuarioServicio.Save(actual);
+                await Api.SaveAsync(actual);
             else
-                UsuarioServicio.Update(actual);
+                await Api.UpdateAsync(seleccionadaId, actual);
 
             mostrarMensaje("Guardado correctamente.", false);
             Cancelar();
-            Cargar();
+            await Cargar();
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
 
-    private void Eliminar(int id)
+    private async Task Eliminar(int id)
     {
-        var item = UsuarioServicio.GetOne(id);
-        if (item == null) return;
         try
         {
-            UsuarioServicio.Delete(item);
+            await Api.DeleteAsync(id);
             mostrarMensaje("Eliminado correctamente.", false);
-            Cargar();
+            await Cargar();
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }

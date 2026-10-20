@@ -27,8 +27,9 @@ namespace UI.Desktop
 
         public virtual void MapearDeDatos() { }
         public virtual void MapearADatos() { }
-        public virtual void GuardarCambios() { }
-        public virtual void Listar() { }
+        public virtual Task GuardarCambiosAsync() => Task.CompletedTask;
+        public virtual Task ListarAsync() => Task.CompletedTask;
+        public virtual void Listar() { _ = ListarAsync(); }
         public virtual bool Validar() { return false; }
 
         public void Notificar(string titulo, string mensaje, MessageBoxButtons botones, MessageBoxIcon icono)
@@ -65,14 +66,20 @@ namespace UI.Desktop
             }
         }
 
+        protected static int? ObtenerId(object? item)
+        {
+            if (item == null) return null;
+            var tipo = item.GetType();
+            var prop = tipo.GetProperty("Id") ?? tipo.GetProperty("ID");
+            return prop?.GetValue(item) as int?;
+        }
+
         protected void SeleccionarFila(DataGridView dgv, int? id)
         {
             if (!id.HasValue) return;
             foreach (DataGridViewRow row in dgv.Rows)
             {
-                if (row.DataBoundItem != null &&
-                    row.DataBoundItem.GetType().GetProperty("ID")?.GetValue(row.DataBoundItem) is int rowId &&
-                    rowId == id.Value)
+                if (ObtenerId(row.DataBoundItem) == id.Value)
                 {
                     row.Selected = true;
                     dgv.CurrentCell = row.Cells[0];
@@ -96,14 +103,24 @@ namespace UI.Desktop
         public void ListarPreservandoSeleccion(DataGridView dgv)
         {
             int? idSeleccionado = null;
-            if (dgv.SelectedRows.Count == 1 && dgv.SelectedRows[0].DataBoundItem != null)
-            {
-                idSeleccionado = dgv.SelectedRows[0].DataBoundItem
-                    .GetType().GetProperty("ID")?.GetValue(dgv.SelectedRows[0].DataBoundItem) as int?;
-            }
+            if (dgv.SelectedRows.Count == 1)
+                idSeleccionado = ObtenerId(dgv.SelectedRows[0].DataBoundItem);
 
             CongelarGrilla(dgv);
             Listar();
+            if (idSeleccionado.HasValue)
+                SeleccionarFila(dgv, idSeleccionado);
+            DescongelarGrilla(dgv);
+        }
+
+        public async Task ListarPreservandoSeleccionAsync(DataGridView dgv)
+        {
+            int? idSeleccionado = null;
+            if (dgv.SelectedRows.Count == 1)
+                idSeleccionado = ObtenerId(dgv.SelectedRows[0].DataBoundItem);
+
+            CongelarGrilla(dgv);
+            await ListarAsync();
             if (idSeleccionado.HasValue)
                 SeleccionarFila(dgv, idSeleccionado);
             DescongelarGrilla(dgv);

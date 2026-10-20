@@ -1,18 +1,15 @@
-using Dominio;
-using Servicios;
+using Contratos;
 
 namespace UI.Desktop
 {
     public partial class Main : ApplicationForm
     {
-        private readonly PersonaServicio _personaServicio;
         private readonly HashSet<string> _botonesPermitidos = new();
         private readonly System.Windows.Forms.Timer _autoRefresh;
 
         public Main()
         {
             InitializeComponent();
-            _personaServicio = ServicioFactory.Persona();
             _autoRefresh = new System.Windows.Forms.Timer { Interval = 5000 };
             _autoRefresh.Tick += AutoRefresh_Tick;
             _autoRefresh.Start();
@@ -20,24 +17,24 @@ namespace UI.Desktop
 
         private void Main_Load(object sender, EventArgs e)
         {
-            if (Login.UsuarioActual?.Persona != null)
+            var perfil = SesionEscritorio.Perfil;
+            if (perfil != null)
             {
-                var persona = Login.UsuarioActual.Persona;
-                lblTitulo.Text = $"Bienvenido/a {persona.Nombre} {persona.Apellido}";
-                lblUsuario.Text = Login.UsuarioActual.NombreUsuario;
-                lblTipo.Text = persona.Tipo.ToString();
-                lblLegajo.Text = persona.Legajo > 0 ? $"Legajo: {persona.Legajo}" : "";
+                lblTitulo.Text = $"Bienvenido/a {perfil.Nombre} {perfil.Apellido}";
+                lblUsuario.Text = perfil.NombreUsuario;
+                lblTipo.Text = perfil.Tipo?.ToString() ?? "";
+                lblLegajo.Text = perfil.Legajo is > 0 ? $"Legajo: {perfil.Legajo}" : "";
             }
 
             panelSubMenu.Visible = false;
 
-            var tipo = Login.UsuarioActual?.Persona?.Tipo;
-            btnAdministracion.Visible = tipo == Persona.TiposPersonas.Administrador;
+            var tipo = SesionEscritorio.Tipo;
+            btnAdministracion.Visible = tipo == TipoPersona.Administrador;
             btnReportes.Visible = tipo != null;
 
             switch (tipo)
             {
-                case Persona.TiposPersonas.Administrador:
+                case TipoPersona.Administrador:
                     btnInscripcion.Visible = true;
                     btnNotas.Visible = true;
                     btnReportesRendimientoDocente.Visible = true;
@@ -52,14 +49,14 @@ namespace UI.Desktop
                     _botonesPermitidos.Add(btnABMDictados.Name);
                     _botonesPermitidos.Add(btnABMUsuarios.Name);
                     break;
-                case Persona.TiposPersonas.Alumno:
+                case TipoPersona.Alumno:
                     btnInscripcion.Visible = true;
                     btnNotas.Visible = false;
                     btnReportesRendimientoDocente.Visible = false;
                     btnReportesRendimientoAlumnos.Visible = true;
                     _botonesPermitidos.Add(btnReportesRendimientoAlumnos.Name);
                     break;
-                case Persona.TiposPersonas.Docente:
+                case TipoPersona.Docente:
                     btnInscripcion.Visible = false;
                     btnNotas.Visible = true;
                     btnReportesRendimientoDocente.Visible = true;
@@ -72,7 +69,7 @@ namespace UI.Desktop
             ConstruirDashboard(tipo);
         }
 
-        private void ConstruirDashboard(Persona.TiposPersonas? tipo)
+        private void ConstruirDashboard(TipoPersona? tipo)
         {
             panelDashboard.Controls.Clear();
 
@@ -88,7 +85,7 @@ namespace UI.Desktop
 
             var cards = new List<(string titulo, string desc, string icono, Action onClick)>();
 
-            if (tipo == Persona.TiposPersonas.Administrador)
+            if (tipo == TipoPersona.Administrador)
             {
                 cards.Add(("Especialidades", "Gestionar especialidades", "\u25C6", () => OpenForm(new Forms.Especialidades.Especialidades())));
                 cards.Add(("Plan/Materias", "Gestionar planes de estudio y materias", "\u25C6", () => OpenForm(new Forms.Planes.PlanMaterias())));
@@ -97,19 +94,19 @@ namespace UI.Desktop
                 cards.Add(("Personas", "Gestionar alumnos, docentes y admins", "\u25C6", () => OpenForm(new Forms.Personas.Personas())));
                 cards.Add(("Dictados", "Gestionar asignacion de docentes a cursos", "\u25C6", () => OpenForm(new Forms.Dictados.Dictados())));
                 cards.Add(("Usuarios", "Gestionar usuarios del sistema", "\u25C6", () => OpenForm(new Forms.Usuarios.Usuarios())));
-                cards.Add(("Inscripciones", "Inscribir alumnos a cursos", "\u270E", () => OpenForm(new Forms.Personas.Personas(Persona.TiposPersonas.Alumno))));
-                cards.Add(("Registrar Notas", "Calificar alumnos en cursos", "\u270E", () => OpenForm(new Forms.Personas.Personas(Persona.TiposPersonas.Docente))));
+                cards.Add(("Inscripciones", "Inscribir alumnos a cursos", "\u270E", () => OpenForm(new Forms.Personas.Personas(TipoPersona.Alumno))));
+                cards.Add(("Registrar Notas", "Calificar alumnos en cursos", "\u270E", () => OpenForm(new Forms.Personas.Personas(TipoPersona.Docente))));
                 cards.Add(("Rend. Docente", "Ver reporte de rendimiento docente", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoDocente))));
                 cards.Add(("Rend. Alumnos", "Ver reporte de rendimiento de alumnos", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
             }
-            else if (tipo == Persona.TiposPersonas.Alumno)
+            else if (tipo == TipoPersona.Alumno)
             {
-                cards.Add(("Inscripciones", "Inscribirse a cursos", "\u270E", () => OpenForm(new Forms.Inscripciones.Inscripciones(Login.UsuarioActual!.Persona!))));
+                cards.Add(("Inscripciones", "Inscribirse a cursos", "\u270E", () => OpenForm(new Forms.Inscripciones.Inscripciones(SesionEscritorio.PersonaId ?? 0))));
                 cards.Add(("Rend. Alumnos", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
             }
-            else if (tipo == Persona.TiposPersonas.Docente)
+            else if (tipo == TipoPersona.Docente)
             {
-                cards.Add(("Registrar Notas", "Calificar alumnos en cursos", "\u270E", () => OpenForm(new Forms.RegistrarNotas.RegistrarNotas(Login.UsuarioActual!.Persona!))));
+                cards.Add(("Registrar Notas", "Calificar alumnos en cursos", "\u270E", () => OpenForm(new Forms.RegistrarNotas.RegistrarNotas(SesionEscritorio.PersonaId ?? 0))));
                 cards.Add(("Rend. Docente", "Ver reporte de rendimiento", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoDocente))));
                 cards.Add(("Rend. Alumnos", "Ver reporte de rendimiento de alumnos", "\u2630", () => OpenForm(new ReporteViewer(ModoReporte.RendimientoAlumnos))));
             }
@@ -281,25 +278,25 @@ namespace UI.Desktop
 
         private void btnInscripcion_Click(object sender, EventArgs e)
         {
-            if (Login.UsuarioActual?.Persona?.Tipo == Persona.TiposPersonas.Administrador)
+            if (SesionEscritorio.IsAdmin)
             {
-                OpenForm(new Forms.Personas.Personas(Persona.TiposPersonas.Alumno));
+                OpenForm(new Forms.Personas.Personas(TipoPersona.Alumno));
             }
             else
             {
-                OpenForm(new Forms.Inscripciones.Inscripciones(Login.UsuarioActual!.Persona!));
+                OpenForm(new Forms.Inscripciones.Inscripciones(SesionEscritorio.PersonaId ?? 0));
             }
         }
 
         private void btnNotas_Click(object sender, EventArgs e)
         {
-            if (Login.UsuarioActual?.Persona?.Tipo == Persona.TiposPersonas.Administrador)
+            if (SesionEscritorio.IsAdmin)
             {
-                OpenForm(new Forms.Personas.Personas(Persona.TiposPersonas.Docente));
+                OpenForm(new Forms.Personas.Personas(TipoPersona.Docente));
             }
             else
             {
-                OpenForm(new Forms.RegistrarNotas.RegistrarNotas(Login.UsuarioActual!.Persona!));
+                OpenForm(new Forms.RegistrarNotas.RegistrarNotas(SesionEscritorio.PersonaId ?? 0));
             }
         }
 
@@ -322,8 +319,8 @@ namespace UI.Desktop
         {
             panelFormLoader.Controls.Clear();
             panelDashboard.Visible = true;
-            var persona = Login.UsuarioActual?.Persona;
-            lblTitulo.Text = persona != null ? $"Bienvenido/a {persona.Nombre} {persona.Apellido}" : "Academia TPI";
+            var perfil = SesionEscritorio.Perfil;
+            lblTitulo.Text = perfil != null ? $"Bienvenido/a {perfil.Nombre} {perfil.Apellido}" : "Academia TPI";
         }
 
         private void btnCerrarSesion_Click(object sender, EventArgs e)
@@ -336,8 +333,9 @@ namespace UI.Desktop
             if (panelFormLoader.Controls.Count == 0)
             {
                 panelDashboard.Visible = true;
-                if (Login.UsuarioActual?.Persona != null)
-                    lblTitulo.Text = $"Bienvenido/a {Login.UsuarioActual.Persona.Nombre} {Login.UsuarioActual.Persona.Apellido}";
+                var perfil = SesionEscritorio.Perfil;
+                if (perfil != null)
+                    lblTitulo.Text = $"Bienvenido/a {perfil.Nombre} {perfil.Apellido}";
             }
         }
     }

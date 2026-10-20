@@ -1,19 +1,16 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Personas
 {
     public partial class Personas : ApplicationForm
     {
-        private readonly PersonaServicio _servicio;
         public override DataGridView? GrillaPrincipal => dgvPersonas;
-        private readonly Persona.TiposPersonas? _filtroTipo;
+        private readonly TipoPersona? _filtroTipo;
 
         public Personas()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Persona();
             dgvPersonas.AutoGenerateColumns = false;
             dgvPersonas.CellFormatting += (s, e) =>
             {
@@ -27,10 +24,10 @@ namespace UI.Desktop.Forms.Personas
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
-        public Personas(Persona.TiposPersonas tipo) : this()
+        public Personas(TipoPersona tipo) : this()
         {
             _filtroTipo = tipo;
-            Text = tipo == Persona.TiposPersonas.Alumno ? "Inscripciones" : "Registrar Notas";
+            Text = tipo == TipoPersona.Alumno ? "Inscripciones" : "Registrar Notas";
 
             tsbAgregar.Visible = false;
             tsbEditar.Visible = false;
@@ -40,43 +37,43 @@ namespace UI.Desktop.Forms.Personas
 
         private void Personas_Load(object sender, EventArgs e) => Listar();
 
-        public override void Listar()
+        public override async Task ListarAsync()
         {
             try
             {
                 dgvPersonas.DataSource = null;
                 if (_filtroTipo.HasValue)
-                    dgvPersonas.DataSource = _servicio.GetByTipo(_filtroTipo.Value);
+                    dgvPersonas.DataSource = await ApiEscritorio.Persona.GetByTipoAsync(_filtroTipo.Value);
                 else
-                    dgvPersonas.DataSource = _servicio.GetAll();
+                    dgvPersonas.DataSource = await ApiEscritorio.Persona.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void tsbAgregar_Click(object sender, EventArgs e)
+        private async void tsbAgregar_Click(object sender, EventArgs e)
         {
             new PersonaDialog(ModoForm.Alta).ShowDialog();
-            Listar();
+            await ListarAsync();
         }
 
-        private void tsbEditar_Click(object sender, EventArgs e)
+        private async void tsbEditar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPersonas)) return;
-            int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
+            int id = ((PersonaDto)dgvPersonas.SelectedRows[0].DataBoundItem).Id;
             new PersonaDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvPersonas);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvPersonas, id);
             DescongelarGrilla(dgvPersonas);
         }
 
-        private void tsbEliminar_Click(object sender, EventArgs e)
+        private async void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPersonas)) return;
-            int id = ((Persona)dgvPersonas.SelectedRows[0].DataBoundItem).ID;
+            int id = ((PersonaDto)dgvPersonas.SelectedRows[0].DataBoundItem).Id;
             new PersonaDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvPersonas);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvPersonas, id);
             DescongelarGrilla(dgvPersonas);
         }
@@ -84,16 +81,16 @@ namespace UI.Desktop.Forms.Personas
         private void tsbSeleccionar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPersonas)) return;
-            var personaSeleccionada = (Persona)dgvPersonas.SelectedRows[0].DataBoundItem;
+            var personaSeleccionada = (PersonaDto)dgvPersonas.SelectedRows[0].DataBoundItem;
 
-            if (_filtroTipo == Persona.TiposPersonas.Alumno)
+            if (_filtroTipo == TipoPersona.Alumno)
             {
-                var form = new Forms.Inscripciones.Inscripciones(personaSeleccionada, admin: true);
+                var form = new Forms.Inscripciones.Inscripciones(personaSeleccionada.Id, admin: true);
                 form.ShowDialog();
             }
-            else if (_filtroTipo == Persona.TiposPersonas.Docente)
+            else if (_filtroTipo == TipoPersona.Docente)
             {
-                var form = new Forms.RegistrarNotas.RegistrarNotas(personaSeleccionada);
+                var form = new Forms.RegistrarNotas.RegistrarNotas(personaSeleccionada.Id);
                 form.ShowDialog();
             }
         }

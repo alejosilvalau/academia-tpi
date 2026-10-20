@@ -1,4 +1,5 @@
 using System.Data;
+using Contratos;
 using Dominio;
 using Microsoft.EntityFrameworkCore;
 using Repositorio;
@@ -32,7 +33,7 @@ namespace Servicios
         {
             RequiereAutenticacion();
             var tipo = TipoUsuarioActual();
-            if (tipo == Persona.TiposPersonas.Administrador || tipo == Persona.TiposPersonas.Alumno) return;
+            if (tipo == TipoPersona.Administrador || tipo == TipoPersona.Alumno) return;
             throw new AccesoNoAutorizadoException("No tiene permisos para realizar esta operación.");
         }
 
@@ -40,16 +41,16 @@ namespace Servicios
         {
             RequiereAutenticacion();
             var tipo = TipoUsuarioActual();
-            if (tipo == Persona.TiposPersonas.Administrador || tipo == Persona.TiposPersonas.Docente) return;
+            if (tipo == TipoPersona.Administrador || tipo == TipoPersona.Docente) return;
             throw new AccesoNoAutorizadoException("No tiene permisos para realizar esta operación.");
         }
 
         protected bool EsAdmin()
         {
-            return TipoUsuarioActual() == Persona.TiposPersonas.Administrador;
+            return TipoUsuarioActual() == TipoPersona.Administrador;
         }
 
-        protected Persona.TiposPersonas? TipoUsuarioActual()
+        protected TipoPersona? TipoUsuarioActual()
         {
             return UsuarioContexto?.ObtenerUsuarioActual()?.Persona?.Tipo;
         }

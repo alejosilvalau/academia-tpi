@@ -1,18 +1,15 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Especialidades
 {
     public partial class Especialidades : ApplicationForm
     {
-        private readonly EspecialidadServicio _servicio;
         public override DataGridView? GrillaPrincipal => dgvEspecialidades;
 
         public Especialidades()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Especialidad();
             dgvEspecialidades.AutoGenerateColumns = false;
             dgvEspecialidades.CellFormatting += (s, e) =>
             {
@@ -24,40 +21,40 @@ namespace UI.Desktop.Forms.Especialidades
 
         private void Especialidades_Load(object sender, EventArgs e) => Listar();
 
-        public override void Listar()
+        public override async Task ListarAsync()
         {
             try
             {
                 dgvEspecialidades.DataSource = null;
-                dgvEspecialidades.DataSource = _servicio.GetAll();
+                dgvEspecialidades.DataSource = await ApiEscritorio.Especialidad.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 
-        private void tsbAgregar_Click(object sender, EventArgs e)
+        private async void tsbAgregar_Click(object sender, EventArgs e)
         {
             new EspecialidadDialog(ModoForm.Alta).ShowDialog();
-            Listar();
+            await ListarAsync();
         }
 
-        private void tsbEditar_Click(object sender, EventArgs e)
+        private async void tsbEditar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvEspecialidades)) return;
-            int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+            int id = ((EspecialidadDto)dgvEspecialidades.SelectedRows[0].DataBoundItem).Id;
             new EspecialidadDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvEspecialidades);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvEspecialidades, id);
             DescongelarGrilla(dgvEspecialidades);
         }
 
-        private void tsbEliminar_Click(object sender, EventArgs e)
+        private async void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvEspecialidades)) return;
-            int id = ((Especialidad)dgvEspecialidades.SelectedRows[0].DataBoundItem).ID;
+            int id = ((EspecialidadDto)dgvEspecialidades.SelectedRows[0].DataBoundItem).Id;
             new EspecialidadDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvEspecialidades);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvEspecialidades, id);
             DescongelarGrilla(dgvEspecialidades);
         }

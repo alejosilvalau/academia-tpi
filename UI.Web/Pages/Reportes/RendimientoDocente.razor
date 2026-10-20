@@ -1,11 +1,10 @@
 @page "/reportes/rendimiento-docente"
 @attribute [Authorize(Roles="Administrador,Docente")]
-@inject ReporteServicio ReporteServicio
-@inject AcademiaContext Contexto
+@inject ReporteClient ReporteApi
+@inject PersonaClient PersonaApi
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
-@using Microsoft.EntityFrameworkCore
 
 <div class="md-card">
     <div class="md-card-header">Reporte de Rendimiento Docente</div>
@@ -21,9 +20,9 @@
                     <option value="0">-- Seleccione un docente --</option>
                     @if (docentes != null)
                     {
-                        @foreach (DataRow row in docentes.Rows)
+                        @foreach (var d in docentes)
                         {
-                            <option value="@row["ID"]">@row["Apellido"], @row["Nombre"] (Legajo @row["Legajo"])</option>
+                            <option value="@d.Id">@d.Apellido, @d.Nombre (Legajo @d.Legajo)</option>
                         }
                     }
                 </select>
@@ -48,14 +47,14 @@
 </div>
 
 @code {
-    private DataTable? docentes;
+    private List<ReportePersonaFilaDto>? docentes;
     private int docenteId;
     private string mensaje = string.Empty;
     private string? pdfBase64;
     private bool _cargarPdf;
-    private Persona? personaObjetivo;
+    private ReportePersonaFilaDto? personaObjetivo;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         if (!Sesion.IsAdmin && !Sesion.IsDocente)
         {
@@ -67,11 +66,11 @@
         {
             if (Sesion.IsAdmin)
             {
-                docentes = ReporteServicio.ObtenerDocentes();
+                docentes = await ReporteApi.GetDocentesAsync();
             }
             else
             {
-                GenerarReporte();
+                await GenerarReporte();
             }
         }
         catch (Exception ex)
@@ -91,7 +90,7 @@
 
     private async Task GenerarReporte()
     {
-        int idObjetivo = Sesion.IsAdmin ? docenteId : (Sesion.UsuarioActual!.PersonaId ?? 0);
+        int idObjetivo = Sesion.IsAdmin ? docenteId : (Sesion.PersonaId ?? 0);
         if (idObjetivo == 0)
         {
             mensaje = "Seleccione un docente.";
@@ -100,10 +99,15 @@
 
         try
         {
-            var report = ReporteServicio.GenerarReporteRendimientoDocente(idObjetivo);
-            byte[] pdfBytes = ReporteServicio.ExportarPdf(report);
+            byte[] pdfBytes = await ReporteApi.GetRendimientoDocentePdfAsync(idObjetivo);
             pdfBase64 = Convert.ToBase64String(pdfBytes);
-            personaObjetivo = Contexto.Personas.AsNoTracking().FirstOrDefault(p => p.ID == idObjetivo);
+            personaObjetivo = docentes?.FirstOrDefault(d => d.Id == idObjetivo);
+            if (personaObjetivo == null)
+            {
+                var p = await PersonaApi.GetBasicoAsync(idObjetivo);
+                if (p != null)
+                    personaObjetivo = new ReportePersonaFilaDto(p.Id, p.Nombre, p.Apellido, p.Legajo);
+            }
 
             _cargarPdf = true;
             StateHasChanged();

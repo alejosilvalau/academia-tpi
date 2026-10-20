@@ -1,4 +1,5 @@
 using Dominio;
+using Contratos;
 using Repositorio;
 using Servicios.Excepciones;
 using Utils;
@@ -33,7 +34,7 @@ namespace Servicios
             return _repositorio.GetOne(id);
         }
 
-        public List<Persona> GetByTipo(Persona.TiposPersonas tipo)
+        public List<Persona> GetByTipo(TipoPersona tipo)
         {
             RequiereAdmin();
             return _repositorio.GetByTipo(tipo);
@@ -96,7 +97,7 @@ namespace Servicios
                 Validaciones.AsegurarRangoEntero(persona.FechaNacimiento.Year, 1900, DateTime.Today.Year, "Año de nacimiento");
                 if (persona.FechaNacimiento > DateTime.Today)
                     throw new ArgumentException("La fecha de nacimiento no puede ser futura.");
-                if (persona.Tipo == Persona.TiposPersonas.Alumno && (!persona.PlanId.HasValue || persona.PlanId <= 0))
+                if (persona.Tipo == TipoPersona.Alumno && (!persona.PlanId.HasValue || persona.PlanId <= 0))
                     throw new ArgumentException("El plan es obligatorio para los alumnos.");
             });
         }

@@ -1,6 +1,6 @@
 @page "/login"
 @inject UI.Web.Services.SesionService Sesion
-@inject IJSRuntime JS
+@inject AuthClient Auth
 @inject NavigationManager Nav
 @using Utils
 
@@ -71,16 +71,16 @@
                 return;
             }
 
-            var ok = await JS.InvokeAsync<bool>("academiaLogin", "/api/auth/login", nombreUsuario, clave);
-            if (!ok)
-            {
-                mensaje = "Usuario o clave incorrectos, o usuario deshabilitado.";
-                cargando = false;
-                return;
-            }
-
-            Sesion.Invalidar();
-            Nav.NavigateTo("/", forceLoad: true);
+            var respuesta = await Auth.LoginAsync(nombreUsuario, clave);
+            Sesion.Iniciar(respuesta);
+            Nav.NavigateTo("/");
+        }
+        catch (ApiException ex)
+        {
+            mensaje = ex.StatusCode == System.Net.HttpStatusCode.Unauthorized
+                ? "Usuario o clave incorrectos, o usuario deshabilitado."
+                : "Error al iniciar sesion: " + ex.Message;
+            cargando = false;
         }
         catch (Exception ex)
         {

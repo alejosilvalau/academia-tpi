@@ -117,7 +117,7 @@ namespace UI.Desktop.Forms.Especialidades
             // 
             // ID
             // 
-            this.ID.DataPropertyName = "ID";
+            this.ID.DataPropertyName = "Id";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 60;
             this.ID.Name = "ID";

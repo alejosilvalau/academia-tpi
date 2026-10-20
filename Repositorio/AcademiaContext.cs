@@ -1,4 +1,5 @@
 using System.Globalization;
+using Contratos;
 using Dominio;
 using Microsoft.EntityFrameworkCore;
 
@@ -229,19 +230,19 @@ namespace Repositorio
             );
 
             modelBuilder.Entity<Persona>().HasData(
-                new Persona { ID = 1, Nombre = "luciano", Apellido = "ferreyra", Legajo = 10000, EMail = "lferreyra@academia.com", Direccion = "san martin 1250", Telefono = "291-4567890", FechaNacimiento = new DateTime(1988, 3, 15), Tipo = Persona.TiposPersonas.Administrador, PlanId = null },
-                new Persona { ID = 2, Nombre = "valentina", Apellido = "ríos", Legajo = 10001, EMail = "vrios@academia.com", Direccion = "belgrano 890", Telefono = "291-5551234", FechaNacimiento = new DateTime(1990, 7, 22), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 3, Nombre = "matías", Apellido = "herrera", Legajo = 10002, EMail = "mherrera@academia.com", Direccion = "rivadavia 2340", Telefono = "291-6667890", FechaNacimiento = new DateTime(1985, 11, 8), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 4, Nombre = "camila", Apellido = "lópez", Legajo = 48102, EMail = "clopez@alumnos.edu", Direccion = "uruguay 1450", Telefono = "291-7771234", FechaNacimiento = new DateTime(2002, 4, 12), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
-                new Persona { ID = 5, Nombre = "tomás", Apellido = "giménez", Legajo = 48230, EMail = "tgimenez@alumnos.edu", Direccion = "mitre 560", Telefono = "291-8885678", FechaNacimiento = new DateTime(2001, 9, 3), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
-                new Persona { ID = 6, Nombre = "isidora", Apellido = "castro", Legajo = 48315, EMail = "icastro@alumnos.edu", Direccion = "sarmiento 1820", Telefono = "291-9993210", FechaNacimiento = new DateTime(2003, 1, 27), Tipo = Persona.TiposPersonas.Alumno, PlanId = 2 },
-                new Persona { ID = 7, Nombre = "benjamín", Apellido = "morales", Legajo = 48401, EMail = "bmorales@alumnos.edu", Direccion = "dorrego 970", Telefono = "291-1114567", FechaNacimiento = new DateTime(2000, 12, 14), Tipo = Persona.TiposPersonas.Alumno, PlanId = 1 },
-                new Persona { ID = 8, Nombre = "antonella", Apellido = "vega", Legajo = 48520, EMail = "avega@alumnos.edu", Direccion = "pellegrini 3210", Telefono = "291-2228901", FechaNacimiento = new DateTime(2002, 6, 30), Tipo = Persona.TiposPersonas.Alumno, PlanId = 4 },
-                new Persona { ID = 9, Nombre = "dante", Apellido = "romero", Legajo = 48610, EMail = "dromero@alumnos.edu", Direccion = "entre rios 1560", Telefono = "291-3336789", FechaNacimiento = new DateTime(2001, 2, 18), Tipo = Persona.TiposPersonas.Alumno, PlanId = 5 },
-                new Persona { ID = 10, Nombre = "florencia", Apellido = "acosta", Legajo = 10003, EMail = "facosta@academia.com", Direccion = "mendoza 2100", Telefono = "291-4442345", FechaNacimiento = new DateTime(1992, 8, 5), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 11, Nombre = "nicolás", Apellido = "medina", Legajo = 10004, EMail = "nmedina@academia.com", Direccion = "junin 780", Telefono = "291-5559012", FechaNacimiento = new DateTime(1987, 5, 20), Tipo = Persona.TiposPersonas.Docente, PlanId = null },
-                new Persona { ID = 12, Nombre = "emilia", Apellido = "silva", Legajo = 48705, EMail = "esilva@alumnos.edu", Direccion = "la rioja 1890", Telefono = "291-6663456", FechaNacimiento = new DateTime(2003, 10, 9), Tipo = Persona.TiposPersonas.Alumno, PlanId = 6 },
-                new Persona { ID = 13, Nombre = "santiago", Apellido = "pereyra", Legajo = 48812, EMail = "spereyra@alumnos.edu", Direccion = "catamarca 430", Telefono = "291-7777890", FechaNacimiento = new DateTime(2000, 7, 25), Tipo = Persona.TiposPersonas.Alumno, PlanId = 7 }
+                new Persona { ID = 1, Nombre = "luciano", Apellido = "ferreyra", Legajo = 10000, EMail = "lferreyra@academia.com", Direccion = "san martin 1250", Telefono = "291-4567890", FechaNacimiento = new DateTime(1988, 3, 15), Tipo = TipoPersona.Administrador, PlanId = null },
+                new Persona { ID = 2, Nombre = "valentina", Apellido = "ríos", Legajo = 10001, EMail = "vrios@academia.com", Direccion = "belgrano 890", Telefono = "291-5551234", FechaNacimiento = new DateTime(1990, 7, 22), Tipo = TipoPersona.Docente, PlanId = null },
+                new Persona { ID = 3, Nombre = "matías", Apellido = "herrera", Legajo = 10002, EMail = "mherrera@academia.com", Direccion = "rivadavia 2340", Telefono = "291-6667890", FechaNacimiento = new DateTime(1985, 11, 8), Tipo = TipoPersona.Docente, PlanId = null },
+                new Persona { ID = 4, Nombre = "camila", Apellido = "lópez", Legajo = 48102, EMail = "clopez@alumnos.edu", Direccion = "uruguay 1450", Telefono = "291-7771234", FechaNacimiento = new DateTime(2002, 4, 12), Tipo = TipoPersona.Alumno, PlanId = 2 },
+                new Persona { ID = 5, Nombre = "tomás", Apellido = "giménez", Legajo = 48230, EMail = "tgimenez@alumnos.edu", Direccion = "mitre 560", Telefono = "291-8885678", FechaNacimiento = new DateTime(2001, 9, 3), Tipo = TipoPersona.Alumno, PlanId = 2 },
+                new Persona { ID = 6, Nombre = "isidora", Apellido = "castro", Legajo = 48315, EMail = "icastro@alumnos.edu", Direccion = "sarmiento 1820", Telefono = "291-9993210", FechaNacimiento = new DateTime(2003, 1, 27), Tipo = TipoPersona.Alumno, PlanId = 2 },
+                new Persona { ID = 7, Nombre = "benjamín", Apellido = "morales", Legajo = 48401, EMail = "bmorales@alumnos.edu", Direccion = "dorrego 970", Telefono = "291-1114567", FechaNacimiento = new DateTime(2000, 12, 14), Tipo = TipoPersona.Alumno, PlanId = 1 },
+                new Persona { ID = 8, Nombre = "antonella", Apellido = "vega", Legajo = 48520, EMail = "avega@alumnos.edu", Direccion = "pellegrini 3210", Telefono = "291-2228901", FechaNacimiento = new DateTime(2002, 6, 30), Tipo = TipoPersona.Alumno, PlanId = 4 },
+                new Persona { ID = 9, Nombre = "dante", Apellido = "romero", Legajo = 48610, EMail = "dromero@alumnos.edu", Direccion = "entre rios 1560", Telefono = "291-3336789", FechaNacimiento = new DateTime(2001, 2, 18), Tipo = TipoPersona.Alumno, PlanId = 5 },
+                new Persona { ID = 10, Nombre = "florencia", Apellido = "acosta", Legajo = 10003, EMail = "facosta@academia.com", Direccion = "mendoza 2100", Telefono = "291-4442345", FechaNacimiento = new DateTime(1992, 8, 5), Tipo = TipoPersona.Docente, PlanId = null },
+                new Persona { ID = 11, Nombre = "nicolás", Apellido = "medina", Legajo = 10004, EMail = "nmedina@academia.com", Direccion = "junin 780", Telefono = "291-5559012", FechaNacimiento = new DateTime(1987, 5, 20), Tipo = TipoPersona.Docente, PlanId = null },
+                new Persona { ID = 12, Nombre = "emilia", Apellido = "silva", Legajo = 48705, EMail = "esilva@alumnos.edu", Direccion = "la rioja 1890", Telefono = "291-6663456", FechaNacimiento = new DateTime(2003, 10, 9), Tipo = TipoPersona.Alumno, PlanId = 6 },
+                new Persona { ID = 13, Nombre = "santiago", Apellido = "pereyra", Legajo = 48812, EMail = "spereyra@alumnos.edu", Direccion = "catamarca 430", Telefono = "291-7777890", FechaNacimiento = new DateTime(2000, 7, 25), Tipo = TipoPersona.Alumno, PlanId = 7 }
             );
 
             modelBuilder.Entity<Usuario>().HasData(
@@ -260,38 +261,38 @@ namespace Repositorio
             );
 
             modelBuilder.Entity<DocenteCurso>().HasData(
-                new DocenteCurso { ID = 1, CursoId = 1, DocenteId = 2, Cargo = DocenteCurso.TiposCargos.Profesor },
-                new DocenteCurso { ID = 2, CursoId = 5, DocenteId = 2, Cargo = DocenteCurso.TiposCargos.JefeDeCatedra },
-                new DocenteCurso { ID = 3, CursoId = 2, DocenteId = 3, Cargo = DocenteCurso.TiposCargos.Profesor },
-                new DocenteCurso { ID = 4, CursoId = 3, DocenteId = 10, Cargo = DocenteCurso.TiposCargos.Auxiliar },
-                new DocenteCurso { ID = 5, CursoId = 9, DocenteId = 11, Cargo = DocenteCurso.TiposCargos.Profesor },
-                new DocenteCurso { ID = 6, CursoId = 10, DocenteId = 11, Cargo = DocenteCurso.TiposCargos.JefeDeCatedra }
+                new DocenteCurso { ID = 1, CursoId = 1, DocenteId = 2, Cargo = CargoDocente.Profesor },
+                new DocenteCurso { ID = 2, CursoId = 5, DocenteId = 2, Cargo = CargoDocente.JefeDeCatedra },
+                new DocenteCurso { ID = 3, CursoId = 2, DocenteId = 3, Cargo = CargoDocente.Profesor },
+                new DocenteCurso { ID = 4, CursoId = 3, DocenteId = 10, Cargo = CargoDocente.Auxiliar },
+                new DocenteCurso { ID = 5, CursoId = 9, DocenteId = 11, Cargo = CargoDocente.Profesor },
+                new DocenteCurso { ID = 6, CursoId = 10, DocenteId = 11, Cargo = CargoDocente.JefeDeCatedra }
             );
 
             modelBuilder.Entity<AlumnoInscripcion>().HasData(
-                new AlumnoInscripcion { ID = 1, AlumnoId = 4, CursoId = 1, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 8 },
-                new AlumnoInscripcion { ID = 2, AlumnoId = 4, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
-                new AlumnoInscripcion { ID = 3, AlumnoId = 5, CursoId = 1, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
-                new AlumnoInscripcion { ID = 4, AlumnoId = 5, CursoId = 2, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
-                new AlumnoInscripcion { ID = 5, AlumnoId = 6, CursoId = 5, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
-                new AlumnoInscripcion { ID = 6, AlumnoId = 6, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 4 },
-                new AlumnoInscripcion { ID = 7, AlumnoId = 7, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 10 },
-                new AlumnoInscripcion { ID = 8, AlumnoId = 7, CursoId = 4, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
-                new AlumnoInscripcion { ID = 9, AlumnoId = 8, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 8 },
-                new AlumnoInscripcion { ID = 10, AlumnoId = 8, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
-                new AlumnoInscripcion { ID = 11, AlumnoId = 9, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
-                new AlumnoInscripcion { ID = 12, AlumnoId = 9, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
-                new AlumnoInscripcion { ID = 13, AlumnoId = 12, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
-                new AlumnoInscripcion { ID = 14, AlumnoId = 12, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Inscripto, Nota = null },
-                new AlumnoInscripcion { ID = 15, AlumnoId = 13, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
-                new AlumnoInscripcion { ID = 16, AlumnoId = 5, CursoId = 3, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 6 },
-                new AlumnoInscripcion { ID = 17, AlumnoId = 5, CursoId = 4, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 4 },
-                new AlumnoInscripcion { ID = 18, AlumnoId = 5, CursoId = 5, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 9 },
-                new AlumnoInscripcion { ID = 19, AlumnoId = 5, CursoId = 6, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 3 },
-                new AlumnoInscripcion { ID = 20, AlumnoId = 5, CursoId = 7, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 7 },
-                new AlumnoInscripcion { ID = 21, AlumnoId = 5, CursoId = 8, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 5 },
-                new AlumnoInscripcion { ID = 22, AlumnoId = 5, CursoId = 9, Condicion = AlumnoInscripcion.Condiciones.Aprobado, Nota = 10 },
-                new AlumnoInscripcion { ID = 23, AlumnoId = 5, CursoId = 10, Condicion = AlumnoInscripcion.Condiciones.Regular, Nota = 2 }
+                new AlumnoInscripcion { ID = 1, AlumnoId = 4, CursoId = 1, Condicion = CondicionInscripcion.Aprobado, Nota = 8 },
+                new AlumnoInscripcion { ID = 2, AlumnoId = 4, CursoId = 3, Condicion = CondicionInscripcion.Regular, Nota = 5 },
+                new AlumnoInscripcion { ID = 3, AlumnoId = 5, CursoId = 1, Condicion = CondicionInscripcion.Aprobado, Nota = 9 },
+                new AlumnoInscripcion { ID = 4, AlumnoId = 5, CursoId = 2, Condicion = CondicionInscripcion.Inscripto, Nota = null },
+                new AlumnoInscripcion { ID = 5, AlumnoId = 6, CursoId = 5, Condicion = CondicionInscripcion.Aprobado, Nota = 7 },
+                new AlumnoInscripcion { ID = 6, AlumnoId = 6, CursoId = 6, Condicion = CondicionInscripcion.Regular, Nota = 4 },
+                new AlumnoInscripcion { ID = 7, AlumnoId = 7, CursoId = 3, Condicion = CondicionInscripcion.Aprobado, Nota = 10 },
+                new AlumnoInscripcion { ID = 8, AlumnoId = 7, CursoId = 4, Condicion = CondicionInscripcion.Aprobado, Nota = 6 },
+                new AlumnoInscripcion { ID = 9, AlumnoId = 8, CursoId = 8, Condicion = CondicionInscripcion.Aprobado, Nota = 8 },
+                new AlumnoInscripcion { ID = 10, AlumnoId = 8, CursoId = 6, Condicion = CondicionInscripcion.Inscripto, Nota = null },
+                new AlumnoInscripcion { ID = 11, AlumnoId = 9, CursoId = 8, Condicion = CondicionInscripcion.Regular, Nota = 5 },
+                new AlumnoInscripcion { ID = 12, AlumnoId = 9, CursoId = 10, Condicion = CondicionInscripcion.Aprobado, Nota = 7 },
+                new AlumnoInscripcion { ID = 13, AlumnoId = 12, CursoId = 10, Condicion = CondicionInscripcion.Aprobado, Nota = 9 },
+                new AlumnoInscripcion { ID = 14, AlumnoId = 12, CursoId = 7, Condicion = CondicionInscripcion.Inscripto, Nota = null },
+                new AlumnoInscripcion { ID = 15, AlumnoId = 13, CursoId = 9, Condicion = CondicionInscripcion.Aprobado, Nota = 6 },
+                new AlumnoInscripcion { ID = 16, AlumnoId = 5, CursoId = 3, Condicion = CondicionInscripcion.Aprobado, Nota = 6 },
+                new AlumnoInscripcion { ID = 17, AlumnoId = 5, CursoId = 4, Condicion = CondicionInscripcion.Regular, Nota = 4 },
+                new AlumnoInscripcion { ID = 18, AlumnoId = 5, CursoId = 5, Condicion = CondicionInscripcion.Aprobado, Nota = 9 },
+                new AlumnoInscripcion { ID = 19, AlumnoId = 5, CursoId = 6, Condicion = CondicionInscripcion.Regular, Nota = 3 },
+                new AlumnoInscripcion { ID = 20, AlumnoId = 5, CursoId = 7, Condicion = CondicionInscripcion.Aprobado, Nota = 7 },
+                new AlumnoInscripcion { ID = 21, AlumnoId = 5, CursoId = 8, Condicion = CondicionInscripcion.Regular, Nota = 5 },
+                new AlumnoInscripcion { ID = 22, AlumnoId = 5, CursoId = 9, Condicion = CondicionInscripcion.Aprobado, Nota = 10 },
+                new AlumnoInscripcion { ID = 23, AlumnoId = 5, CursoId = 10, Condicion = CondicionInscripcion.Regular, Nota = 2 }
             );
         }
     }

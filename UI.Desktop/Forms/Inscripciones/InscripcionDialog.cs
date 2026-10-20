@@ -1,36 +1,34 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Inscripciones
 {
     public partial class InscripcionDialog : ApplicationForm
     {
-        private readonly InscripcionServicio _servicio;
-        private readonly Persona _personaActual;
-        private AlumnoInscripcion? _inscripcion;
+        private readonly int _alumnoId;
+        private int? _inscripcionId;
 
-        public InscripcionDialog(Persona persona, ModoForm modo)
+        public InscripcionDialog(int alumnoId, ModoForm modo)
         {
             InitializeComponent();
+            _alumnoId = alumnoId;
+            Modo = modo;
             dgvCursos.AutoGenerateColumns = false;
             dgvCursos.CellFormatting += (s, e) =>
             {
                 if (e.ColumnIndex < 0) return;
                 var colName = dgvCursos.Columns[e.ColumnIndex].Name;
-                if (dgvCursos.Rows[e.RowIndex].DataBoundItem is Curso curso)
-                {
-                    if (colName == "Materia")
-                        e.Value = Formato.ToTitleCase(curso.Materia.Descripcion);
-                    else if (colName == "Comision")
-                        e.Value = Formato.ToTitleCase(curso.Comision.Descripcion);
-                }
+                if (colName == "Materia" && e.Value is string vm)
+                    e.Value = Formato.ToTitleCase(vm);
+                else if (colName == "Comision" && e.Value is string vc)
+                    e.Value = Formato.ToTitleCase(vc);
             };
-            _servicio = ServicioFactory.Inscripcion();
-            _personaActual = persona;
-            Modo = modo;
-            txtAlumno.Text = $"{Formato.ToTitleCase(persona.Nombre)} {Formato.ToTitleCase(persona.Apellido)}";
-            cbxCondicion.DataSource = EnumHelper.GetEnumItems<AlumnoInscripcion.Condiciones>();
+
+            var persona = ApiEscritorio.Persona.GetBasicoAsync(alumnoId).GetAwaiter().GetResult();
+            txtAlumno.Text = persona != null
+                ? $"{Formato.ToTitleCase(persona.Nombre)} {Formato.ToTitleCase(persona.Apellido)}"
+                : "";
+            cbxCondicion.DataSource = EnumHelper.GetEnumItems<CondicionInscripcion>();
             cbxCondicion.DisplayMember = "Display";
             cbxCondicion.ValueMember = "Value";
             cbxCondicion.Enabled = false;
@@ -39,7 +37,7 @@ namespace UI.Desktop.Forms.Inscripciones
             {
                 case ModoForm.Alta:
                     btnAceptar.Text = "Inscribir";
-                    dgvCursos.DataSource = ServicioFactory.Curso().GetAll();
+                    dgvCursos.DataSource = ApiEscritorio.Curso.GetAllAsync().GetAwaiter().GetResult();
                     break;
                 case ModoForm.Baja:
                     btnAceptar.Text = "Eliminar";
@@ -49,51 +47,36 @@ namespace UI.Desktop.Forms.Inscripciones
             }
         }
 
-        public InscripcionDialog(Persona persona, int id, ModoForm modo) : this(persona, modo)
+        public InscripcionDialog(int alumnoId, int id, ModoForm modo) : this(alumnoId, modo)
         {
-            _inscripcion = _servicio.GetOne(id);
-            MapearDeDatos();
-        }
-
-        public override void MapearDeDatos()
-        {
-            if (_inscripcion == null) return;
-            cbxCondicion.SelectedItem = _inscripcion.Condicion;
-        }
-
-        public override void MapearADatos()
-        {
-            if (_inscripcion == null) return;
-            if (Modo == ModoForm.Alta) return;
-            if (cbxCondicion.SelectedItem is AlumnoInscripcion.Condiciones cond)
-                _inscripcion.Condicion = cond;
+            _inscripcionId = id;
+            var inscripcion = ApiEscritorio.Inscripcion.GetOneAsync(id).GetAwaiter().GetResult();
+            if (inscripcion != null) cbxCondicion.SelectedItem = inscripcion.Condicion;
         }
 
         public override bool Validar() => true;
 
-        public override void GuardarCambios()
+        public override async Task GuardarCambiosAsync()
         {
             if (Modo == ModoForm.Alta)
             {
-                if (!IsRowSelected(dgvCursos)) { Notificar("Error", "Seleccione un curso.", MessageBoxButtons.OK, MessageBoxIcon.Warning); return; }
-                var curso = (Curso)dgvCursos.SelectedRows[0].DataBoundItem;
-                _servicio.InscribirAlumno(_personaActual.ID, curso.ID);
+                var curso = (CursoDto)dgvCursos.SelectedRows[0].DataBoundItem;
+                await ApiEscritorio.Inscripcion.InscribirAsync(new InscribirRequest
+                {
+                    AlumnoId = _alumnoId,
+                    CursoId = curso.Id
+                });
             }
-            else if (Modo == ModoForm.Baja && _inscripcion != null)
+            else if (Modo == ModoForm.Baja && _inscripcionId.HasValue)
             {
-                _servicio.Delete(_inscripcion);
-            }
-            else if (Modo == ModoForm.Modificacion && _inscripcion != null)
-            {
-                MapearADatos();
-                _servicio.Update(_inscripcion);
+                await ApiEscritorio.Inscripcion.DeleteAsync(_inscripcionId.Value);
             }
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             if (Modo == ModoForm.Alta && !IsRowSelected(dgvCursos)) return;
-            try { GuardarCambios(); Close(); }
+            try { await GuardarCambiosAsync(); Close(); }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 

@@ -1,41 +1,38 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Planes
 {
     public partial class PlanDialog : ApplicationForm
     {
-        private readonly PlanServicio _planServicio;
-        private readonly EspecialidadServicio _especialidadServicio;
-        private Plan? _plan;
+        private int? _id;
 
         public PlanDialog(ModoForm modo) : this()
         {
             Modo = modo;
+            CargarEspecialidades();
             SetModo();
         }
 
         public PlanDialog(int id, ModoForm modo) : this(modo)
         {
-            _plan = _planServicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var plan = ApiEscritorio.Plan.GetOneAsync(id).GetAwaiter().GetResult();
+            if (plan != null) MapearDeDatos(plan);
         }
 
         public PlanDialog() : base()
         {
             InitializeComponent();
-            _planServicio = ServicioFactory.Plan();
-            _especialidadServicio = ServicioFactory.Especialidad();
-            CargarEspecialidades();
         }
 
         private void CargarEspecialidades()
         {
-            cbxEspecialidad.DataSource = _especialidadServicio.GetAll()
-                .Select(e => new { e.ID, Descripcion = Formato.ToTitleCase(e.Descripcion) }).ToList();
+            var especialidades = ApiEscritorio.Especialidad.GetAllAsync().GetAwaiter().GetResult();
+            cbxEspecialidad.DataSource = especialidades
+                .Select(e => new { e.Id, Descripcion = Formato.ToTitleCase(e.Descripcion) }).ToList();
             cbxEspecialidad.DisplayMember = "Descripcion";
-            cbxEspecialidad.ValueMember = "ID";
+            cbxEspecialidad.ValueMember = "Id";
         }
 
         private void SetModo()
@@ -49,37 +46,29 @@ namespace UI.Desktop.Forms.Planes
             }
         }
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos(PlanDto plan)
         {
-            if (_plan == null) return;
-            txtID.Text = _plan.ID.ToString();
-            txtDescripcion.Text = Formato.ToTitleCase(_plan.Descripcion);
-            cbxEspecialidad.SelectedValue = _plan.EspecialidadId;
+            txtID.Text = plan.Id.ToString();
+            txtDescripcion.Text = Formato.ToTitleCase(plan.Descripcion);
+            cbxEspecialidad.SelectedValue = plan.EspecialidadId;
         }
 
-        public override void MapearADatos()
-        {
-            if (Modo == ModoForm.Alta)
-                _plan = new Plan();
-            if (_plan == null) return;
-            _plan.Descripcion = txtDescripcion.Text;
-            if (cbxEspecialidad.SelectedValue != null)
-            {
-                int espId = (int)cbxEspecialidad.SelectedValue;
-                _plan.EspecialidadId = espId;
-            }
-        }
+        public override void MapearDeDatos() { }
 
-        public override void GuardarCambios()
+        private PlanRequest ConstruirRequest() => new()
         {
-            MapearADatos();
-            if (_plan == null) return;
-            if (Modo == ModoForm.Baja)
-                _planServicio.Delete(_plan);
+            Descripcion = txtDescripcion.Text,
+            EspecialidadId = cbxEspecialidad.SelectedValue is int espId ? espId : 0
+        };
+
+        public override async Task GuardarCambiosAsync()
+        {
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.Plan.DeleteAsync(_id.Value);
             else if (Modo == ModoForm.Alta)
-                _planServicio.Save(_plan);
-            else
-                _planServicio.Update(_plan);
+                await ApiEscritorio.Plan.SaveAsync(ConstruirRequest());
+            else if (_id.HasValue)
+                await ApiEscritorio.Plan.UpdateAsync(_id.Value, ConstruirRequest());
         }
 
         public override bool Validar()
@@ -90,12 +79,12 @@ namespace UI.Desktop.Forms.Planes
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }

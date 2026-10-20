@@ -1,4 +1,5 @@
 using Dominio;
+using Contratos;
 using Repositorio;
 using Servicios.Excepciones;
 using Utils;
@@ -43,7 +44,7 @@ namespace Servicios
             return _repositorio.GetByCurso(cursoId);
         }
 
-        public void AsignarDocente(int docenteId, int cursoId, DocenteCurso.TiposCargos cargo)
+        public void AsignarDocente(int docenteId, int cursoId, CargoDocente cargo)
         {
             RequiereAdmin();
             ValidarBasicos(docenteId, cursoId);
@@ -92,12 +93,12 @@ namespace Servicios
             });
         }
 
-        private void ValidarReglasNegocio(int docenteId, int cursoId, DocenteCurso.TiposCargos cargo, bool esAlta, int idActual = 0)
+        private void ValidarReglasNegocio(int docenteId, int cursoId, CargoDocente cargo, bool esAlta, int idActual = 0)
         {
             var docente = _personaRepositorio.GetOne(docenteId);
             if (docente == null)
                 throw new ReglaNegocioException("El docente especificado no existe.");
-            if (docente.Tipo != Persona.TiposPersonas.Docente)
+            if (docente.Tipo != TipoPersona.Docente)
                 throw new ReglaNegocioException("La persona seleccionada no es de tipo docente.");
 
             var duplicado = _repositorio.GetByCurso(cursoId)

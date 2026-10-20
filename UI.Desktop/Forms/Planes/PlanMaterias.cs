@@ -1,5 +1,4 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using UI.Desktop.Forms.Materias;
 using Utils;
 
@@ -7,8 +6,6 @@ namespace UI.Desktop.Forms.Planes
 {
     public partial class PlanMaterias : ApplicationForm
     {
-        private readonly PlanServicio _planServicio;
-        private readonly MateriaServicio _materiaServicio;
         public override DataGridView? GrillaPrincipal => dgvPlanes;
         private int? _planSeleccionadoId;
         private bool _cargando;
@@ -16,8 +13,6 @@ namespace UI.Desktop.Forms.Planes
         public PlanMaterias()
         {
             InitializeComponent();
-            _planServicio = ServicioFactory.Plan();
-            _materiaServicio = ServicioFactory.Materia();
             dgvPlanes.AutoGenerateColumns = false;
             dgvMaterias.AutoGenerateColumns = false;
             dgvPlanes.CellFormatting += (s, e) =>
@@ -26,8 +21,8 @@ namespace UI.Desktop.Forms.Planes
                 var colName = dgvPlanes.Columns[e.ColumnIndex].Name;
                 if (colName == "colPlanDescripcion" && e.Value is string v)
                     e.Value = Formato.ToTitleCase(v);
-                else if (colName == "colPlanEspecialidad" && dgvPlanes.Rows[e.RowIndex].DataBoundItem is Plan p)
-                    e.Value = Formato.ToTitleCase(p.Especialidad.Descripcion);
+                else if (colName == "colPlanEspecialidad" && dgvPlanes.Rows[e.RowIndex].DataBoundItem is PlanDto p)
+                    e.Value = Formato.ToTitleCase(p.EspecialidadDescripcion ?? "");
             };
             dgvMaterias.CellFormatting += (s, e) =>
             {
@@ -40,29 +35,28 @@ namespace UI.Desktop.Forms.Planes
 
         private void PlanMaterias_Load(object sender, EventArgs e) => Listar();
 
-        public override void Listar()
+        public override async Task ListarAsync()
         {
             try
             {
                 _cargando = true;
                 dgvPlanes.DataSource = null;
-                dgvPlanes.DataSource = _planServicio.GetAll();
+                dgvPlanes.DataSource = await ApiEscritorio.Plan.GetAllAsync();
                 if (_planSeleccionadoId.HasValue)
                     SeleccionarFila(dgvPlanes, _planSeleccionadoId);
                 _cargando = false;
-                CargarMaterias();
+                await CargarMateriasAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 
-        private void CargarMaterias()
+        private async Task CargarMateriasAsync()
         {
             try
             {
                 int? materiaSeleccionadaId = null;
-                if (dgvMaterias.SelectedRows.Count == 1 && dgvMaterias.SelectedRows[0].DataBoundItem != null)
-                    materiaSeleccionadaId = dgvMaterias.SelectedRows[0].DataBoundItem
-                        .GetType().GetProperty("ID")?.GetValue(dgvMaterias.SelectedRows[0].DataBoundItem) as int?;
+                if (dgvMaterias.SelectedRows.Count == 1)
+                    materiaSeleccionadaId = ObtenerId(dgvMaterias.SelectedRows[0].DataBoundItem);
 
                 if (dgvPlanes.SelectedRows.Count != 1)
                 {
@@ -70,10 +64,10 @@ namespace UI.Desktop.Forms.Planes
                     _planSeleccionadoId = null;
                     return;
                 }
-                var plan = (Plan)dgvPlanes.SelectedRows[0].DataBoundItem;
-                _planSeleccionadoId = plan.ID;
+                var plan = (PlanDto)dgvPlanes.SelectedRows[0].DataBoundItem;
+                _planSeleccionadoId = plan.Id;
                 dgvMaterias.DataSource = null;
-                dgvMaterias.DataSource = _materiaServicio.GetByPlan(plan.ID);
+                dgvMaterias.DataSource = await ApiEscritorio.Materia.GetByPlanAsync(plan.Id);
 
                 if (materiaSeleccionadaId.HasValue)
                     SeleccionarFila(dgvMaterias, materiaSeleccionadaId);
@@ -81,10 +75,10 @@ namespace UI.Desktop.Forms.Planes
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 
-        private void dgvPlanes_SelectionChanged(object sender, EventArgs e)
+        private async void dgvPlanes_SelectionChanged(object sender, EventArgs e)
         {
             if (_cargando) return;
-            CargarMaterias();
+            await CargarMateriasAsync();
         }
 
         private void dgvPlanes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -92,34 +86,34 @@ namespace UI.Desktop.Forms.Planes
             tsbEditarPlan_Click(sender, e);
         }
 
-        private void tsbAgregarPlan_Click(object sender, EventArgs e)
+        private async void tsbAgregarPlan_Click(object sender, EventArgs e)
         {
             new PlanDialog(ModoForm.Alta).ShowDialog();
             CongelarGrilla(dgvPlanes);
-            Listar();
+            await ListarAsync();
             DescongelarGrilla(dgvPlanes);
         }
 
-        private void tsbEditarPlan_Click(object sender, EventArgs e)
+        private async void tsbEditarPlan_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPlanes)) return;
-            int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+            int id = ((PlanDto)dgvPlanes.SelectedRows[0].DataBoundItem).Id;
             new PlanDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvPlanes);
             _planSeleccionadoId = id;
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvPlanes, id);
             DescongelarGrilla(dgvPlanes);
         }
 
-        private void tsbEliminarPlan_Click(object sender, EventArgs e)
+        private async void tsbEliminarPlan_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPlanes)) return;
-            int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+            int id = ((PlanDto)dgvPlanes.SelectedRows[0].DataBoundItem).Id;
             new PlanDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvPlanes);
             _planSeleccionadoId = null;
-            Listar();
+            await ListarAsync();
             DescongelarGrilla(dgvPlanes);
         }
 
@@ -128,34 +122,34 @@ namespace UI.Desktop.Forms.Planes
             tsbEditarMateria_Click(sender, e);
         }
 
-        private void tsbAgregarMateria_Click(object sender, EventArgs e)
+        private async void tsbAgregarMateria_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPlanes)) return;
-            int planId = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+            int planId = ((PlanDto)dgvPlanes.SelectedRows[0].DataBoundItem).Id;
             new MateriaDialog(planId).ShowDialog();
             CongelarGrilla(dgvMaterias);
-            CargarMaterias();
+            await CargarMateriasAsync();
             DescongelarGrilla(dgvMaterias);
         }
 
-        private void tsbEditarMateria_Click(object sender, EventArgs e)
+        private async void tsbEditarMateria_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvMaterias)) return;
-            int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+            int id = ((MateriaDto)dgvMaterias.SelectedRows[0].DataBoundItem).Id;
             new MateriaDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvMaterias);
-            CargarMaterias();
+            await CargarMateriasAsync();
             SeleccionarFila(dgvMaterias, id);
             DescongelarGrilla(dgvMaterias);
         }
 
-        private void tsbEliminarMateria_Click(object sender, EventArgs e)
+        private async void tsbEliminarMateria_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvMaterias)) return;
-            int id = ((Materia)dgvMaterias.SelectedRows[0].DataBoundItem).ID;
+            int id = ((MateriaDto)dgvMaterias.SelectedRows[0].DataBoundItem).Id;
             new MateriaDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvMaterias);
-            CargarMaterias();
+            await CargarMateriasAsync();
             SeleccionarFila(dgvMaterias, id);
             DescongelarGrilla(dgvMaterias);
         }

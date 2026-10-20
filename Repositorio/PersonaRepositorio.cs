@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Contratos;
 using Dominio;
 
 namespace Repositorio
@@ -7,7 +8,7 @@ namespace Repositorio
     {
         public PersonaRepositorio(AcademiaContext ctx) : base(ctx) { }
 
-        public List<Persona> GetByTipo(Persona.TiposPersonas tipo)
+        public List<Persona> GetByTipo(TipoPersona tipo)
         {
             return context.Personas
                 .AsNoTracking()

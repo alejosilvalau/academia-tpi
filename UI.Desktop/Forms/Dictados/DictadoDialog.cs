@@ -1,45 +1,48 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Dictados
 {
     public partial class DictadoDialog : ApplicationForm
     {
-        private readonly DocenteCursoServicio _servicio;
-        private readonly CursoServicio _cursoServicio;
-        private readonly PersonaServicio _personaServicio;
-        private DocenteCurso? _dictado;
+        private int? _id;
 
         public DictadoDialog() : base()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.DocenteCurso();
-            _cursoServicio = ServicioFactory.Curso();
-            _personaServicio = ServicioFactory.Persona();
         }
 
         public DictadoDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxCursos.DataSource = _cursoServicio.GetAll()
-                .Select(c => new { c.ID, Display = $"{Formato.ToTitleCase(c.Materia.Descripcion)} - {Formato.ToTitleCase(c.Comision.Descripcion)} - {c.AnioCalendario}" }).ToList();
-            cbxCursos.DisplayMember = "Display";
-            cbxCursos.ValueMember = "ID";
-            cbxDocentes.DataSource = _personaServicio.GetByTipo(Persona.TiposPersonas.Docente)
-                .Select(p => new { p.ID, Display = $"{Formato.ToTitleCase(p.Nombre)} {Formato.ToTitleCase(p.Apellido)}" }).ToList();
-            cbxDocentes.DisplayMember = "Display";
-            cbxDocentes.ValueMember = "ID";
-            cbxTiposCargos.DataSource = EnumHelper.GetEnumItems<DocenteCurso.TiposCargos>();
-            cbxTiposCargos.DisplayMember = "Display";
-            cbxTiposCargos.ValueMember = "Value";
+            CargarCatalogos();
             SetModo();
         }
 
         public DictadoDialog(int id, ModoForm modo) : this(modo)
         {
-            _dictado = _servicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var dictado = ApiEscritorio.DocenteCurso.GetOneAsync(id).GetAwaiter().GetResult();
+            if (dictado != null) MapearDeDatos(dictado);
+        }
+
+        private void CargarCatalogos()
+        {
+            var cursos = ApiEscritorio.Curso.GetAllAsync().GetAwaiter().GetResult();
+            cbxCursos.DataSource = cursos
+                .Select(c => new { c.Id, Display = $"{Formato.ToTitleCase(c.MateriaDescripcion ?? "")} - {Formato.ToTitleCase(c.ComisionDescripcion ?? "")} - {c.AnioCalendario}" }).ToList();
+            cbxCursos.DisplayMember = "Display";
+            cbxCursos.ValueMember = "Id";
+
+            var docentes = ApiEscritorio.Persona.GetByTipoAsync(TipoPersona.Docente).GetAwaiter().GetResult();
+            cbxDocentes.DataSource = docentes
+                .Select(p => new { p.Id, Display = $"{Formato.ToTitleCase(p.Nombre)} {Formato.ToTitleCase(p.Apellido)}" }).ToList();
+            cbxDocentes.DisplayMember = "Display";
+            cbxDocentes.ValueMember = "Id";
+
+            cbxTiposCargos.DataSource = EnumHelper.GetEnumItems<CargoDocente>();
+            cbxTiposCargos.DisplayMember = "Display";
+            cbxTiposCargos.ValueMember = "Value";
         }
 
         private void SetModo()
@@ -53,31 +56,38 @@ namespace UI.Desktop.Forms.Dictados
             }
         }
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos(DocenteCursoDto dictado)
         {
-            if (_dictado == null) return;
-            txtID.Text = _dictado.ID.ToString();
-            cbxCursos.SelectedValue = _dictado.CursoId;
-            cbxDocentes.SelectedValue = _dictado.DocenteId;
-            cbxTiposCargos.SelectedItem = _dictado.Cargo;
+            txtID.Text = dictado.Id.ToString();
+            cbxCursos.SelectedValue = dictado.CursoId;
+            cbxDocentes.SelectedValue = dictado.DocenteId;
+            cbxTiposCargos.SelectedItem = dictado.Cargo;
         }
 
-        public override void MapearADatos()
-        {
-            if (Modo == ModoForm.Alta) _dictado = new DocenteCurso();
-            if (_dictado == null) return;
-            if (cbxCursos.SelectedValue is int cursoId) _dictado.CursoId = cursoId;
-            if (cbxDocentes.SelectedValue is int docenteId) _dictado.DocenteId = docenteId;
-            if (cbxTiposCargos.SelectedItem is DocenteCurso.TiposCargos cargo) _dictado.Cargo = cargo;
-        }
+        public override void MapearDeDatos() { }
 
-        public override void GuardarCambios()
+        private int CursoId => cbxCursos.SelectedValue is int cursoId ? cursoId : 0;
+        private int DocenteId => cbxDocentes.SelectedValue is int docenteId ? docenteId : 0;
+        private CargoDocente Cargo => cbxTiposCargos.SelectedItem is CargoDocente cargo ? cargo : CargoDocente.Profesor;
+
+        public override async Task GuardarCambiosAsync()
         {
-            MapearADatos();
-            if (_dictado == null) return;
-            if (Modo == ModoForm.Baja) _servicio.Delete(_dictado);
-            else if (Modo == ModoForm.Alta) _servicio.AsignarDocente(_dictado.DocenteId, _dictado.CursoId, _dictado.Cargo);
-            else _servicio.Update(_dictado);
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.DocenteCurso.DeleteAsync(_id.Value);
+            else if (Modo == ModoForm.Alta)
+                await ApiEscritorio.DocenteCurso.AsignarAsync(new AsignarDocenteRequest
+                {
+                    DocenteId = DocenteId,
+                    CursoId = CursoId,
+                    Cargo = Cargo
+                });
+            else if (_id.HasValue)
+                await ApiEscritorio.DocenteCurso.UpdateAsync(_id.Value, new DocenteCursoRequest
+                {
+                    Cargo = Cargo,
+                    DocenteId = DocenteId,
+                    CursoId = CursoId
+                });
         }
 
         public override bool Validar()
@@ -91,12 +101,12 @@ namespace UI.Desktop.Forms.Dictados
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }

@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using Contratos;
 using System.Security.Claims;
 using System.Text;
 using Dominio;
@@ -22,7 +23,7 @@ namespace UI.Api.Auth
                 new Claim(JwtRegisteredClaimNames.Sub, usuario.NombreUsuario),
                 new Claim(ClaimTypes.Name, usuario.NombreUsuario),
                 new Claim(ClaimTypes.NameIdentifier, (usuario.PersonaId ?? 0).ToString()),
-                new Claim(ClaimTypes.Role, (usuario.Persona?.Tipo ?? Persona.TiposPersonas.Alumno).ToString()),
+                new Claim(ClaimTypes.Role, (usuario.Persona?.Tipo ?? TipoPersona.Alumno).ToString()),
                 new Claim("Nombre", usuario.Persona?.Nombre ?? ""),
                 new Claim("Apellido", usuario.Persona?.Apellido ?? ""),
                 new Claim("Legajo", (usuario.Persona?.Legajo ?? 0).ToString()),

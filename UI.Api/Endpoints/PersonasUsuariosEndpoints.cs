@@ -1,5 +1,7 @@
+using Contratos;
 using Dominio;
 using Servicios;
+using UI.Api.Mapping;
 
 namespace UI.Api.Endpoints
 {
@@ -16,22 +18,28 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/personas").WithTags("Personas").RequireAuthorization();
 
-            g.MapGet("", (PersonaServicio s) => s.GetAll());
+            g.MapGet("", (PersonaServicio s) => Results.Ok(s.GetAll().Select(p => p.ADto()).ToList()));
             g.MapGet("/{id:int}", (int id, PersonaServicio s) =>
-                s.GetOne(id) is Persona p ? Results.Ok(p) : Results.NotFound());
-            g.MapGet("/por-tipo/{tipo}", (Persona.TiposPersonas tipo, PersonaServicio s) => s.GetByTipo(tipo));
+                s.GetOne(id) is Persona p ? Results.Ok(p.ADto()) : Results.NotFound());
+            g.MapGet("/basico/{id:int}", (int id, PersonaServicio s) =>
+                s.GetOneBasico(id) is Persona p ? Results.Ok(p.ADto()) : Results.NotFound());
+            g.MapGet("/por-tipo/{tipo}", (TipoPersona tipo, PersonaServicio s) =>
+                Results.Ok(s.GetByTipo(tipo).Select(p => p.ADto()).ToList()));
             g.MapGet("/por-legajo/{legajo:int}", (int legajo, PersonaServicio s) =>
-                s.GetByLegajo(legajo) is Persona p ? Results.Ok(p) : Results.NotFound());
-            g.MapPost("", (Persona cuerpo, PersonaServicio s) =>
+                s.GetByLegajo(legajo) is Persona p ? Results.Ok(p.ADto()) : Results.NotFound());
+            g.MapPost("", (PersonaRequest cuerpo, PersonaServicio s) =>
             {
-                s.Save(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = cuerpo.AEntidad();
+                s.Save(entidad);
+                return Results.Ok(entidad.ADto());
             });
-            g.MapPut("/{id:int}", (int id, Persona cuerpo, PersonaServicio s) =>
+            g.MapPut("/{id:int}", (int id, PersonaRequest cuerpo, PersonaServicio s) =>
             {
-                cuerpo.ID = id;
-                s.Update(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = s.GetOne(id);
+                if (entidad == null) return Results.NotFound();
+                cuerpo.Aplicar(entidad);
+                s.Update(entidad);
+                return Results.Ok(entidad.ADto());
             });
             g.MapDelete("/{id:int}", (int id, PersonaServicio s) =>
             {
@@ -46,21 +54,24 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/usuarios").WithTags("Usuarios").RequireAuthorization();
 
-            g.MapGet("", (UsuarioServicio s) => s.GetAll());
+            g.MapGet("", (UsuarioServicio s) => Results.Ok(s.GetAll().Select(u => u.ADto()).ToList()));
             g.MapGet("/{id:int}", (int id, UsuarioServicio s) =>
-                s.GetOne(id) is Usuario u ? Results.Ok(u) : Results.NotFound());
+                s.GetOne(id) is Usuario u ? Results.Ok(u.ADto()) : Results.NotFound());
             g.MapGet("/por-usuario/{nombreUsuario}", (string nombreUsuario, UsuarioServicio s) =>
-                s.GetByUsername(nombreUsuario) is Usuario u ? Results.Ok(u) : Results.NotFound());
-            g.MapPost("", (Usuario cuerpo, UsuarioServicio s) =>
+                s.GetByUsername(nombreUsuario) is Usuario u ? Results.Ok(u.ADto()) : Results.NotFound());
+            g.MapPost("", (UsuarioRequest cuerpo, UsuarioServicio s) =>
             {
-                s.Save(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = cuerpo.AEntidad();
+                s.Save(entidad);
+                return Results.Ok(entidad.ADto());
             });
-            g.MapPut("/{id:int}", (int id, Usuario cuerpo, UsuarioServicio s) =>
+            g.MapPut("/{id:int}", (int id, UsuarioRequest cuerpo, UsuarioServicio s) =>
             {
-                cuerpo.ID = id;
-                s.Update(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = s.GetOne(id);
+                if (entidad == null) return Results.NotFound();
+                cuerpo.Aplicar(entidad);
+                s.Update(entidad);
+                return Results.Ok(entidad.ADto());
             });
             g.MapDelete("/{id:int}", (int id, UsuarioServicio s) =>
             {

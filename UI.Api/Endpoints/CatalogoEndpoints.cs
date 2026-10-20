@@ -1,5 +1,7 @@
+using Contratos;
 using Dominio;
 using Servicios;
+using UI.Api.Mapping;
 
 namespace UI.Api.Endpoints
 {
@@ -19,19 +21,22 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/especialidades").WithTags("Especialidades").RequireAuthorization();
 
-            g.MapGet("", (EspecialidadServicio s) => s.GetAll());
+            g.MapGet("", (EspecialidadServicio s) => Results.Ok(s.GetAll().Select(e => e.ADto()).ToList()));
             g.MapGet("/{id:int}", (int id, EspecialidadServicio s) =>
-                s.GetOne(id) is Especialidad e ? Results.Ok(e) : Results.NotFound());
-            g.MapPost("", (Especialidad cuerpo, EspecialidadServicio s) =>
+                s.GetOne(id) is Especialidad e ? Results.Ok(e.ADto()) : Results.NotFound());
+            g.MapPost("", (EspecialidadRequest cuerpo, EspecialidadServicio s) =>
             {
-                s.Save(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = cuerpo.AEntidad();
+                s.Save(entidad);
+                return Results.Ok(entidad.ADto());
             });
-            g.MapPut("/{id:int}", (int id, Especialidad cuerpo, EspecialidadServicio s) =>
+            g.MapPut("/{id:int}", (int id, EspecialidadRequest cuerpo, EspecialidadServicio s) =>
             {
-                cuerpo.ID = id;
-                s.Update(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = s.GetOne(id);
+                if (entidad == null) return Results.NotFound();
+                cuerpo.Aplicar(entidad);
+                s.Update(entidad);
+                return Results.Ok(entidad.ADto());
             });
             g.MapDelete("/{id:int}", (int id, EspecialidadServicio s) =>
             {
@@ -46,20 +51,24 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/planes").WithTags("Planes").RequireAuthorization();
 
-            g.MapGet("", (PlanServicio s) => s.GetAll());
+            g.MapGet("", (PlanServicio s) => Results.Ok(s.GetAll().Select(p => p.ADto()).ToList()));
             g.MapGet("/{id:int}", (int id, PlanServicio s) =>
-                s.GetOne(id) is Plan p ? Results.Ok(p) : Results.NotFound());
-            g.MapGet("/por-especialidad/{especialidadId:int}", (int especialidadId, PlanServicio s) => s.GetByEspecialidad(especialidadId));
-            g.MapPost("", (Plan cuerpo, PlanServicio s) =>
+                s.GetOne(id) is Plan p ? Results.Ok(p.ADto()) : Results.NotFound());
+            g.MapGet("/por-especialidad/{especialidadId:int}", (int especialidadId, PlanServicio s) =>
+                Results.Ok(s.GetByEspecialidad(especialidadId).Select(p => p.ADto()).ToList()));
+            g.MapPost("", (PlanRequest cuerpo, PlanServicio s) =>
             {
-                s.Save(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = cuerpo.AEntidad();
+                s.Save(entidad);
+                return Results.Ok(entidad.ADto());
             });
-            g.MapPut("/{id:int}", (int id, Plan cuerpo, PlanServicio s) =>
+            g.MapPut("/{id:int}", (int id, PlanRequest cuerpo, PlanServicio s) =>
             {
-                cuerpo.ID = id;
-                s.Update(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = s.GetOne(id);
+                if (entidad == null) return Results.NotFound();
+                cuerpo.Aplicar(entidad);
+                s.Update(entidad);
+                return Results.Ok(entidad.ADto());
             });
             g.MapDelete("/{id:int}", (int id, PlanServicio s) =>
             {
@@ -74,20 +83,24 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/materias").WithTags("Materias").RequireAuthorization();
 
-            g.MapGet("", (MateriaServicio s) => s.GetAll());
+            g.MapGet("", (MateriaServicio s) => Results.Ok(s.GetAll().Select(m => m.ADto()).ToList()));
             g.MapGet("/{id:int}", (int id, MateriaServicio s) =>
-                s.GetOne(id) is Materia m ? Results.Ok(m) : Results.NotFound());
-            g.MapGet("/por-plan/{planId:int}", (int planId, MateriaServicio s) => s.GetByPlan(planId));
-            g.MapPost("", (Materia cuerpo, MateriaServicio s) =>
+                s.GetOne(id) is Materia m ? Results.Ok(m.ADto()) : Results.NotFound());
+            g.MapGet("/por-plan/{planId:int}", (int planId, MateriaServicio s) =>
+                Results.Ok(s.GetByPlan(planId).Select(m => m.ADto()).ToList()));
+            g.MapPost("", (MateriaRequest cuerpo, MateriaServicio s) =>
             {
-                s.Save(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = cuerpo.AEntidad();
+                s.Save(entidad);
+                return Results.Ok(entidad.ADto());
             });
-            g.MapPut("/{id:int}", (int id, Materia cuerpo, MateriaServicio s) =>
+            g.MapPut("/{id:int}", (int id, MateriaRequest cuerpo, MateriaServicio s) =>
             {
-                cuerpo.ID = id;
-                s.Update(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = s.GetOne(id);
+                if (entidad == null) return Results.NotFound();
+                cuerpo.Aplicar(entidad);
+                s.Update(entidad);
+                return Results.Ok(entidad.ADto());
             });
             g.MapDelete("/{id:int}", (int id, MateriaServicio s) =>
             {
@@ -102,20 +115,24 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/comisiones").WithTags("Comisiones").RequireAuthorization();
 
-            g.MapGet("", (ComisionServicio s) => s.GetAll());
+            g.MapGet("", (ComisionServicio s) => Results.Ok(s.GetAll().Select(c => c.ADto()).ToList()));
             g.MapGet("/{id:int}", (int id, ComisionServicio s) =>
-                s.GetOne(id) is Comision c ? Results.Ok(c) : Results.NotFound());
-            g.MapGet("/por-plan/{planId:int}", (int planId, ComisionServicio s) => s.GetByPlan(planId));
-            g.MapPost("", (Comision cuerpo, ComisionServicio s) =>
+                s.GetOne(id) is Comision c ? Results.Ok(c.ADto()) : Results.NotFound());
+            g.MapGet("/por-plan/{planId:int}", (int planId, ComisionServicio s) =>
+                Results.Ok(s.GetByPlan(planId).Select(c => c.ADto()).ToList()));
+            g.MapPost("", (ComisionRequest cuerpo, ComisionServicio s) =>
             {
-                s.Save(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = cuerpo.AEntidad();
+                s.Save(entidad);
+                return Results.Ok(entidad.ADto());
             });
-            g.MapPut("/{id:int}", (int id, Comision cuerpo, ComisionServicio s) =>
+            g.MapPut("/{id:int}", (int id, ComisionRequest cuerpo, ComisionServicio s) =>
             {
-                cuerpo.ID = id;
-                s.Update(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = s.GetOne(id);
+                if (entidad == null) return Results.NotFound();
+                cuerpo.Aplicar(entidad);
+                s.Update(entidad);
+                return Results.Ok(entidad.ADto());
             });
             g.MapDelete("/{id:int}", (int id, ComisionServicio s) =>
             {
@@ -130,21 +147,24 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/cursos").WithTags("Cursos").RequireAuthorization();
 
-            g.MapGet("", (CursoServicio s) => s.GetAll());
+            g.MapGet("", (CursoServicio s) => Results.Ok(s.GetAll().Select(c => c.ADto()).ToList()));
             g.MapGet("/{id:int}", (int id, CursoServicio s) =>
-                s.GetOne(id) is Curso c ? Results.Ok(c) : Results.NotFound());
+                s.GetOne(id) is Curso c ? Results.Ok(c.ADto()) : Results.NotFound());
             g.MapGet("/por-materia-comision", (int materiaId, int comisionId, CursoServicio s) =>
-                s.GetByMateriaYComision(materiaId, comisionId));
-            g.MapPost("", (Curso cuerpo, CursoServicio s) =>
+                Results.Ok(s.GetByMateriaYComision(materiaId, comisionId).Select(c => c.ADto()).ToList()));
+            g.MapPost("", (CursoRequest cuerpo, CursoServicio s) =>
             {
-                s.Save(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = cuerpo.AEntidad();
+                s.Save(entidad);
+                return Results.Ok(entidad.ADto());
             });
-            g.MapPut("/{id:int}", (int id, Curso cuerpo, CursoServicio s) =>
+            g.MapPut("/{id:int}", (int id, CursoRequest cuerpo, CursoServicio s) =>
             {
-                cuerpo.ID = id;
-                s.Update(cuerpo);
-                return Results.Ok(cuerpo);
+                var entidad = s.GetOne(id);
+                if (entidad == null) return Results.NotFound();
+                cuerpo.Aplicar(entidad);
+                s.Update(entidad);
+                return Results.Ok(entidad.ADto());
             });
             g.MapDelete("/{id:int}", (int id, CursoServicio s) =>
             {

@@ -136,7 +136,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             // ID
             //
-            this.ID.DataPropertyName = "ID";
+            this.ID.DataPropertyName = "Id";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 50;
             this.ID.Name = "ID";
@@ -161,7 +161,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             // Materia
             //
-            this.Materia.DataPropertyName = "Materia";
+            this.Materia.DataPropertyName = "MateriaDescripcion";
             this.Materia.HeaderText = "Materia";
             this.Materia.MinimumWidth = 150;
             this.Materia.Name = "Materia";
@@ -169,7 +169,7 @@ namespace UI.Desktop.Forms.Inscripciones
             //
             // Comision
             //
-            this.Comision.DataPropertyName = "Comision";
+            this.Comision.DataPropertyName = "ComisionDescripcion";
             this.Comision.HeaderText = "Comision";
             this.Comision.MinimumWidth = 120;
             this.Comision.Name = "Comision";

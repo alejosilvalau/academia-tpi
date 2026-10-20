@@ -1,36 +1,38 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Usuarios
 {
     public partial class UsuarioDialog : ApplicationForm
     {
-        private readonly UsuarioServicio _servicio;
-        private readonly PersonaServicio _personaServicio;
-        private Usuario? _usuario;
+        private int? _id;
 
         public UsuarioDialog() : base()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Usuario();
-            _personaServicio = ServicioFactory.Persona();
         }
 
         public UsuarioDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxPersona.DataSource = _personaServicio.GetAll()
-                .Select(p => new { p.ID, Display = $"{Formato.ToTitleCase(p.Nombre)} {Formato.ToTitleCase(p.Apellido)}" }).ToList();
-            cbxPersona.DisplayMember = "Display";
-            cbxPersona.ValueMember = "ID";
+            CargarPersonas();
             SetModo();
         }
 
         public UsuarioDialog(int id, ModoForm modo) : this(modo)
         {
-            _usuario = _servicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var usuario = ApiEscritorio.Usuario.GetOneAsync(id).GetAwaiter().GetResult();
+            if (usuario != null) MapearDeDatos(usuario);
+        }
+
+        private void CargarPersonas()
+        {
+            var personas = ApiEscritorio.Persona.GetAllAsync().GetAwaiter().GetResult();
+            cbxPersona.DataSource = personas
+                .Select(p => new { p.Id, Display = $"{Formato.ToTitleCase(p.Nombre)} {Formato.ToTitleCase(p.Apellido)}" }).ToList();
+            cbxPersona.DisplayMember = "Display";
+            cbxPersona.ValueMember = "Id";
         }
 
         private void SetModo()
@@ -44,33 +46,33 @@ namespace UI.Desktop.Forms.Usuarios
             }
         }
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos(UsuarioDto usuario)
         {
-            if (_usuario == null) return;
-            txtID.Text = _usuario.ID.ToString();
-            txtUsuario.Text = _usuario.NombreUsuario;
-            txtClave.Text = _usuario.Clave;
-            chkHabilitado.Checked = _usuario.Habilitado;
-            cbxPersona.SelectedValue = _usuario.PersonaId;
+            txtID.Text = usuario.Id.ToString();
+            txtUsuario.Text = usuario.NombreUsuario;
+            txtClave.Text = "";
+            chkHabilitado.Checked = usuario.Habilitado;
+            if (usuario.PersonaId.HasValue) cbxPersona.SelectedValue = usuario.PersonaId.Value;
         }
 
-        public override void MapearADatos()
-        {
-            if (Modo == ModoForm.Alta) _usuario = new Usuario();
-            if (_usuario == null) return;
-            _usuario.NombreUsuario = txtUsuario.Text;
-            _usuario.Clave = txtClave.Text;
-            _usuario.Habilitado = chkHabilitado.Checked;
-            if (cbxPersona.SelectedValue is int personaId) _usuario.PersonaId = personaId;
-        }
+        public override void MapearDeDatos() { }
 
-        public override void GuardarCambios()
+        private UsuarioRequest ConstruirRequest() => new()
         {
-            MapearADatos();
-            if (_usuario == null) return;
-            if (Modo == ModoForm.Baja) _servicio.Delete(_usuario);
-            else if (Modo == ModoForm.Alta) _servicio.Save(_usuario);
-            else _servicio.Update(_usuario);
+            NombreUsuario = txtUsuario.Text,
+            Clave = string.IsNullOrWhiteSpace(txtClave.Text) ? null : txtClave.Text,
+            Habilitado = chkHabilitado.Checked,
+            PersonaId = cbxPersona.SelectedValue is int personaId ? personaId : null
+        };
+
+        public override async Task GuardarCambiosAsync()
+        {
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.Usuario.DeleteAsync(_id.Value);
+            else if (Modo == ModoForm.Alta)
+                await ApiEscritorio.Usuario.SaveAsync(ConstruirRequest());
+            else if (_id.HasValue)
+                await ApiEscritorio.Usuario.UpdateAsync(_id.Value, ConstruirRequest());
         }
 
         public override bool Validar()
@@ -83,12 +85,12 @@ namespace UI.Desktop.Forms.Usuarios
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }

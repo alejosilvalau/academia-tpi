@@ -167,7 +167,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             // 
             // ID
             // 
-            ID.DataPropertyName = "ID";
+            ID.DataPropertyName = "Id";
             ID.HeaderText = "ID";
             ID.MinimumWidth = 50;
             ID.Name = "ID";
@@ -176,7 +176,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             // Nombre
             // 
             Nombre.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Nombre.DataPropertyName = "Nombre";
+            Nombre.DataPropertyName = "AlumnoNombre";
             Nombre.HeaderText = "Nombre";
             Nombre.MinimumWidth = 150;
             Nombre.Name = "Nombre";
@@ -185,7 +185,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             // Apellido
             // 
             Apellido.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Apellido.DataPropertyName = "Apellido";
+            Apellido.DataPropertyName = "AlumnoApellido";
             Apellido.HeaderText = "Apellido";
             Apellido.MinimumWidth = 150;
             Apellido.Name = "Apellido";
@@ -193,7 +193,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
             // 
             // Legajo
             // 
-            Legajo.DataPropertyName = "Legajo";
+            Legajo.DataPropertyName = "AlumnoLegajo";
             Legajo.HeaderText = "Legajo";
             Legajo.MinimumWidth = 100;
             Legajo.Name = "Legajo";

@@ -124,7 +124,7 @@ namespace UI.Desktop.Forms.Cursos
             //
             // ID
             //
-            this.ID.DataPropertyName = "ID";
+            this.ID.DataPropertyName = "Id";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 60;
             this.ID.Name = "ID";
@@ -148,7 +148,7 @@ namespace UI.Desktop.Forms.Cursos
             //
             // Materia
             //
-            this.Materia.DataPropertyName = "Materia";
+            this.Materia.DataPropertyName = "MateriaDescripcion";
             this.Materia.HeaderText = "Materia";
             this.Materia.MinimumWidth = 100;
             this.Materia.Name = "Materia";
@@ -156,7 +156,7 @@ namespace UI.Desktop.Forms.Cursos
             //
             // Comision
             //
-            this.Comision.DataPropertyName = "Comision";
+            this.Comision.DataPropertyName = "ComisionDescripcion";
             this.Comision.HeaderText = "Comision";
             this.Comision.MinimumWidth = 100;
             this.Comision.Name = "Comision";

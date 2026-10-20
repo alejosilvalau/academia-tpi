@@ -98,8 +98,8 @@
     <div class="topbar">
         <div class="topbar-title">@GetPageTitle()</div>
         <div class="topbar-user">
-            <span class="topbar-legajo">Legajo: @Sesion.UsuarioActual?.Persona?.Legajo</span>
-            @Formato.ToTitleCase(Sesion.UsuarioActual?.Persona?.Nombre) @Formato.ToTitleCase(Sesion.UsuarioActual?.Persona?.Apellido)
+            <span class="topbar-legajo">Legajo: @Sesion.Perfil?.Legajo</span>
+            @Utils.Formato.ToTitleCase(Sesion.Perfil?.Nombre) @Utils.Formato.ToTitleCase(Sesion.Perfil?.Apellido)
             <span class="topbar-tipo">@Sesion.TipoUsuario</span>
         </div>
     </div>
@@ -124,7 +124,7 @@ else
     {
         if (firstRender && !Sesion.IsLoggedIn && !Nav.Uri.EndsWith("/login"))
         {
-            Nav.NavigateTo("/login", forceLoad: true);
+            Nav.NavigateTo("/login");
         }
     }
 
@@ -169,8 +169,8 @@ else
 
     private async Task CerrarSesion()
     {
-        await JS.InvokeVoidAsync("academiaLogout", "/api/auth/logout");
         Sesion.Invalidar();
-        Nav.NavigateTo("/login", forceLoad: true);
+        await Task.CompletedTask;
+        Nav.NavigateTo("/login");
     }
 }

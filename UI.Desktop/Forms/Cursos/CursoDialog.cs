@@ -1,38 +1,44 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Cursos
 {
     public partial class CursoDialog : ApplicationForm
     {
-        private readonly CursoServicio _servicio;
-        private readonly MateriaServicio _materiaServicio;
-        private readonly ComisionServicio _comisionServicio;
-        private Curso? _curso;
+        private int? _id;
 
         public CursoDialog() : base()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Curso();
-            _materiaServicio = ServicioFactory.Materia();
-            _comisionServicio = ServicioFactory.Comision();
         }
 
         public CursoDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxMateria.DataSource = _materiaServicio.GetAll()
-                .Select(m => new { m.ID, Descripcion = Formato.ToTitleCase(m.Descripcion) }).ToList();
-            cbxComision.DataSource = _comisionServicio.GetAll()
-                .Select(c => new { c.ID, Descripcion = Formato.ToTitleCase(c.Descripcion) }).ToList();
+            CargarCatalogos();
             SetModo();
         }
 
         public CursoDialog(int id, ModoForm modo) : this(modo)
         {
-            _curso = _servicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var curso = ApiEscritorio.Curso.GetOneAsync(id).GetAwaiter().GetResult();
+            if (curso != null) MapearDeDatos(curso);
+        }
+
+        private void CargarCatalogos()
+        {
+            var materias = ApiEscritorio.Materia.GetAllAsync().GetAwaiter().GetResult();
+            cbxMateria.DataSource = materias
+                .Select(m => new { m.Id, Descripcion = Formato.ToTitleCase(m.Descripcion) }).ToList();
+            cbxMateria.DisplayMember = "Descripcion";
+            cbxMateria.ValueMember = "Id";
+
+            var comisiones = ApiEscritorio.Comision.GetAllAsync().GetAwaiter().GetResult();
+            cbxComision.DataSource = comisiones
+                .Select(c => new { c.Id, Descripcion = Formato.ToTitleCase(c.Descripcion) }).ToList();
+            cbxComision.DisplayMember = "Descripcion";
+            cbxComision.ValueMember = "Id";
         }
 
         private void SetModo()
@@ -46,36 +52,39 @@ namespace UI.Desktop.Forms.Cursos
             }
         }
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos(CursoDto curso)
         {
-            if (_curso == null) return;
-            txtID.Text = _curso.ID.ToString();
-            txtDescripcion.Text = $"{Formato.ToTitleCase(_curso.Materia.Descripcion)} - {Formato.ToTitleCase(_curso.Comision.Descripcion)} - {_curso.AnioCalendario}";
-            txtAnioCalendario.Text = _curso.AnioCalendario.ToString();
-            txtCupo.Text = _curso.Cupo.ToString();
-            cbxMateria.SelectedValue = _curso.MateriaId;
-            cbxComision.SelectedValue = _curso.ComisionId;
+            txtID.Text = curso.Id.ToString();
+            txtDescripcion.Text = $"{Formato.ToTitleCase(curso.MateriaDescripcion ?? "")} - {Formato.ToTitleCase(curso.ComisionDescripcion ?? "")} - {curso.AnioCalendario}";
+            txtAnioCalendario.Text = curso.AnioCalendario.ToString();
+            txtCupo.Text = curso.Cupo.ToString();
+            cbxMateria.SelectedValue = curso.MateriaId;
+            cbxComision.SelectedValue = curso.ComisionId;
         }
 
-        public override void MapearADatos()
+        public override void MapearDeDatos() { }
+
+        private CursoRequest ConstruirRequest()
         {
-            if (Modo == ModoForm.Alta) _curso = new Curso();
-            if (_curso == null) return;
             int.TryParse(txtAnioCalendario.Text, out int anio);
             int.TryParse(txtCupo.Text, out int cupo);
-            _curso.AnioCalendario = anio;
-            _curso.Cupo = cupo;
-            if (cbxMateria.SelectedValue is int materiaId) _curso.MateriaId = materiaId;
-            if (cbxComision.SelectedValue is int comisionId) _curso.ComisionId = comisionId;
+            return new CursoRequest
+            {
+                AnioCalendario = anio,
+                Cupo = cupo,
+                MateriaId = cbxMateria.SelectedValue is int materiaId ? materiaId : 0,
+                ComisionId = cbxComision.SelectedValue is int comisionId ? comisionId : 0
+            };
         }
 
-        public override void GuardarCambios()
+        public override async Task GuardarCambiosAsync()
         {
-            MapearADatos();
-            if (_curso == null) return;
-            if (Modo == ModoForm.Baja) _servicio.Delete(_curso);
-            else if (Modo == ModoForm.Alta) _servicio.Save(_curso);
-            else _servicio.Update(_curso);
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.Curso.DeleteAsync(_id.Value);
+            else if (Modo == ModoForm.Alta)
+                await ApiEscritorio.Curso.SaveAsync(ConstruirRequest());
+            else if (_id.HasValue)
+                await ApiEscritorio.Curso.UpdateAsync(_id.Value, ConstruirRequest());
         }
 
         public override bool Validar()
@@ -91,22 +100,17 @@ namespace UI.Desktop.Forms.Cursos
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
         private void btnCancelar_Click(object sender, EventArgs e) => Close();
-
-        private void CursoDialog_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

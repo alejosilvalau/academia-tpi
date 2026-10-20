@@ -120,7 +120,7 @@ namespace UI.Desktop.Forms.Comisiones
             // colID
             //
             this.colID.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colID.DataPropertyName = "ID";
+            this.colID.DataPropertyName = "Id";
             this.colID.HeaderText = "ID";
             this.colID.Name = "colID";
             this.colID.ReadOnly = true;
@@ -144,7 +144,7 @@ namespace UI.Desktop.Forms.Comisiones
             // colPlan
             //
             this.colPlan.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPlan.DataPropertyName = "Plan";
+            this.colPlan.DataPropertyName = "PlanDescripcion";
             this.colPlan.HeaderText = "Plan";
             this.colPlan.Name = "colPlan";
             this.colPlan.ReadOnly = true;

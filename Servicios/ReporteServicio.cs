@@ -1,4 +1,5 @@
 using Dominio;
+using Contratos;
 using Microsoft.Extensions.Configuration;
 using Repositorio;
 using Servicios.Excepciones;
@@ -56,7 +57,7 @@ namespace Servicios
             try
             {
                 int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
-                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Docente, "docente");
+                ValidarTipoPersona(idResuelto, TipoPersona.Docente, "docente");
                 return _generador.ObtenerAlumnosDeDocente(idResuelto);
             }
             catch (ServicioException)
@@ -75,7 +76,7 @@ namespace Servicios
             try
             {
                 int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
-                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Docente, "docente");
+                ValidarTipoPersona(idResuelto, TipoPersona.Docente, "docente");
                 return _generador.GenerarReporteRendimientoDocente(idResuelto);
             }
             catch (ServicioException)
@@ -95,7 +96,7 @@ namespace Servicios
             {
                 var tipo = TipoUsuarioActual();
                 int idResuelto;
-                if (tipo == Persona.TiposPersonas.Docente)
+                if (tipo == TipoPersona.Docente)
                 {
                     int docenteId = PersonaIdActual()!.Value;
                     var alumnosDocente = _generador.ObtenerAlumnosDeDocente(docenteId);
@@ -108,7 +109,7 @@ namespace Servicios
                     idResuelto = EsAdmin() ? alumnoId : PersonaIdActual()!.Value;
                 }
 
-                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Alumno, "alumno");
+                ValidarTipoPersona(idResuelto, TipoPersona.Alumno, "alumno");
                 return _generador.GenerarReporteRendimientoAlumno(idResuelto);
             }
             catch (ServicioException)
@@ -127,7 +128,7 @@ namespace Servicios
             try
             {
                 int idResuelto = EsAdmin() ? docenteId : PersonaIdActual()!.Value;
-                ValidarTipoPersona(idResuelto, Persona.TiposPersonas.Docente, "docente");
+                ValidarTipoPersona(idResuelto, TipoPersona.Docente, "docente");
                 return _generador.GenerarReporteRendimientoAlumnosDeDocente(idResuelto);
             }
             catch (ServicioException)
@@ -157,7 +158,7 @@ namespace Servicios
             }
         }
 
-        private void ValidarTipoPersona(int personaId, Persona.TiposPersonas esperado, string nombreRol)
+        private void ValidarTipoPersona(int personaId, TipoPersona esperado, string nombreRol)
         {
             var tipo = _generador.ObtenerTipoPersona(personaId);
             if (tipo == null)

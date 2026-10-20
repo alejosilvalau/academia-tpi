@@ -1,0 +1,36 @@
+[
+  {
+    "Name": "API + Desktop",
+    "Projects": [
+      {
+        "Path": "UI.Api\\UI.Api.csproj",
+        "Name": "UI.Api",
+        "Action": "Start",
+        "Profile": "http"
+      },
+      {
+        "Path": "UI.Desktop\\UI.Desktop.csproj",
+        "Name": "UI.Desktop",
+        "Action": "Start",
+        "Profile": "Project"
+      }
+    ]
+  },
+  {
+    "Name": "API + Web",
+    "Projects": [
+      {
+        "Path": "UI.Api\\UI.Api.csproj",
+        "Name": "UI.Api",
+        "Action": "Start",
+        "Profile": "http"
+      },
+      {
+        "Path": "UI.Web\\UI.Web.csproj",
+        "Name": "UI.Web",
+        "Action": "Start",
+        "Profile": "http"
+      }
+    ]
+  }
+]

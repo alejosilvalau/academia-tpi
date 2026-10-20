@@ -1,35 +1,28 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Materias
 {
     public partial class MateriaDialog : ApplicationForm
     {
-        private readonly MateriaServicio _servicio;
-        private readonly PlanServicio _planServicio;
-        private Materia? _materia;
+        private int? _id;
 
         public MateriaDialog() : base()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Materia();
-            _planServicio = ServicioFactory.Plan();
         }
 
         public MateriaDialog(ModoForm modo) : this()
         {
             Modo = modo;
-            cbxPlan.DataSource = _planServicio.GetAll()
-                .Select(p => new { p.ID, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
+            CargarPlanes();
             SetModo();
         }
 
         public MateriaDialog(int planId) : this()
         {
             Modo = ModoForm.Alta;
-            cbxPlan.DataSource = _planServicio.GetAll()
-                .Select(p => new { p.ID, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
+            CargarPlanes();
             cbxPlan.SelectedValue = planId;
             cbxPlan.Enabled = false;
             SetModo();
@@ -37,8 +30,18 @@ namespace UI.Desktop.Forms.Materias
 
         public MateriaDialog(int id, ModoForm modo) : this(modo)
         {
-            _materia = _servicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var materia = ApiEscritorio.Materia.GetOneAsync(id).GetAwaiter().GetResult();
+            if (materia != null) MapearDeDatos(materia);
+        }
+
+        private void CargarPlanes()
+        {
+            var planes = ApiEscritorio.Plan.GetAllAsync().GetAwaiter().GetResult();
+            cbxPlan.DataSource = planes
+                .Select(p => new { p.Id, Descripcion = Formato.ToTitleCase(p.Descripcion) }).ToList();
+            cbxPlan.DisplayMember = "Descripcion";
+            cbxPlan.ValueMember = "Id";
         }
 
         private void SetModo()
@@ -52,35 +55,38 @@ namespace UI.Desktop.Forms.Materias
             }
         }
 
-        public override void MapearDeDatos()
+        public void MapearDeDatos(MateriaDto materia)
         {
-            if (_materia == null) return;
-            txtID.Text = _materia.ID.ToString();
-            txtDescripcion.Text = Formato.ToTitleCase(_materia.Descripcion);
-            txtHsSemanales.Text = _materia.HorasSemanales.ToString();
-            txtHsTotales.Text = _materia.HorasTotales.ToString();
-            cbxPlan.SelectedValue = _materia.PlanId;
+            txtID.Text = materia.Id.ToString();
+            txtDescripcion.Text = Formato.ToTitleCase(materia.Descripcion);
+            txtHsSemanales.Text = materia.HorasSemanales.ToString();
+            txtHsTotales.Text = materia.HorasTotales.ToString();
+            cbxPlan.SelectedValue = materia.PlanId;
         }
 
-        public override void MapearADatos()
+        public override void MapearDeDatos() { }
+
+        private MateriaRequest ConstruirRequest()
         {
-            if (Modo == ModoForm.Alta) _materia = new Materia();
-            if (_materia == null) return;
-            _materia.Descripcion = txtDescripcion.Text;
             int.TryParse(txtHsSemanales.Text, out int hsSem);
-            _materia.HorasSemanales = hsSem;
             int.TryParse(txtHsTotales.Text, out int hsTot);
-            _materia.HorasTotales = hsTot;
-            if (cbxPlan.SelectedValue is int planId) _materia.PlanId = planId;
+            return new MateriaRequest
+            {
+                Descripcion = txtDescripcion.Text,
+                HorasSemanales = hsSem,
+                HorasTotales = hsTot,
+                PlanId = cbxPlan.SelectedValue is int planId ? planId : 0
+            };
         }
 
-        public override void GuardarCambios()
+        public override async Task GuardarCambiosAsync()
         {
-            MapearADatos();
-            if (_materia == null) return;
-            if (Modo == ModoForm.Baja) _servicio.Delete(_materia);
-            else if (Modo == ModoForm.Alta) _servicio.Save(_materia);
-            else _servicio.Update(_materia);
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.Materia.DeleteAsync(_id.Value);
+            else if (Modo == ModoForm.Alta)
+                await ApiEscritorio.Materia.SaveAsync(ConstruirRequest());
+            else if (_id.HasValue)
+                await ApiEscritorio.Materia.UpdateAsync(_id.Value, ConstruirRequest());
         }
 
         public override bool Validar()
@@ -95,12 +101,12 @@ namespace UI.Desktop.Forms.Materias
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }

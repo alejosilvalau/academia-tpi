@@ -1,18 +1,12 @@
-using Dominio;
-using Servicios;
+using Contratos;
 
 namespace UI.Desktop
 {
     public partial class Login : ApplicationForm
     {
-        private readonly UsuarioServicio _usuarioServicio;
-
-        public static Usuario? UsuarioActual { get; private set; }
-
         public Login()
         {
             InitializeComponent();
-            _usuarioServicio = ServicioFactory.Usuario();
         }
 
         private void btnIniciarSesion_Click(object sender, EventArgs e)
@@ -56,13 +50,18 @@ namespace UI.Desktop
                 return false;
             }
 
-            UsuarioActual = _usuarioServicio.Login(txtUsuario.Text, txtClave.Text);
-            if (UsuarioActual == null)
+            var respuesta = ApiEscritorio.Auth
+                .LoginAsync(txtUsuario.Text, txtClave.Text)
+                .GetAwaiter().GetResult();
+
+            if (respuesta == null || !respuesta.Habilitado || string.IsNullOrEmpty(respuesta.Token))
             {
                 Notificar("Información inválida", "Usuario y/o contraseña incorrectos.",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
+
+            SesionEscritorio.Iniciar(respuesta);
             return true;
         }
 

@@ -1,31 +1,28 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Inscripciones
 {
     public partial class Inscripciones : ApplicationForm
     {
-        private readonly InscripcionServicio _servicio;
         public override DataGridView? GrillaPrincipal => dgvInscripciones;
-        private readonly Persona _personaActual;
+        private readonly int _alumnoId;
 
-        public Inscripciones(Persona persona, bool admin = false)
+        public Inscripciones(int alumnoId, bool admin = false)
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Inscripcion();
-            _personaActual = persona;
+            _alumnoId = alumnoId;
             dgvInscripciones.AutoGenerateColumns = false;
             dgvInscripciones.CellFormatting += (s, e) =>
             {
                 if (e.ColumnIndex < 0) return;
                 var colName = dgvInscripciones.Columns[e.ColumnIndex].Name;
-                if (dgvInscripciones.Rows[e.RowIndex].DataBoundItem is AlumnoInscripcion ins)
+                if (dgvInscripciones.Rows[e.RowIndex].DataBoundItem is InscripcionDto ins)
                 {
                     if (colName == "DescripcionMateria")
-                        e.Value = Formato.ToTitleCase(ins.Curso.Materia.Descripcion);
+                        e.Value = Formato.ToTitleCase(ins.CursoMateriaDescripcion ?? "");
                     else if (colName == "Legajo")
-                        e.Value = ins.Alumno.Legajo;
+                        e.Value = ins.AlumnoLegajo;
                 }
             };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
@@ -38,32 +35,31 @@ namespace UI.Desktop.Forms.Inscripciones
 
         private void Inscripciones_Load(object sender, EventArgs e) => Listar();
 
-        public override void Listar()
+        public override async Task ListarAsync()
         {
             try
             {
                 dgvInscripciones.DataSource = null;
-                dgvInscripciones.DataSource = _servicio.GetByAlumno(_personaActual.ID);
+                dgvInscripciones.DataSource = await ApiEscritorio.Inscripcion.GetByAlumnoAsync(_alumnoId);
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
         }
 
-        private void tsbAgregar_Click(object sender, EventArgs e)
+        private async void tsbAgregar_Click(object sender, EventArgs e)
         {
-            new InscripcionDialog(_personaActual, ModoForm.Alta).ShowDialog();
-            Listar();
+            new InscripcionDialog(_alumnoId, ModoForm.Alta).ShowDialog();
+            await ListarAsync();
         }
 
-        private void tsbEliminar_Click(object sender, EventArgs e)
+        private async void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvInscripciones)) return;
-            int id = ((AlumnoInscripcion)dgvInscripciones.SelectedRows[0].DataBoundItem).ID;
-            new InscripcionDialog(_personaActual, id, ModoForm.Baja).ShowDialog();
+            int id = ((InscripcionDto)dgvInscripciones.SelectedRows[0].DataBoundItem).Id;
+            new InscripcionDialog(_alumnoId, id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvInscripciones);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvInscripciones, id);
             DescongelarGrilla(dgvInscripciones);
         }
-
     }
 }

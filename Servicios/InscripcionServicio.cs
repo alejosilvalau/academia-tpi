@@ -1,4 +1,5 @@
 using Dominio;
+using Contratos;
 using Repositorio;
 using Servicios.Excepciones;
 using Utils;
@@ -66,7 +67,7 @@ namespace Servicios
                 {
                     AlumnoId = alumnoId,
                     CursoId = cursoId,
-                    Condicion = AlumnoInscripcion.Condiciones.Inscripto
+                    Condicion = CondicionInscripcion.Inscripto
                 };
 
                 _repositorioInscripcion.Add(inscripcion);
@@ -124,15 +125,15 @@ namespace Servicios
         {
             if (!inscripcion.Nota.HasValue)
             {
-                if (inscripcion.Condicion != AlumnoInscripcion.Condiciones.Inscripto)
+                if (inscripcion.Condicion != CondicionInscripcion.Inscripto)
                     throw new ArgumentException("Si no hay nota, la condición debe ser 'Inscripto'.");
                 return;
             }
             var condicionEsperada = inscripcion.Nota.Value switch
             {
-                >= 6 => AlumnoInscripcion.Condiciones.Aprobado,
-                >= 4 => AlumnoInscripcion.Condiciones.Regular,
-                _ => AlumnoInscripcion.Condiciones.Inscripto
+                >= 6 => CondicionInscripcion.Aprobado,
+                >= 4 => CondicionInscripcion.Regular,
+                _ => CondicionInscripcion.Inscripto
             };
             if (inscripcion.Condicion != condicionEsperada)
                 throw new ArgumentException($"La nota {inscripcion.Nota.Value} no corresponde con la condición '{inscripcion.Condicion}'.");
@@ -143,7 +144,7 @@ namespace Servicios
             var alumno = _repositorioPersona.GetOne(alumnoId);
             if (alumno == null)
                 throw new ReglaNegocioException("El alumno especificado no existe.");
-            if (alumno.Tipo != Persona.TiposPersonas.Alumno)
+            if (alumno.Tipo != TipoPersona.Alumno)
                 throw new ReglaNegocioException("La persona seleccionada no es de tipo alumno.");
 
             var curso = _repositorioCurso.GetOne(cursoId);
@@ -161,7 +162,7 @@ namespace Servicios
 
         private bool EsDocenteDelCurso(int cursoId)
         {
-            if (TipoUsuarioActual() != Persona.TiposPersonas.Docente) return false;
+            if (TipoUsuarioActual() != TipoPersona.Docente) return false;
             var docenteId = PersonaIdActual();
             if (!docenteId.HasValue) return false;
             return _repositorioDocenteCurso.GetByCurso(cursoId).Any(dc => dc.DocenteId == docenteId.Value);

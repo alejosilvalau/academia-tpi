@@ -1,13 +1,12 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Especialidades
 {
     public partial class EspecialidadDialog : ApplicationForm
     {
-        private readonly EspecialidadServicio _servicio;
-        private Especialidad? _especialidad;
+        private int? _id;
+        private string _descripcionActual = "";
 
         public EspecialidadDialog(ModoForm modo) : this()
         {
@@ -17,14 +16,18 @@ namespace UI.Desktop.Forms.Especialidades
 
         public EspecialidadDialog(int id, ModoForm modo) : this(modo)
         {
-            _especialidad = _servicio.GetOne(id);
-            MapearDeDatos();
+            _id = id;
+            var especialidad = ApiEscritorio.Especialidad.GetOneAsync(id).GetAwaiter().GetResult();
+            if (especialidad != null)
+            {
+                _descripcionActual = especialidad.Descripcion;
+                MapearDeDatos();
+            }
         }
 
         public EspecialidadDialog() : base()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Especialidad();
         }
 
         private void SetModo()
@@ -40,29 +43,24 @@ namespace UI.Desktop.Forms.Especialidades
 
         public override void MapearDeDatos()
         {
-            if (_especialidad == null) return;
-            txtID.Text = _especialidad.ID.ToString();
-            txtDescripcion.Text = Formato.ToTitleCase(_especialidad.Descripcion);
+            txtID.Text = _id?.ToString() ?? "";
+            txtDescripcion.Text = Formato.ToTitleCase(_descripcionActual);
         }
 
         public override void MapearADatos()
         {
-            if (Modo == ModoForm.Alta)
-                _especialidad = new Especialidad();
-            if (_especialidad == null) return;
-            _especialidad.Descripcion = txtDescripcion.Text;
+            _descripcionActual = txtDescripcion.Text;
         }
 
-        public override void GuardarCambios()
+        public override async Task GuardarCambiosAsync()
         {
             MapearADatos();
-            if (_especialidad == null) return;
-            if (Modo == ModoForm.Baja)
-                _servicio.Delete(_especialidad);
+            if (Modo == ModoForm.Baja && _id.HasValue)
+                await ApiEscritorio.Especialidad.DeleteAsync(_id.Value);
             else if (Modo == ModoForm.Alta)
-                _servicio.Save(_especialidad);
-            else
-                _servicio.Update(_especialidad);
+                await ApiEscritorio.Especialidad.SaveAsync(new EspecialidadRequest { Descripcion = _descripcionActual });
+            else if (_id.HasValue)
+                await ApiEscritorio.Especialidad.UpdateAsync(_id.Value, new EspecialidadRequest { Descripcion = _descripcionActual });
         }
 
         public override bool Validar()
@@ -71,12 +69,12 @@ namespace UI.Desktop.Forms.Especialidades
             return true;
         }
 
-        private void btnAceptar_Click(object sender, EventArgs e)
+        private async void btnAceptar_Click(object sender, EventArgs e)
         {
             try
             {
                 if (!Validar()) return;
-                GuardarCambios();
+                await GuardarCambiosAsync();
                 Close();
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }

@@ -1,5 +1,5 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using Contratos;
 
 namespace Dominio
 {
@@ -8,10 +8,10 @@ namespace Dominio
     {
         public AlumnoInscripcion()
         {
-            Condicion = Condiciones.Inscripto;
+            Condicion = CondicionInscripcion.Inscripto;
         }
 
-        public Condiciones Condicion { get; set; }
+        public CondicionInscripcion Condicion { get; set; }
         public int? Nota { get; set; }
 
         [ForeignKey("Alumno")]
@@ -21,15 +21,5 @@ namespace Dominio
         [ForeignKey("Curso")]
         public int CursoId { get; set; }
         public virtual Curso Curso { get; set; } = null!;
-
-        public enum Condiciones
-        {
-            [Description("Inscripto")]
-            Inscripto,
-            [Description("Regular")]
-            Regular,
-            [Description("Aprobado")]
-            Aprobado
-        }
     }
 }

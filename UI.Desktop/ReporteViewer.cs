@@ -1,5 +1,4 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Microsoft.Web.WebView2.WinForms;
 
 namespace UI.Desktop
@@ -12,18 +11,14 @@ namespace UI.Desktop
 
     public partial class ReporteViewer : ApplicationForm
     {
-        private readonly ReporteServicio _servicio;
-        private readonly PersonaServicio _personaServicio;
         private readonly ModoReporte _modo;
         private byte[]? _pdfActual;
         private string? _tempPath;
-        private Persona? _personaObjetivo;
+        private PersonaDto? _personaObjetivo;
 
         public ReporteViewer(ModoReporte modo)
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Reporte();
-            _personaServicio = ServicioFactory.Persona();
             _modo = modo;
             Text = modo == ModoReporte.RendimientoDocente
                 ? "Reporte de Rendimiento Docente"
@@ -35,11 +30,11 @@ namespace UI.Desktop
             InicializarWebView();
             ConfigurarPorRol();
 
-            var tipo = Login.UsuarioActual?.Persona?.Tipo;
-            if (tipo != Persona.TiposPersonas.Administrador
-                && !(tipo == Persona.TiposPersonas.Docente && _modo == ModoReporte.RendimientoAlumnos))
+            var tipo = SesionEscritorio.Tipo;
+            if (tipo != TipoPersona.Administrador
+                && !(tipo == TipoPersona.Docente && _modo == ModoReporte.RendimientoAlumnos))
             {
-                GenerarReporte();
+                _ = GenerarReporteAsync();
             }
         }
 
@@ -56,9 +51,9 @@ namespace UI.Desktop
 
         private void ConfigurarPorRol()
         {
-            var tipo = Login.UsuarioActual?.Persona?.Tipo;
+            var tipo = SesionEscritorio.Tipo;
 
-            if (tipo == Persona.TiposPersonas.Administrador)
+            if (tipo == TipoPersona.Administrador)
             {
                 lblSelector.Visible = true;
                 cbxSelector.Visible = true;
@@ -66,7 +61,7 @@ namespace UI.Desktop
                 btnGenerar.Location = new System.Drawing.Point(550, 15);
                 btnDescargar.Location = new System.Drawing.Point(695, 15);
             }
-            else if (tipo == Persona.TiposPersonas.Docente && _modo == ModoReporte.RendimientoAlumnos)
+            else if (tipo == TipoPersona.Docente && _modo == ModoReporte.RendimientoAlumnos)
             {
                 lblSelector.Visible = true;
                 cbxSelector.Visible = true;
@@ -84,13 +79,13 @@ namespace UI.Desktop
             }
         }
 
-        private void CargarSelectorDocente()
+        private async void CargarSelectorDocente()
         {
             try
             {
-                cbxSelector.DataSource = _servicio.ObtenerAlumnosDeDocente(Login.UsuarioActual!.Persona!.ID);
+                cbxSelector.DataSource = await ApiEscritorio.Reporte.GetAlumnosDeDocenteAsync(SesionEscritorio.PersonaId ?? 0);
                 cbxSelector.DisplayMember = "Apellido";
-                cbxSelector.ValueMember = "ID";
+                cbxSelector.ValueMember = "Id";
             }
             catch (Exception ex)
             {
@@ -99,22 +94,22 @@ namespace UI.Desktop
             }
         }
 
-        private void CargarSelectorAdmin()
+        private async void CargarSelectorAdmin()
         {
             try
             {
                 if (_modo == ModoReporte.RendimientoDocente)
                 {
-                    cbxSelector.DataSource = _servicio.ObtenerDocentes();
+                    cbxSelector.DataSource = await ApiEscritorio.Reporte.GetDocentesAsync();
                     lblSelector.Text = "Docente:";
                 }
                 else
                 {
-                    cbxSelector.DataSource = _servicio.ObtenerAlumnos();
+                    cbxSelector.DataSource = await ApiEscritorio.Reporte.GetAlumnosAsync();
                     lblSelector.Text = "Alumno:";
                 }
                 cbxSelector.DisplayMember = "Apellido";
-                cbxSelector.ValueMember = "ID";
+                cbxSelector.ValueMember = "Id";
             }
             catch (Exception ex)
             {
@@ -125,16 +120,17 @@ namespace UI.Desktop
 
         private int ObtenerIdObjetivo()
         {
-            var persona = Login.UsuarioActual?.Persona;
-            if (persona != null && persona.Tipo != Persona.TiposPersonas.Administrador)
+            var personaId = SesionEscritorio.PersonaId;
+            var tipo = SesionEscritorio.Tipo;
+            if (personaId.HasValue && tipo != TipoPersona.Administrador)
             {
-                if (persona.Tipo == Persona.TiposPersonas.Docente && _modo == ModoReporte.RendimientoAlumnos)
+                if (tipo == TipoPersona.Docente && _modo == ModoReporte.RendimientoAlumnos)
                 {
                     if (cbxSelector.SelectedValue == null)
                         throw new InvalidOperationException("Seleccione un alumno.");
                     return Convert.ToInt32(cbxSelector.SelectedValue);
                 }
-                return persona.ID;
+                return personaId.Value;
             }
 
             if (cbxSelector.SelectedValue == null)
@@ -143,22 +139,20 @@ namespace UI.Desktop
             return Convert.ToInt32(cbxSelector.SelectedValue);
         }
 
-        private void btnGenerar_Click(object sender, EventArgs e)
+        private async void btnGenerar_Click(object sender, EventArgs e)
         {
-            GenerarReporte();
+            await GenerarReporteAsync();
         }
 
-        private void GenerarReporte()
+        private async Task GenerarReporteAsync()
         {
             try
             {
                 int idObjetivo = ObtenerIdObjetivo();
-                var report = _modo == ModoReporte.RendimientoDocente
-                    ? _servicio.GenerarReporteRendimientoDocente(idObjetivo)
-                    : _servicio.GenerarReporteRendimientoAlumno(idObjetivo);
-
-                _pdfActual = _servicio.ExportarPdf(report);
-                _personaObjetivo = ObtenerPersona(idObjetivo);
+                _pdfActual = _modo == ModoReporte.RendimientoDocente
+                    ? await ApiEscritorio.Reporte.GetRendimientoDocentePdfAsync(idObjetivo)
+                    : await ApiEscritorio.Reporte.GetRendimientoAlumnoPdfAsync(idObjetivo);
+                _personaObjetivo = await ApiEscritorio.Persona.GetBasicoAsync(idObjetivo);
                 MostrarPdf(_pdfActual);
                 SetBtnDescargarEstado(true);
             }
@@ -169,18 +163,13 @@ namespace UI.Desktop
             }
         }
 
-        private Persona? ObtenerPersona(int id)
-        {
-            return _personaServicio.GetOneBasico(id);
-        }
-
-        private void btnDescargar_Click(object? sender, EventArgs e)
+        private async void btnDescargar_Click(object? sender, EventArgs e)
         {
             if (_pdfActual == null)
             {
                 MessageBox.Show("No hay reporte generado. Se generara antes de descargar.",
                     "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                GenerarReporte();
+                await GenerarReporteAsync();
                 if (_pdfActual == null) return;
             }
 

@@ -124,7 +124,7 @@ namespace UI.Desktop.Forms.Usuarios
             //
             // ID
             //
-            this.ID.DataPropertyName = "ID";
+            this.ID.DataPropertyName = "Id";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 50;
             this.ID.Name = "ID";

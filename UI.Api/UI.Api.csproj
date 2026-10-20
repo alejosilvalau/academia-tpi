@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Contratos\Contratos.csproj" />
     <ProjectReference Include="..\Repositorio\Repositorio.csproj" />
     <ProjectReference Include="..\Servicios\Servicios.csproj" />
     <ProjectReference Include="..\Dominio\Dominio.csproj" />

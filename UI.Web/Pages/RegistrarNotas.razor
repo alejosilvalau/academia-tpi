@@ -1,12 +1,12 @@
 @page "/registrar-notas"
 @page "/registrar-notas/{docenteId:int}"
 @attribute [Authorize(Roles="Administrador,Docente")]
-@inject InscripcionServicio InscripcionServicio
-@inject CursoServicio CursoServicio
-@inject PersonaServicio PersonaServicio
-@inject DocenteCursoServicio DocenteCursoServicio
+@inject InscripcionClient InscripcionApi
+@inject DocenteCursoClient DocenteCursoApi
+@inject PersonaClient PersonaApi
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@using Utils
 
 <div class="md-card">
     <div class="md-card-header-actions">
@@ -33,7 +33,7 @@
                     <option value="0">-- Seleccione un curso --</option>
                     @foreach (var c in cursos)
                     {
-                        <option value="@c.ID">@Formato.ToTitleCase(c.Materia.Descripcion) - @Formato.ToTitleCase(c.Comision.Descripcion) - @c.AnioCalendario</option>
+                        <option value="@c.CursoId">@Formato.ToTitleCase(c.CursoMateriaDescripcion ?? "") - @Formato.ToTitleCase(c.CursoComisionDescripcion ?? "") - @c.CursoAnioCalendario</option>
                     }
                 </select>
             </div>
@@ -57,16 +57,16 @@
                     @foreach (var item in inscripciones)
                     {
                         <tr>
-                            <td>@item.Alumno.Legajo</td>
-                            <td>@Formato.ToTitleCase(item.Alumno.Nombre) @Formato.ToTitleCase(item.Alumno.Apellido)</td>
+                            <td>@item.AlumnoLegajo</td>
+                            <td>@Formato.ToTitleCase(item.AlumnoNombre ?? "") @Formato.ToTitleCase(item.AlumnoApellido ?? "")</td>
                             <td><span class="md-badge md-badge-primary">@item.Condicion</span></td>
                             <td>@(item.Nota?.ToString() ?? "-")</td>
                             <td>
                                 <input class="md-input" type="number" min="0" max="10" style="width:80px;"
-                                       @bind="notas[item.ID]" />
+                                       @bind="notas[item.Id]" />
                             </td>
                             <td>
-                                <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Calificar(item.ID)">Guardar</button>
+                                <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Calificar(item.Id)">Guardar</button>
                             </td>
                         </tr>
                     }
@@ -84,8 +84,8 @@
     [Parameter]
     public int? docenteId { get; set; }
 
-    private List<Curso>? cursos;
-    private List<AlumnoInscripcion>? inscripciones;
+    private List<DocenteCursoDto>? cursos;
+    private List<InscripcionDto>? inscripciones;
     private string mensaje = "";
     private bool mensajeEsError = false;
     private int cursoIdSeleccionado;
@@ -93,9 +93,9 @@
     private int docenteObjetivoId;
     private string tituloDocente = "";
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        if (!Sesion.ValidarPermisos(Dominio.Persona.TiposPersonas.Docente))
+        if (!Sesion.ValidarPermisos(TipoPersona.Docente))
         {
             Navigation.NavigateTo("/");
             return;
@@ -108,71 +108,88 @@
                 Navigation.NavigateTo("/personas?tipo=docente&seleccion=notas");
                 return;
             }
-            var docente = PersonaServicio.GetOne(docenteId.Value);
+            var docente = await PersonaApi.GetBasicoAsync(docenteId.Value);
             if (docente == null)
             {
                 Navigation.NavigateTo("/personas?tipo=docente&seleccion=notas");
                 return;
             }
-            docenteObjetivoId = docente.ID;
-            tituloDocente = $"- {docente}";
+            docenteObjetivoId = docente.Id;
+            tituloDocente = $"- {Formato.ToTitleCase(docente.Nombre)} {Formato.ToTitleCase(docente.Apellido)}";
         }
         else
         {
-            docenteObjetivoId = Sesion.UsuarioActual?.PersonaId ?? 0;
+            docenteObjetivoId = Sesion.PersonaId ?? 0;
         }
 
-        var asignaciones = DocenteCursoServicio.GetByDocente(docenteObjetivoId);
-        cursos = asignaciones.Select(a => a.Curso).Where(c => c != null).DistinctBy(c => c!.ID).ToList();
-
-        CargarInscripciones();
+        await CargarCursos();
+        if (cursoIdSeleccionado != 0)
+            await CargarInscripciones();
     }
 
-    private void CargarInscripciones()
+    private async Task CargarCursos()
+    {
+        try
+        {
+            var asignaciones = await DocenteCursoApi.GetByDocenteAsync(docenteObjetivoId);
+            cursos = asignaciones
+                .GroupBy(a => a.CursoId)
+                .Select(g => g.First())
+                .ToList();
+        }
+        catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
+    }
+
+    private async Task CargarInscripciones()
     {
         if (cursoIdSeleccionado == 0) { inscripciones = null; return; }
         try
         {
-            inscripciones = InscripcionServicio.GetByCurso(cursoIdSeleccionado);
+            inscripciones = await InscripcionApi.GetByCursoAsync(cursoIdSeleccionado);
             notas = new Dictionary<int, int?>();
             foreach (var ins in inscripciones)
             {
-                notas[ins.ID] = ins.Nota;
+                notas[ins.Id] = ins.Nota;
             }
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
 
-    private void RefrescarCursos()
+    private async Task RefrescarCursos()
     {
-        try
-        {
-            var asignaciones = DocenteCursoServicio.GetByDocente(docenteObjetivoId);
-            cursos = asignaciones.Select(a => a.Curso).Where(c => c != null).DistinctBy(c => c!.ID).ToList();
-        }
+        try { await CargarCursos(); }
         catch { }
     }
 
-    private void Calificar(int inscripcionId)
+    private async Task Calificar(int inscripcionId)
     {
         try
         {
-            var inscripcion = InscripcionServicio.GetByCurso(cursoIdSeleccionado).FirstOrDefault(i => i.ID == inscripcionId);
+            var inscripcion = inscripciones?.FirstOrDefault(i => i.Id == inscripcionId);
             if (inscripcion == null) return;
 
-            if (notas.TryGetValue(inscripcionId, out int? nota) && nota.HasValue)
+            var nota = notas.TryGetValue(inscripcionId, out int? n) ? n : null;
+            var condicion = inscripcion.Condicion;
+
+            if (nota.HasValue)
             {
-                inscripcion.Nota = nota;
-                inscripcion.Condicion = nota >= 6
-                    ? AlumnoInscripcion.Condiciones.Aprobado
+                condicion = nota >= 6
+                    ? CondicionInscripcion.Aprobado
                     : nota >= 4
-                        ? AlumnoInscripcion.Condiciones.Regular
-                        : AlumnoInscripcion.Condiciones.Inscripto;
+                        ? CondicionInscripcion.Regular
+                        : CondicionInscripcion.Inscripto;
             }
 
-            InscripcionServicio.Update(inscripcion);
+            await InscripcionApi.UpdateAsync(inscripcionId, new InscripcionRequest
+            {
+                AlumnoId = inscripcion.AlumnoId,
+                CursoId = inscripcion.CursoId,
+                Nota = nota,
+                Condicion = condicion
+            });
+
             mostrarMensaje("Calificacion guardada correctamente.", false);
-            CargarInscripciones();
+            await CargarInscripciones();
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }

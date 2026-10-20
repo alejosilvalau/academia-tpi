@@ -1,4 +1,5 @@
 using System.Data;
+using Contratos;
 using Servicios;
 
 namespace UI.Api.Endpoints
@@ -9,10 +10,10 @@ namespace UI.Api.Endpoints
         {
             var g = app.MapGroup("/api/reportes").WithTags("Reportes").RequireAuthorization();
 
-            g.MapGet("/docentes", (ReporteServicio s) => Results.Ok(TablaAJson(s.ObtenerDocentes())));
-            g.MapGet("/alumnos", (ReporteServicio s) => Results.Ok(TablaAJson(s.ObtenerAlumnos())));
+            g.MapGet("/docentes", (ReporteServicio s) => Results.Ok(FilasDePersonas(s.ObtenerDocentes())));
+            g.MapGet("/alumnos", (ReporteServicio s) => Results.Ok(FilasDePersonas(s.ObtenerAlumnos())));
             g.MapGet("/alumnos-de-docente/{docenteId:int}", (int docenteId, ReporteServicio s) =>
-                Results.Ok(TablaAJson(s.ObtenerAlumnosDeDocente(docenteId))));
+                Results.Ok(FilasDePersonas(s.ObtenerAlumnosDeDocente(docenteId))));
 
             g.MapGet("/rendimiento-docente/{docenteId:int}/pdf", (int docenteId, ReporteServicio s, PersonaServicio ps) =>
                 Results.File(s.ExportarPdf(s.GenerarReporteRendimientoDocente(docenteId)), "application/pdf",
@@ -37,15 +38,16 @@ namespace UI.Api.Endpoints
                 : $"{prefijo}-{DateTime.Now:yyyyMMdd}.pdf";
         }
 
-        private static List<Dictionary<string, object?>> TablaAJson(DataTable tabla)
+        private static List<ReportePersonaFilaDto> FilasDePersonas(DataTable tabla)
         {
-            var filas = new List<Dictionary<string, object?>>(tabla.Rows.Count);
+            var filas = new List<ReportePersonaFilaDto>(tabla.Rows.Count);
             foreach (DataRow fila in tabla.Rows)
             {
-                var dict = new Dictionary<string, object?>(tabla.Columns.Count);
-                foreach (DataColumn columna in tabla.Columns)
-                    dict[columna.ColumnName] = fila[columna] == DBNull.Value ? null : fila[columna];
-                filas.Add(dict);
+                filas.Add(new ReportePersonaFilaDto(
+                    Convert.ToInt32(fila["ID"]),
+                    fila["Nombre"]?.ToString() ?? "",
+                    fila["Apellido"]?.ToString() ?? "",
+                    Convert.ToInt32(fila["Legajo"])));
             }
             return filas;
         }

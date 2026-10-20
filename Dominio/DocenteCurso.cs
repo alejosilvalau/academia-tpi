@@ -1,12 +1,12 @@
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
+using Contratos;
 
 namespace Dominio
 {
     [Table("DocenteCurso")]
     public class DocenteCurso : BusinessEntity
     {
-        public TiposCargos Cargo { get; set; }
+        public CargoDocente Cargo { get; set; }
 
         [ForeignKey("Curso")]
         public int CursoId { get; set; }
@@ -44,16 +44,6 @@ namespace Dominio
                     DocenteId = value.ID;
                 }
             }
-        }
-
-        public enum TiposCargos
-        {
-            [Description("Profesor")]
-            Profesor,
-            [Description("Jefe De Cátedra")]
-            JefeDeCatedra,
-            [Description("Auxiliar")]
-            Auxiliar
         }
     }
 }

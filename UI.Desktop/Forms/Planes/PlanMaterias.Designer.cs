@@ -152,7 +152,7 @@ namespace UI.Desktop.Forms.Planes
             // 
             // colPlanID
             // 
-            this.colPlanID.DataPropertyName = "ID";
+            this.colPlanID.DataPropertyName = "Id";
             this.colPlanID.HeaderText = "ID";
             this.colPlanID.MinimumWidth = 60;
             this.colPlanID.Name = "colPlanID";
@@ -171,7 +171,7 @@ namespace UI.Desktop.Forms.Planes
             // colPlanEspecialidad
             // 
             this.colPlanEspecialidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.colPlanEspecialidad.DataPropertyName = "Especialidad";
+            this.colPlanEspecialidad.DataPropertyName = "EspecialidadDescripcion";
             this.colPlanEspecialidad.HeaderText = "Especialidad";
             this.colPlanEspecialidad.MinimumWidth = 150;
             this.colPlanEspecialidad.Name = "colPlanEspecialidad";
@@ -275,7 +275,7 @@ namespace UI.Desktop.Forms.Planes
             // 
             // colMateriaID
             // 
-            this.colMateriaID.DataPropertyName = "ID";
+            this.colMateriaID.DataPropertyName = "Id";
             this.colMateriaID.HeaderText = "ID";
             this.colMateriaID.MinimumWidth = 60;
             this.colMateriaID.Name = "colMateriaID";

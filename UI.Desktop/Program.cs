@@ -1,18 +1,12 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using Microsoft.EntityFrameworkCore;
+using Contratos;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Repositorio;
-using Servicios;
-using Servicios.Excepciones;
 
 namespace UI.Desktop;
 
 static class Program
 {
-    public static IServiceProvider? ServiceProvider { get; private set; }
-
     [STAThread]
     static void Main()
     {
@@ -25,25 +19,13 @@ static class Program
             if (e.ExceptionObject is Exception ex) MostrarFatal(ex);
         };
 
-        var services = new ServiceCollection();
-
         var configuration = new ConfigurationBuilder()
             .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
             .AddJsonFile("appsettings.json", optional: false)
             .Build();
 
-        services.AddSingleton<IConfiguration>(configuration);
-        services.AddDbContextFactory<AcademiaContext>(options =>
-            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-        ServiceProvider = services.BuildServiceProvider();
-
-        using (var scope = ServiceProvider.CreateScope())
-        {
-            var context = scope.ServiceProvider.GetRequiredService<AcademiaContext>();
-            context.Database.EnsureCreated();
-        }
-
-        ServicioFactory.Initialize(ServiceProvider);
+        var baseUrl = configuration["Api:BaseUrl"] ?? "http://localhost:5006/";
+        ApiEscritorio.Inicializar(baseUrl);
 
         var icon = GenerateIcon();
 
@@ -65,7 +47,7 @@ static class Program
     {
         var mensaje = ex switch
         {
-            ServicioException sx => sx.Message,
+            ApiException ax => ax.Message,
             null => "Ocurrió un error desconocido.",
             _ => "Ocurrió un error inesperado en la aplicación. Intente nuevamente."
         };
@@ -75,7 +57,6 @@ static class Program
         }
         catch
         {
-            // Si no se puede mostrar el cuadro (por ejemplo, durante el cierre), se ignora.
         }
     }
 

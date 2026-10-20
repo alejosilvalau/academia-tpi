@@ -1,11 +1,10 @@
 @page "/reportes/rendimiento-alumnos"
 @attribute [Authorize(Roles="Administrador,Docente,Alumno")]
-@inject ReporteServicio ReporteServicio
-@inject AcademiaContext Contexto
+@inject ReporteClient ReporteApi
+@inject PersonaClient PersonaApi
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
-@using Microsoft.EntityFrameworkCore
 
 <div class="md-card">
     <div class="md-card-header">Reporte de Rendimiento de Alumnos</div>
@@ -21,9 +20,9 @@
                     <option value="0">-- Seleccione un alumno --</option>
                     @if (alumnos != null)
                     {
-                        @foreach (DataRow row in alumnos.Rows)
+                        @foreach (var a in alumnos)
                         {
-                            <option value="@row["ID"]">@row["Apellido"], @row["Nombre"] (Legajo @row["Legajo"])</option>
+                            <option value="@a.Id">@a.Apellido, @a.Nombre (Legajo @a.Legajo)</option>
                         }
                     }
                 </select>
@@ -48,16 +47,16 @@
 </div>
 
 @code {
-    private DataTable? alumnos;
+    private List<ReportePersonaFilaDto>? alumnos;
     private int alumnoId;
     private string mensaje = string.Empty;
     private string? pdfBase64;
     private bool _cargarPdf;
-    private Persona? personaObjetivo;
+    private ReportePersonaFilaDto? personaObjetivo;
 
     private bool NecesitaSeleccion => Sesion.IsAdmin || Sesion.IsDocente;
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
         if (!Sesion.IsLoggedIn)
         {
@@ -69,15 +68,15 @@
         {
             if (Sesion.IsAdmin)
             {
-                alumnos = ReporteServicio.ObtenerAlumnos();
+                alumnos = await ReporteApi.GetAlumnosAsync();
             }
             else if (Sesion.IsDocente)
             {
-                alumnos = ReporteServicio.ObtenerAlumnosDeDocente(Sesion.UsuarioActual!.PersonaId ?? 0);
+                alumnos = await ReporteApi.GetAlumnosDeDocenteAsync(Sesion.PersonaId ?? 0);
             }
             else
             {
-                GenerarReporte();
+                await GenerarReporte();
             }
         }
         catch (Exception ex)
@@ -99,7 +98,7 @@
     {
         try
         {
-            byte[] pdfBytes;
+            int personaId;
 
             if (NecesitaSeleccion)
             {
@@ -108,19 +107,24 @@
                     mensaje = "Seleccione un alumno.";
                     return;
                 }
-                var report = ReporteServicio.GenerarReporteRendimientoAlumno(alumnoId);
-                pdfBytes = ReporteServicio.ExportarPdf(report);
-                personaObjetivo = Contexto.Personas.AsNoTracking().FirstOrDefault(p => p.ID == alumnoId);
+                personaId = alumnoId;
             }
             else
             {
-                var personaId = Sesion.UsuarioActual!.PersonaId ?? 0;
-                var report = ReporteServicio.GenerarReporteRendimientoAlumno(personaId);
-                pdfBytes = ReporteServicio.ExportarPdf(report);
-                personaObjetivo = Contexto.Personas.AsNoTracking().FirstOrDefault(p => p.ID == personaId);
+                personaId = Sesion.PersonaId ?? 0;
             }
 
+            byte[] pdfBytes = await ReporteApi.GetRendimientoAlumnoPdfAsync(personaId);
             pdfBase64 = Convert.ToBase64String(pdfBytes);
+
+            personaObjetivo = alumnos?.FirstOrDefault(a => a.Id == personaId);
+            if (personaObjetivo == null)
+            {
+                var p = await PersonaApi.GetBasicoAsync(personaId);
+                if (p != null)
+                    personaObjetivo = new ReportePersonaFilaDto(p.Id, p.Nombre, p.Apellido, p.Legajo);
+            }
+
             _cargarPdf = true;
             StateHasChanged();
             mensaje = "Reporte generado correctamente.";

@@ -1,18 +1,15 @@
-using Dominio;
-using Servicios;
+using Contratos;
 using Utils;
 
 namespace UI.Desktop.Forms.Planes
 {
     public partial class Planes : ApplicationForm
     {
-        private readonly PlanServicio _servicio;
         public override DataGridView? GrillaPrincipal => dgvPlanes;
 
         public Planes()
         {
             InitializeComponent();
-            _servicio = ServicioFactory.Plan();
             dgvPlanes.AutoGenerateColumns = false;
             dgvPlanes.CellFormatting += (s, e) =>
             {
@@ -20,48 +17,48 @@ namespace UI.Desktop.Forms.Planes
                 var colName = dgvPlanes.Columns[e.ColumnIndex].Name;
                 if (colName == "Descripcion" && e.Value is string v)
                     e.Value = Formato.ToTitleCase(v);
-                else if (colName == "Especialidad" && dgvPlanes.Rows[e.RowIndex].DataBoundItem is Plan p)
-                    e.Value = Formato.ToTitleCase(p.Especialidad.Descripcion);
+                else if (colName == "Especialidad" && dgvPlanes.Rows[e.RowIndex].DataBoundItem is PlanDto p)
+                    e.Value = Formato.ToTitleCase(p.EspecialidadDescripcion ?? "");
             };
             AplicarHoverToolStrip(toolStrip1, MaterialColors.Primary);
         }
 
         private void Planes_Load(object sender, EventArgs e) => Listar();
 
-        public override void Listar()
+        public override async Task ListarAsync()
         {
             try
             {
                 dgvPlanes.DataSource = null;
-                dgvPlanes.DataSource = _servicio.GetAll();
+                dgvPlanes.DataSource = await ApiEscritorio.Plan.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
         }
 
-        private void tsbAgregar_Click(object sender, EventArgs e)
+        private async void tsbAgregar_Click(object sender, EventArgs e)
         {
             new PlanDialog(ModoForm.Alta).ShowDialog();
-            Listar();
+            await ListarAsync();
         }
 
-        private void tsbEditar_Click(object sender, EventArgs e)
+        private async void tsbEditar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPlanes)) return;
-            int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+            int id = ((PlanDto)dgvPlanes.SelectedRows[0].DataBoundItem).Id;
             new PlanDialog(id, ModoForm.Modificacion).ShowDialog();
             CongelarGrilla(dgvPlanes);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvPlanes, id);
             DescongelarGrilla(dgvPlanes);
         }
 
-        private void tsbEliminar_Click(object sender, EventArgs e)
+        private async void tsbEliminar_Click(object sender, EventArgs e)
         {
             if (!IsRowSelected(dgvPlanes)) return;
-            int id = ((Plan)dgvPlanes.SelectedRows[0].DataBoundItem).ID;
+            int id = ((PlanDto)dgvPlanes.SelectedRows[0].DataBoundItem).Id;
             new PlanDialog(id, ModoForm.Baja).ShowDialog();
             CongelarGrilla(dgvPlanes);
-            Listar();
+            await ListarAsync();
             SeleccionarFila(dgvPlanes, id);
             DescongelarGrilla(dgvPlanes);
         }

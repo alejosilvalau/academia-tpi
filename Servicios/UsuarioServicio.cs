@@ -1,4 +1,5 @@
 using Dominio;
+using Contratos;
 using Repositorio;
 using Servicios.Excepciones;
 using Utils;
@@ -137,7 +138,7 @@ namespace Servicios
             if (!deshabilitando) return;
 
             var adminsHabilitados = _repositorio.GetHabilitadosConPersonaAsNoTracking()
-                .Where(u => u.Persona != null && u.Persona.Tipo == Persona.TiposPersonas.Administrador)
+                .Where(u => u.Persona != null && u.Persona.Tipo == TipoPersona.Administrador)
                 .ToList();
             if (!adminsHabilitados.Any(u => u.ID == usuarioId)) return;
             if (adminsHabilitados.Count <= 1)

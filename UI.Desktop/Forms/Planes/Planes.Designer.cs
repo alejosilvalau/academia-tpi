@@ -119,7 +119,7 @@ namespace UI.Desktop.Forms.Planes
             // 
             // ID
             // 
-            this.ID.DataPropertyName = "ID";
+            this.ID.DataPropertyName = "Id";
             this.ID.HeaderText = "ID";
             this.ID.MinimumWidth = 60;
             this.ID.Name = "ID";
@@ -138,7 +138,7 @@ namespace UI.Desktop.Forms.Planes
             // Especialidad
             // 
             this.Especialidad.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Especialidad.DataPropertyName = "Especialidad";
+            this.Especialidad.DataPropertyName = "EspecialidadDescripcion";
             this.Especialidad.HeaderText = "Especialidad";
             this.Especialidad.MinimumWidth = 150;
             this.Especialidad.Name = "Especialidad";

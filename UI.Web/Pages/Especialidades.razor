@@ -1,6 +1,6 @@
 @page "/especialidades"
 @attribute [Authorize(Roles="Administrador")]
-@inject EspecialidadServicio Servicio
+@inject EspecialidadClient Api
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
 @using Utils
@@ -54,12 +54,12 @@
             <tbody>
                 @foreach (var item in lista)
                 {
-                    <tr class="@(seleccionadaId == item.ID ? "selected" : "")" @onclick="() => Seleccionar(item.ID)">
-                        <td>@item.ID</td>
+                    <tr class="@(seleccionadaId == item.Id ? "selected" : "")" @onclick="() => Seleccionar(item.Id)">
+                        <td>@item.Id</td>
                         <td>@Formato.ToTitleCase(item.Descripcion)</td>
                         <td class="md-table-actions">
-                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.ID)">Editar</button>
-                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.ID)">Eliminar</button>
+                            <button class="md-btn md-btn-primary md-btn-sm" @onclick="() => Editar(item.Id)">Editar</button>
+                            <button class="md-btn md-btn-danger md-btn-sm" @onclick="() => Eliminar(item.Id)">Eliminar</button>
                         </td>
                     </tr>
                 }
@@ -69,8 +69,8 @@
 </div>
 
 @code {
-    private List<Especialidad>? lista;
-    private Especialidad actual = new();
+    private List<EspecialidadDto>? lista;
+    private EspecialidadRequest actual = new();
     private ModoForm modoForm = ModoForm.Ninguno;
     private int seleccionadaId;
     private string mensaje = "";
@@ -78,19 +78,19 @@
 
     enum ModoForm { Ninguno, Alta, Modificacion }
 
-    protected override void OnInitialized()
+    protected override async Task OnInitializedAsync()
     {
-        if (!Sesion.ValidarPermisos(Dominio.Persona.TiposPersonas.Administrador))
+        if (!Sesion.ValidarPermisos(TipoPersona.Administrador))
         {
             Navigation.NavigateTo("/");
             return;
         }
-        Cargar();
+        await Cargar();
     }
 
-    private void Cargar()
+    private async Task Cargar()
     {
-        try { lista = Servicio.GetAll(); }
+        try { lista = await Api.GetAllAsync(); }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
 
@@ -98,17 +98,16 @@
 
     private void Nuevo()
     {
-        actual = new Especialidad();
+        actual = new EspecialidadRequest();
         modoForm = ModoForm.Alta;
         seleccionadaId = 0;
     }
 
-    private void Editar(int id)
+    private async Task Editar(int id)
     {
-        var item = Servicio.GetOne(id);
+        var item = await Api.GetOneAsync(id);
         if (item == null) return;
-        item.Descripcion = Formato.ToTitleCase(item.Descripcion);
-        actual = item;
+        actual = new EspecialidadRequest { Descripcion = item.Descripcion };
         modoForm = ModoForm.Modificacion;
         seleccionadaId = id;
     }
@@ -116,36 +115,34 @@
     private void Cancelar()
     {
         modoForm = ModoForm.Ninguno;
-        actual = new Especialidad();
+        actual = new EspecialidadRequest();
     }
 
-    private void Guardar()
+    private async Task Guardar()
     {
         try
         {
             Validaciones.AsegurarDescripcion(actual.Descripcion, "Descripcion");
 
             if (modoForm == ModoForm.Alta)
-                Servicio.Save(actual);
+                await Api.SaveAsync(actual);
             else
-                Servicio.Update(actual);
+                await Api.UpdateAsync(seleccionadaId, actual);
 
             mostrarMensaje("Guardado correctamente.", false);
             Cancelar();
-            Cargar();
+            await Cargar();
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
 
-    private void Eliminar(int id)
+    private async Task Eliminar(int id)
     {
-        var item = Servicio.GetOne(id);
-        if (item == null) return;
         try
         {
-            Servicio.Delete(item);
+            await Api.DeleteAsync(id);
             mostrarMensaje("Eliminado correctamente.", false);
-            Cargar();
+            await Cargar();
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
