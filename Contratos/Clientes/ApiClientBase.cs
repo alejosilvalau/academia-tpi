@@ -114,7 +114,10 @@ namespace Contratos
             try
             {
                 var problem = await respuesta.Content.ReadFromJsonAsync<ProblemDetails>(JsonOpciones).ConfigureAwait(false);
-                mensaje = problem?.Detail ?? problem?.Title ?? $"Error HTTP {(int)respuesta.StatusCode}.";
+                if (problem?.Error is { } error)
+                    mensaje = problem.Campo is null ? error : $"{error} ({problem.Campo})";
+                else
+                    mensaje = $"Error HTTP {(int)respuesta.StatusCode}.";
             }
             catch (JsonException)
             {
@@ -125,8 +128,8 @@ namespace Contratos
 
         private sealed class ProblemDetails
         {
-            public string? Title { get; set; }
-            public string? Detail { get; set; }
+            public string? Error { get; set; }
+            public string? Campo { get; set; }
         }
     }
 }

@@ -6,7 +6,9 @@ namespace UI.Desktop.Forms.RegistrarNotas
     public partial class RegistrarNotas : ApplicationForm
     {
         private readonly int _docenteId;
-        private List<DocenteCursoDto> _cursos = new();
+        private bool _cargandoCursos;
+
+        private sealed record CursoOpcion(int CursoId, string Display);
 
         public override bool PermitirAutoRefresco => false;
 
@@ -39,15 +41,18 @@ namespace UI.Desktop.Forms.RegistrarNotas
 
         private async Task CargarCursosAsync()
         {
-            _cursos = await ApiEscritorio.DocenteCurso.GetByDocenteAsync(_docenteId);
-            cbxCursos.DataSource = _cursos
-                .Select(dc => new
-                {
-                    dc.Id,
-                    Display = $"{Formato.ToTitleCase(dc.CursoMateriaDescripcion ?? "")} - {Formato.ToTitleCase(dc.CursoComisionDescripcion ?? "")} - {dc.CursoAnioCalendario}"
-                }).ToList();
-            cbxCursos.DisplayMember = "Display";
-            cbxCursos.ValueMember = "Id";
+            var cursos = await ApiEscritorio.DocenteCurso.GetByDocenteAsync(_docenteId);
+            var opciones = cursos
+                .Select(dc => new CursoOpcion(
+                    dc.CursoId,
+                    $"{Formato.ToTitleCase(dc.CursoMateriaDescripcion ?? "")} - {Formato.ToTitleCase(dc.CursoComisionDescripcion ?? "")} - {dc.CursoAnioCalendario}"))
+                .ToList();
+
+            _cargandoCursos = true;
+            cbxCursos.DisplayMember = nameof(CursoOpcion.Display);
+            cbxCursos.ValueMember = nameof(CursoOpcion.CursoId);
+            cbxCursos.DataSource = opciones;
+            _cargandoCursos = false;
         }
 
         private void dgvAlumnos_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -59,6 +64,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
 
         private async void cbxCursos_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_cargandoCursos) return;
             await ListarAsync();
         }
 
@@ -67,8 +73,8 @@ namespace UI.Desktop.Forms.RegistrarNotas
             try
             {
                 dgvAlumnos.DataSource = null;
-                if (cbxCursos.SelectedItem == null) return;
-                int cursoId = _cursos.First(dc => dc.Id == Convert.ToInt32(cbxCursos.SelectedValue)).CursoId;
+                if (cbxCursos.SelectedValue == null) return;
+                int cursoId = Convert.ToInt32(cbxCursos.SelectedValue);
                 dgvAlumnos.DataSource = await ApiEscritorio.Inscripcion.GetByCursoAsync(cursoId);
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }
