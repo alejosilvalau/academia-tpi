@@ -65,7 +65,7 @@ namespace UI.Api.Endpoints
             });
             g.MapPut("/{id:int}", (int id, InscripcionRequest cuerpo, InscripcionServicio s) =>
             {
-                var entidad = s.GetOne(id);
+                var entidad = s.GetOneParaEdicion(id);
                 if (entidad == null) return Results.NotFound();
                 cuerpo.Aplicar(entidad);
                 s.Update(entidad);

@@ -113,7 +113,7 @@ app.MapPost("/api/auth/login", (Contratos.LoginRequest req, UsuarioServicio serv
         usuario.Persona?.Nombre,
         usuario.Persona?.Apellido,
         usuario.Habilitado));
-}).AllowAnonymous();
+}).WithTags("Login").AllowAnonymous();
 
 app.MapApiEndpoints();
 

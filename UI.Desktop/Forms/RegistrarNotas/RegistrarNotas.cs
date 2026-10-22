@@ -10,7 +10,7 @@ namespace UI.Desktop.Forms.RegistrarNotas
 
         private sealed record CursoOpcion(int CursoId, string Display);
 
-        public override bool PermitirAutoRefresco => false;
+        public override DataGridView? GrillaPrincipal => dgvAlumnos;
 
         public RegistrarNotas(int docenteId)
         {

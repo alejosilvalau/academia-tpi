@@ -111,7 +111,7 @@ namespace UI.Desktop.Forms.Personas
         {
             try
             {
-                if (!Validar()) return;
+                if (Modo is not (ModoForm.Baja or ModoForm.Consulta) && !Validar()) return;
                 await GuardarCambiosAsync();
                 Close();
             }

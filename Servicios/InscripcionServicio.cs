@@ -36,6 +36,17 @@ namespace Servicios
             return _repositorioInscripcion.GetOne(id);
         }
 
+        public AlumnoInscripcion? GetOneParaEdicion(int id)
+        {
+            RequiereAutenticacion();
+            var entidad = _repositorioInscripcion.GetOne(id);
+            if (entidad == null)
+                return null;
+            if (!EsAdmin() && !EsDocenteDelCurso(entidad.CursoId))
+                throw new AccesoNoAutorizadoException("No puede modificar inscripciones de un curso que no le está asignado.");
+            return entidad;
+        }
+
         public List<AlumnoInscripcion> GetByAlumno(int alumnoId)
         {
             RequiereAutenticacion();
@@ -77,10 +88,23 @@ namespace Servicios
 
         public void Update(AlumnoInscripcion inscripcion)
         {
-            ValidarBasicosActualizacion(inscripcion);
             RequiereAutenticacion();
-            if (!EsAdmin() && !EsDocenteDelCurso(inscripcion.CursoId))
-                throw new AccesoNoAutorizadoException("No puede modificar inscripciones de un curso que no le está asignado.");
+            if (inscripcion == null)
+                throw new ArgumentException("Los datos de la inscripción son obligatorios.");
+
+            var actual = _repositorioInscripcion.GetOne(inscripcion.ID);
+            if (actual == null)
+                throw new ReglaNegocioException("La inscripción a actualizar no existe.");
+
+            if (!EsAdmin())
+            {
+                if (!EsDocenteDelCurso(actual.CursoId))
+                    throw new AccesoNoAutorizadoException("No puede modificar inscripciones de un curso que no le está asignado.");
+                inscripcion.AlumnoId = actual.AlumnoId;
+                inscripcion.CursoId = actual.CursoId;
+            }
+
+            ValidarBasicosActualizacion(inscripcion);
             EjecutarPersistencia(() =>
             {
                 _repositorioInscripcion.Update(inscripcion);
