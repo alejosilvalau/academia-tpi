@@ -24,49 +24,49 @@ namespace Contratos
 
         protected async Task<T> GetAsync<T>(string url)
         {
-            using var respuesta = await EnviarAsync(HttpMethod.Get, url, null);
-            return await LeerAsync<T>(respuesta);
+            using var respuesta = await EnviarAsync(HttpMethod.Get, url, null).ConfigureAwait(false);
+            return await LeerAsync<T>(respuesta).ConfigureAwait(false);
         }
 
         protected async Task<T?> GetOrNullAsync<T>(string url) where T : class
         {
-            using var respuesta = await Http.SendAsync(ConstruirRequest(HttpMethod.Get, url));
+            using var respuesta = await Http.SendAsync(ConstruirRequest(HttpMethod.Get, url)).ConfigureAwait(false);
             if (respuesta.StatusCode == System.Net.HttpStatusCode.NotFound) return null;
-            if (!respuesta.IsSuccessStatusCode) await LanzarApiExceptionAsync(respuesta);
-            return await LeerAsync<T>(respuesta);
+            if (!respuesta.IsSuccessStatusCode) await LanzarApiExceptionAsync(respuesta).ConfigureAwait(false);
+            return await LeerAsync<T>(respuesta).ConfigureAwait(false);
         }
 
         protected async Task<T> PostAsync<T>(string url, object cuerpo)
         {
-            using var respuesta = await EnviarAsync(HttpMethod.Post, url, cuerpo);
-            return await LeerAsync<T>(respuesta);
+            using var respuesta = await EnviarAsync(HttpMethod.Post, url, cuerpo).ConfigureAwait(false);
+            return await LeerAsync<T>(respuesta).ConfigureAwait(false);
         }
 
         protected async Task<T> PutAsync<T>(string url, object cuerpo)
         {
-            using var respuesta = await EnviarAsync(HttpMethod.Put, url, cuerpo);
-            return await LeerAsync<T>(respuesta);
+            using var respuesta = await EnviarAsync(HttpMethod.Put, url, cuerpo).ConfigureAwait(false);
+            return await LeerAsync<T>(respuesta).ConfigureAwait(false);
         }
 
         protected async Task SendAsync(string url, object cuerpo)
         {
-            using var respuesta = await EnviarAsync(HttpMethod.Post, url, cuerpo);
+            using var respuesta = await EnviarAsync(HttpMethod.Post, url, cuerpo).ConfigureAwait(false);
         }
 
         protected async Task SendPutAsync(string url, object cuerpo)
         {
-            using var respuesta = await EnviarAsync(HttpMethod.Put, url, cuerpo);
+            using var respuesta = await EnviarAsync(HttpMethod.Put, url, cuerpo).ConfigureAwait(false);
         }
 
         protected async Task DeleteAsync(string url)
         {
-            using var respuesta = await EnviarAsync(HttpMethod.Delete, url, null);
+            using var respuesta = await EnviarAsync(HttpMethod.Delete, url, null).ConfigureAwait(false);
         }
 
         protected async Task<byte[]> GetBytesAsync(string url)
         {
-            using var respuesta = await EnviarAsync(HttpMethod.Get, url, null);
-            return await respuesta.Content.ReadAsByteArrayAsync();
+            using var respuesta = await EnviarAsync(HttpMethod.Get, url, null).ConfigureAwait(false);
+            return await respuesta.Content.ReadAsByteArrayAsync().ConfigureAwait(false);
         }
 
         private async Task<HttpResponseMessage> EnviarAsync(HttpMethod metodo, string url, object? cuerpo)
@@ -76,12 +76,12 @@ namespace Contratos
             {
                 request.Content = JsonContent.Create(cuerpo, options: JsonOpciones);
             }
-            var respuesta = await Http.SendAsync(request);
+            var respuesta = await Http.SendAsync(request).ConfigureAwait(false);
             if (!respuesta.IsSuccessStatusCode)
             {
                 using (respuesta)
                 {
-                    await LanzarApiExceptionAsync(respuesta);
+                    await LanzarApiExceptionAsync(respuesta).ConfigureAwait(false);
                 }
             }
             return respuesta;
@@ -100,7 +100,7 @@ namespace Contratos
 
         private static async Task<T> LeerAsync<T>(HttpResponseMessage respuesta)
         {
-            var resultado = await respuesta.Content.ReadFromJsonAsync<T>(JsonOpciones);
+            var resultado = await respuesta.Content.ReadFromJsonAsync<T>(JsonOpciones).ConfigureAwait(false);
             if (resultado == null)
             {
                 throw new ApiException(respuesta.StatusCode, "Respuesta vacía del servidor.");
@@ -113,7 +113,7 @@ namespace Contratos
             string mensaje;
             try
             {
-                var problem = await respuesta.Content.ReadFromJsonAsync<ProblemDetails>(JsonOpciones);
+                var problem = await respuesta.Content.ReadFromJsonAsync<ProblemDetails>(JsonOpciones).ConfigureAwait(false);
                 mensaje = problem?.Detail ?? problem?.Title ?? $"Error HTTP {(int)respuesta.StatusCode}.";
             }
             catch (JsonException)

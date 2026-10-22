@@ -6,7 +6,7 @@ namespace Contratos
 
         public async Task<LoginResponse> LoginAsync(string nombreUsuario, string clave)
         {
-            return await PostAsync<LoginResponse>("api/auth/login", new LoginRequest(nombreUsuario, clave));
+            return await PostAsync<LoginResponse>("api/auth/login", new LoginRequest(nombreUsuario, clave)).ConfigureAwait(false);
         }
     }
 }

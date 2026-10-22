@@ -33,10 +33,7 @@ namespace Contratos
         public int MateriaId { get; set; }
         public int ComisionId { get; set; }
     }
-}
 
-namespace Contratos
-{
     public record EspecialidadDto(int Id, string Descripcion);
 
     public record PlanDto(int Id, string Descripcion, int EspecialidadId, string? EspecialidadDescripcion);

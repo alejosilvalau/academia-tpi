@@ -91,7 +91,8 @@ app.UseManejadorErrores();
 app.UseSwagger();
 app.UseSwaggerUI(options => options.SwaggerEndpoint("/swagger/v1/swagger.json", "Academia TPI API v1"));
 
-app.UseHttpsRedirection();
+if (!app.Environment.IsDevelopment())
+    app.UseHttpsRedirection();
 app.UseCors("Permisiva");
 app.UseAuthentication();
 app.UseAuthorization();
