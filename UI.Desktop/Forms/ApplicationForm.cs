@@ -76,17 +76,42 @@ namespace UI.Desktop
 
         protected void SeleccionarFila(DataGridView dgv, int? id)
         {
-            if (!id.HasValue) return;
+            SeleccionarFila(dgv, id, desplazar: true);
+        }
+
+        protected bool SeleccionarFila(DataGridView dgv, int? id, bool desplazar, int columna = 0)
+        {
+            if (!id.HasValue) return false;
             foreach (DataGridViewRow row in dgv.Rows)
             {
                 if (ObtenerId(row.DataBoundItem) == id.Value)
                 {
+                    dgv.ClearSelection();
                     row.Selected = true;
-                    dgv.CurrentCell = row.Cells[0];
-                    dgv.FirstDisplayedScrollingRowIndex = row.Index;
-                    break;
+                    if (row.Cells.Count > 0)
+                        dgv.CurrentCell = row.Cells[Math.Clamp(columna, 0, row.Cells.Count - 1)];
+                    if (desplazar)
+                        dgv.FirstDisplayedScrollingRowIndex = row.Index;
+                    return true;
                 }
             }
+            return false;
+        }
+
+        private static void SeleccionarPrimeraFila(DataGridView dgv, int columna)
+        {
+            if (dgv.Rows.Count == 0) return;
+            var fila = dgv.Rows[0];
+            if (fila.Cells.Count == 0) return;
+            dgv.ClearSelection();
+            dgv.CurrentCell = fila.Cells[Math.Clamp(columna, 0, fila.Cells.Count - 1)];
+            fila.Selected = true;
+        }
+
+        private static void RestaurarScroll(DataGridView dgv, int indice)
+        {
+            if (indice < 0 || dgv.Rows.Count == 0) return;
+            dgv.FirstDisplayedScrollingRowIndex = Math.Min(indice, dgv.Rows.Count - 1);
         }
 
         protected void CongelarGrilla(DataGridView dgv)
@@ -100,30 +125,42 @@ namespace UI.Desktop
             dgv.Refresh();
         }
 
-        public void ListarPreservandoSeleccion(DataGridView dgv)
-        {
-            int? idSeleccionado = null;
-            if (dgv.SelectedRows.Count == 1)
-                idSeleccionado = ObtenerId(dgv.SelectedRows[0].DataBoundItem);
-
-            CongelarGrilla(dgv);
-            Listar();
-            if (idSeleccionado.HasValue)
-                SeleccionarFila(dgv, idSeleccionado);
-            DescongelarGrilla(dgv);
-        }
-
         public async Task ListarPreservandoSeleccionAsync(DataGridView dgv)
         {
             int? idSeleccionado = null;
             if (dgv.SelectedRows.Count == 1)
                 idSeleccionado = ObtenerId(dgv.SelectedRows[0].DataBoundItem);
 
+            int scroll = dgv.FirstDisplayedScrollingRowIndex;
+            int columna = dgv.CurrentCell?.ColumnIndex ?? 0;
+
             CongelarGrilla(dgv);
-            await ListarAsync();
-            if (idSeleccionado.HasValue)
-                SeleccionarFila(dgv, idSeleccionado);
-            DescongelarGrilla(dgv);
+            try
+            {
+                await ListarAsync();
+                if (dgv.IsDisposed) return;
+
+                bool encontrada = dgv.SelectedRows.Count == 1 &&
+                    ObtenerId(dgv.SelectedRows[0].DataBoundItem) == idSeleccionado;
+
+                if (!encontrada)
+                    encontrada = SeleccionarFila(dgv, idSeleccionado, desplazar: false, columna);
+
+                if (encontrada)
+                {
+                    RestaurarScroll(dgv, scroll);
+                }
+                else if (dgv.Rows.Count > 0)
+                {
+                    SeleccionarPrimeraFila(dgv, columna);
+                    dgv.FirstDisplayedScrollingRowIndex = 0;
+                }
+            }
+            finally
+            {
+                if (!dgv.IsDisposed)
+                    DescongelarGrilla(dgv);
+            }
         }
 
         [DllImport("user32.dll")]

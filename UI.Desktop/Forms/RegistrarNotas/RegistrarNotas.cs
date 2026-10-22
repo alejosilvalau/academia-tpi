@@ -72,8 +72,11 @@ namespace UI.Desktop.Forms.RegistrarNotas
         {
             try
             {
-                dgvAlumnos.DataSource = null;
-                if (cbxCursos.SelectedValue == null) return;
+                if (cbxCursos.SelectedValue == null)
+                {
+                    dgvAlumnos.DataSource = null;
+                    return;
+                }
                 int cursoId = Convert.ToInt32(cbxCursos.SelectedValue);
                 dgvAlumnos.DataSource = await ApiEscritorio.Inscripcion.GetByCursoAsync(cursoId);
             }

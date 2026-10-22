@@ -29,7 +29,6 @@ namespace UI.Desktop.Forms.Materias
         {
             try
             {
-                dgvMaterias.DataSource = null;
                 dgvMaterias.DataSource = await ApiEscritorio.Materia.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }

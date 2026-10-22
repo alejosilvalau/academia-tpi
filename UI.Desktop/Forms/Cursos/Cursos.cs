@@ -29,7 +29,6 @@ namespace UI.Desktop.Forms.Cursos
         {
             try
             {
-                dgvCursos.DataSource = null;
                 dgvCursos.DataSource = await ApiEscritorio.Curso.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }

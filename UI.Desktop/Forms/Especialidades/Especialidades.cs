@@ -25,7 +25,6 @@ namespace UI.Desktop.Forms.Especialidades
         {
             try
             {
-                dgvEspecialidades.DataSource = null;
                 dgvEspecialidades.DataSource = await ApiEscritorio.Especialidad.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }

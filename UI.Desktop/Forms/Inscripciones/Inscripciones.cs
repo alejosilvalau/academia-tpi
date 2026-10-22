@@ -39,7 +39,6 @@ namespace UI.Desktop.Forms.Inscripciones
         {
             try
             {
-                dgvInscripciones.DataSource = null;
                 dgvInscripciones.DataSource = await ApiEscritorio.Inscripcion.GetByAlumnoAsync(_alumnoId);
             }
             catch (Exception ex) { Notificar("Error", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error); }

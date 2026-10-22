@@ -40,7 +40,6 @@ namespace UI.Desktop.Forms.Dictados
         {
             try
             {
-                dgvDocentes.DataSource = null;
                 dgvDocentes.DataSource = await ApiEscritorio.DocenteCurso.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }

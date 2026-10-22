@@ -6,6 +6,7 @@ namespace UI.Desktop
     {
         private readonly HashSet<string> _botonesPermitidos = new();
         private readonly System.Windows.Forms.Timer _autoRefresh;
+        private bool _refrescando;
 
         public Main()
         {
@@ -300,18 +301,25 @@ namespace UI.Desktop
             }
         }
 
-        private void AutoRefresh_Tick(object? sender, EventArgs e)
+        private async void AutoRefresh_Tick(object? sender, EventArgs e)
         {
-            if (panelFormLoader.Controls.OfType<ApplicationForm>().FirstOrDefault() is { } form && form.PermitirAutoRefresco)
+            if (_refrescando) return;
+            if (panelFormLoader.Controls.OfType<ApplicationForm>().FirstOrDefault() is not { } form ||
+                !form.PermitirAutoRefresco)
+                return;
+
+            _refrescando = true;
+            try
             {
-                try
-                {
-                    if (form.GrillaPrincipal is { } dgv)
-                        form.ListarPreservandoSeleccion(dgv);
-                    else
-                        form.Listar();
-                }
-                catch { }
+                if (form.GrillaPrincipal is { } dgv)
+                    await form.ListarPreservandoSeleccionAsync(dgv);
+                else
+                    await form.ListarAsync();
+            }
+            catch { }
+            finally
+            {
+                _refrescando = false;
             }
         }
 

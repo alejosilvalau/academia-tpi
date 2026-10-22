@@ -29,7 +29,6 @@ namespace UI.Desktop.Forms.Usuarios
         {
             try
             {
-                dgvUsuarios.DataSource = null;
                 var usuarios = await ApiEscritorio.Usuario.GetAllAsync();
                 dgvUsuarios.DataSource = usuarios.Select(u => new
                 {

@@ -29,7 +29,6 @@ namespace UI.Desktop.Forms.Comisiones
         {
             try
             {
-                dgvComisiones.DataSource = null;
                 dgvComisiones.DataSource = await ApiEscritorio.Comision.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }

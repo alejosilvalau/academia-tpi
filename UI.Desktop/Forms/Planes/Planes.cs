@@ -29,7 +29,6 @@ namespace UI.Desktop.Forms.Planes
         {
             try
             {
-                dgvPlanes.DataSource = null;
                 dgvPlanes.DataSource = await ApiEscritorio.Plan.GetAllAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }

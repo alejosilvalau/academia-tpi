@@ -41,7 +41,6 @@ namespace UI.Desktop.Forms.Personas
         {
             try
             {
-                dgvPersonas.DataSource = null;
                 if (_filtroTipo.HasValue)
                     dgvPersonas.DataSource = await ApiEscritorio.Persona.GetByTipoAsync(_filtroTipo.Value);
                 else

@@ -40,14 +40,13 @@ namespace UI.Desktop.Forms.Planes
             try
             {
                 _cargando = true;
-                dgvPlanes.DataSource = null;
                 dgvPlanes.DataSource = await ApiEscritorio.Plan.GetAllAsync();
                 if (_planSeleccionadoId.HasValue)
-                    SeleccionarFila(dgvPlanes, _planSeleccionadoId);
-                _cargando = false;
+                    SeleccionarFila(dgvPlanes, _planSeleccionadoId, desplazar: false);
                 await CargarMateriasAsync();
             }
             catch (Exception ex) { Notificar("Error", ex.Message); }
+            finally { _cargando = false; }
         }
 
         private async Task CargarMateriasAsync()
@@ -66,7 +65,6 @@ namespace UI.Desktop.Forms.Planes
                 }
                 var plan = (PlanDto)dgvPlanes.SelectedRows[0].DataBoundItem;
                 _planSeleccionadoId = plan.Id;
-                dgvMaterias.DataSource = null;
                 dgvMaterias.DataSource = await ApiEscritorio.Materia.GetByPlanAsync(plan.Id);
 
                 if (materiaSeleccionadaId.HasValue)
