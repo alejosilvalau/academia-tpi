@@ -167,9 +167,9 @@
         {
             if (!modoSeleccion || !tipoSeleccion.HasValue) return "Personas";
             if (Seleccion?.Equals("inscripcion", StringComparison.OrdinalIgnoreCase) == true)
-                return "Inscripciones";
+                return "Inscripciones - Alumno:\u00A0";
             if (Seleccion?.Equals("notas", StringComparison.OrdinalIgnoreCase) == true)
-                return "Registrar Notas";
+                return "Registrar Notas - Docente:\u00A0";
             return $"Personas - {tipoSeleccion}";
         }
     }

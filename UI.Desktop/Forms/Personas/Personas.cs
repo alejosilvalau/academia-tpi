@@ -33,6 +33,7 @@ namespace UI.Desktop.Forms.Personas
             tsbEditar.Visible = false;
             tsbEliminar.Visible = false;
             tsbSeleccionar.Visible = true;
+            tsbSeleccionar.Text = tipo == TipoPersona.Alumno ? "Seleccionar Alumno" : "Seleccionar Docente";
         }
 
         private void Personas_Load(object sender, EventArgs e) => Listar();

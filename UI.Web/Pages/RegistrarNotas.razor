@@ -11,7 +11,7 @@
 
 <div class="md-card">
     <div class="md-card-header-actions">
-        <span>Tabla de Registrar Notas @(tituloDocente)</span>
+        <span>Tabla de Registrar Notas - Docente: @docenteNombre</span>
     </div>
 
     <AutoRefresh OnTick="RefrescarCursos" />
@@ -92,7 +92,7 @@
     private int cursoIdSeleccionado;
     private Dictionary<int, int?> notas = new();
     private int docenteObjetivoId;
-    private string tituloDocente = "";
+    private string docenteNombre = "";
 
     protected override async Task OnInitializedAsync()
     {
@@ -116,11 +116,12 @@
                 return;
             }
             docenteObjetivoId = docente.Id;
-            tituloDocente = $"- {Formato.ToTitleCase(docente.Nombre)} {Formato.ToTitleCase(docente.Apellido)}";
+            docenteNombre = $"{Formato.ToTitleCase(docente.Nombre)} {Formato.ToTitleCase(docente.Apellido)}";
         }
         else
         {
             docenteObjetivoId = Sesion.PersonaId ?? 0;
+            docenteNombre = $"{Formato.ToTitleCase(Sesion.Perfil?.Nombre ?? "")} {Formato.ToTitleCase(Sesion.Perfil?.Apellido ?? "")}";
         }
 
         await CargarCursos();

@@ -2,6 +2,7 @@
 @inject UI.Web.Services.SesionService Sesion
 @inject IJSRuntime JS
 @inject NavigationManager Nav
+@using System.Text.Json
 
 @if (Sesion.IsLoggedIn)
 {
@@ -120,8 +121,29 @@ else
     private void ToggleAdministracion() => adminOpen = !adminOpen;
     private void ToggleReportes() => reportesOpen = !reportesOpen;
 
-    protected override void OnAfterRender(bool firstRender)
+    protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        if (firstRender)
+        {
+            try
+            {
+                var json = await JS.InvokeAsync<string>("sessionStorage.getItem", "sesion");
+                if (!string.IsNullOrWhiteSpace(json))
+                {
+                    var sesion = JsonSerializer.Deserialize<LoginResponse>(json);
+                    if (sesion != null && sesion.ExpiraUtc > DateTime.UtcNow)
+                    {
+                        Sesion.Iniciar(sesion);
+                    }
+                    else
+                    {
+                        await JS.InvokeVoidAsync("sessionStorage.removeItem", "sesion");
+                    }
+                }
+            }
+            catch { }
+        }
+
         if (firstRender && !Sesion.IsLoggedIn && !Nav.Uri.EndsWith("/login"))
         {
             Nav.NavigateTo("/login");
@@ -170,6 +192,7 @@ else
     private async Task CerrarSesion()
     {
         Sesion.Invalidar();
+        try { await JS.InvokeVoidAsync("sessionStorage.removeItem", "sesion"); } catch { }
         await Task.CompletedTask;
         Nav.NavigateTo("/login");
     }

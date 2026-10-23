@@ -2,6 +2,8 @@
 @inject UI.Web.Services.SesionService Sesion
 @inject AuthClient Auth
 @inject NavigationManager Nav
+@inject IJSRuntime JS
+@using System.Text.Json
 @using Utils
 
 @if (!Sesion.IsLoggedIn)
@@ -82,6 +84,7 @@
 
             var respuesta = await Auth.LoginAsync(nombreUsuario, clave);
             Sesion.Iniciar(respuesta);
+            await JS.InvokeVoidAsync("sessionStorage.setItem", "sesion", JsonSerializer.Serialize(respuesta));
             Nav.NavigateTo("/");
         }
         catch (ApiException ex)
