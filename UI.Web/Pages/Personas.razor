@@ -270,6 +270,7 @@
             Validaciones.AsegurarNombreOApellido(actual.Nombre, "Nombre");
             Validaciones.AsegurarNombreOApellido(actual.Apellido, "Apellido");
             Validaciones.AsegurarPositivo(actual.Legajo, "Legajo");
+            actual.EMail = actual.EMail.Trim().ToLowerInvariant();
             Validaciones.AsegurarEmail(actual.EMail);
             Validaciones.AsegurarTelefono(actual.Telefono);
 

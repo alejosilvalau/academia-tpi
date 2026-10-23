@@ -41,11 +41,11 @@ namespace Servicios
         public Usuario? Login(string nombreUsuario, string clave)
         {
             var usuario = _repositorio.GetByUsername(nombreUsuario);
-            if (usuario != null && usuario.Habilitado && PasswordHasher.Verify(clave, usuario.Clave))
-            {
-                return usuario;
-            }
-            return null;
+            if (usuario == null || !PasswordHasher.Verify(clave, usuario.Clave))
+                return null;
+            if (!usuario.Habilitado)
+                throw new AccesoNoAutorizadoException("El usuario está deshabilitado. Contacte al administrador.");
+            return usuario;
         }
 
         public void Save(Usuario usuario)

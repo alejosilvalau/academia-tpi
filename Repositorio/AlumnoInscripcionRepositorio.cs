@@ -20,6 +20,13 @@ namespace Repositorio
                 .ToList();
         }
 
+        public int CountByCurso(int cursoId)
+        {
+            return context.AlumnoInscripciones
+                .AsNoTracking()
+                .Count(ai => ai.CursoId == cursoId);
+        }
+
         public List<AlumnoInscripcion> GetByCurso(int cursoId)
         {
             return context.AlumnoInscripciones

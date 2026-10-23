@@ -7,6 +7,15 @@ namespace Repositorio
     {
         public DocenteCursoRepositorio(AcademiaContext ctx) : base(ctx) { }
 
+        public int? GetCursoIdActual(int id)
+        {
+            return context.DocenteCursos
+                .AsNoTracking()
+                .Where(dc => dc.ID == id)
+                .Select(dc => (int?)dc.CursoId)
+                .FirstOrDefault();
+        }
+
         public List<DocenteCurso> GetByDocente(int docenteId)
         {
             return context.DocenteCursos

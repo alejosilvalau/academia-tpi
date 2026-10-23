@@ -73,7 +73,7 @@ namespace UI.Desktop.Forms.Personas
                 Nombre = txtNombre.Text,
                 Apellido = txtApellido.Text,
                 Legajo = legajo,
-                EMail = txtEMail.Text,
+                EMail = txtEMail.Text.Trim().ToLowerInvariant(),
                 Direccion = txtDireccion.Text,
                 Telefono = txtTelefono.Text,
                 FechaNacimiento = dtpFechaNacimiento.Value,
@@ -98,7 +98,7 @@ namespace UI.Desktop.Forms.Personas
             Validaciones.AsegurarNombreOApellido(txtApellido.Text, "Apellido");
             Validaciones.AsegurarEnteroParseable(txtLegajo.Text, "Legajo");
             Validaciones.AsegurarPositivo(int.Parse(txtLegajo.Text), "Legajo");
-            Validaciones.AsegurarEmail(txtEMail.Text);
+            Validaciones.AsegurarEmail(txtEMail.Text.Trim().ToLowerInvariant());
             Validaciones.AsegurarTelefono(txtTelefono.Text);
             if (cbxTipo.SelectedItem == null)
                 throw new ArgumentException("El campo Tipo es obligatorio.");
@@ -111,7 +111,7 @@ namespace UI.Desktop.Forms.Personas
         {
             try
             {
-                if (Modo is not (ModoForm.Baja or ModoForm.Consulta) && !Validar()) return;
+                if (Modo != ModoForm.Baja && !Validar()) return;
                 await GuardarCambiosAsync();
                 Close();
             }

@@ -78,7 +78,7 @@
         catch (ApiException ex)
         {
             mensaje = ex.StatusCode == System.Net.HttpStatusCode.Unauthorized
-                ? "Usuario o clave incorrectos, o usuario deshabilitado."
+                ? (string.IsNullOrWhiteSpace(ex.Message) ? "Usuario o clave incorrectos." : ex.Message)
                 : "Error al iniciar sesion: " + ex.Message;
             cargando = false;
         }

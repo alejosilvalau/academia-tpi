@@ -50,19 +50,28 @@ namespace UI.Desktop
                 return false;
             }
 
-            var respuesta = ApiEscritorio.Auth
-                .LoginAsync(txtUsuario.Text, txtClave.Text)
-                .GetAwaiter().GetResult();
-
-            if (respuesta == null || !respuesta.Habilitado || string.IsNullOrEmpty(respuesta.Token))
+            try
             {
-                Notificar("Información inválida", "Usuario y/o contraseña incorrectos.",
+                var respuesta = ApiEscritorio.Auth
+                    .LoginAsync(txtUsuario.Text, txtClave.Text)
+                    .GetAwaiter().GetResult();
+
+                if (respuesta == null || !respuesta.Habilitado || string.IsNullOrEmpty(respuesta.Token))
+                {
+                    Notificar("Información inválida", "Usuario o clave incorrectos.",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+
+                SesionEscritorio.Iniciar(respuesta);
+                return true;
+            }
+            catch (ApiException ex)
+            {
+                Notificar("Información inválida", ex.Message,
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
             }
-
-            SesionEscritorio.Iniciar(respuesta);
-            return true;
         }
 
         private void lblSubtitulo_Click(object sender, EventArgs e)

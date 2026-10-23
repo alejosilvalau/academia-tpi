@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Repositorio;
 using Servicios;
+using Servicios.Excepciones;
 using System.Text;
 using System.Text.Json.Serialization;
 using UI.Api.Auth;
@@ -99,9 +100,18 @@ app.UseAuthorization();
 
 app.MapPost("/api/auth/login", (Contratos.LoginRequest req, UsuarioServicio servicio, JwtTokenService jwt) =>
 {
-    var usuario = servicio.Login(req.NombreUsuario, req.Clave);
+    Dominio.Usuario? usuario;
+    try
+    {
+        usuario = servicio.Login(req.NombreUsuario, req.Clave);
+    }
+    catch (AccesoNoAutorizadoException ex)
+    {
+        return Results.Json(new { error = ex.Message }, statusCode: StatusCodes.Status401Unauthorized);
+    }
+
     if (usuario == null)
-        return Results.Unauthorized();
+        return Results.Json(new { error = "Usuario o clave incorrectos." }, statusCode: StatusCodes.Status401Unauthorized);
 
     var token = jwt.GenerarToken(usuario);
     return Results.Ok(new Contratos.LoginResponse(

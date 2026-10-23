@@ -8,14 +8,18 @@ namespace Servicios
 {
     public class DocenteCursoServicio : ServicioBase
     {
+        private AcademiaContext _context;
         private DocenteCursoRepositorio _repositorio;
         private PersonaRepositorio _personaRepositorio;
+        private AlumnoInscripcionRepositorio _repositorioInscripcion;
 
         public DocenteCursoServicio(AcademiaContext context, IUsuarioContexto? usuarioContexto)
             : base(usuarioContexto)
         {
+            _context = context;
             _repositorio = new DocenteCursoRepositorio(context);
             _personaRepositorio = new PersonaRepositorio(context);
+            _repositorioInscripcion = new AlumnoInscripcionRepositorio(context);
         }
 
         public List<DocenteCurso> GetAll()
@@ -67,8 +71,11 @@ namespace Servicios
             RequiereAdmin();
             ValidarBasicos(docenteCurso.DocenteId, docenteCurso.CursoId);
             ValidarReglasNegocio(docenteCurso.DocenteId, docenteCurso.CursoId, docenteCurso.Cargo, esAlta: false, idActual: docenteCurso.ID);
-            EjecutarPersistencia(() =>
+            EjecutarPersistenciaTransaccional(_context, () =>
             {
+                var cursoAnterior = _repositorio.GetCursoIdActual(docenteCurso.ID);
+                if (cursoAnterior.HasValue && cursoAnterior.Value != docenteCurso.CursoId)
+                    AsegurarCursoSinInscriptos(cursoAnterior.Value, "cambiar el curso del dictado", "curso original");
                 _repositorio.Update(docenteCurso);
                 _repositorio.Save();
             }, "No se pudo actualizar la asignación. Intente nuevamente.");
@@ -77,11 +84,21 @@ namespace Servicios
         public void Delete(DocenteCurso docenteCurso)
         {
             RequiereAdmin();
-            EjecutarPersistencia(() =>
+            EjecutarPersistenciaTransaccional(_context, () =>
             {
+                AsegurarCursoSinInscriptos(docenteCurso.CursoId, "eliminar el dictado");
                 _repositorio.Delete(docenteCurso);
                 _repositorio.Save();
             }, "No se pudo eliminar la asignación. Intente nuevamente.");
+        }
+
+        private void AsegurarCursoSinInscriptos(int cursoId, string accion, string curso = "curso")
+        {
+            var inscriptos = _repositorioInscripcion.CountByCurso(cursoId);
+            if (inscriptos == 0) return;
+            var alumnos = inscriptos == 1 ? "alumno inscripto" : "alumnos inscriptos";
+            throw new ReglaNegocioException(
+                $"No se puede {accion} porque el {curso} tiene {inscriptos} {alumnos}.");
         }
 
         private void ValidarBasicos(int docenteId, int cursoId)
