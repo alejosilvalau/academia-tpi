@@ -11,7 +11,7 @@
 
 <div class="md-card">
 <div class="md-card-header-actions">
-        <span>Tabla de Inscripciones - Alumno: @(esAdminConAlumno ? $"{alumnoObjetivo}" : "")</span>
+        <span>Tabla de Inscripciones - Alumno: @(esAdminConAlumno ? alumnoObjetivo : alumnoNombre)</span>
         <div class="md-btn-group">
             @if (Sesion.IsAdmin)
             {
@@ -120,6 +120,7 @@
     private int mensajeVersion;
     private int alumnoObjetivoId;
     private string alumnoObjetivo = "";
+    private string alumnoNombre = "";
     private bool esAdminConAlumno => Sesion.IsAdmin && alumnoObjetivoId > 0;
     private string NombreAlumnoFijo => esAdminConAlumno
         ? alumnoObjetivo
@@ -150,10 +151,18 @@
             }
             alumnoObjetivoId = alumno.Id;
             alumnoObjetivo = $"{Formato.ToTitleCase(alumno.Nombre)} {Formato.ToTitleCase(alumno.Apellido)}";
+            alumnoNombre = alumnoObjetivo;
         }
         else
         {
             alumnoObjetivoId = Sesion.PersonaId ?? 0;
+            if (alumnoObjetivoId > 0)
+            {
+                var alumno = await PersonaApi.GetBasicoAsync(alumnoObjetivoId);
+                if (alumno != null)
+                    alumnoNombre = $"{Formato.ToTitleCase(alumno.Nombre)} {Formato.ToTitleCase(alumno.Apellido)}";
+            }
+
         }
 
         solicitud = new InscribirRequest { AlumnoId = alumnoObjetivoId };
