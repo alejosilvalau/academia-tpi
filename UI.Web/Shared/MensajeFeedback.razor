@@ -23,13 +23,14 @@
 
     private System.Threading.Timer? _timer;
     private bool _scrollPendiente;
+    private string? _ultimoMensaje;
 
     protected override void OnParametersSet()
     {
         _timer?.Dispose();
         _timer = null;
 
-        if (!string.IsNullOrEmpty(Mensaje))
+        if (!string.IsNullOrEmpty(Mensaje) && Mensaje != _ultimoMensaje)
         {
             _timer = new System.Threading.Timer(
                 _ => OcultarDesdeTimer(),
@@ -38,6 +39,7 @@
                 Timeout.InfiniteTimeSpan);
             _scrollPendiente = true;
         }
+        _ultimoMensaje = Mensaje;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
