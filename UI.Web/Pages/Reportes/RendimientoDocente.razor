@@ -9,7 +9,7 @@
 <div class="md-card">
     <div class="md-card-header">Reporte de Rendimiento Docente</div>
 
-    <MensajeFeedback Mensaje="@mensaje" EsError='@mensaje.Contains("Error")' Ocultar="OcultarMensaje" />
+    <MensajeFeedback Mensaje="@mensaje" EsError='@mensaje.Contains("Error")' Ocultar="OcultarMensaje" Version="@mensajeVersion" />
 
     <div class="md-form-row">
         @if (Sesion.IsAdmin)
@@ -50,6 +50,7 @@
     private List<ReportePersonaFilaDto>? docentes;
     private int docenteId;
     private string mensaje = string.Empty;
+    private int mensajeVersion;
     private string? pdfBase64;
     private bool _cargarPdf;
     private ReportePersonaFilaDto? personaObjetivo;
@@ -75,7 +76,7 @@
         }
         catch (Exception ex)
         {
-            mensaje = "Error al cargar docentes: " + ex.Message;
+            mensajeVersion++; mensaje = "Error al cargar docentes: " + ex.Message;
         }
     }
 
@@ -93,7 +94,7 @@
         int idObjetivo = Sesion.IsAdmin ? docenteId : (Sesion.PersonaId ?? 0);
         if (idObjetivo == 0)
         {
-            mensaje = "Seleccione un docente.";
+            mensajeVersion++; mensaje = "Seleccione un docente.";
             return;
         }
 
@@ -111,11 +112,11 @@
 
             _cargarPdf = true;
             StateHasChanged();
-            mensaje = "Reporte generado correctamente.";
+            mensajeVersion++; mensaje = "Reporte generado correctamente.";
         }
         catch (Exception ex)
         {
-            mensaje = "Error al generar reporte: " + ex.Message;
+            mensajeVersion++; mensaje = "Error al generar reporte: " + ex.Message;
         }
     }
 

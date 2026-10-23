@@ -25,7 +25,7 @@
 </div>
 
     <AutoRefresh OnTick="Cargar" />
-    <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" />
+    <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" Version="@mensajeVersion" />
 
     @if (modoForm != ModoForm.Ninguno)
     {
@@ -117,6 +117,7 @@
     private int seleccionadaId;
     private string mensaje = "";
     private bool mensajeEsError = false;
+    private int mensajeVersion;
     private int alumnoObjetivoId;
     private string alumnoObjetivo = "";
     private bool esAdminConAlumno => Sesion.IsAdmin && alumnoObjetivoId > 0;
@@ -217,6 +218,7 @@
 
     private void mostrarMensaje(string msg, bool esError)
     {
+        mensajeVersion++;
         mensaje = msg;
         mensajeEsError = esError;
     }

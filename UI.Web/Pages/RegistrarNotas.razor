@@ -15,7 +15,7 @@
     </div>
 
     <AutoRefresh OnTick="RefrescarCursos" />
-    <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" />
+    <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" Version="@mensajeVersion" />
 
     @if (cursos == null)
     {
@@ -89,6 +89,7 @@
     private List<InscripcionDto>? inscripciones;
     private string mensaje = "";
     private bool mensajeEsError = false;
+    private int mensajeVersion;
     private int cursoIdSeleccionado;
     private Dictionary<int, int?> notas = new();
     private int docenteObjetivoId;
@@ -199,6 +200,7 @@
 
     private void mostrarMensaje(string msg, bool esError)
     {
+        mensajeVersion++;
         mensaje = msg;
         mensajeEsError = esError;
     }

@@ -19,7 +19,7 @@
     </div>
 
     <AutoRefresh OnTick="Cargar" />
-    <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" />
+    <MensajeFeedback Mensaje="@mensaje" EsError="mensajeEsError" Ocultar="OcultarMensaje" Version="@mensajeVersion" />
 
     @if (!modoSeleccion && modoForm != ModoForm.Ninguno)
     {
@@ -149,6 +149,7 @@
     private int seleccionadaId;
     private string mensaje = "";
     private bool mensajeEsError = false;
+    private int mensajeVersion;
     private string tipoSeleccionado = "1";
     private string? planIdSeleccionado;
     private DateTime fechaNac = DateTime.Now.AddYears(-20);
@@ -310,6 +311,7 @@
 
     private void mostrarMensaje(string msg, bool esError)
     {
+        mensajeVersion++;
         mensaje = msg;
         mensajeEsError = esError;
     }

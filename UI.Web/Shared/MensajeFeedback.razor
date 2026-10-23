@@ -19,19 +19,36 @@
     public EventCallback Ocultar { get; set; }
 
     [Parameter]
-    public int DuracionSegundos { get; set; } = 4;
+    public double DuracionSegundos { get; set; } = 1.5;
+
+    [Parameter]
+    public int Version { get; set; }
 
     private System.Threading.Timer? _timer;
     private bool _scrollPendiente;
     private string? _ultimoMensaje;
+    private int _ultimaVersion;
 
     protected override void OnParametersSet()
     {
-        _timer?.Dispose();
-        _timer = null;
-
-        if (!string.IsNullOrEmpty(Mensaje) && Mensaje != _ultimoMensaje)
+        bool nuevo = false;
+        if (!string.IsNullOrEmpty(Mensaje))
         {
+            if (Version != 0 && Version != _ultimaVersion)
+                nuevo = true;
+            else if (Version == 0 && Mensaje != _ultimoMensaje)
+                nuevo = true;
+        }
+
+        if (string.IsNullOrEmpty(Mensaje))
+        {
+            _timer?.Dispose();
+            _timer = null;
+        }
+        else if (nuevo)
+        {
+            _timer?.Dispose();
+            _timer = null;
             _timer = new System.Threading.Timer(
                 _ => OcultarDesdeTimer(),
                 null,
@@ -39,7 +56,9 @@
                 Timeout.InfiniteTimeSpan);
             _scrollPendiente = true;
         }
+
         _ultimoMensaje = Mensaje;
+        _ultimaVersion = Version;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
