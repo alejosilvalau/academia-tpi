@@ -1,3 +1,5 @@
+@inject IJSRuntime JS
+
 @if (!string.IsNullOrEmpty(Mensaje))
 {
     <div class="md-message @(EsError ? "md-message-error" : "md-message-success")">
@@ -20,6 +22,7 @@
     public int DuracionSegundos { get; set; } = 4;
 
     private System.Threading.Timer? _timer;
+    private bool _scrollPendiente;
 
     protected override void OnParametersSet()
     {
@@ -33,6 +36,16 @@
                 null,
                 TimeSpan.FromSeconds(DuracionSegundos),
                 Timeout.InfiniteTimeSpan);
+            _scrollPendiente = true;
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (_scrollPendiente)
+        {
+            _scrollPendiente = false;
+            try { await JS.InvokeVoidAsync("window.scrollTo", 0, 0); } catch { }
         }
     }
 

@@ -5,6 +5,7 @@
 @inject ComisionClient ComisionApi
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@inject IJSRuntime JS
 @using Utils
 
 <div class="md-card">
@@ -167,6 +168,7 @@
         };
         modoForm = ModoForm.Modificacion;
         seleccionadaId = id;
+        await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
     }
 
     private void Cancelar()
@@ -201,7 +203,9 @@
         {
             await Api.DeleteAsync(id);
             mostrarMensaje("Eliminado correctamente.", false);
+            Cancelar();
             await Cargar();
+            await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }

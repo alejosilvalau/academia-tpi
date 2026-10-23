@@ -6,6 +6,7 @@
 @inject PersonaClient PersonaApi
 @inject UI.Web.Services.SesionService Sesion
 @inject NavigationManager Navigation
+@inject IJSRuntime JS
 @using Utils
 
 <div class="md-card">
@@ -196,6 +197,7 @@
             mostrarMensaje("Inscripcion realizada correctamente.", false);
             Cancelar();
             await Cargar();
+            await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
@@ -206,7 +208,9 @@
         {
             await Api.DeleteAsync(id);
             mostrarMensaje("Inscripcion eliminada correctamente.", false);
+            Cancelar();
             await Cargar();
+            await JS.InvokeVoidAsync("window.scrollTo", 0, 0);
         }
         catch (Exception ex) { mostrarMensaje("Error: " + ex.Message, true); }
     }
@@ -221,4 +225,4 @@
     {
         mensaje = "";
     }
-}��
+}
