@@ -117,7 +117,13 @@ namespace Servicios
             RequiereAdmin();
             EjecutarPersistencia(() =>
             {
-                _repositorioInscripcion.Delete(inscripcion);
+                var actual = _repositorioInscripcion.GetOne(inscripcion.ID);
+                if (actual == null)
+                    throw new ReglaNegocioException("La inscripción a eliminar no existe.");
+                if (actual.Nota.HasValue)
+                    throw new ReglaNegocioException("No se puede eliminar la inscripción porque ya tiene una nota registrada.");
+
+                _repositorioInscripcion.Delete(actual);
                 _repositorioInscripcion.Save();
             }, "No se pudo eliminar la inscripción. Intente nuevamente.");
         }
