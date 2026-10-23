@@ -6,7 +6,9 @@ namespace UI.Desktop
     {
         private readonly HashSet<string> _botonesPermitidos = new();
         private readonly System.Windows.Forms.Timer _autoRefresh;
+        private readonly System.Windows.Forms.Timer _expiracionSesion;
         private bool _refrescando;
+        private bool _sesionExpirada;
 
         public Main()
         {
@@ -14,6 +16,10 @@ namespace UI.Desktop
             _autoRefresh = new System.Windows.Forms.Timer { Interval = 5000 };
             _autoRefresh.Tick += AutoRefresh_Tick;
             _autoRefresh.Start();
+
+            _expiracionSesion = new System.Windows.Forms.Timer { Interval = 1000 };
+            _expiracionSesion.Tick += ExpiracionSesion_Tick;
+            _expiracionSesion.Start();
         }
 
         private void Main_Load(object sender, EventArgs e)
@@ -299,6 +305,33 @@ namespace UI.Desktop
             {
                 OpenForm(new Forms.RegistrarNotas.RegistrarNotas(SesionEscritorio.PersonaId ?? 0));
             }
+        }
+
+        private void ExpiracionSesion_Tick(object? sender, EventArgs e)
+        {
+            if (_sesionExpirada) return;
+            if (SesionEscritorio.ExpiraUtc is not { } expiraUtc || expiraUtc == default) return;
+            if (DateTime.UtcNow < expiraUtc) return;
+
+            _sesionExpirada = true;
+            _expiracionSesion.Stop();
+            _autoRefresh.Stop();
+            SesionEscritorio.Invalidar();
+
+            MessageBox.Show(
+                "La sesión expiró. Debe iniciar sesión nuevamente.",
+                "Sesión expirada",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Information);
+
+            Application.Restart();
+        }
+
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            _expiracionSesion.Stop();
+            _autoRefresh.Stop();
+            base.OnFormClosed(e);
         }
 
         private async void AutoRefresh_Tick(object? sender, EventArgs e)

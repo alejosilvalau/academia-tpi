@@ -16,7 +16,7 @@ namespace UI.Api.Auth
             _config = config;
         }
 
-        public string GenerarToken(Usuario usuario)
+        public (string Token, DateTime ExpiraUtc) GenerarToken(Usuario usuario)
         {
             var claims = new List<Claim>
             {
@@ -37,14 +37,15 @@ namespace UI.Api.Auth
                 ? min
                 : 60;
 
+            var expiraUtc = DateTime.UtcNow.AddMinutes(expire);
             var token = new JwtSecurityToken(
                 issuer: _config["Jwt:Issuer"],
                 audience: _config["Jwt:Audience"],
                 claims: claims,
-                expires: DateTime.UtcNow.AddMinutes(expire),
+                expires: expiraUtc,
                 signingCredentials: creds);
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return (new JwtSecurityTokenHandler().WriteToken(token), expiraUtc);
         }
     }
 }

@@ -10,5 +10,6 @@ namespace Contratos
         int? Legajo,
         string? Nombre,
         string? Apellido,
-        bool Habilitado);
+        bool Habilitado,
+        DateTime ExpiraUtc);
 }

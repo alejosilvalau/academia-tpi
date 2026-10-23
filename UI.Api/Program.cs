@@ -113,7 +113,7 @@ app.MapPost("/api/auth/login", (Contratos.LoginRequest req, UsuarioServicio serv
     if (usuario == null)
         return Results.Json(new { error = "Usuario o clave incorrectos." }, statusCode: StatusCodes.Status401Unauthorized);
 
-    var token = jwt.GenerarToken(usuario);
+    var (token, expiraUtc) = jwt.GenerarToken(usuario);
     return Results.Ok(new Contratos.LoginResponse(
         token,
         usuario.NombreUsuario,
@@ -122,7 +122,8 @@ app.MapPost("/api/auth/login", (Contratos.LoginRequest req, UsuarioServicio serv
         usuario.Persona?.Legajo,
         usuario.Persona?.Nombre,
         usuario.Persona?.Apellido,
-        usuario.Habilitado));
+        usuario.Habilitado,
+        expiraUtc));
 }).WithTags("Login").AllowAnonymous();
 
 app.MapApiEndpoints();

@@ -1,18 +1,21 @@
 using System.Security.Claims;
+using System.Threading;
 using Contratos;
 using Microsoft.AspNetCore.Components.Authorization;
 
 namespace UI.Web.Services
 {
-    public class SesionService : AuthenticationStateProvider, IApiTokenProvider
+    public class SesionService : AuthenticationStateProvider, IApiTokenProvider, IDisposable
     {
         private LoginResponse? _sesion;
+        private CancellationTokenSource? _expiracionCts;
 
         public string? Token => _sesion?.Token;
         public LoginResponse? Perfil => _sesion;
         public int? PersonaId => _sesion?.PersonaId;
         public TipoPersona? TipoUsuario => _sesion?.Tipo;
         public string? NombreUsuario => _sesion?.NombreUsuario;
+        public DateTime? ExpiraUtc => _sesion?.ExpiraUtc;
         public bool IsLoggedIn => _sesion != null;
         public bool IsAdmin => TipoUsuario == TipoPersona.Administrador;
         public bool IsAlumno => TipoUsuario == TipoPersona.Alumno;
@@ -23,14 +26,54 @@ namespace UI.Web.Services
         public void Iniciar(LoginResponse sesion)
         {
             _sesion = sesion;
+            ProgramarExpiracion(sesion.ExpiraUtc);
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
         public void Invalidar()
         {
+            CancelarExpiracion();
             _sesion = null;
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
+
+        private void ProgramarExpiracion(DateTime expiraUtc)
+        {
+            CancelarExpiracion();
+            if (expiraUtc == default) return;
+
+            var cts = new CancellationTokenSource();
+            _expiracionCts = cts;
+            _ = ExpirarAlVencerAsync(expiraUtc, cts);
+        }
+
+        private async Task ExpirarAlVencerAsync(DateTime expiraUtc, CancellationTokenSource cts)
+        {
+            try
+            {
+                var demora = expiraUtc - DateTime.UtcNow;
+                if (demora > TimeSpan.Zero)
+                    await Task.Delay(demora, cts.Token);
+
+                if (!cts.IsCancellationRequested)
+                    Invalidar();
+            }
+            catch (OperationCanceledException)
+            {
+            }
+        }
+
+        private void CancelarExpiracion()
+        {
+            var cts = _expiracionCts;
+            _expiracionCts = null;
+            if (cts == null) return;
+
+            cts.Cancel();
+            cts.Dispose();
+        }
+
+        public void Dispose() => CancelarExpiracion();
 
         public override Task<AuthenticationState> GetAuthenticationStateAsync()
         {

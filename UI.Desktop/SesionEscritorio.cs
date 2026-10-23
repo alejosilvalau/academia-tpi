@@ -8,6 +8,7 @@ namespace UI.Desktop
         public static string? Token => Perfil?.Token;
         public static int? PersonaId => Perfil?.PersonaId;
         public static TipoPersona? Tipo => Perfil?.Tipo;
+        public static DateTime? ExpiraUtc => Perfil?.ExpiraUtc;
         public static bool IsAdmin => Tipo == TipoPersona.Administrador;
         public static bool IsAlumno => Tipo == TipoPersona.Alumno;
         public static bool IsDocente => Tipo == TipoPersona.Docente;
