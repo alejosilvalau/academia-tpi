@@ -20,6 +20,11 @@
                 <h2>Iniciar Sesion</h2>
                 <p>Ingrese sus credenciales para acceder al sistema</p>
 
+                @if (sesionExpirada)
+                {
+                    <div class="md-message md-message-info">La sesión expiró. Inicie sesión nuevamente.</div>
+                }
+
                 @if (!string.IsNullOrEmpty(mensaje))
                 {
                     <div class="md-message md-message-error">@mensaje</div>
@@ -48,9 +53,13 @@
     private string clave = "";
     private string mensaje = "";
     private bool cargando = false;
+    private bool sesionExpirada;
 
     protected override void OnInitialized()
     {
+        var query = System.Web.HttpUtility.ParseQueryString(new Uri(Nav.Uri).Query);
+        sesionExpirada = string.Equals(query["sesion"], "expirada", StringComparison.OrdinalIgnoreCase);
+
         if (Sesion.IsLoggedIn)
         {
             Nav.NavigateTo("/");

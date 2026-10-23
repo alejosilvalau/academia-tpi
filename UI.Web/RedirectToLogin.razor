@@ -1,12 +1,14 @@
 @using Microsoft.AspNetCore.Components
 @inject NavigationManager Navigation
+@inject UI.Web.Services.SesionService Sesion
 
 @code {
     protected override void OnAfterRender(bool firstRender)
     {
         if (firstRender)
         {
-            Navigation.NavigateTo("/login", forceLoad: true);
+            var destino = Sesion.SesionExpirada ? "/login?sesion=expirada" : "/login";
+            Navigation.NavigateTo(destino, forceLoad: true);
         }
     }
 }

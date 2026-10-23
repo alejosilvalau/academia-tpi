@@ -17,6 +17,7 @@ namespace UI.Web.Services
         public string? NombreUsuario => _sesion?.NombreUsuario;
         public DateTime? ExpiraUtc => _sesion?.ExpiraUtc;
         public bool IsLoggedIn => _sesion != null;
+        public bool SesionExpirada { get; private set; }
         public bool IsAdmin => TipoUsuario == TipoPersona.Administrador;
         public bool IsAlumno => TipoUsuario == TipoPersona.Alumno;
         public bool IsDocente => TipoUsuario == TipoPersona.Docente;
@@ -25,15 +26,21 @@ namespace UI.Web.Services
 
         public void Iniciar(LoginResponse sesion)
         {
+            SesionExpirada = false;
             _sesion = sesion;
             ProgramarExpiracion(sesion.ExpiraUtc);
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
-        public void Invalidar()
+        public void Invalidar() => CerrarSesion(false);
+
+        private void Expirar() => CerrarSesion(true);
+
+        private void CerrarSesion(bool expirada)
         {
             CancelarExpiracion();
             _sesion = null;
+            SesionExpirada = expirada;
             NotifyAuthenticationStateChanged(GetAuthenticationStateAsync());
         }
 
@@ -56,7 +63,7 @@ namespace UI.Web.Services
                     await Task.Delay(demora, cts.Token);
 
                 if (!cts.IsCancellationRequested)
-                    Invalidar();
+                    Expirar();
             }
             catch (OperationCanceledException)
             {
