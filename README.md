@@ -169,8 +169,8 @@ Los permisos se validan igual que en las interfaces: los guards de `ServicioBase
 | Entity Framework Core | Repositorio | 8.0.0 | ORM para acceso a datos |
 | EF Core SqlServer | Repositorio | 8.0.0 | Provider SQL Server |
 | Microsoft.Data.SqlClient | Repositorio | 7.0.2 | ADO.NET para consultas de reportes |
-| FastReport.OpenSource | Repositorio, Servicios, UI.Web | 2026.2.3 | Motor de reportes y generación de PDF (en la API) |
-| FastReport.OpenSource.Export.PdfSimple | Repositorio, UI.Web | 2026.2.3 | Exportación a PDF |
+| FastReport.OpenSource | Repositorio, Servicios | 2026.2.3 | Motor de reportes y generación de PDF (en la API) |
+| FastReport.OpenSource.Export.PdfSimple | Repositorio | 2026.2.3 | Exportación a PDF |
 | SkiaSharp | Repositorio | 2.88.8 | Generación de gráficos (barras, torta) |
 | SkiaSharp.NativeAssets.Linux.NoDependencies | Repositorio | 2.88.8 | Soporte nativo Linux para SkiaSharp |
 | Microsoft.Extensions.Configuration | UI.Desktop | 8.0.0 | Lectura de archivos de configuración |
