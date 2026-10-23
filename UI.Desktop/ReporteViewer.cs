@@ -84,8 +84,8 @@ namespace UI.Desktop
             try
             {
                 cbxSelector.DataSource = await ApiEscritorio.Reporte.GetAlumnosDeDocenteAsync(SesionEscritorio.PersonaId ?? 0);
-                cbxSelector.DisplayMember = "Apellido";
-                cbxSelector.ValueMember = "Id";
+                cbxSelector.DisplayMember = nameof(ReportePersonaFilaDto.Etiqueta);
+                cbxSelector.ValueMember = nameof(ReportePersonaFilaDto.Id);
             }
             catch (Exception ex)
             {
@@ -108,8 +108,8 @@ namespace UI.Desktop
                     cbxSelector.DataSource = await ApiEscritorio.Reporte.GetAlumnosAsync();
                     lblSelector.Text = "Alumno:";
                 }
-                cbxSelector.DisplayMember = "Apellido";
-                cbxSelector.ValueMember = "Id";
+                cbxSelector.DisplayMember = nameof(ReportePersonaFilaDto.Etiqueta);
+                cbxSelector.ValueMember = nameof(ReportePersonaFilaDto.Id);
             }
             catch (Exception ex)
             {
